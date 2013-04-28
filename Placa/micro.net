@@ -1,0 +1,264 @@
+# EESchema Netlist Version 1.1 created  sáb 27 abr 2013 15:55:16 ART
+(
+ ( /517BF9BE SM0805 1k1 R
+  ( 1 /Encendido_Sensores )
+  ( 2 N-000034 )
+ )
+ ( /51740DB0 SM0805 C1 22_pF
+  ( 1 N-000037 )
+  ( 2 GND )
+ )
+ ( /51740E54 SM0805 C2 12_pF
+  ( 1 N-000036 )
+  ( 2 GND )
+ )
+ ( /5174105F SM0805 C3 100_nF
+  ( 1 /RESET )
+  ( 2 GND )
+ )
+ ( /5174216E SM0805 C4 1uF
+  ( 1 N-000029 )
+  ( 2 N-000030 )
+ )
+ ( /51742178 SM0805 C5 1uF
+  ( 1 N-000031 )
+  ( 2 N-000012 )
+ )
+ ( /5174224C SM0805 C6 1uF
+  ( 1 N-000053 )
+  ( 2 GND )
+ )
+ ( /51742246 SM0805 C7 1uF
+  ( 1 +5V )
+  ( 2 GND )
+ )
+ ( /51742251 SM0805 C8 1uF
+  ( 1 N-000052 )
+  ( 2 GND )
+ )
+ ( /51746DA2 SM0805 C9 100nF
+  ( 1 N-000001 )
+  ( 2 GND )
+ )
+ ( /51740609 TQFP44 IC1 ATMEGA16-A
+  ( 1 /MOSI )
+  ( 2 /MISO )
+  ( 3 /SCK )
+  ( 4 /RESET )
+  ( 5 +5V )
+  ( 6 GND )
+  ( 7 N-000037 )
+  ( 8 N-000036 )
+  ( 9 /RXD )
+  ( 10 /TXD )
+  ( 11 /Motor_1_Encoder_B )
+  ( 12 /Motor_2_Encoder_B )
+  ( 13 /Motor_2_PWM )
+  ( 14 /Motor_1_PWM )
+  ( 15 /Motor_2_Direction )
+  ( 16 /Motor_1_Direction )
+  ( 17 +5V )
+  ( 18 GND )
+  ( 19 /Señal_sens_pared )
+  ( 20 /Encendido_Sensores )
+  ( 21 /TCK )
+  ( 22 /TMS )
+  ( 23 /TDO )
+  ( 24 /TDI )
+  ( 25 /Motor_2_Encoder_A )
+  ( 26 ? )
+  ( 27 +5V )
+  ( 28 GND )
+  ( 29 N-000001 )
+  ( 30 /Motor_2_Temperature )
+  ( 31 /Motor_1_Temperature )
+  ( 32 /Sensor_Pared_Cen )
+  ( 33 /Sensor_Pared_Der )
+  ( 34 /Sensor_Pared_Izq )
+  ( 35 /Sensor_Piso_Cen )
+  ( 36 /Sensor_Piso_Der )
+  ( 37 /Sensor_Piso_Izq )
+  ( 38 +5V )
+  ( 39 GND )
+  ( 40 /Motor_1_Encoder_A )
+  ( 41 ? )
+  ( 42 /INT2 )
+  ( 43 /Motor_1_Brake )
+  ( 44 /Motor_2_Brake )
+ )
+ ( /51741714 pin_array_3x2 P1 CONN_3X2
+  ( 1 /MISO )
+  ( 2 +5V )
+  ( 3 /SCK )
+  ( 4 /MOSI )
+  ( 5 /RESET )
+  ( 6 GND )
+ )
+ ( /5174232F PIN_ARRAY_5x2 P2 CONN_5X2
+  ( 1 ? )
+  ( 2 ? )
+  ( 3 /CONN_RX )
+  ( 4 ? )
+  ( 5 /CONN_TX )
+  ( 6 ? )
+  ( 7 ? )
+  ( 8 ? )
+  ( 9 GND )
+  ( 10 ? )
+ )
+ ( /517C1D49 PIN_ARRAY_5x2 P3 CONN_5X2
+  ( 1 /Sensor_Piso_Cen )
+  ( 2 /Sensor_Pared_Cen )
+  ( 3 /Sensor_Piso_Der )
+  ( 4 /Sensor_Pared_Der )
+  ( 5 /Sensor_Piso_Izq )
+  ( 6 /Sensor_Pared_Izq )
+  ( 7 ? )
+  ( 8 /Señal_sens_pared )
+  ( 9 /Alimentación_Sensores )
+  ( 10 GND )
+ )
+ ( /517C1CE8 PIN_ARRAY_2X1 P6 CONN_2
+  ( 1 +5V )
+  ( 2 GND )
+ )
+ ( /517467EE pin_array_8x2 P7 CONN_7X2
+  ( 1 /Motor_1_Direction )
+  ( 2 /Motor_2_Direction )
+  ( 3 /Motor_1_Brake )
+  ( 4 /Motor_2_Brake )
+  ( 5 /Motor_1_PWM )
+  ( 6 /Motor_2_PWM )
+  ( 7 /Motor_1_Temperature )
+  ( 8 /Motor_2_Temperature )
+  ( 9 /Motor_1_Encoder_A )
+  ( 10 /Motor_2_Encoder_A )
+  ( 11 /Motor_1_Encoder_B )
+  ( 12 /Motor_2_Encoder_B )
+  ( 13 +5V )
+  ( 14 GND )
+ )
+ ( /517BFEF9 PIN_ARRAY_5x2 P9 CONN_5X2
+  ( 1 /TCK )
+  ( 2 GND )
+  ( 3 /TDO )
+  ( 4 +5V )
+  ( 5 /TMS )
+  ( 6 /RESET )
+  ( 7 ? )
+  ( 8 ? )
+  ( 9 /TDI )
+  ( 10 GND )
+ )
+ ( /517BF9A9 TO92 Q1 NPN
+  ( 1 GND )
+  ( 2 N-000034 )
+  ( 3 /Alimentación_Sensores )
+ )
+ ( /51740FEC SM0805 R1 10k
+  ( 1 /RESET )
+  ( 2 +5V )
+ )
+ ( /517BF9D3 SM0805 R2 R
+  ( 1 +5V )
+  ( 2 /Alimentación_Sensores )
+ )
+ ( /51741055 SW_PUSH_SMALL SW1 SW_PUSH
+  ( 1 GND )
+  ( 2 /RESET )
+ )
+ ( /51746B07 SW_PUSH_SMALL SW2 SW_PUSH
+  ( 1 GND )
+  ( 2 /INT2 )
+ )
+ ( /51742163 SO16L U1 MAX232
+  ( 1 N-000029 )
+  ( 2 N-000053 )
+  ( 3 N-000030 )
+  ( 4 N-000031 )
+  ( 5 N-000012 )
+  ( 6 N-000052 )
+  ( 7 ? )
+  ( 8 ? )
+  ( 9 ? )
+  ( 10 ? )
+  ( 11 /TXD )
+  ( 12 /RXD )
+  ( 13 /CONN_TX )
+  ( 14 /CONN_RX )
+  ( 15 GND )
+  ( 16 +5V )
+ )
+ ( /51740D9C HC-18UV X1 8_MHz
+  ( 1 N-000036 )
+  ( 2 N-000037 )
+ )
+)
+*
+{ Allowed footprints by component:
+$component 1k1
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$component C1
+ SM*
+ C?
+ C1-1
+$endlist
+$component C2
+ SM*
+ C?
+ C1-1
+$endlist
+$component C3
+ SM*
+ C?
+ C1-1
+$endlist
+$component C4
+ CP*
+ SM*
+$endlist
+$component C5
+ CP*
+ SM*
+$endlist
+$component C6
+ CP*
+ SM*
+$endlist
+$component C7
+ CP*
+ SM*
+$endlist
+$component C8
+ CP*
+ SM*
+$endlist
+$component C9
+ SM*
+ C?
+ C1-1
+$endlist
+$component IC1
+ TQFP44
+$endlist
+$component R1
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$component R2
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$endfootprintlist
+}
