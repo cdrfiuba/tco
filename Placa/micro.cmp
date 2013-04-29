@@ -1,4 +1,4 @@
-Cmp-Mod V01 Created by CvPcb (2012-apr-16-27)-stable date = sáb 27 abr 2013 15:55:16 ART
+Cmp-Mod V01 Created by CvPcb (2012-apr-16-27)-stable date = lun 29 abr 2013 16:03:09 ART
 
 BeginCmp
 TimeStamp = /517BF9BE;
@@ -71,10 +71,31 @@ IdModule  = SM0805;
 EndCmp
 
 BeginCmp
+TimeStamp = /517EC291;
+Reference = C10;
+ValeurCmp = 100nF;
+IdModule  = SM0805;
+EndCmp
+
+BeginCmp
+TimeStamp = /517EC041;
+Reference = C11;
+ValeurCmp = C;
+IdModule  = SM0805;
+EndCmp
+
+BeginCmp
 TimeStamp = /51740609;
 Reference = IC1;
 ValeurCmp = ATMEGA16-A;
 IdModule  = TQFP44;
+EndCmp
+
+BeginCmp
+TimeStamp = /517EC009;
+Reference = L1;
+ValeurCmp = INDUCTOR;
+IdModule  = R4;
 EndCmp
 
 BeginCmp
@@ -92,10 +113,10 @@ IdModule  = PIN_ARRAY_5x2;
 EndCmp
 
 BeginCmp
-TimeStamp = /517C1D49;
+TimeStamp = /517EBEA3;
 Reference = P3;
-ValeurCmp = CONN_5X2;
-IdModule  = PIN_ARRAY_5x2;
+ValeurCmp = CONN_8X2;
+IdModule  = pin_array_8x2;
 EndCmp
 
 BeginCmp
@@ -136,6 +157,41 @@ EndCmp
 BeginCmp
 TimeStamp = /517BF9D3;
 Reference = R2;
+ValeurCmp = R;
+IdModule  = SM0805;
+EndCmp
+
+BeginCmp
+TimeStamp = /517EBD54;
+Reference = R3;
+ValeurCmp = R;
+IdModule  = SM0805;
+EndCmp
+
+BeginCmp
+TimeStamp = /517EBD61;
+Reference = R4;
+ValeurCmp = R;
+IdModule  = SM0805;
+EndCmp
+
+BeginCmp
+TimeStamp = /517EBD5E;
+Reference = R5;
+ValeurCmp = R;
+IdModule  = SM0805;
+EndCmp
+
+BeginCmp
+TimeStamp = /517EBD64;
+Reference = R6;
+ValeurCmp = R;
+IdModule  = SM0805;
+EndCmp
+
+BeginCmp
+TimeStamp = /517EBD67;
+Reference = R7;
 ValeurCmp = R;
 IdModule  = SM0805;
 EndCmp

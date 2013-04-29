@@ -1,31 +1,31 @@
-# EESchema Netlist Version 1.1 created  sáb 27 abr 2013 15:55:16 ART
+# EESchema Netlist Version 1.1 created  lun 29 abr 2013 16:03:09 ART
 (
  ( /517BF9BE SM0805 1k1 R
   ( 1 /Encendido_Sensores )
-  ( 2 N-000034 )
+  ( 2 N-000012 )
  )
  ( /51740DB0 SM0805 C1 22_pF
-  ( 1 N-000037 )
+  ( 1 N-000030 )
   ( 2 GND )
  )
  ( /51740E54 SM0805 C2 12_pF
-  ( 1 N-000036 )
+  ( 1 N-000029 )
   ( 2 GND )
  )
  ( /5174105F SM0805 C3 100_nF
   ( 1 /RESET )
-  ( 2 GND )
+  ( 2 +5V )
  )
  ( /5174216E SM0805 C4 1uF
-  ( 1 N-000029 )
-  ( 2 N-000030 )
+  ( 1 N-000003 )
+  ( 2 N-000004 )
  )
  ( /51742178 SM0805 C5 1uF
-  ( 1 N-000031 )
-  ( 2 N-000012 )
+  ( 1 N-000005 )
+  ( 2 N-000006 )
  )
  ( /5174224C SM0805 C6 1uF
-  ( 1 N-000053 )
+  ( 1 N-000068 )
   ( 2 GND )
  )
  ( /51742246 SM0805 C7 1uF
@@ -33,11 +33,19 @@
   ( 2 GND )
  )
  ( /51742251 SM0805 C8 1uF
-  ( 1 N-000052 )
+  ( 1 N-000067 )
   ( 2 GND )
  )
  ( /51746DA2 SM0805 C9 100nF
-  ( 1 N-000001 )
+  ( 1 N-000016 )
+  ( 2 GND )
+ )
+ ( /517EC291 SM0805 C10 100nF
+  ( 1 GND )
+  ( 2 +5V )
+ )
+ ( /517EC041 SM0805 C11 C
+  ( 1 N-000069 )
   ( 2 GND )
  )
  ( /51740609 TQFP44 IC1 ATMEGA16-A
@@ -47,8 +55,8 @@
   ( 4 /RESET )
   ( 5 +5V )
   ( 6 GND )
-  ( 7 N-000037 )
-  ( 8 N-000036 )
+  ( 7 N-000030 )
+  ( 8 N-000029 )
   ( 9 /RXD )
   ( 10 /TXD )
   ( 11 /Motor_1_Encoder_B )
@@ -67,9 +75,9 @@
   ( 24 /TDI )
   ( 25 /Motor_2_Encoder_A )
   ( 26 ? )
-  ( 27 +5V )
+  ( 27 N-000069 )
   ( 28 GND )
-  ( 29 N-000001 )
+  ( 29 N-000016 )
   ( 30 /Motor_2_Temperature )
   ( 31 /Motor_1_Temperature )
   ( 32 /Sensor_Pared_Cen )
@@ -85,6 +93,10 @@
   ( 42 /INT2 )
   ( 43 /Motor_1_Brake )
   ( 44 /Motor_2_Brake )
+ )
+ ( /517EC009 R4 L1 INDUCTOR
+  ( 1 +5V )
+  ( 2 N-000069 )
  )
  ( /51741714 pin_array_3x2 P1 CONN_3X2
   ( 1 /MISO )
@@ -106,17 +118,23 @@
   ( 9 GND )
   ( 10 ? )
  )
- ( /517C1D49 PIN_ARRAY_5x2 P3 CONN_5X2
+ ( /517EBEA3 pin_array_8x2 P3 CONN_8X2
   ( 1 /Sensor_Piso_Cen )
   ( 2 /Sensor_Pared_Cen )
-  ( 3 /Sensor_Piso_Der )
-  ( 4 /Sensor_Pared_Der )
+  ( 3 /S1+ )
+  ( 4 /S4+ )
   ( 5 /Sensor_Piso_Izq )
-  ( 6 /Sensor_Pared_Izq )
-  ( 7 ? )
-  ( 8 /Señal_sens_pared )
-  ( 9 /Alimentación_Sensores )
-  ( 10 GND )
+  ( 6 /Sensor_Pared_Der )
+  ( 7 /S2+ )
+  ( 8 /S5+ )
+  ( 9 /Sensor_Piso_Der )
+  ( 10 /Sensor_Pared_Izq )
+  ( 11 /S3+ )
+  ( 12 /S6+ )
+  ( 13 ? )
+  ( 14 /Señal_sens_pared )
+  ( 15 /S- )
+  ( 16 GND )
  )
  ( /517C1CE8 PIN_ARRAY_2X1 P6 CONN_2
   ( 1 +5V )
@@ -152,16 +170,36 @@
  )
  ( /517BF9A9 TO92 Q1 NPN
   ( 1 GND )
-  ( 2 N-000034 )
-  ( 3 /Alimentación_Sensores )
+  ( 2 N-000012 )
+  ( 3 /S- )
  )
  ( /51740FEC SM0805 R1 10k
   ( 1 /RESET )
-  ( 2 +5V )
+  ( 2 GND )
  )
  ( /517BF9D3 SM0805 R2 R
   ( 1 +5V )
-  ( 2 /Alimentación_Sensores )
+  ( 2 /S1+ )
+ )
+ ( /517EBD54 SM0805 R3 R
+  ( 1 +5V )
+  ( 2 /S2+ )
+ )
+ ( /517EBD61 SM0805 R4 R
+  ( 1 +5V )
+  ( 2 /S3+ )
+ )
+ ( /517EBD5E SM0805 R5 R
+  ( 1 +5V )
+  ( 2 /S4+ )
+ )
+ ( /517EBD64 SM0805 R6 R
+  ( 1 +5V )
+  ( 2 /S5+ )
+ )
+ ( /517EBD67 SM0805 R7 R
+  ( 1 +5V )
+  ( 2 /S6+ )
  )
  ( /51741055 SW_PUSH_SMALL SW1 SW_PUSH
   ( 1 GND )
@@ -172,12 +210,12 @@
   ( 2 /INT2 )
  )
  ( /51742163 SO16L U1 MAX232
-  ( 1 N-000029 )
-  ( 2 N-000053 )
-  ( 3 N-000030 )
-  ( 4 N-000031 )
-  ( 5 N-000012 )
-  ( 6 N-000052 )
+  ( 1 N-000003 )
+  ( 2 N-000068 )
+  ( 3 N-000004 )
+  ( 4 N-000005 )
+  ( 5 N-000006 )
+  ( 6 N-000067 )
   ( 7 ? )
   ( 8 ? )
   ( 9 ? )
@@ -190,8 +228,8 @@
   ( 16 +5V )
  )
  ( /51740D9C HC-18UV X1 8_MHz
-  ( 1 N-000036 )
-  ( 2 N-000037 )
+  ( 1 N-000029 )
+  ( 2 N-000030 )
  )
 )
 *
@@ -243,6 +281,16 @@ $component C9
  C?
  C1-1
 $endlist
+$component C10
+ SM*
+ C?
+ C1-1
+$endlist
+$component C11
+ SM*
+ C?
+ C1-1
+$endlist
 $component IC1
  TQFP44
 $endlist
@@ -254,6 +302,41 @@ $component R1
  SM1206
 $endlist
 $component R2
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$component R3
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$component R4
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$component R5
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$component R6
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$component R7
  R?
  SM0603
  SM0805
