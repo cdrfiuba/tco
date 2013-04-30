@@ -1,0 +1,101 @@
+Cmp-Mod V01 Created by CvPcb (2012-apr-16-27)-stable date = mar 30 abr 2013 19:27:06 ART
+
+BeginCmp
+TimeStamp = /517555DF;
+Reference = C1;
+ValeurCmp = 220u;
+IdModule  = C1V5;
+EndCmp
+
+BeginCmp
+TimeStamp = /517555EE;
+Reference = C2;
+ValeurCmp = 1u;
+IdModule  = C1V5;
+EndCmp
+
+BeginCmp
+TimeStamp = /51755634;
+Reference = C3;
+ValeurCmp = 10n;
+IdModule  = C1;
+EndCmp
+
+BeginCmp
+TimeStamp = /5175549B;
+Reference = C4;
+ValeurCmp = 10n;
+IdModule  = C1;
+EndCmp
+
+BeginCmp
+TimeStamp = /51769D3D;
+Reference = C5;
+ValeurCmp = 220u;
+IdModule  = C1V5;
+EndCmp
+
+BeginCmp
+TimeStamp = /51769D3E;
+Reference = C6;
+ValeurCmp = 1u;
+IdModule  = C1V5;
+EndCmp
+
+BeginCmp
+TimeStamp = /51769D40;
+Reference = C7;
+ValeurCmp = 10n;
+IdModule  = C1;
+EndCmp
+
+BeginCmp
+TimeStamp = /51769D3B;
+Reference = C8;
+ValeurCmp = 10n;
+IdModule  = C1;
+EndCmp
+
+BeginCmp
+TimeStamp = /517D8704;
+Reference = P1;
+ValeurCmp = CONN_6;
+IdModule  = SIL-6;
+EndCmp
+
+BeginCmp
+TimeStamp = /517D87F6;
+Reference = P2;
+ValeurCmp = CONN_6;
+IdModule  = SIL-6;
+EndCmp
+
+BeginCmp
+TimeStamp = /517556DB;
+Reference = P3;
+ValeurCmp = CONN_7X2;
+IdModule  = pin_array_8x2;
+EndCmp
+
+BeginCmp
+TimeStamp = /5180450D;
+Reference = P4;
+ValeurCmp = CONN_2;
+IdModule  = bornier2;
+EndCmp
+
+BeginCmp
+TimeStamp = /51755346;
+Reference = Puente1;
+ValeurCmp = LMD18200;
+IdModule  = L298D;
+EndCmp
+
+BeginCmp
+TimeStamp = /51769D3A;
+Reference = Puente2;
+ValeurCmp = LMD18200;
+IdModule  = L298D;
+EndCmp
+
+EndListe

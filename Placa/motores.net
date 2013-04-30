@@ -1,0 +1,139 @@
+# EESchema Netlist Version 1.1 created  mar 30 abr 2013 19:27:06 ART
+(
+ ( /517555DF C1V5 C1 220u
+  ( 1 VCC )
+  ( 2 GND )
+ )
+ ( /517555EE C1V5 C2 1u
+  ( 1 VCC )
+  ( 2 GND )
+ )
+ ( /51755634 C1 C3 10n
+  ( 1 /Motor_1_Alimentación_2 )
+  ( 2 N-000014 )
+ )
+ ( /5175549B C1 C4 10n
+  ( 1 /Motor_1_Alimentación_1 )
+  ( 2 N-000016 )
+ )
+ ( /51769D3D C1V5 C5 220u
+  ( 1 VCC )
+  ( 2 GND )
+ )
+ ( /51769D3E C1V5 C6 1u
+  ( 1 VCC )
+  ( 2 GND )
+ )
+ ( /51769D40 C1 C7 10n
+  ( 1 /Motor_2_Alimentación_2 )
+  ( 2 N-000017 )
+ )
+ ( /51769D3B C1 C8 10n
+  ( 1 /Motor_2_Alimentación_1 )
+  ( 2 N-000020 )
+ )
+ ( /517D8704 SIL-6 P1 CONN_6
+  ( 1 /Motor_1_Alimentación_1 )
+  ( 2 /Motor_1_Alimentación_2 )
+  ( 3 GND )
+  ( 4 +5V )
+  ( 5 /Motor_1_Encoder_A )
+  ( 6 /Motor_1_Encoder_B )
+ )
+ ( /517D87F6 SIL-6 P2 CONN_6
+  ( 1 /Motor_2_Alimentación_1 )
+  ( 2 /Motor_2_Alimentación_2 )
+  ( 3 GND )
+  ( 4 +5V )
+  ( 5 /Motor_2_Encoder_A )
+  ( 6 /Motor_2_Encoder_B )
+ )
+ ( /517556DB pin_array_8x2 P3 CONN_7X2
+  ( 1 /Motor_1_Direction )
+  ( 2 /Motor_2_Direction )
+  ( 3 /Motor_1_Brake )
+  ( 4 /Motor_2_Brake )
+  ( 5 /Motor_1_PWM )
+  ( 6 /Motor_2_PWM )
+  ( 7 /Motor_1_Temperature )
+  ( 8 /Motor_2_Temperature )
+  ( 9 /Motor_1_Encoder_A )
+  ( 10 /Motor_2_Encoder_A )
+  ( 11 /Motor_1_Encoder_B )
+  ( 12 /Motor_2_Encoder_B )
+  ( 13 +5V )
+  ( 14 GND )
+ )
+ ( /5180450D bornier2 P4 CONN_2
+  ( 1 VCC )
+  ( 2 GND )
+ )
+ ( /51755346 L298D Puente1 LMD18200
+  ( 1 N-000016 )
+  ( 2 /Motor_1_Alimentación_1 )
+  ( 3 /Motor_1_Direction )
+  ( 4 /Motor_1_Brake )
+  ( 5 /Motor_1_PWM )
+  ( 6 VCC )
+  ( 7 GND )
+  ( 8 ? )
+  ( 9 /Motor_1_Temperature )
+  ( 10 /Motor_1_Alimentación_2 )
+  ( 11 N-000014 )
+ )
+ ( /51769D3A L298D Puente2 LMD18200
+  ( 1 N-000020 )
+  ( 2 /Motor_2_Alimentación_1 )
+  ( 3 /Motor_2_Direction )
+  ( 4 /Motor_2_Brake )
+  ( 5 /Motor_2_PWM )
+  ( 6 VCC )
+  ( 7 GND )
+  ( 8 ? )
+  ( 9 /Motor_2_Temperature )
+  ( 10 /Motor_2_Alimentación_2 )
+  ( 11 N-000017 )
+ )
+)
+*
+{ Allowed footprints by component:
+$component C1
+ CP*
+ SM*
+$endlist
+$component C2
+ SM*
+ C?
+ C1-1
+$endlist
+$component C3
+ SM*
+ C?
+ C1-1
+$endlist
+$component C4
+ SM*
+ C?
+ C1-1
+$endlist
+$component C5
+ CP*
+ SM*
+$endlist
+$component C6
+ SM*
+ C?
+ C1-1
+$endlist
+$component C7
+ SM*
+ C?
+ C1-1
+$endlist
+$component C8
+ SM*
+ C?
+ C1-1
+$endlist
+$endfootprintlist
+}
