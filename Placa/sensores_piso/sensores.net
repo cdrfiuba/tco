@@ -1,0 +1,67 @@
+# EESchema Netlist Version 1.1 created  mar 21 may 2013 20:57:24 ART
+(
+ ( /519C0880 $noname  K1 CONN_3 {Lib=CONN_3}
+  (    1 /Vcc )
+  (    2 /OUT )
+  (    3 GND )
+ )
+ ( /516A2B00 $noname  RV1 POT {Lib=POT}
+  (    1 /OUT )
+  (    2 /OUT )
+  (    3 N-000001 )
+ )
+ ( /516A2AD5 $noname  R2 100 {Lib=R}
+  (    1 GND )
+  (    2 N-000001 )
+ )
+ ( /516A2AC6 $noname  R_sens1 200 {Lib=R}
+  (    1 N-000005 )
+  (    2 /Vcc )
+ )
+ ( /516A2AAF $noname  ??1 CNY70 {Lib=CNY70}
+  (    A N-000005 )
+  (    C /Vcc )
+  (    E /OUT )
+  (    K GND )
+ )
+)
+*
+{ Allowed footprints by component:
+$component R2
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$component R_sens1
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$endfootprintlist
+}
+{ Pin List by Nets
+Net 1 "" ""
+ RV1 3
+ R2 2
+Net 2 "/OUT" "OUT"
+ K1 2
+ ??1 E
+ RV1 1
+ RV1 2
+Net 3 "GND" "GND"
+ R2 1
+ K1 3
+ ??1 K
+Net 4 "/Vcc" "Vcc"
+ R_sens1 2
+ K1 1
+ ??1 C
+Net 5 "" ""
+ R_sens1 1
+ ??1 A
+}
+#End
