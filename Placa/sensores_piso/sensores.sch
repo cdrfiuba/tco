@@ -203,8 +203,6 @@ Text Label 1250 3450 0    60   ~ 0
 S-
 Text Label 3050 3450 0    60   ~ 0
 S-
-Text Label 2550 3450 0    60   ~ 0
-S-
 Text Label 4350 3450 0    60   ~ 0
 S-
 Text Label 4800 3450 0    60   ~ 0
@@ -300,4 +298,15 @@ Wire Wire Line
 	2150 2350 2150 3150
 Text Label 2050 2150 0    60   ~ 0
 Vcc
+$Comp
+L GND #PWR?
+U 1 1 51A13F3D
+P 2550 3450
+F 0 "#PWR?" H 2550 3450 30  0001 C CNN
+F 1 "GND" H 2550 3380 30  0001 C CNN
+F 2 "" H 2550 3450 60  0000 C CNN
+F 3 "" H 2550 3450 60  0000 C CNN
+	1    2550 3450
+	1    0    0    -1  
+$EndComp
 $EndSCHEMATC
