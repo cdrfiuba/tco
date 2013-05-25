@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date vie 19 abr 2013 20:13:57 ART
+EESchema Schematic File Version 2  date sáb 25 may 2013 16:00:35 ART
 LIBS:power
 LIBS:device
 LIBS:transistors
@@ -29,13 +29,19 @@ LIBS:opto
 LIBS:atmel
 LIBS:contrib
 LIBS:valves
+LIBS:cny70
+LIBS:L298
+LIBS:ptn4050
+LIBS:ptn78000w
+LIBS:ptn78020w
+LIBS:TCO-cache
 EELAYER 25  0
 EELAYER END
 $Descr A4 11700 8267
 encoding utf-8
-Sheet 1 4
+Sheet 1 5
 Title ""
-Date "19 apr 2013"
+Date "25 may 2013"
 Rev ""
 Comp ""
 Comment1 ""
