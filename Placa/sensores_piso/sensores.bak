@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date mar 21 may 2013 20:56:40 ART
+EESchema Schematic File Version 2  date mié 22 may 2013 20:07:39 ART
 LIBS:power
 LIBS:device
 LIBS:transistors
@@ -29,6 +29,8 @@ LIBS:opto
 LIBS:atmel
 LIBS:contrib
 LIBS:valves
+LIBS:cny70
+LIBS:sensores-cache
 LIBS:sensores-cache
 EELAYER 25  0
 EELAYER END
