@@ -1,0 +1,52 @@
+Cmp-Mod V01 Created by CvPcb (2013-mar-13)-testing date = Sun 26 May 2013 08:25:42 PM ART
+
+BeginCmp
+TimeStamp = /516A2B00;
+Reference = RV1;
+ValeurCmp = POT;
+IdModule  = PIN_ARRAY_3X1;
+EndCmp
+
+BeginCmp
+TimeStamp = /516A2AAF;
+Reference = U1;
+ValeurCmp = CNY70;
+IdModule  = cny70-4;
+EndCmp
+
+BeginCmp
+TimeStamp = /51A27F19;
+Reference = P1;
+ValeurCmp = CONN_5X2;
+IdModule  = PIN_ARRAY_5x2;
+EndCmp
+
+BeginCmp
+TimeStamp = /51A284F4;
+Reference = RV2;
+ValeurCmp = POT;
+IdModule  = PIN_ARRAY_3X1;
+EndCmp
+
+BeginCmp
+TimeStamp = /51A284FA;
+Reference = U2;
+ValeurCmp = CNY70;
+IdModule  = cny70-4;
+EndCmp
+
+BeginCmp
+TimeStamp = /51A28514;
+Reference = RV3;
+ValeurCmp = POT;
+IdModule  = PIN_ARRAY_3X1;
+EndCmp
+
+BeginCmp
+TimeStamp = /51A299A4;
+Reference = U3;
+ValeurCmp = CNY70;
+IdModule  = cny70-4;
+EndCmp
+
+EndListe
