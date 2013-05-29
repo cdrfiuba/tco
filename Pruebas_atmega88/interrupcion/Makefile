@@ -4,7 +4,7 @@
 
 # TARGET es el nombre del proyecto y es el nombre que se usa para generar el
 # binario
-TARGET = interrupcion
+TARGET = pwm
 
 # PATH de la biblioteca
 LIBCDR = ../library/
