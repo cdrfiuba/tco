@@ -10,9 +10,9 @@ INC = $(shell find .  -name '*.[h]')
 TARGET_P = m16
 HFUSE = 0x99
 # external clock, no divide by 8
-#LFUSE = 0xcf 
+LFUSE = 0xcf
 # internal 8MHz
-LFUSE = 0xe1
+#LFUSE = 0xe1
 MMCU_N = 2
 
 CDEFINES = -DMMCU=$(MMCU_N) -DF_CPU=$(F_CPU)
@@ -27,7 +27,7 @@ elf: $(SRC) $(INC)
 	$(CC) $(CDEFINES) -mmcu=$(MMCU) $(CFLAGS) -o $(TARGET).elf $(SRC)
 	avr-objdump -h -S $(TARGET).elf > $(TARGET).lst
 	avr-size -d $(TARGET).elf
-	avr-size -d --fomrat=avr --mcu=$(MMCU) $(TARGET).elf
+	avr-size -d --format=avr --mcu=$(MMCU) $(TARGET).elf
 
 hex: elf
 	avr-objcopy -j .text -j .data -O ihex $(TARGET).elf $(TARGET).hex
