@@ -11,9 +11,6 @@ void usart_init();
 
 int main()
 {
-
-	unsigned char toogle;
-
 	usart_init();	//Inicialización de la interrupción
 	sei();		//Esta función se llama para activar las interrupciones
 		
@@ -26,16 +23,6 @@ int main()
 		PORTB &= ~(1 << PB0);
 		_delay_ms(10);
 		
-		/*
-		if(toogle == 1){
-			toogle = 0;
-			PORTB |= (1 << PB0);
-		}
-		else{
-			toogle = 1;
-			PORTB &= ~(1<<PB0);			
-		}
-		*/
 	}
 }
 
