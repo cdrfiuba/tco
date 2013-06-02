@@ -1,38 +1,6 @@
-#include <avr/io.h>
-#include <util/delay.h>
+#include "pwm.h"
 
-void inicializar_puertos(void);
-void inicializar_PWM(void);
-void variar_velocidad(unsigned char, unsigned char);
-void motores_avanzar(void);
-
-int main(void)
-{
-
-	inicializar_puertos();
-
-	inicializar_PWM();
-
-	variar_velocidad(0, 0);
-
-	motores_avanzar();	
-
-    	DDRD |= (1<<2);
-
-       	// Ciclo
-    	while(1)
-    	{
-        	_delay_ms(10);
-		PORTD |= (1<<2);
-        	_delay_ms(10);
-		PORTD &= ~(1<<2);
-		
-    	}
-    
-	return 0;
-}
-
-void inicializar_puertos(void){
+void inicializar_puertos_motores(void){
 
 	//Configuro pines como salida
 	DDRB |= (1<<PB3);	//pin BRAKE del motor 1
@@ -40,10 +8,6 @@ void inicializar_puertos(void){
 
 	DDRD |= (1<<PD6); 	//pin DIRECTION del motor 1
 	DDRD |= (1<<PD7); 	//pin DIRECTION del motor 1
-
-	//configuro pines como entrada
-	DDRB &= ~(1<<PB0);	//pin ENCODER motor 1
-	DDRD &= ~(1<<PD2);	//pin ENCODER motor 1
 
 }
 
@@ -89,3 +53,8 @@ void motores_avanzar(void){
 	
 }
 
+void motor_detener(void){
+
+	PORTB |= (1<<PB3);	//Pongo en bajo el pin BRAKE del motor 1
+	PORTB |= (1<<PB4);	//Pongo en bajo el pin BRAKE del motor 2
+}

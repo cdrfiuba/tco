@@ -1,36 +1,19 @@
-TARGET = test
+TARGET = main
 MMCU = atmega16
-F_CPU = 16000000UL
+F_CPU = 8000000UL
 
 CC = avr-gcc
 CFLAGS = -O2 -g -Wall
-SRC = $(shell ls *.c) $(shell ls ../board/*.c)
+SRC = $(shell ls *.c) 
 INC = $(shell find .  -name '*.[h]')
 
-ifeq ($(MMCU), atmega8)
-	TARGET_P = m8
-	HFUSE = 0xd9
-	LFUSE = 0xe4
-	MMCU_N = 0
-else
-ifeq ($(MMCU), atmega88)
-	TARGET_P = m88
-	HFUSE = 0xdf
-	# external clock, no divide by 8
-	LFUSE = 0xf7
-	MMCU_N = 1
-else
-ifeq ($(MMCU), atmega16)
-	TARGET_P = m16
-	HFUSE = 
-	# external clock, no divide by 8
-	LFUSE = 
-	MMCU_N = 2
-else
-	$(error Target no soportado)
-endif
-endif
-endif
+TARGET_P = m16
+HFUSE = 0x99
+# external clock, no divide by 8
+LFUSE = 0xcf
+# internal 8MHz
+#LFUSE = 0xe1
+MMCU_N = 2
 
 CDEFINES = -DMMCU=$(MMCU_N) -DF_CPU=$(F_CPU)
 
@@ -44,6 +27,7 @@ elf: $(SRC) $(INC)
 	$(CC) $(CDEFINES) -mmcu=$(MMCU) $(CFLAGS) -o $(TARGET).elf $(SRC)
 	avr-objdump -h -S $(TARGET).elf > $(TARGET).lst
 	avr-size -d $(TARGET).elf
+	avr-size -d --format=avr --mcu=$(MMCU) $(TARGET).elf
 
 hex: elf
 	avr-objcopy -j .text -j .data -O ihex $(TARGET).elf $(TARGET).hex

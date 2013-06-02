@@ -1,4 +1,14 @@
-//Funciones para la transmición/recepción de datos a través de RS232
+/*	
+*	Proyecto: TCO - Robot resolverdor de laberintos
+*	Club de robótica 2013.
+*	
+*	Integrantes: Ignacio Carballeda, Sebastian Cerone y Gisela Farace.
+*
+*	El siguiente código se realizó para hacer pruebas en la comunicación serie del proyecto.
+*	El microcontrolador es un ATMEGA16.
+*
+*	Este código es un ECHO, se envia un caracter por RS232 y se devuelve el mismo caracter. Utilizar la interrupción de puerto serie.
+*/
 
 #include <avr/io.h>
 #include <avr/interrupt.h>
