@@ -6,9 +6,9 @@
  *												*
  *	Integrantes: 	Ignacio Carballeda, Sebastian Cerone y Gisela Farace			*
  *												*
- *	Archivo:	main.h									*
- *	Descripción: 	El presente documento tiene las definiciones para el manejo del		*
- *			programa principal.
+ *	Archivo:	motores.h								*
+ *	Descripción: 	El presente documento tiene las definiciones para el manejo de los 	*
+ *			motores.								*
  *												*
  *	Última modificación: 02/06/2013								*
  *												*
@@ -16,17 +16,22 @@
 
 #include <avr/io.h>
 #include <avr/interrupt.h>
-#include <util/delay.h>
-
 #include "pwm.h"
-#include "motores.h"
 
-#ifndef MAIN_H_
-#define MAIN_H_
 
-#define USART_BAUDRATE 	9600
-#define BAUD_PRESCALE 	(((F_CPU / (USART_BAUDRATE * 16UL))) - 1)
+#ifndef MOTORES_H_
+#define MOTORES_H_
 
-#endif /* MAIN_H_ */
+#define MOTOR_1_BRAKE		(1<<PB3)
+#define MOTOR_2_BRAKE		(1<<PB4)
+#define MOTOR_1_DIRECTION	(1<<PD7)
+#define MOTOR_2_DIRECTION	(1<<PD6)
 
-void usart_init();
+#endif /* MOTORES_H_ */
+
+void inicializar_puertos_motores	(void);
+void motores_avanzar			(unsigned char);
+void motores_retroceder			(unsigned char);
+void motores_detener			(void);
+void motores_rotar_derecha		(unsigned char);
+void motores_rotar_izquierda		(unsigned char);

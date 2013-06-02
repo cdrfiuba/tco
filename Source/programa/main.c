@@ -2,9 +2,6 @@
 
 #include "main.h"
 
-unsigned char i = 127, j = 127, i_ant;
-
-void usart_init();
 
 int main()
 {
@@ -12,17 +9,14 @@ int main()
 	sei();		//Esta función se llama para activar las interrupciones
 
 	inicializar_PWM();
-	variar_velocidad(i, i);
-	motores_avanzar();
-	variar_velocidad(i, j);
+	motores_detener();
 		
 	for (;;)
 	{
-		if(i != i_ant){
-			i_ant = i;
-			variar_velocidad(i, j);
-		}		
+	
 	}
+
+	return 0;
 }
 
 
@@ -45,18 +39,6 @@ ISR (USART_RXC_vect)						//Interrupción puerto serie
 
 	value = UDR;				 		// Tomo el valor recibido, y lo cargo en la variable value
 	UDR = value;				   		// Cargo el buffer con lo almacenado en la variable value
-
-	if(value == 'q')
-		i--;
-	
-	if(value == 'w')
-		i++;
-
-	if(value == 'e')
-		j--;
-	
-	if(value == 'd')
-		j++;
 }
 
 

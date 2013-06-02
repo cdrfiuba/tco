@@ -1,16 +1,19 @@
+/************************************************************************************************
+ *												*
+ *	Proyecto TCO - Robot resolverdor de laberintos						*
+ *												*
+ *	Laboratorio de microcomputadores 66.09 - Club de robótica 2013				*
+ *												*
+ *	Integrantes: 	Ignacio Carballeda, Sebastian Cerone y Gisela Farace			*
+ *												*
+ *	Archivo:	pwm.c									*
+ *	Descripción: 	El presente documento tiene las definiciones para el manejo del PWM.	*
+ *												*
+ *	Última modificación: 02/06/2013								*
+ *												*
+ ***********************************************************************************************/
+
 #include "pwm.h"
-
-void inicializar_puertos_motores(void){
-
-	//Configuro pines como salida
-	DDRB |= (1<<PB3);	//pin BRAKE del motor 1
-	DDRB |= (1<<PB4);	//pin BRAKE del motor 1
-
-	DDRD |= (1<<PD6); 	//pin DIRECTION del motor 1
-	DDRD |= (1<<PD7); 	//pin DIRECTION del motor 1
-
-}
-
 
 void inicializar_PWM(void){
 
@@ -35,26 +38,10 @@ void inicializar_PWM(void){
 
 }
 
-void variar_velocidad(unsigned char velocidad_motor_izq, unsigned char velocidad_motor_der){
+void variar_PWM(unsigned char valor_izq, unsigned char valor_der){
 
-	OCR1AL = velocidad_motor_izq;
-    	OCR1BL = velocidad_motor_der;
+	OCR1AL = valor_izq;
+    	OCR1BL = valor_der;
     	//TCNT1 = 0;
 
-}
-
-void motores_avanzar(void){
-
-	PORTD |= (1<<PD7); 	//Pongo en alto el pin DIRECTION del motor 1
-	PORTB &= ~(1<<PB3);	//Pongo en bajo el pin BRAKE del motor 1
-
-	PORTD |= (1<<PD6); 	//Pongo en alto el pin DIRECTION del motor 2
-	PORTB &= ~(1<<PB4);	//Pongo en bajo el pin BRAKE del motor 2
-	
-}
-
-void motor_detener(void){
-
-	PORTB |= (1<<PB3);	//Pongo en bajo el pin BRAKE del motor 1
-	PORTB |= (1<<PB4);	//Pongo en bajo el pin BRAKE del motor 2
 }
