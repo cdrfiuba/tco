@@ -29,6 +29,8 @@
 
 #endif /* MOTORES_H_ */
 
+
+//Definición de prototipos
 void inicializar_puertos_motores	(void);
 void motores_avanzar			(unsigned char, unsigned char);
 void motores_retroceder			(unsigned char, unsigned char);

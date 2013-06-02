@@ -17,7 +17,7 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <util/delay.h>
-
+#include <string.h>
 #include "pwm.h"
 #include "motores.h"
 
@@ -27,6 +27,11 @@
 #define USART_BAUDRATE 	9600
 #define BAUD_PRESCALE 	(((F_CPU / (USART_BAUDRATE * 16UL))) - 1)
 
+#define MAX_STRING	25
+
 #endif /* MAIN_H_ */
 
+
+//Definición de prototipos
 void usart_init();
+void enviar_string(unsigned char *);

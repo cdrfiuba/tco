@@ -16,6 +16,8 @@
 #include <avr/io.h>
 #include <util/delay.h>
 
+
+//Definición de prototipos
 void inicializar_PWM	(void);
 void variar_velocidad	(unsigned char, unsigned char);
 

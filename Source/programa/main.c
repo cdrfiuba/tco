@@ -16,6 +16,8 @@
 
 #include "main.h"
 
+unsigned char	buff_rx[MAX_STRING];
+unsigned int	indice_rx;
 
 int main()
 {
@@ -47,12 +49,37 @@ void usart_init()
 }
 
 
+void enviar_string(unsigned char *cadena){
+
+	unsigned int longitud = strlen(cadena);
+
+	for(i = 0; i < longitud; i++){
+
+		while(!UCSRA);					//Espero que se libere el buffer de transimición
+		UDR = cadena[i];
+	}
+}
+
+
 ISR (USART_RXC_vect)						//Interrupción puerto serie
 {
 	unsigned char value;
 
-	value = UDR;				 		// Tomo el valor recibido, y lo cargo en la variable value
-	UDR = value;				   		// Cargo el buffer con lo almacenado en la variable value
+	if(indice_rx < MAX_STRING){
+		
+		buff_rx[indice_rx] = UDR;
+		indice_rx++;
+
+	}
+
+	else{
+		indice_rx = 0;
+
+	}
+		
+	//El código comentado sirve para implementar un echo.
+	//value = UDR;				 		// Tomo el valor recibido, y lo cargo en la variable value
+	//UDR = value;				   		// Cargo el buffer con lo almacenado en la variable value
 }
 
 
