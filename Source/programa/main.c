@@ -1,15 +1,29 @@
-//Funciones para la transmición/recepción de datos a través de RS232
+/************************************************************************************************
+ *												*
+ *	Proyecto TCO - Robot resolverdor de laberintos						*
+ *												*
+ *	Laboratorio de microcomputadores 66.09 - Club de robótica 2013				*
+ *												*
+ *	Integrantes: 	Ignacio Carballeda, Sebastian Cerone y Gisela Farace			*
+ *												*
+ *	Archivo:	main.c									*
+ *	Descripción: 	El presente documento tiene las definiciones para el manejo del		*
+ *			programa principal.							*
+ *												*
+ *	Última modificación: 02/06/2013								*
+ *												*
+ ***********************************************************************************************/
 
 #include "main.h"
 
 
 int main()
 {
-	usart_init();	//Inicialización de la interrupción
-	sei();		//Esta función se llama para activar las interrupciones
+	usart_init();		//Inicialización de la interrupción
+	sei();			//Activación de las interrupciones
 
-	inicializar_PWM();
-	motores_detener();
+	inicializar_PWM();	//Inicialización del PWM
+	motores_detener();	//Detengo los motores
 		
 	for (;;)
 	{

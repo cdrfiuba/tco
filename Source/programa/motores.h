@@ -22,16 +22,16 @@
 #ifndef MOTORES_H_
 #define MOTORES_H_
 
-#define MOTOR_1_BRAKE		(1<<PB3)
-#define MOTOR_2_BRAKE		(1<<PB4)
-#define MOTOR_1_DIRECTION	(1<<PD7)
-#define MOTOR_2_DIRECTION	(1<<PD6)
+#define MOTOR_DER_BRAKE		(1<<PB3)
+#define MOTOR_IZQ_BRAKE		(1<<PB4)
+#define MOTOR_DER_DIRECTION	(1<<PD7)
+#define MOTOR_IZQ_DIRECTION	(1<<PD6)
 
 #endif /* MOTORES_H_ */
 
 void inicializar_puertos_motores	(void);
-void motores_avanzar			(unsigned char);
-void motores_retroceder			(unsigned char);
+void motores_avanzar			(unsigned char, unsigned char);
+void motores_retroceder			(unsigned char, unsigned char);
 void motores_detener			(void);
 void motores_rotar_derecha		(unsigned char);
 void motores_rotar_izquierda		(unsigned char);

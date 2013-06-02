@@ -8,7 +8,7 @@
  *												*
  *	Archivo:	main.h									*
  *	Descripción: 	El presente documento tiene las definiciones para el manejo del		*
- *			programa principal.
+ *			programa principal.							*
  *												*
  *	Última modificación: 02/06/2013								*
  *												*
