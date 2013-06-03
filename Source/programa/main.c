@@ -26,10 +26,14 @@ int main()
 
 	inicializar_PWM();	//Inicialización del PWM
 	motores_detener();	//Detengo los motores
-		
+
+    avanzar_celda(); //avanza una distancia de una celda hacia adonde este apuntando el robot
+
+
+
 	for (;;)
 	{
-	
+
 	}
 
 	return 0;
@@ -40,11 +44,11 @@ int main()
 void usart_init()
 {
 	UCSRB |= (1<<RXCIE) | (1 << RXEN) | (1 << TXEN);   	//Encender recepción transmición
-								
+
 	UCSRC |= (1 << URSEL) | (1 << UCSZ0) | (1 << UCSZ1); 	//Configuro para usar 8 caracteres
 
 	UBRRL = BAUD_PRESCALE; 					// Cargo la parte baja del registro
-								
+
 	UBRRH = (BAUD_PRESCALE >> 8); 				// Cargo la parte alta del registro
 }
 
@@ -66,7 +70,7 @@ ISR (USART_RXC_vect)						//Interrupción puerto serie
 	unsigned char value;
 
 	if(indice_rx < MAX_STRING){
-		
+
 		buff_rx[indice_rx] = UDR;
 		indice_rx++;
 
@@ -76,7 +80,7 @@ ISR (USART_RXC_vect)						//Interrupción puerto serie
 		indice_rx = 0;
 
 	}
-		
+
 	//El código comentado sirve para implementar un echo.
 	//value = UDR;				 		// Tomo el valor recibido, y lo cargo en la variable value
 	//UDR = value;				   		// Cargo el buffer con lo almacenado en la variable value
