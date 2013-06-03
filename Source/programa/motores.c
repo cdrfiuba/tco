@@ -131,8 +131,8 @@ void motores_rotar_izquierda(unsigned char grados){
     int precision=10; //mientras mas alto sea este valor mas veces se va a comparar y a corregir el pwm en un trayecto
     unsigned long fraccion=cuenta_motor_celda/precision;  //estas definiciones van arriba...despues moverlas
     int velocidad_izq=127,velocidad_der=127; //empiezo con una velocidad intermedia
-    int diferencia;
-    int proporcion; //variable a harcodear
+    int diferencia=0;
+    int proporcion=1; //variable a harcodear
     //reseteo cuentas, para arrancar desde cero.
     cuenta_motor_derecha=0;
     cuenta_encoder_derecha=0;
@@ -145,19 +145,19 @@ void motores_rotar_izquierda(unsigned char grados){
 
     if((cuenta_motor_izquierda || cuenta_motor_derecha)>=(fraccion)) //cuando alguno de los dos motores llegue a cuenta/fraccion de lo que se debe mover para recorrer una celda
         {
-        if(cuenta_motor_izquierda > cuenta_motor_derecha) //si la rueda de la izquierda llego antes que la derecha
+        if(cuenta_encoder_izquierda > cuenta_encoder_derecha) //si la rueda de la izquierda llego antes que la derecha (notese que uso cuentas de encoder)
             {
-            diferencia=cuenta_motor_izquierda-cuenta_motor_derecha;
+            diferencia=cuenta_motor_izquierda-cuenta_motor_derecha; //para sacar la diferencia uso cuenta de motores.
             velocidad_izq=velocidad_izq+(diferencia*proporcion);
             }
-        else if(cuenta_motor_izquierda < cuenta_motor_derecha)
+        else if(cuenta_encoder_izquierda < cuenta_encoder_derecha)
             {
             diferencia=cuenta_motor_derecha-cuenta_motor_izquierda;
             velocidad_der=velocidad_der+(diferencia*proporcion)
             }
 
         }
-        fraccion=fraccion+fraccion; //esto se va a repetir 10 veces
+        fraccion=fraccion+fraccion; //esto se va a repetir "precision"  veces
     }
 
 
