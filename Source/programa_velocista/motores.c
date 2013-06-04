@@ -1,6 +1,6 @@
 /************************************************************************************************
  *												*
- *	Proyecto TCO - Robot resolverdor de laberintos						*
+ *	Proyecto TCO - Robot seguidor de lineas							*
  *												*
  *	Laboratorio de microcomputadores 66.09 - Club de robótica 2013				*
  *												*
@@ -118,7 +118,6 @@ void motores_rotar_izquierda(unsigned char grados){
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
-
  void avanzar_celda()
  {
     /*Idea del codigo: Avanzar, cuando se detecta que el robot esta en 1/10 parte del recorrido se
@@ -167,6 +166,5 @@ void motores_rotar_izquierda(unsigned char grados){
 
 
 }
-
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
