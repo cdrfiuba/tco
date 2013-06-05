@@ -16,8 +16,17 @@
 
 #include "sensores_pared.h"
 
-void inicializar_puertos_sensores_pared(void)
-{
+void inicializar_puertos_sensores_pared(void){
+
+	//Led indicador de medición en curso
+	DDRC |= (1<<PC0);
+
+	//configuro TIMER para funcionamiento normal, contando hacia arriba, con prescaler de 256
+
+	//Para timer en modo normal	
+	TCCR0 &= ~(1<<WGM00);	//pongo un 0
+	TCCR0 &= ~(1<<WGM01);	//pongo un 0
+
 	//Configuro los puertos de TRIGGER como salida.
 	DDRA |= SENSOR_PARED_DER_TRIG;
 	DDRA |= SENSOR_PARED_CEN_TRIG;
@@ -30,11 +39,48 @@ void inicializar_puertos_sensores_pared(void)
 }
 
 
+unsigned int prueba_rapida_sensor_pared(void){
+
+	//Enciendo led indicador de medición en curso
+	PORTC |= (1<<PC0);
+
+	//pongo en 1 el trigger
+	PORTA |= SENSOR_PARED_DER_TRIG;
+	
+	//Espero 11 us	
+	_delay_us(11);
+
+	//pongo en 0 el trigger
+	PORTA &= ~SENSOR_PARED_DER_TRIG;
+
+	//Espero a que el echo sea 1
+	while((PORTA & SENSOR_PARED_DER_TRIG) != SENSOR_PARED_DER_TRIG);
+
+	encender_timer();
+	TCNT0 = 0;
+
+	//Espero a que el echo sea 0
+	while((PORTA & SENSOR_PARED_DER_TRIG) == SENSOR_PARED_DER_TRIG);
+
+	apagar_timer();
+
+	//Enciendo led indicador de medición en curso
+	PORTC |= (1<<PC0);
+
+	
+	return TCNT0;
+}
+		
+
+
+
+
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-unsigned int inicializar_maquina_medicion_distancia_pared(void)
-{
+unsigned int inicializar_maquina_medicion_distancia_pared(void){
+
+	sensor = SENSOR_PARED_DERECHA;
 
 	estado_maquina_medicion_distancia_pared = INICIALIZAR_MEDICION_DISTANCIA_PARED;
 	tick_maquina_medicion_distancia_pared	= TICK_INICIALIZAR_MEDICION_DISTANCIA_PARED;
@@ -53,11 +99,10 @@ unsigned int inicializar_maquina_medicion_distancia_pared(void)
  *
  */
 
-unsigned int medir_distancia_pared(unsigned char sensor)
-{
+unsigned int medir_distancia_pared(void){
 
-	if(tick_maquina_medicion_distancia_pared == 0)
-	{
+	if(tick_maquina_medicion_distancia_pared == 0){
+
 		switch(estado_maquina_medicion_distancia_pared){
 
 			//En caso de que caiga en un estado no valido, reinicio la máquina
@@ -78,10 +123,8 @@ unsigned int medir_distancia_pared(unsigned char sensor)
 				
 					PORTA |= SENSOR_PARED_DER_TRIG;
 
-					//Poner contador en cero	
-
-					estado_maquina_medicion_distancia_pared = MEDICION_DISTANCIA_PARED;
-					tick_maquina_medicion_distancia_pared	= TICK_MEDICION_DISTANCIA_PARED;	
+					estado_maquina_medicion_distancia_pared = ESPERAR_UNO;
+					tick_maquina_medicion_distancia_pared	= TICK_MEDICION_DISTANCIA_PARED_ESPERAR_UNO;	
 
 				}
 				
@@ -89,10 +132,8 @@ unsigned int medir_distancia_pared(unsigned char sensor)
 
 					PORTA |= SENSOR_PARED_CEN_TRIG;	
 
-					//Poner contador en cero
-					
-					estado_maquina_medicion_distancia_pared = MEDICION_DISTANCIA_PARED;
-					tick_maquina_medicion_distancia_pared	= TICK_MEDICION_DISTANCIA_PARED;
+					estado_maquina_medicion_distancia_pared = ESPERAR_UNO;
+					tick_maquina_medicion_distancia_pared	= TICK_MEDICION_DISTANCIA_PARED_ESPERAR_UNO;	
 
 				} 
 				
@@ -100,10 +141,8 @@ unsigned int medir_distancia_pared(unsigned char sensor)
 
 					PORTA |= SENSOR_PARED_IZQ_TRIG;	
 
-					//Poner contador en cero
-
-					estado_maquina_medicion_distancia_pared = MEDICION_DISTANCIA_PARED;
-					tick_maquina_medicion_distancia_pared	= TICK_MEDICION_DISTANCIA_PARED;
+					estado_maquina_medicion_distancia_pared = ESPERAR_UNO;
+					tick_maquina_medicion_distancia_pared	= TICK_MEDICION_DISTANCIA_PARED_ESPERAR_UNO;	
 
 				}
 
@@ -113,27 +152,66 @@ unsigned int medir_distancia_pared(unsigned char sensor)
 			break;
 
 
-			case MEDICION_DISTANCIA_PARED:
+			case ESPERAR_UNO:
 
-				//Espero a tener la cantidad de pulsos del reloj (ms).
+				//Espero a tener un '1' en el pin ECHO
 
 				if(sensor == SENSOR_PARED_DERECHA){
 				
 					PORTA &= ~SENSOR_PARED_DER_TRIG;	//Pongo en cero el trigger
 
-					if((PORTA & SENSOR_PARED_IZQ_ECHO) == SENSOR_PARED_IZQ_ECHO)
+					if((PORTA & SENSOR_PARED_DER_ECHO) == SENSOR_PARED_DER_ECHO){
 
+						//poner contador en cero
+						
+						estado_maquina_medicion_distancia_pared = ESPERAR_CERO;
+						tick_maquina_medicion_distancia_pared	= TICK_MEDICION_DISTANCIA_PARED_ESPERAR_CERO;
+
+					}
+					else{
+						estado_maquina_medicion_distancia_pared = ESPERAR_UNO;
+						tick_maquina_medicion_distancia_pared	= TICK_MEDICION_DISTANCIA_PARED_ESPERAR_UNO;
+
+					}
 				}
 				
 				else if(sensor == SENSOR_PARED_CENTRO){
 
 					PORTA &= ~SENSOR_PARED_CEN_TRIG;	//Pongo en cero el trigger
 
+					if((PORTA & SENSOR_PARED_CEN_ECHO) == SENSOR_PARED_CEN_ECHO){
+
+						//poner contador en cero
+						
+						estado_maquina_medicion_distancia_pared = ESPERAR_CERO;
+						tick_maquina_medicion_distancia_pared	= TICK_MEDICION_DISTANCIA_PARED_ESPERAR_CERO;
+
+					}
+					else{
+						estado_maquina_medicion_distancia_pared = ESPERAR_UNO;
+						tick_maquina_medicion_distancia_pared	= TICK_MEDICION_DISTANCIA_PARED_ESPERAR_UNO;
+
+					}
+
 				} 
 				
-				else if(sensor == SENSOR_PARED_CENTRO){
+				else if(sensor == SENSOR_PARED_IZQUIERDA){
 
-					PORTA &= ~SENSOR_PARED_IZQ_TRIG;	//Pongo en cero el trigger	
+					PORTA &= ~SENSOR_PARED_IZQ_TRIG;	//Pongo en cero el trigger
+
+					if((PORTA & SENSOR_PARED_IZQ_ECHO) == SENSOR_PARED_IZQ_ECHO){
+
+						//pongo contador en cero
+						
+						estado_maquina_medicion_distancia_pared = ESPERAR_CERO;
+						tick_maquina_medicion_distancia_pared	= TICK_MEDICION_DISTANCIA_PARED_ESPERAR_CERO;
+
+					}
+					else{
+						estado_maquina_medicion_distancia_pared = ESPERAR_UNO;
+						tick_maquina_medicion_distancia_pared	= TICK_MEDICION_DISTANCIA_PARED_ESPERAR_UNO;
+
+					}
 
 				}
 
@@ -143,6 +221,72 @@ unsigned int medir_distancia_pared(unsigned char sensor)
 
 			break;
 
+
+			case ESPERAR_CERO:
+
+				//Espero a tener un '0' en el pin ECHO
+
+				if(sensor == SENSOR_PARED_DERECHA){
+				
+					if((PORTA & SENSOR_PARED_DER_ECHO) == ~SENSOR_PARED_DER_ECHO){
+
+						
+						estado_maquina_medicion_distancia_pared = ESPERAR_CERO;
+						tick_maquina_medicion_distancia_pared	= TICK_MEDICION_DISTANCIA_PARED_ESPERAR_CERO;
+
+					}
+					else{
+						estado_maquina_medicion_distancia_pared = ESPERAR_UNO;
+						tick_maquina_medicion_distancia_pared	= TICK_MEDICION_DISTANCIA_PARED_ESPERAR_UNO;
+
+					}
+				}
+				
+				else if(sensor == SENSOR_PARED_CENTRO){
+
+					PORTA &= ~SENSOR_PARED_CEN_TRIG;	//Pongo en cero el trigger
+
+					if((PORTA & SENSOR_PARED_CEN_ECHO) == SENSOR_PARED_CEN_ECHO){
+
+						//poner contador en cero
+						
+						estado_maquina_medicion_distancia_pared = ESPERAR_CERO;
+						tick_maquina_medicion_distancia_pared	= TICK_MEDICION_DISTANCIA_PARED_ESPERAR_CERO;
+
+					}
+					else{
+						estado_maquina_medicion_distancia_pared = ESPERAR_UNO;
+						tick_maquina_medicion_distancia_pared	= TICK_MEDICION_DISTANCIA_PARED_ESPERAR_UNO;
+
+					}
+
+				} 
+				
+				else if(sensor == SENSOR_PARED_IZQUIERDA){
+
+					PORTA &= ~SENSOR_PARED_IZQ_TRIG;	//Pongo en cero el trigger
+
+					if((PORTA & SENSOR_PARED_IZQ_ECHO) == SENSOR_PARED_IZQ_ECHO){
+
+						//pongo contador en cero
+						
+						estado_maquina_medicion_distancia_pared = ESPERAR_CERO;
+						tick_maquina_medicion_distancia_pared	= TICK_MEDICION_DISTANCIA_PARED_ESPERAR_CERO;
+
+					}
+					else{
+						estado_maquina_medicion_distancia_pared = ESPERAR_UNO;
+						tick_maquina_medicion_distancia_pared	= TICK_MEDICION_DISTANCIA_PARED_ESPERAR_UNO;
+
+					}
+
+				}
+
+				//Si llego a este punto, es que el sensor ingresado no es válido, reinicio la maquina de estados
+				else
+					inicializar_maquina_medicion_distancia_pared();
+
+			break;
 
 			//En caso de que caiga en un estado no valido, reinicio la máquina
 			case DEFAULT:

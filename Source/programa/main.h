@@ -14,12 +14,16 @@
  *												*
  ***********************************************************************************************/
 
+#ifndef _MAIN_H_
+#define _MAIN_H_
+
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <util/delay.h>
 #include <string.h>
-#include "pwm.h"
-#include "motores.h"
+//#include "pwm.h"
+//#include "motores.h"
+#include "sensores_pared.h"
 
 #ifndef MAIN_H_
 #define MAIN_H_
@@ -35,3 +39,5 @@
 //Definición de prototipos
 void usart_init();
 void enviar_string(unsigned char *);
+
+#endif

@@ -19,20 +19,28 @@
 unsigned char	buff_rx[MAX_STRING];
 unsigned int	indice_rx;
 
-int main()
+unsigned char value;
+
+int main(void)
 {
 	usart_init();		//Inicialización de la interrupción
 	sei();			//Activación de las interrupciones
 
+	/*
 	inicializar_PWM();	//Inicialización del PWM
 	motores_detener();	//Detengo los motores
 
-    avanzar_celda(); //avanza una distancia de una celda hacia adonde este apuntando el robot
+    	avanzar_celda(); //avanza una distancia de una celda hacia adonde este apuntando el robot
 
+	*/
 
+	inicializar_puertos_sensores_pared();
+	DDRC |= (1<<PC0);
 
 	for (;;)
 	{
+		while(!UCSRA);
+		UDR = prueba_rapida_sensor_pared(); 
 
 	}
 
@@ -52,8 +60,10 @@ void usart_init()
 	UBRRH = (BAUD_PRESCALE >> 8); 				// Cargo la parte alta del registro
 }
 
-
+/*
 void enviar_string(unsigned char *cadena){
+
+	unsigned int i;
 
 	unsigned int longitud = strlen(cadena);
 
@@ -63,10 +73,11 @@ void enviar_string(unsigned char *cadena){
 		UDR = cadena[i];
 	}
 }
-
+*/
 
 ISR (USART_RXC_vect)						//Interrupción puerto serie
 {
+	/*
 	unsigned char value;
 
 	if(indice_rx < MAX_STRING){
@@ -80,10 +91,11 @@ ISR (USART_RXC_vect)						//Interrupción puerto serie
 		indice_rx = 0;
 
 	}
-
+	*/
+	
 	//El código comentado sirve para implementar un echo.
-	//value = UDR;				 		// Tomo el valor recibido, y lo cargo en la variable value
-	//UDR = value;				   		// Cargo el buffer con lo almacenado en la variable value
+	value = UDR;				 		// Tomo el valor recibido, y lo cargo en la variable value
+	UDR = value;				   		// Cargo el buffer con lo almacenado en la variable value
 }
 
 

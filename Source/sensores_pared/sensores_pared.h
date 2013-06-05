@@ -18,6 +18,10 @@
 #include <avr/io.h>
 #include <util/delay.h>
 
+inline void apagar_timer(void) 		{TCCR0 &= ~((1<<CS02)|(1<<CS01)|(1<<CS00))}
+inline void encender_timer(void)	{TCCR0 |= ((1<<CS02)|(0<<CS01)|(0<<CS00))}
+	
+
 #define	SENSOR_PARED_IZQ_TRIG	(1<<PA4)
 #define SENSOR_PARED_IZQ_ECHO	(1<<PB2)
   
