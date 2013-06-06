@@ -1,31 +1,31 @@
 /************************************************************************************************
- *												*
- *	Proyecto TCO - Robot resolverdor de laberintos						*
- *												*
- *	Laboratorio de microcomputadores 66.09 - Club de robótica 2013				*
- *												*
- *	Integrantes: 	Ignacio Carballeda, Sebastian Cerone y Gisela Farace			*
- *												*
- *	Archivo:	sensores_pared.c							*
- *	Descripción: 	El presente documento tiene las definiciones para el manejo de los 	*
- *			sensores HC-SR04, para la medición de distancia a las paredes.		*
- *												*
- *	Última modificación: 03/06/2013								*
- *												*
+ *												                                                *
+ *	Proyecto TCO - Robot resolverdor de laberintos						                        *
+ *												                                                *
+ *	Laboratorio de microcomputadores 66.09 - Club de robótica 2013				                *
+ *												                                                *
+ *	Integrantes: 	Ignacio Carballeda, Sebastian Cerone y Gisela Farace			            *
+ *												                                                *
+ *	Archivo:	    sensores_pared.c							                                *
+ *	Descripción: 	El presente documento tiene las definiciones para el manejo de los 	        *
+ *			        sensores HC-SR04, para la medición de distancia a las paredes.		        *
+ *												                                                *
+ *	Última modificación: 06/06/2013								                                *
+ *												                                                *
  ***********************************************************************************************/
 
 #include "sensores_pared.h"
 
 extern volatile uint8_t status_flag;
 
-inline void 	apagar_timer(void) 	{TCCR0 &= ~((1<<CS02)|(1<<CS01)|(1<<CS00));}
-inline void	encender_timer(void)	{TCCR0 |= ((0<<CS02)|(1<<CS01)|(1<<CS00));}
+inline void 	        apagar_timer(void) 	    {TCCR0 &= ~((1<<CS02)|(1<<CS01)|(1<<CS00));}
+inline void	            encender_timer(void)	{TCCR0 |= ((0<<CS02)|(1<<CS01)|(1<<CS00));}
 
 
 void inicializar_timer(void){
-  	
+
 	apagar_timer();
-	
+
 	//configuro TIMER para funcionamiento normal, contando hacia arriba, con prescaler de 256
 	TCCR0 &= ~((1<<WGM01)|(1<<WGM00));	// Modo 0
  	TIMSK |= (1<<TOIE0);
@@ -33,21 +33,18 @@ void inicializar_timer(void){
 
 void inicializar_puertos_sensores_pared(void){
 
-	//Led indicador de medición en curso
-	DDRC |= (1<<PC0);
-
 	//Configuro los puertos de TRIGGER como salida.
 	DDRA |= SENSOR_PARED_DER_TRIG;
 	DDRA |= SENSOR_PARED_CEN_TRIG;
 	DDRA |= SENSOR_PARED_IZQ_TRIG;
 
 	//Configuro el puerto de ECHO como entrada.
-	DDRB &= ~SENSOR_PARED_DER_ECHO;
-	PORTB |= SENSOR_PARED_DER_ECHO;
+	DDRB &= ~SENSOR_PARED_ECHO;
+	PORTB |= SENSOR_PARED_ECHO;
 }
 
 
-unsigned char prueba_rapida_sensor_pared(void){
+uint8_t prueba_rapida_sensor_pared(void){
 
 	//Enciendo led indicador de medición en curso
 	PORTC |= (1<<PC0);
@@ -55,25 +52,25 @@ unsigned char prueba_rapida_sensor_pared(void){
 	//pongo en 1 el trigger
 	PORTA |= SENSOR_PARED_DER_TRIG;
 
-	//Espero 15 us	
+	//Espero 15 us
 	_delay_us(15);
 
 	//pongo en 0 el trigger
 	PORTA &= ~SENSOR_PARED_DER_TRIG;
-	
+
 	//Espero a que el echo sea 1
-	while((PINB & SENSOR_PARED_DER_ECHO) != SENSOR_PARED_DER_ECHO);
+	while((PINB & SENSOR_PARED_ECHO) != SENSOR_PARED_ECHO);
 
 	TCNT0 = 0;
 	encender_timer();
-	
+
   	status_flag = 0;
-	
+
 	//Espero a que el echo sea 0
-	while( ((PINB & SENSOR_PARED_DER_ECHO) == SENSOR_PARED_DER_ECHO) && (status_flag == 0) ){}
+	while( ((PINB & SENSOR_PARED_ECHO) == SENSOR_PARED_ECHO) && (status_flag == 0) ){}
 
 	apagar_timer();
-	
+
 	//Apago led indicador de medición en curso
 	PORTC &= ~(1<<PC0);
 
@@ -81,7 +78,7 @@ unsigned char prueba_rapida_sensor_pared(void){
 
 	return TCNT0;
 }
-		
+
 
 
 
@@ -105,9 +102,9 @@ unsigned int inicializar_maquina_medicion_distancia_pared(void){
 // El siguiente código es una maquina de estados para manejar los sensores de medición de distancia.
 // Para poder usarla se tiene que usar un variable contador del tipo unsigned long global "tick_maquina_medicion_distancia_pared"
 // Esta variable debe ser decrementada en la interrupción de timer cada 1 ms.
-// Tambien se debe declarar una variable global del tipo unsigned char "estado_maquina_medicion_distancia_pared" para llevar el 
+// Tambien se debe declarar una variable global del tipo unsigned char "estado_maquina_medicion_distancia_pared" para llevar el
 // orden de la maquina.
-inline 
+inline
 
 unsigned int medir_distancia_pared(void){
 
@@ -127,32 +124,32 @@ unsigned int medir_distancia_pared(void){
 
 				//Pongo el pin en 1 y paso al siguiente estado. Como al siguiente estado voy a entrar en
 				// TICK_MEDICION_DISTANCIA_PARED = 10 ms como minimo, es el tiempo suficiente para generar el tren de pulsos
-					
+
 
 				if(sensor == SENSOR_PARED_DERECHA){
-				
+
 					PORTA |= SENSOR_PARED_DER_TRIG;
 
 					estado_maquina_medicion_distancia_pared = ESPERAR_UNO;
-					tick_maquina_medicion_distancia_pared	= TICK_MEDICION_DISTANCIA_PARED_ESPERAR_UNO;	
+					tick_maquina_medicion_distancia_pared	= TICK_MEDICION_DISTANCIA_PARED_ESPERAR_UNO;
 
 				}
-				
+
 				else if(sensor == SENSOR_PARED_CENTRO){
 
-					PORTA |= SENSOR_PARED_CEN_TRIG;	
+					PORTA |= SENSOR_PARED_CEN_TRIG;
 
 					estado_maquina_medicion_distancia_pared = ESPERAR_UNO;
-					tick_maquina_medicion_distancia_pared	= TICK_MEDICION_DISTANCIA_PARED_ESPERAR_UNO;	
+					tick_maquina_medicion_distancia_pared	= TICK_MEDICION_DISTANCIA_PARED_ESPERAR_UNO;
 
-				} 
-				
+				}
+
 				else if(sensor == SENSOR_PARED_CENTRO){
 
-					PORTA |= SENSOR_PARED_IZQ_TRIG;	
+					PORTA |= SENSOR_PARED_IZQ_TRIG;
 
 					estado_maquina_medicion_distancia_pared = ESPERAR_UNO;
-					tick_maquina_medicion_distancia_pared	= TICK_MEDICION_DISTANCIA_PARED_ESPERAR_UNO;	
+					tick_maquina_medicion_distancia_pared	= TICK_MEDICION_DISTANCIA_PARED_ESPERAR_UNO;
 
 				}
 
@@ -167,13 +164,13 @@ unsigned int medir_distancia_pared(void){
 				//Espero a tener un '1' en el pin ECHO
 
 				if(sensor == SENSOR_PARED_DERECHA){
-				
+
 					PORTA &= ~SENSOR_PARED_DER_TRIG;	//Pongo en cero el trigger
 
 					if((PORTA & SENSOR_PARED_DER_ECHO) == SENSOR_PARED_DER_ECHO){
 
 						//poner contador en cero
-						
+
 						estado_maquina_medicion_distancia_pared = ESPERAR_CERO;
 						tick_maquina_medicion_distancia_pared	= TICK_MEDICION_DISTANCIA_PARED_ESPERAR_CERO;
 
@@ -184,7 +181,7 @@ unsigned int medir_distancia_pared(void){
 
 					}
 				}
-				
+
 				else if(sensor == SENSOR_PARED_CENTRO){
 
 					PORTA &= ~SENSOR_PARED_CEN_TRIG;	//Pongo en cero el trigger
@@ -192,7 +189,7 @@ unsigned int medir_distancia_pared(void){
 					if((PORTA & SENSOR_PARED_CEN_ECHO) == SENSOR_PARED_CEN_ECHO){
 
 						//poner contador en cero
-						
+
 						estado_maquina_medicion_distancia_pared = ESPERAR_CERO;
 						tick_maquina_medicion_distancia_pared	= TICK_MEDICION_DISTANCIA_PARED_ESPERAR_CERO;
 
@@ -203,8 +200,8 @@ unsigned int medir_distancia_pared(void){
 
 					}
 
-				} 
-				
+				}
+
 				else if(sensor == SENSOR_PARED_IZQUIERDA){
 
 					PORTA &= ~SENSOR_PARED_IZQ_TRIG;	//Pongo en cero el trigger
@@ -212,7 +209,7 @@ unsigned int medir_distancia_pared(void){
 					if((PORTA & SENSOR_PARED_IZQ_ECHO) == SENSOR_PARED_IZQ_ECHO){
 
 						//pongo contador en cero
-						
+
 						estado_maquina_medicion_distancia_pared = ESPERAR_CERO;
 						tick_maquina_medicion_distancia_pared	= TICK_MEDICION_DISTANCIA_PARED_ESPERAR_CERO;
 
@@ -237,10 +234,10 @@ unsigned int medir_distancia_pared(void){
 				//Espero a tener un '0' en el pin ECHO
 
 				if(sensor == SENSOR_PARED_DERECHA){
-				
+
 					if((PORTA & SENSOR_PARED_DER_ECHO) == ~SENSOR_PARED_DER_ECHO){
 
-						
+
 						estado_maquina_medicion_distancia_pared = ESPERAR_CERO;
 						tick_maquina_medicion_distancia_pared	= TICK_MEDICION_DISTANCIA_PARED_ESPERAR_CERO;
 
@@ -251,7 +248,7 @@ unsigned int medir_distancia_pared(void){
 
 					}
 				}
-				
+
 				else if(sensor == SENSOR_PARED_CENTRO){
 
 					PORTA &= ~SENSOR_PARED_CEN_TRIG;	//Pongo en cero el trigger
@@ -259,7 +256,7 @@ unsigned int medir_distancia_pared(void){
 					if((PORTA & SENSOR_PARED_CEN_ECHO) == SENSOR_PARED_CEN_ECHO){
 
 						//poner contador en cero
-						
+
 						estado_maquina_medicion_distancia_pared = ESPERAR_CERO;
 						tick_maquina_medicion_distancia_pared	= TICK_MEDICION_DISTANCIA_PARED_ESPERAR_CERO;
 
@@ -270,8 +267,8 @@ unsigned int medir_distancia_pared(void){
 
 					}
 
-				} 
-				
+				}
+
 				else if(sensor == SENSOR_PARED_IZQUIERDA){
 
 					PORTA &= ~SENSOR_PARED_IZQ_TRIG;	//Pongo en cero el trigger
@@ -279,7 +276,7 @@ unsigned int medir_distancia_pared(void){
 					if((PORTA & SENSOR_PARED_IZQ_ECHO) == SENSOR_PARED_IZQ_ECHO){
 
 						//pongo contador en cero
-						
+
 						estado_maquina_medicion_distancia_pared = ESPERAR_CERO;
 						tick_maquina_medicion_distancia_pared	= TICK_MEDICION_DISTANCIA_PARED_ESPERAR_CERO;
 
