@@ -1,5 +1,5 @@
 /************************************************************************************************
- *												*
+ *												                                            *
  *	Proyecto TCO - Robot resolverdor de laberintos						*
  *												*
  *	Laboratorio de microcomputadores 66.09 - Club de robótica 2013				*

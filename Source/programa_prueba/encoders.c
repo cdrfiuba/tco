@@ -1,8 +1,4 @@
-
-
-#include <avr/io.h>
-#include <util/delay.h>
-#include <avr/interrupt.h>
+#include "encoders.h"
 
 
 unsigned long cuenta_encoder_derecha, cuenta_encoder_izquierda;
@@ -60,21 +56,6 @@ TIFR |= (1<<TOV2);
 
 }
 
-//¿Las Interrupciones Deberian ir en el Main?
-//Las variables que uso a continuacion deberian ser globales y estar definidas en main
-//unsigned char cuenta_encoder_1;
-//unsigned char cuenta_encoder_2;
-
-ISR (TIMER0_OVF_vect)   //interrupcion por overflow del timer 0
-{
-cuenta_encoder_derecha++;
-}
-
-
-ISR (TIMER2_OVF_vect)   //interrupcion por overflow del timer 2
-{
-cuenta_encoder_izquierda++;
-}
 
 
 

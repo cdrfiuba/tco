@@ -16,12 +16,11 @@
 
 #include "main.h"
 
-unsigned char	buff_rx[MAX_STRING];
-unsigned int	indice_rx;
+unsigned char		buff_rx[MAX_STRING];
+unsigned int		indice_rx;
 
-unsigned char 	value, distancia;
-
-volatile uint8_t status_flag;
+unsigned char 		value, distancia;
+volatile uint8_t 	status_flag;
 
 int main(void)
 {
@@ -76,6 +75,7 @@ ISR (USART_RXC_vect){
 ISR (TIMER0_OVF_vect){
   
 	status_flag = 1;
+
 	while(!UCSRA);	
 	UDR = 'I';
 }

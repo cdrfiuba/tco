@@ -16,7 +16,6 @@
 
 #include "sensores_pared.h"
 
-extern unsigned char flag_interrupcion;
 extern volatile uint8_t status_flag;
 
 inline void 	apagar_timer(void) 	{TCCR0 &= ~((1<<CS02)|(1<<CS01)|(1<<CS00));}
@@ -24,7 +23,8 @@ inline void	encender_timer(void)	{TCCR0 |= ((0<<CS02)|(1<<CS01)|(1<<CS00));}
 
 
 void inicializar_timer(void){
-  	apagar_timer();
+  	
+	apagar_timer();
 	
 	//configuro TIMER para funcionamiento normal, contando hacia arriba, con prescaler de 256
 	TCCR0 &= ~((1<<WGM01)|(1<<WGM00));	// Modo 0
@@ -68,11 +68,12 @@ unsigned char prueba_rapida_sensor_pared(void){
 	encender_timer();
 	
   	status_flag = 0;
+	
 	//Espero a que el echo sea 0
-	while( ((PINB & SENSOR_PARED_DER_ECHO) == SENSOR_PARED_DER_ECHO) || (status_flag == 1)){
-	}
+	while( ((PINB & SENSOR_PARED_DER_ECHO) == SENSOR_PARED_DER_ECHO) && (status_flag == 0) ){}
 
 	apagar_timer();
+	
 	//Apago led indicador de medición en curso
 	PORTC &= ~(1<<PC0);
 

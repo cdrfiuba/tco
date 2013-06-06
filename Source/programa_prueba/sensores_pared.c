@@ -16,34 +16,40 @@
 
 #include "sensores_pared.h"
 
+extern volatile uint8_t status_flag;
+
 inline void 	apagar_timer(void) 	{TCCR0 &= ~((1<<CS02)|(1<<CS01)|(1<<CS00));}
 inline void	encender_timer(void)	{TCCR0 |= ((0<<CS02)|(1<<CS01)|(1<<CS00));}
-//inline void	inicializar_timer(void)	{TIMSK 
+
+
+void inicializar_timer(void){
+  	
+	apagar_timer();
+	
+	//configuro TIMER para funcionamiento normal, contando hacia arriba, con prescaler de 256
+	TCCR0 &= ~((1<<WGM01)|(1<<WGM00));	// Modo 0
+ 	TIMSK |= (1<<TOIE0);
+}
 
 void inicializar_puertos_sensores_pared(void){
 
 	//Led indicador de medición en curso
 	DDRC |= (1<<PC0);
 
-	//configuro TIMER para funcionamiento normal, contando hacia arriba, con prescaler de 256
-	TCCR0 &= ~(1<<WGM00);	//pongo un 0
-	TCCR0 &= ~(1<<WGM01);	//pongo un 0
-
 	//Configuro los puertos de TRIGGER como salida.
 	DDRA |= SENSOR_PARED_DER_TRIG;
 	DDRA |= SENSOR_PARED_CEN_TRIG;
 	DDRA |= SENSOR_PARED_IZQ_TRIG;
 
-	//Configuro los puertos de ECHO como entradas.
+	//Configuro el puerto de ECHO como entrada.
 	DDRB &= ~SENSOR_PARED_DER_ECHO;
-
-	PORTB |= SENSOR_PARED_IZQ_ECHO;
-
+	PORTB |= SENSOR_PARED_DER_ECHO;
 }
 
 
 unsigned char prueba_rapida_sensor_pared(void){
 
+	//Enciendo led indicador de medición en curso
 	PORTC |= (1<<PC0);
 
 	//pongo en 1 el trigger
@@ -54,21 +60,24 @@ unsigned char prueba_rapida_sensor_pared(void){
 
 	//pongo en 0 el trigger
 	PORTA &= ~SENSOR_PARED_DER_TRIG;
-
+	
 	//Espero a que el echo sea 1
 	while((PINB & SENSOR_PARED_DER_ECHO) != SENSOR_PARED_DER_ECHO);
 
 	TCNT0 = 0;
 	encender_timer();
 	
+  	status_flag = 0;
+	
 	//Espero a que el echo sea 0
-	//Enciendo led indicador de medición en curso
-	while((PINB & SENSOR_PARED_DER_ECHO) == SENSOR_PARED_DER_ECHO);
+	while( ((PINB & SENSOR_PARED_DER_ECHO) == SENSOR_PARED_DER_ECHO) && (status_flag == 0) ){}
 
 	apagar_timer();
-
-	//Enciendo led indicador de medición en curso
+	
+	//Apago led indicador de medición en curso
 	PORTC &= ~(1<<PC0);
+
+  	if (status_flag == 1) return 0xff;
 
 	return TCNT0;
 }

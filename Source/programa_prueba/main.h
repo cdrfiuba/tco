@@ -25,6 +25,7 @@
 #include "motores.h"
 #include "sensores_pared.h"
 #include "encoders.h"
+#include "sensores_pared.h"
 
 #ifndef MAIN_H_
 #define MAIN_H_
@@ -38,6 +39,7 @@
 
 
 //Definición de prototipos
-//void usart_init();
+void usart_init();
+void enviar_string(unsigned char *);
 
 #endif

@@ -17,11 +17,11 @@
 
 void inicializar_PWM(void){
 
-	TCCR1A = ((1 << COM1A1)|(1 << COM1A0)|(1 << COM1B1)|(1 << COM1B0)|(0 << WGM11)|(1 << WGM10)); 	
+	TCCR1A = ((1 << COM1A1)|(1 << COM1A0)|(1 << COM1B1)|(1 << COM1B0)|(0 << WGM11)|(1 << WGM10));
 	//COM1A1=1, COM1A0=1, COM1B1=1, COM1B0=1, WGM11=0, WGM10=1
 	//Configuración del PWM como fast PWM de 8 bits
 
-	TCCR1B = ((0 << WGM13)|(1 << WGM12)); 								
+	TCCR1B = ((0 << WGM13)|(1 << WGM12));
 	//Timer Apagado WGM13=0, WGM12=1, CS12=0, CS11=0, CS10=0
 
 	// Configuración de dirección de puertos I/O
@@ -37,7 +37,6 @@ void inicializar_PWM(void){
 
 	// Configuración del Timer 1:
 	TCCR1B |= ((0<<CS12)|(0<<CS11)|(1<<CS10)); //Enciendo el Timer sin prescaler (001)
-
 }
 
 void variar_PWM(unsigned char valor_izq, unsigned char valor_der){
@@ -45,5 +44,4 @@ void variar_PWM(unsigned char valor_izq, unsigned char valor_der){
 	OCR1AL = valor_izq;
 	OCR1BL = valor_der;
 	//TCNT1 = 0;
-
 }

@@ -13,14 +13,12 @@
  *	Última modificación: 02/06/2013								*
  *												*
  ***********************************************************************************************/
+#ifndef MOTORES_H_
+#define MOTORES_H_
 
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include "pwm.h"
-
-
-#ifndef MOTORES_H_
-#define MOTORES_H_
 
 #define MOTOR_DER_BRAKE		(1<<PB3)
 #define MOTOR_IZQ_BRAKE		(1<<PB4)
@@ -38,5 +36,5 @@ void motores_detener			    (void);
 void motores_rotar_derecha		    (unsigned char);
 void motores_rotar_izquierda		(unsigned char);
 
-extern void inicializar_PWM(void);
-extern void variar_PWM(unsigned char, unsigned char);
+extern void inicializar_PWM         (void);
+extern void variar_PWM              (unsigned char, unsigned char);
