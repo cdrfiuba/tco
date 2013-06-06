@@ -19,12 +19,13 @@
 unsigned char	buff_rx[MAX_STRING];
 unsigned int	indice_rx;
 
-unsigned char value, distancia;
+unsigned char 	value, distancia;
 
 int main(void)
 {
 	usart_init();		//Inicialización de la interrupción
 	sei();			//Activación de las interrupciones
+	inicializar_timer();	//Configuro la interrupción por timer
 
 	/*
 	inicializar_PWM();	//Inicialización del PWM
@@ -35,10 +36,9 @@ int main(void)
 	*/
 
 	inicializar_puertos_sensores_pared();
-
+	
 	for (;;)
 	{
-	
 		_delay_ms(1000);
 
 		distancia = prueba_rapida_sensor_pared(); 
@@ -64,38 +64,8 @@ void usart_init()
 	UBRRH = (BAUD_PRESCALE >> 8); 				// Cargo la parte alta del registro
 }
 
-/*
-void enviar_string(unsigned char *cadena){
-
-	unsigned int i;
-
-	unsigned int longitud = strlen(cadena);
-
-	for(i = 0; i < longitud; i++){
-
-		while(!UCSRA);					//Espero que se libere el buffer de transimición
-		UDR = cadena[i];
-	}
-}
-*/
-
-ISR (USART_RXC_vect)						//Interrupción puerto serie
-{
-	/*
-	unsigned char value;
-
-	if(indice_rx < MAX_STRING){
-
-		buff_rx[indice_rx] = UDR;
-		indice_rx++;
-
-	}
-
-	else{
-		indice_rx = 0;
-
-	}
-	*/
+//Interrupción puerto serie
+ISR (USART_RXC_vect){
 	
 	//El código comentado sirve para implementar un echo.
 	value = UDR;				 		// Tomo el valor recibido, y lo cargo en la variable value
@@ -105,6 +75,8 @@ ISR (USART_RXC_vect)						//Interrupción puerto serie
 
 ISR (TIMER0_OVF_vect){
 
+	while(!UCSRA);	
+	UDR = 'I';
 
 }
 

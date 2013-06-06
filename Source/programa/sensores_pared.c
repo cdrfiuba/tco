@@ -16,9 +16,14 @@
 
 #include "sensores_pared.h"
 
+
+
+extern unsigned char flag_interrupcion;
+
 inline void 	apagar_timer(void) 	{TCCR0 &= ~((1<<CS02)|(1<<CS01)|(1<<CS00));}
 inline void	encender_timer(void)	{TCCR0 |= ((0<<CS02)|(1<<CS01)|(1<<CS00));}
-//inline void	inicializar_timer(void)	{TIMSK 
+inline void	inicializar_timer(void)	{TIMSK |= (1<<TOIE0);}
+
 
 void inicializar_puertos_sensores_pared(void){
 
@@ -44,6 +49,7 @@ void inicializar_puertos_sensores_pared(void){
 
 unsigned char prueba_rapida_sensor_pared(void){
 
+	//Enciendo led indicador de medición en curso
 	PORTC |= (1<<PC0);
 
 	//pongo en 1 el trigger
@@ -55,6 +61,7 @@ unsigned char prueba_rapida_sensor_pared(void){
 	//pongo en 0 el trigger
 	PORTA &= ~SENSOR_PARED_DER_TRIG;
 
+	
 	//Espero a que el echo sea 1
 	while((PINB & SENSOR_PARED_DER_ECHO) != SENSOR_PARED_DER_ECHO);
 
@@ -62,12 +69,23 @@ unsigned char prueba_rapida_sensor_pared(void){
 	encender_timer();
 	
 	//Espero a que el echo sea 0
-	//Enciendo led indicador de medición en curso
-	while((PINB & SENSOR_PARED_DER_ECHO) == SENSOR_PARED_DER_ECHO);
+	while( (PINB & SENSOR_PARED_DER_ECHO) == SENSOR_PARED_DER_ECHO){
+		
+		if( (TIFR & (1<<TOV0)) == (1<<TOV0) ){
+		
+			apagar_timer();
+
+			//Apago led indicador de medición en curso
+			PORTC &= ~(1<<PC0);
+
+			
+			return 0xFF;
+		}
+	}
 
 	apagar_timer();
 
-	//Enciendo led indicador de medición en curso
+	//Apago led indicador de medición en curso
 	PORTC &= ~(1<<PC0);
 
 	return TCNT0;
