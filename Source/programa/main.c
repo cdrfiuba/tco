@@ -32,11 +32,24 @@ int main(void)
 
         _delay_ms(1000);
 
-		distancia = prueba_rapida_sensor_pared();
+		distancia = prueba_rapida_sensor_pared(SENSOR_PARED_DER);
 
         while(!UCSRA);
         UDR = distancia;
 
+        _delay_ms(20);
+
+		distancia = prueba_rapida_sensor_pared(SENSOR_PARED_CEN);
+
+        while(!UCSRA);
+        UDR = distancia;
+
+        _delay_ms(20);
+
+		distancia = prueba_rapida_sensor_pared(SENSOR_PARED_IZQ);
+
+        while(!UCSRA);
+        UDR = distancia;
     }
 
 	return 0;

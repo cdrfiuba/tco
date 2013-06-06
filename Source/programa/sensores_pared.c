@@ -34,9 +34,9 @@ void inicializar_timer(void){
 void inicializar_puertos_sensores_pared(void){
 
 	//Configuro los puertos de TRIGGER como salida.
-	DDRA |= SENSOR_PARED_DER_TRIG;
-	DDRA |= SENSOR_PARED_CEN_TRIG;
-	DDRA |= SENSOR_PARED_IZQ_TRIG;
+	DDRA |= SENSOR_PARED_DER;
+	DDRA |= SENSOR_PARED_CEN;
+	DDRA |= SENSOR_PARED_IZQ;
 
 	//Configuro el puerto de ECHO como entrada.
 	DDRB &= ~SENSOR_PARED_ECHO;
@@ -44,19 +44,19 @@ void inicializar_puertos_sensores_pared(void){
 }
 
 
-uint8_t prueba_rapida_sensor_pared(void){
+uint8_t prueba_rapida_sensor_pared(uint8_t sensor){
 
 	//Enciendo led indicador de medición en curso
 	PORTC |= (1<<PC0);
 
 	//pongo en 1 el trigger
-	PORTA |= SENSOR_PARED_DER_TRIG;
+	PORTA |= sensor;
 
 	//Espero 15 us
 	_delay_us(15);
 
 	//pongo en 0 el trigger
-	PORTA &= ~SENSOR_PARED_DER_TRIG;
+	PORTA &= ~sensor;
 
 	//Espero a que el echo sea 1
 	while((PINB & SENSOR_PARED_ECHO) != SENSOR_PARED_ECHO);

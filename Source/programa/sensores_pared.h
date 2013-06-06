@@ -20,10 +20,11 @@
 #include <avr/io.h>
 #include <util/delay.h>
 
-#define	SENSOR_PARED_IZQ_TRIG	(1 << PA3)
-#define	SENSOR_PARED_DER_TRIG	(1 << PA4)
-#define	SENSOR_PARED_CEN_TRIG	(1 << PA5)
+#define	SENSOR_PARED_IZQ	(1 << PA3)
+#define	SENSOR_PARED_DER	(1 << PA4)
+#define	SENSOR_PARED_CEN	(1 << PA5)
 #define SENSOR_PARED_ECHO	    (1 << PB2)
+
 
 #endif
 
@@ -32,7 +33,7 @@ inline void  apagar_timer(void);
 inline void	encender_timer(void);
 void        inicializar_timer(void);
 void        inicializar_puertos_sensores_pared(void);
-uint8_t     prueba_rapida_sensor_pared(void);
+uint8_t     prueba_rapida_sensor_pared(uint8_t);
 
 
 
