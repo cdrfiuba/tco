@@ -24,7 +24,7 @@ unsigned char value;
 int main(void)
 {
 	usart_init();		//Inicialización de la interrupción
-	sei();			//Activación de las interrupciones
+	//sei();			//Activación de las interrupciones
 
 	/*
 	inicializar_PWM();	//Inicialización del PWM
@@ -35,11 +35,9 @@ int main(void)
 	*/
 
 	inicializar_puertos_sensores_pared();
-	DDRC |= (1<<PC0);
 
 	for (;;)
 	{
-		while(!UCSRA);
 		UDR = prueba_rapida_sensor_pared(); 
 
 	}

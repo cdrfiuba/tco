@@ -29,10 +29,11 @@ int main()
 	{
 		
 		PORTB |= (1 << PB0);
-		_delay_ms(10);
+		_delay_ms(100);
 		PORTB &= ~(1 << PB0);
-		_delay_ms(10);
-		
+		//UDR = 'a';
+		_delay_ms(100);
+		//UDR = 'b';
 	}
 }
 
