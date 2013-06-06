@@ -21,18 +21,18 @@ unsigned int	indice_rx;
 
 unsigned char 	value, distancia;
 
+volatile uint8_t status_flag;
+
 int main(void)
 {
+	inicializar_timer();	//Configuro la interrupción por timer
 	usart_init();		//Inicialización de la interrupción
 	sei();			//Activación de las interrupciones
-	inicializar_timer();	//Configuro la interrupción por timer
 
 	/*
 	inicializar_PWM();	//Inicialización del PWM
 	motores_detener();	//Detengo los motores
-
-    	avanzar_celda(); //avanza una distancia de una celda hacia adonde este apuntando el robot
-
+  avanzar_celda(); //avanza una distancia de una celda hacia adonde este apuntando el robot
 	*/
 
 	inicializar_puertos_sensores_pared();
@@ -74,10 +74,9 @@ ISR (USART_RXC_vect){
 
 
 ISR (TIMER0_OVF_vect){
-
+  status_flag = 1;
 	while(!UCSRA);	
 	UDR = 'I';
-
 }
 
 
