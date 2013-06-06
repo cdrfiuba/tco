@@ -20,8 +20,8 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <util/delay.h>
-//#include "pwm.h"
-//#include "motores.h"
+#include "pwm.h"
+#include "motores.h"
 #include "sensores_pared.h"
 
 #define USART_BAUDRATE 	9600
@@ -33,4 +33,4 @@
 
 //Definición de prototipos
 void usart_init(void);
-
+void mantener_distancia (uint8_t, uint8_t);

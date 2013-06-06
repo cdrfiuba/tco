@@ -26,30 +26,14 @@ int main(void)
 	sei();			        //Activación de las interrupciones
 
     inicializar_puertos_sensores_pared();
+    inicializar_puertos_motores();
+    inicializar_PWM();
+    motores_detener();
 
 	for (;;)
 	{
-
         _delay_ms(1000);
-
-		distancia = prueba_rapida_sensor_pared(SENSOR_PARED_DER);
-
-        while(!UCSRA);
-        UDR = distancia;
-
-        _delay_ms(20);
-
-		distancia = prueba_rapida_sensor_pared(SENSOR_PARED_CEN);
-
-        while(!UCSRA);
-        UDR = distancia;
-
-        _delay_ms(20);
-
-		distancia = prueba_rapida_sensor_pared(SENSOR_PARED_IZQ);
-
-        while(!UCSRA);
-        UDR = distancia;
+        mantener_distancia (SENSOR_PARED_CEN, 0x4E);
     }
 
 	return 0;
@@ -82,6 +66,23 @@ ISR (USART_RXC_vect){
 ISR (TIMER0_OVF_vect){
 
 	status_flag = 1;
+
+}
+
+
+void mantener_distancia (uint8_t direccion, uint8_t distancia){
+
+    uint8_t distancia_medida = prueba_rapida_sensor_pared(direccion);
+
+    while(distancia_medida != distancia){
+
+        if(distancia_medida < distancia)
+
+            motores_retroceder(127,127);
+
+        else
+            motores_avanzar(127,127);
+    }
 
 }
 
