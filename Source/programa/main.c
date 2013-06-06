@@ -32,7 +32,7 @@ int main(void)
 	/*
 	inicializar_PWM();	//Inicialización del PWM
 	motores_detener();	//Detengo los motores
-  avanzar_celda(); //avanza una distancia de una celda hacia adonde este apuntando el robot
+ 	avanzar_celda(); //avanza una distancia de una celda hacia adonde este apuntando el robot
 	*/
 
 	inicializar_puertos_sensores_pared();
@@ -74,7 +74,8 @@ ISR (USART_RXC_vect){
 
 
 ISR (TIMER0_OVF_vect){
-  status_flag = 1;
+  
+	status_flag = 1;
 	while(!UCSRA);	
 	UDR = 'I';
 }
