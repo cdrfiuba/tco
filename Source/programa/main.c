@@ -19,12 +19,12 @@
 unsigned char	buff_rx[MAX_STRING];
 unsigned int	indice_rx;
 
-unsigned char value;
+unsigned char value, distancia;
 
 int main(void)
 {
 	usart_init();		//Inicialización de la interrupción
-	//sei();			//Activación de las interrupciones
+	sei();			//Activación de las interrupciones
 
 	/*
 	inicializar_PWM();	//Inicialización del PWM
@@ -38,7 +38,13 @@ int main(void)
 
 	for (;;)
 	{
-		UDR = prueba_rapida_sensor_pared(); 
+	
+		_delay_ms(1000);
+
+		distancia = prueba_rapida_sensor_pared(); 
+		
+		while(!UCSRA);	
+		UDR = distancia;
 
 	}
 
@@ -95,5 +101,12 @@ ISR (USART_RXC_vect)						//Interrupción puerto serie
 	value = UDR;				 		// Tomo el valor recibido, y lo cargo en la variable value
 	UDR = value;				   		// Cargo el buffer con lo almacenado en la variable value
 }
+
+
+ISR (TIMER0_OVF_vect){
+
+
+}
+
 
 

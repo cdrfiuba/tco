@@ -17,7 +17,8 @@
 #include "sensores_pared.h"
 
 inline void 	apagar_timer(void) 	{TCCR0 &= ~((1<<CS02)|(1<<CS01)|(1<<CS00));}
-inline void	encender_timer(void)	{TCCR0 |= ((1<<CS02)|(0<<CS01)|(0<<CS00));}
+inline void	encender_timer(void)	{TCCR0 |= ((0<<CS02)|(1<<CS01)|(1<<CS00));}
+//inline void	inicializar_timer(void)	{TIMSK 
 
 void inicializar_puertos_sensores_pared(void){
 
@@ -43,61 +44,32 @@ void inicializar_puertos_sensores_pared(void){
 
 unsigned char prueba_rapida_sensor_pared(void){
 
-	while(!UCSRA);
-	UDR = '1';
-
 	PORTC |= (1<<PC0);
-
-	while(!UCSRA);
-	UDR = '2';
 
 	//pongo en 1 el trigger
 	PORTA |= SENSOR_PARED_DER_TRIG;
 
-	while(!UCSRA);
-	UDR = '3';
-	
-	//Espero 11 us	
+	//Espero 15 us	
 	_delay_us(15);
-
-	while(!UCSRA);
-	UDR = '4';
 
 	//pongo en 0 el trigger
 	PORTA &= ~SENSOR_PARED_DER_TRIG;
 
-	while(!UCSRA);
-	UDR = '5';
-
 	//Espero a que el echo sea 1
 	while((PINB & SENSOR_PARED_DER_ECHO) != SENSOR_PARED_DER_ECHO);
-
-	while(!UCSRA);
-	UDR = '6';
 
 	TCNT0 = 0;
 	encender_timer();
 	
-	while(!UCSRA);
-	UDR = '7';
-
 	//Espero a que el echo sea 0
 	//Enciendo led indicador de medición en curso
-		_delay_us(15);
 	while((PINB & SENSOR_PARED_DER_ECHO) == SENSOR_PARED_DER_ECHO);
 
-	while(!UCSRA);
-	UDR = '8';
-
 	apagar_timer();
-
-	while(!UCSRA);
-	UDR = '9';
 
 	//Enciendo led indicador de medición en curso
 	PORTC &= ~(1<<PC0);
 
-	while(!UCSRA);
 	return TCNT0;
 }
 		
