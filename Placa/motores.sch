@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date dom 26 may 2013 11:34:54 ART
+EESchema Schematic File Version 2  date jue 06 jun 2013 20:07:57 ART
 LIBS:power
 LIBS:device
 LIBS:transistors
@@ -40,7 +40,7 @@ $Descr A4 11700 8267
 encoding utf-8
 Sheet 4 5
 Title "TCO - Placa motores"
-Date "26 may 2013"
+Date "6 jun 2013"
 Rev "1"
 Comp ""
 Comment1 ""
