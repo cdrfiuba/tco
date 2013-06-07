@@ -34,7 +34,7 @@ void inicializar_puertos_motores(void){
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
-void motores_avanzar(uint8_t velocidad_izquierda, uint8_t velocidad_derecha){
+void motores_retroceder(uint8_t velocidad_izquierda, uint8_t velocidad_derecha){
 
 	//Avance sentido 1: PWM H - Direction H - Brake L
 
@@ -50,7 +50,7 @@ void motores_avanzar(uint8_t velocidad_izquierda, uint8_t velocidad_derecha){
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
-void motores_retroceder(uint8_t velocidad_izquierda, uint8_t velocidad_derecha){
+void motores_avanzar(uint8_t velocidad_izquierda, uint8_t velocidad_derecha){
 
 	//Avance sensito 2: PWM H - Direction L - Brake L
 

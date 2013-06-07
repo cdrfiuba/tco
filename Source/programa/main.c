@@ -32,8 +32,22 @@ int main(void)
 
 	for (;;)
 	{
-        _delay_ms(1000);
-        mantener_distancia (SENSOR_PARED_CEN, 0x4E);
+        _delay_ms(100);
+        //mantener_distancia (SENSOR_PARED_CEN, 0x4E);
+
+        distancia = prueba_rapida_sensor_pared(SENSOR_PARED_CEN);
+
+        if(distancia < 0x4E)
+
+            motores_retroceder(127,127);
+
+        else if (distancia > 0x6E)
+
+            motores_avanzar(127,127);
+
+        else
+
+            motores_detener();
     }
 
 	return 0;
@@ -85,6 +99,20 @@ void mantener_distancia (uint8_t direccion, uint8_t distancia){
     }
 
 }
+
+/*
+void seguir_pared(uint8_t direccion , uint8_t distancia, uint8_t velocidad_izq, uint8_t velocidad_der){
+
+    motores_avanzar(velocidad_izq,velocidad_der);
+
+    uint8_t distancia_medida = prueba_rapida_sensor_pared(direccion);
+
+
+
+
+}
+*/
+
 
 
 
