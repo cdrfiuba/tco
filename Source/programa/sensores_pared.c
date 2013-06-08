@@ -46,6 +46,14 @@ void inicializar_puertos_sensores_pared(void){
 
 uint8_t prueba_rapida_sensor_pared(uint8_t sensor){
 
+    if (sensor==SENSOR_PARED_DER){
+        PORTA |= (1<<PA3);
+    }
+
+    if(sensor==SENSOR_PARED_CEN){
+        PORTA |= (1<<PA2);
+    }
+
     uint8_t    medicion = 0;
 
     //Enciendo led indicador de medición en curso
@@ -91,7 +99,8 @@ uint8_t prueba_rapida_sensor_pared(uint8_t sensor){
             medicion = 0xF0;
     }
 
-
+    PORTA &= ~(1<<PA3);
+    PORTA &= ~(1<<PA2);
     return medicion;
 }
 

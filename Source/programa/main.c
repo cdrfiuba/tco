@@ -29,9 +29,16 @@ int main(void)
     inicializar_puertos_motores();
     inicializar_PWM();
     motores_detener();
+    DDRA |= (1<<PA3);
+    DDRA |= (1<<PA2);
+
+
 
 	for (;;)
 	{
+
+
+	//Enciendo led indicador de medición en curso
 
         //Enviar distancia por puerto serie
         /*
