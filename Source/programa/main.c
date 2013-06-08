@@ -32,9 +32,10 @@ int main(void)
 
 	for (;;)
 	{
+<<<<<<< local
 //**************************************************************************************
 //**************************************************************************************
-		//Intento de codigo muy "cabeza" usando las funciones que definimos ayer
+		//Intento de codigo muy "cabeza" usando las funciones que definimos ayer.
 		
 		distancia = prueba_rapida_sensor_pared(SENSOR_PARED_DER);
 		
@@ -116,21 +117,101 @@ int main(void)
 	   
 	   
 	    _delay_ms(100);
+=======
+        /*
+        //Enviar distancia por puerto serie
+        _delay_ms(100);
+
+        distancia = prueba_rapida_sensor_pared(SENSOR_PARED_DER);
+
+        while(!UCSRA);
+        UDR = distancia;
+        */
+
+
+>>>>>>> other
         //mantener_distancia (SENSOR_PARED_CEN, 0x4E);
 
-        distancia = prueba_rapida_sensor_pared(SENSOR_PARED_CEN);
 
-        if(distancia < 0x4E)
+        /*
+        if(distancia > 0x4E){
 
-            motores_retroceder(127,127);
-
-        else if (distancia > 0x6E)
-
-            motores_avanzar(127,127);
+            motores_rotar_derecha();
+            //motores_avanzar(190,190);
+            //motores_retroceder(190,190);
+        }
 
         else
+            motores_avanzar(190,190);
+
+            */
+
+        /*Prueba rotación
+
+            _delay_ms(1000);
+
+            motores_rotar_der_90_grados();
 
             motores_detener();
+
+            _delay_ms(1000);
+
+            motores_rotar_izq_90_grados();
+
+            motores_detener();
+
+            *//*
+
+            motores_avanzar(190,190);
+
+            distancia = prueba_rapida_sensor_pared(SENSOR_PARED_DER);
+
+            if(distancia < DISTANCIA_CHICA){*/
+
+                /*
+                while(distancia < DISTANCIA_CHICA){
+                distancia = prueba_rapida_sensor_pared(SENSOR_PARED_DER);
+                girar_poquito_izquierda();
+                }
+                *//*
+            }
+
+            else{
+
+                if(distancia > DISTANCIA_GRANDE){
+                    motores_rotar_der_90_grados();
+
+
+                }
+
+                else{*/
+                    /*
+                    while(distancia < DISTANCIA_CHICA){
+                    distancia = prueba_rapida_sensor_pared(SENSOR_PARED_DER);
+                    girar_poquito_derecha();
+                    }
+                    *//*
+
+                }
+            }
+
+            distancia = prueba_rapida_sensor_pared(SENSOR_PARED_CEN);
+
+            if(distancia < DISTANCIA_CHICA){
+
+                distancia = prueba_rapida_sensor_pared(SENSOR_PARED_IZQ);
+
+                if(distancia < DISTANCIA_CHICA){
+
+                    motores_rotar_der_90_grados();
+                    motores_rotar_der_90_grados();
+
+                }
+
+                else{
+                    motores_rotar_izq_90_grados();
+                }
+            }*/
     }
 
 	return 0;

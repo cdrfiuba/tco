@@ -29,6 +29,9 @@
 
 #define MAX_STRING	25
 
+#define DISTANCIA_CHICA   0x1E
+#define DISTANCIA_GRANDE  0x8C
+
 #endif /* _MAIN_H_ */
 
 //Definición de prototipos

@@ -77,18 +77,50 @@ void motores_detener(void){
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
-void motores_rotar_derecha(uint8_t grados){
+void motores_rotar_der_90_grados(void){
 
-	//hacer cuenta para convertir grados en cantidad de eventos encoder
-	PORTD |= MOTOR_DER_DIRECTION; 	//Pongo en alto el pin DIRECTION del motor 1
-	PORTB &= ~MOTOR_DER_BRAKE;	    //Pongo en bajo el pin BRAKE del motor 1
 
-    PORTD |= MOTOR_IZQ_DIRECTION; 	//Pongo en alto el pin DIRECTION del motor 2
-	PORTB &= ~MOTOR_IZQ_BRAKE;	    //Pongo en bajo el pin BRAKE del motor 2
 
-	//Agregar cuando detener la rotación
+    //hacer cuenta para convertir grados en cantidad de eventos encoder
+    PORTD &= ~MOTOR_DER_DIRECTION; 	//Pongo en bajo el pin DIRECTION del motor 1
+    PORTB &= ~MOTOR_DER_BRAKE;	    //Pongo en bajo el pin BRAKE del motor 1
+
+    PORTD &= ~MOTOR_IZQ_DIRECTION; 	//Pongo en bajo el pin DIRECTION del motor 2
+    PORTB &= ~MOTOR_IZQ_BRAKE;	    //Pongo en bajo el pin BRAKE del motor 2
+
+    //Agregar cuando detener la rotación
+
+    _delay_ms(190);
+
 
 }
+
+
+void motores_rotar_izq_90_grados(void){
+
+    PORTD |= MOTOR_DER_DIRECTION; 	//Pongo en alto el pin DIRECTION del motor 1
+    PORTB &= ~MOTOR_DER_BRAKE;	    //Pongo en bajo el pin BRAKE del motor 1
+
+
+    PORTD |= MOTOR_IZQ_DIRECTION; 	//Pongo en alto el pin DIRECTION del motor 2
+    PORTB &= ~MOTOR_IZQ_BRAKE;	    //Pongo en bajo el pin BRAKE del motor 2
+
+    _delay_ms(170);
+}
+
+
+void girar_poquito_izquierda(void){
+
+    motores_avanzar(200,180);
+}
+
+
+void girar_poquito_derecha(void){
+
+    motores_avanzar(180,200);
+
+}
+
 
 
 
