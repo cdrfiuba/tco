@@ -46,50 +46,51 @@ void inicializar_puertos_sensores_pared(void){
 
 uint8_t prueba_rapida_sensor_pared(uint8_t sensor){
 
-    uint8_t     i = 0;
-    uint32_t    medicion = 0;
+    uint8_t    medicion = 0;
 
-    while(i < CANTIDAD){
+    //Enciendo led indicador de medición en curso
+    PORTC |= (1<<PC0);
 
-        //Enciendo led indicador de medición en curso
-        PORTC |= (1<<PC0);
+    //pongo en 1 el trigger
+    PORTA |= sensor;
 
-        //pongo en 1 el trigger
-        PORTA |= sensor;
+    //Espero 15 us
+    _delay_us(15);
 
-        //Espero 15 us
-        _delay_us(15);
+    //pongo en 0 el trigger
+    PORTA &= ~sensor;
 
-        //pongo en 0 el trigger
-        PORTA &= ~sensor;
+    //Espero a que el echo sea 1
+    while((PINB & SENSOR_PARED_ECHO) != SENSOR_PARED_ECHO);
 
-        //Espero a que el echo sea 1
-        while((PINB & SENSOR_PARED_ECHO) != SENSOR_PARED_ECHO);
+    TCNT0 = 0;
+    encender_timer();
 
-        TCNT0 = 0;
-        encender_timer();
+    status_flag = 0;
 
-        status_flag = 0;
+    //Espero a que el echo sea 0
+    while( ((PINB & SENSOR_PARED_ECHO) == SENSOR_PARED_ECHO) && (status_flag == 0) );
 
-        //Espero a que el echo sea 0
-        while( ((PINB & SENSOR_PARED_ECHO) == SENSOR_PARED_ECHO) && (status_flag == 0) ){}
+    apagar_timer();
 
-        apagar_timer();
+    //Apago led indicador de medición en curso
+    PORTC &= ~(1<<PC0);
 
-        //Apago led indicador de medición en curso
-        PORTC &= ~(1<<PC0);
+    if (status_flag == 1)
+        medicion = 0xFF;
 
-        if (status_flag == 1);
-        else{
-            medicion = medicion + TCNT0;
-            i++;
-        }
+    else{
 
+        if(TCNT0 < 0xF0)
+            medicion = TCNT0;
+
+        else
+            medicion = 0xF0;
     }
 
-    medicion = medicion / CANTIDAD;
 
-    return (uint8_t)(medicion);
+
+    return medicion;
 }
 
 

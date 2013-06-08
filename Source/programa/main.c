@@ -32,21 +32,22 @@ int main(void)
 
 	for (;;)
 	{
-        /*
+/*
         //Enviar distancia por puerto serie
         _delay_ms(100);
 
-        distancia = prueba_rapida_sensor_pared(SENSOR_PARED_DER);
+        distancia = prueba_rapida_sensor_pared(SENSOR_PARED_CEN);
 
         while(!UCSRA);
         UDR = distancia;
-        */
+
 
 
         //mantener_distancia (SENSOR_PARED_CEN, 0x4E);
 
 
-        /*
+        *//*
+
         if(distancia > 0x4E){
 
             motores_rotar_derecha();
@@ -57,9 +58,9 @@ int main(void)
         else
             motores_avanzar(190,190);
 
-            */
 
-        /*
+
+
             _delay_ms(1000);
 
             motores_rotar_der_90_grados();
@@ -120,68 +121,9 @@ int main(void)
 
                 }
 
-
             }
 
 
-
-
-
-            /*
-            if(distancia < DISTANCIA_CHICA){
-
-                girar_poquito_derecha();
-                motores_detener();
-                _delay_ms(TIEMPO);
-
-
-
-            }
-
-            else{
-
-                if(distancia > DISTANCIA_GRANDE){
-                    motores_rotar_der_90_grados();
-                    motores_detener();
-                    _delay_ms(TIEMPO);
-
-
-                }
-
-                else{
-
-                    girar_poquito_derecha();
-                    motores_detener();
-                    _delay_ms(TIEMPO);
-
-                }
-            }
-
-            distancia = prueba_rapida_sensor_pared(SENSOR_PARED_CEN);
-
-            if(distancia < DISTANCIA_CHICA){
-
-                distancia = prueba_rapida_sensor_pared(SENSOR_PARED_IZQ);
-
-                if(distancia < DISTANCIA_CHICA){
-
-                    motores_rotar_der_90_grados();
-                    motores_rotar_der_90_grados();
-                    motores_detener();
-                    _delay_ms(TIEMPO);
-
-                }
-
-                else{
-                    motores_rotar_izq_90_grados();
-                    motores_detener();
-                    _delay_ms(TIEMPO);
-
-                }
-            }
-
-
-            */
 
     }
 
