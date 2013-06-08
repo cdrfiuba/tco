@@ -32,17 +32,18 @@ int main(void)
 
 	for (;;)
 	{
-/*
+
         //Enviar distancia por puerto serie
-        _delay_ms(100);
+        /*
+        _delay_ms(10);
 
         distancia = prueba_rapida_sensor_pared(SENSOR_PARED_CEN);
 
         while(!UCSRA);
         UDR = distancia;
+        */
 
-
-
+/*
         //mantener_distancia (SENSOR_PARED_CEN, 0x4E);
 
 
@@ -86,7 +87,7 @@ int main(void)
             if(distancia > DISTANCIA_GRANDE){
                  motores_detener();
                 _delay_ms(200);
-               // motores_avanzar(170,170);
+                //motores_avanzar(170,170);
                 //_delay_ms(200);
                 motores_rotar_der_90_grados();
                 _delay_ms(50);
