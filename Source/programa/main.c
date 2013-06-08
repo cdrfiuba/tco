@@ -103,13 +103,13 @@ int main(void)
 
                 distancia = prueba_rapida_sensor_pared(SENSOR_PARED_CEN);
 
-                if(distancia > DISTANCIA_GRANDE){
-                }
-
-                else if(distancia < DISTANCIA_CHICA){
+                if(distancia < DISTANCIA_CHICA){
 
                     motores_detener();
-                    _delay_ms(200);
+                    _delay_ms(100);
+                    motores_retroceder(170,170);
+                    _delay_ms(100);
+                    motores_detener();
                     // motores_avanzar(170,170);
                     //_delay_ms(200);
                     motores_rotar_izq_90_grados();
@@ -121,6 +121,7 @@ int main(void)
                     motores_detener();
 
                 }
+
 
             }
 

@@ -44,7 +44,8 @@ void motores_retroceder(uint8_t velocidad_izquierda, uint8_t velocidad_derecha){
 	PORTD &= ~MOTOR_IZQ_DIRECTION; 	//Pongo en bajo el pin DIRECTION del motor 2
 	PORTB &= ~MOTOR_IZQ_BRAKE;	    //Pongo en bajo el pin BRAKE del motor 2
 
-	variar_PWM(velocidad_izquierda, velocidad_derecha);
+    variar_PWM(velocidad_izquierda, velocidad_derecha);
+
 }
 
 
@@ -107,36 +108,6 @@ void motores_rotar_izq_90_grados(void){
 
     _delay_ms(300);
 }
-
-
-void girar_poquito_izquierda(void){
-
-    PORTD |= MOTOR_DER_DIRECTION; 	//Pongo en alto el pin DIRECTION del motor 1
-    PORTB &= ~MOTOR_DER_BRAKE;	    //Pongo en bajo el pin BRAKE del motor 1
-
-
-    PORTD |= MOTOR_IZQ_DIRECTION; 	//Pongo en alto el pin DIRECTION del motor 2
-    PORTB &= ~MOTOR_IZQ_BRAKE;	    //Pongo en bajo el pin BRAKE del motor 2
-
-    _delay_ms(50);
-}
-
-
-void girar_poquito_derecha(void){
-
-    //hacer cuenta para convertir grados en cantidad de eventos encoder
-    PORTD &= ~MOTOR_DER_DIRECTION; 	//Pongo en bajo el pin DIRECTION del motor 1
-    PORTB &= ~MOTOR_DER_BRAKE;	    //Pongo en bajo el pin BRAKE del motor 1
-
-    PORTD &= ~MOTOR_IZQ_DIRECTION; 	//Pongo en bajo el pin DIRECTION del motor 2
-    PORTB &= ~MOTOR_IZQ_BRAKE;	    //Pongo en bajo el pin BRAKE del motor 2
-
-    //Agregar cuando detener la rotación
-
-    _delay_ms(70);
-
-}
-
 
 
 
