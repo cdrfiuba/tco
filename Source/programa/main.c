@@ -59,8 +59,7 @@ int main(void)
 
             */
 
-        /*Prueba rotación
-
+        /*
             _delay_ms(1000);
 
             motores_rotar_der_90_grados();
@@ -73,37 +72,87 @@ int main(void)
 
             motores_detener();
 
-            *//*
+          */
 
-            motores_avanzar(190,190);
+            motores_avanzar(170,170);
+
+            _delay_ms(200);
+
+            motores_detener();
 
             distancia = prueba_rapida_sensor_pared(SENSOR_PARED_DER);
 
-            if(distancia < DISTANCIA_CHICA){*/
+            if(distancia > DISTANCIA_GRANDE){
+                 motores_detener();
+                _delay_ms(200);
+               // motores_avanzar(170,170);
+                //_delay_ms(200);
+                motores_rotar_der_90_grados();
+                _delay_ms(50);
+                motores_detener();
+                _delay_ms(200);
+                motores_avanzar(170,170);
+                _delay_ms(500);
+                 motores_detener();
 
-                /*
-                while(distancia < DISTANCIA_CHICA){
-                distancia = prueba_rapida_sensor_pared(SENSOR_PARED_DER);
-                girar_poquito_izquierda();
+            }
+
+            else{
+
+                distancia = prueba_rapida_sensor_pared(SENSOR_PARED_CEN);
+
+                if(distancia > DISTANCIA_GRANDE){
                 }
-                *//*
+
+                else if(distancia < DISTANCIA_CHICA){
+
+                    motores_detener();
+                    _delay_ms(200);
+                    // motores_avanzar(170,170);
+                    //_delay_ms(200);
+                    motores_rotar_izq_90_grados();
+                    _delay_ms(50);
+                    motores_detener();
+                    _delay_ms(200);
+                    motores_avanzar(170,170);
+                    _delay_ms(500);
+                    motores_detener();
+
+                }
+
+
+            }
+
+
+
+
+
+            /*
+            if(distancia < DISTANCIA_CHICA){
+
+                girar_poquito_derecha();
+                motores_detener();
+                _delay_ms(TIEMPO);
+
+
+
             }
 
             else{
 
                 if(distancia > DISTANCIA_GRANDE){
                     motores_rotar_der_90_grados();
+                    motores_detener();
+                    _delay_ms(TIEMPO);
 
 
                 }
 
-                else{*/
-                    /*
-                    while(distancia < DISTANCIA_CHICA){
-                    distancia = prueba_rapida_sensor_pared(SENSOR_PARED_DER);
+                else{
+
                     girar_poquito_derecha();
-                    }
-                    *//*
+                    motores_detener();
+                    _delay_ms(TIEMPO);
 
                 }
             }
@@ -118,13 +167,22 @@ int main(void)
 
                     motores_rotar_der_90_grados();
                     motores_rotar_der_90_grados();
+                    motores_detener();
+                    _delay_ms(TIEMPO);
 
                 }
 
                 else{
                     motores_rotar_izq_90_grados();
+                    motores_detener();
+                    _delay_ms(TIEMPO);
+
                 }
-            }*/
+            }
+
+
+            */
+
     }
 
 	return 0;
