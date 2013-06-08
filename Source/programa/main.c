@@ -32,7 +32,90 @@ int main(void)
 
 	for (;;)
 	{
-        _delay_ms(100);
+//**************************************************************************************
+//**************************************************************************************
+		//Intento de codigo muy "cabeza" usando las funciones que definimos ayer
+		
+		distancia = prueba_rapida_sensor_pared(SENSOR_PARED_DER);
+		
+		if(distancia == DISTANCIA_CHICA)
+		{
+			distancia = prueba_rapida_sensor_pared(SENSOR_PARED_CEN);
+			if(distancia <= DISTANCIA_CHICA)
+			{
+				distancia = prueba_rapida_sensor_pared(SENSOR_PARED_IZQ);
+				if(distancia <= DISTANCIA_CHICA)
+				{				
+					rotar_180();
+				}
+				else
+				{
+					rotar_90_izquierda();
+				}
+			}
+			else motores_avanzar(190,190);
+		}
+		
+		else 
+		{
+			while(distancia != DISTANCIA_CHICA)
+			{
+				distancia = prueba_rapida_sensor_pared(SENSOR_PARED_DER);
+				if(distancia < DISTANCIA_CHICA)
+				{
+					girar_poco_izquierda();
+					
+					distancia = prueba_rapida_sensor_pared(SENSOR_PARED_CEN);
+					if(distancia <= DISTANCIA_CHICA)
+					{
+						distancia = prueba_rapida_sensor_pared(SENSOR_PARED_IZQ);
+						if(distancia <= DISTANCIA_CHICA)
+						{
+							rotar_180();
+						}
+						else
+						{
+							rotar_90_izquierda();
+						}
+					}
+					
+				}
+				
+				else
+				{
+					if(distancia < DISTANCIA_GRANDE)
+					{
+						girar_poco_derecha();
+						distancia = prueba_rapida_sensor_pared(SENSOR_PARED_CEN);
+						if(distancia <= DISTANCIA_CHICA)
+						{
+							distancia = prueba_rapida_sensor_pared(SENSOR_PARED_IZQ);
+							if(distancia <= DISTANCIA_CHICA)
+							{
+								rotar_180();
+							}
+							else
+							{
+								rotar_90_izquierda();
+							}
+						}
+					
+					
+					}
+					else
+					{
+						rotar_90_derecha();
+					}
+				}
+		}
+	}
+		
+//**************************************************************************************		
+//**************************************************************************************
+       
+	   
+	   
+	    _delay_ms(100);
         //mantener_distancia (SENSOR_PARED_CEN, 0x4E);
 
         distancia = prueba_rapida_sensor_pared(SENSOR_PARED_CEN);
