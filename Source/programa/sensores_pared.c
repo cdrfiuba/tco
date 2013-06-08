@@ -64,9 +64,9 @@ uint8_t prueba_rapida_sensor_pared(uint8_t sensor){
     while((PINB & SENSOR_PARED_ECHO) != SENSOR_PARED_ECHO);
 
     TCNT0 = 0;
+    status_flag = 0;
     encender_timer();
 
-    status_flag = 0;
 
     //Espero a que el echo sea 0
     while( ((PINB & SENSOR_PARED_ECHO) == SENSOR_PARED_ECHO) && (status_flag == 0) );
@@ -76,9 +76,12 @@ uint8_t prueba_rapida_sensor_pared(uint8_t sensor){
     //Apago led indicador de medición en curso
     PORTC &= ~(1<<PC0);
 
-    if (status_flag == 1)
+    if (status_flag == 1){
         medicion = 0xFF;
 
+       // _delay_ms(5000);
+
+        }
     else{
 
         if(TCNT0 < 0xF0)
@@ -87,7 +90,6 @@ uint8_t prueba_rapida_sensor_pared(uint8_t sensor){
         else
             medicion = 0xF0;
     }
-
 
 
     return medicion;
