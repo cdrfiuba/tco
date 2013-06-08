@@ -25,6 +25,8 @@
 #define	SENSOR_PARED_CEN	(1 << PA5)
 #define SENSOR_PARED_ECHO	    (1 << PB2)
 
+#define CANTIDAD    10
+
 
 #endif
 

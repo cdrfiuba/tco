@@ -4,3 +4,5 @@
 //prototipos de funcion.
 
 void    inicializar_sensores_piso   (void);
+void    medir_piso  (void);
+void    estado_sensores_piso    (void);

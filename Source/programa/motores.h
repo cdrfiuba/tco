@@ -15,9 +15,11 @@
  ***********************************************************************************************/
 #ifndef MOTORES_H_
 #define MOTORES_H_
+#include <util/delay.h>
 
 #include <avr/io.h>
 #include <avr/interrupt.h>
+
 #include "pwm.h"
 
 #define MOTOR_DER_BRAKE		(1<<PB3)
@@ -33,8 +35,10 @@ void inicializar_puertos_motores	(void);
 void motores_avanzar			    (uint8_t, uint8_t);
 void motores_retroceder			    (uint8_t, uint8_t);
 void motores_detener			    (void);
-//void motores_rotar_derecha		(unsigned char);
-//void motores_rotar_izquierda		(unsigned char);
+void motores_rotar_der_90_grados    (void);
+void motores_rotar_izq_90_grados    (void);
+void girar_poquito_izquierda        (void);
+void girar_poquito_derecha          (void);
 
 extern void inicializar_PWM         (void);
 extern void variar_PWM              (uint8_t, uint8_t);
