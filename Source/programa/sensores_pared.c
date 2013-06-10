@@ -19,8 +19,9 @@
 extern volatile uint8_t status_flag;
 
 inline void 	        apagar_timer(void) 	    {TCCR0 &= ~((1<<CS02)|(1<<CS01)|(1<<CS00));}
-inline void	            encender_timer(void)	{TCCR0 |= ((0<<CS02)|(1<<CS01)|(1<<CS00));}
-
+//Con este andaba, lo cambio para ver de tener mas alcance
+//inline void	            encender_timer(void)	{TCCR0 |= ((0<<CS02)|(1<<CS01)|(1<<CS00));}
+inline void	            encender_timer(void)	{TCCR0 |= ((1<<CS02)|(0<<CS01)|(0<<CS00));}
 
 void inicializar_timer(void){
 
@@ -41,55 +42,49 @@ void inicializar_puertos_sensores_pared(void){
 	//Configuro el puerto de ECHO como entrada.
 	DDRB &= ~SENSOR_PARED_ECHO;
 	PORTB |= SENSOR_PARED_ECHO;
+
+	//Configuro los puertos encendido como salida.
+	DDRA |= (1<<PA0);
+
 }
 
 
 uint8_t prueba_rapida_sensor_pared(uint8_t sensor){
 
-    uint8_t     i = 0;
-    uint32_t    medicion = 0;
+    //pongo en 1 el trigger
+    PORTA |= sensor;
 
-    while(i < CANTIDAD){
+    //Espero 10 us
+    _delay_us(15);
 
-        //Enciendo led indicador de medición en curso
-        PORTC |= (1<<PC0);
+    //pongo en 0 el trigger
+    PORTA &= ~sensor;
 
-        //pongo en 1 el trigger
-        PORTA |= sensor;
+    //Espero a que el echo sea 1
+    while((PINB & SENSOR_PARED_ECHO) != SENSOR_PARED_ECHO);
 
-        //Espero 15 us
-        _delay_us(15);
+    TCNT0 = 0;
+    encender_timer();
 
-        //pongo en 0 el trigger
-        PORTA &= ~sensor;
+    status_flag = 0;
 
-        //Espero a que el echo sea 1
-        while((PINB & SENSOR_PARED_ECHO) != SENSOR_PARED_ECHO);
+    //Espero a que el echo sea 0
+    while( ((PINB & SENSOR_PARED_ECHO) == SENSOR_PARED_ECHO) && (status_flag == 0) );
 
-        TCNT0 = 0;
-        encender_timer();
+    apagar_timer();
 
-        status_flag = 0;
+    //Apago led indicador de medición en curso
+    PORTC &= ~(1<<PC0);
 
-        //Espero a que el echo sea 0
-        while( ((PINB & SENSOR_PARED_ECHO) == SENSOR_PARED_ECHO) && (status_flag == 0) ){}
+    if (status_flag == 1)
+        return 0xFF;
 
-        apagar_timer();
+    else if(TCNT0 < 0x02)
+        return 0xFF;
 
-        //Apago led indicador de medición en curso
-        PORTC &= ~(1<<PC0);
+    else
+        return TCNT0;
 
-        if (status_flag == 1);
-        else{
-            medicion = medicion + TCNT0;
-            i++;
-        }
-
-    }
-
-    medicion = medicion / CANTIDAD;
-
-    return (uint8_t)(medicion);
 }
 
 

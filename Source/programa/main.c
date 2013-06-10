@@ -32,186 +32,26 @@ int main(void)
 
 	for (;;)
 	{
-<<<<<<< local
-//**************************************************************************************
-//**************************************************************************************
-		//Intento de codigo muy "cabeza" usando las funciones que definimos ayer.
-		
-		distancia = prueba_rapida_sensor_pared(SENSOR_PARED_DER);
-		
-		if(distancia == DISTANCIA_CHICA)
-		{
-			distancia = prueba_rapida_sensor_pared(SENSOR_PARED_CEN);
-			if(distancia <= DISTANCIA_CHICA)
-			{
-				distancia = prueba_rapida_sensor_pared(SENSOR_PARED_IZQ);
-				if(distancia <= DISTANCIA_CHICA)
-				{				
-					rotar_180();
-				}
-				else
-				{
-					rotar_90_izquierda();
-				}
-			}
-			else motores_avanzar(190,190);
-		}
-		
-		else 
-		{
-			while(distancia != DISTANCIA_CHICA)
-			{
-				distancia = prueba_rapida_sensor_pared(SENSOR_PARED_DER);
-				if(distancia < DISTANCIA_CHICA)
-				{
-					girar_poco_izquierda();
-					
-					distancia = prueba_rapida_sensor_pared(SENSOR_PARED_CEN);
-					if(distancia <= DISTANCIA_CHICA)
-					{
-						distancia = prueba_rapida_sensor_pared(SENSOR_PARED_IZQ);
-						if(distancia <= DISTANCIA_CHICA)
-						{
-							rotar_180();
-						}
-						else
-						{
-							rotar_90_izquierda();
-						}
-					}
-					
-				}
-				
-				else
-				{
-					if(distancia < DISTANCIA_GRANDE)
-					{
-						girar_poco_derecha();
-						distancia = prueba_rapida_sensor_pared(SENSOR_PARED_CEN);
-						if(distancia <= DISTANCIA_CHICA)
-						{
-							distancia = prueba_rapida_sensor_pared(SENSOR_PARED_IZQ);
-							if(distancia <= DISTANCIA_CHICA)
-							{
-								rotar_180();
-							}
-							else
-							{
-								rotar_90_izquierda();
-							}
-						}
-					
-					
-					}
-					else
-					{
-						rotar_90_derecha();
-					}
-				}
-		}
-	}
-		
-//**************************************************************************************		
-//**************************************************************************************
-       
-	   
-	   
-	    _delay_ms(100);
-=======
-        /*
-        //Enviar distancia por puerto serie
         _delay_ms(100);
+
+        while(!UCSRA);
+        UDR = 'D';
 
         distancia = prueba_rapida_sensor_pared(SENSOR_PARED_DER);
 
         while(!UCSRA);
         UDR = distancia;
-        */
 
 
->>>>>>> other
-        //mantener_distancia (SENSOR_PARED_CEN, 0x4E);
+        _delay_ms(100);
+        distancia = prueba_rapida_sensor_pared(SENSOR_PARED_CEN);
 
+        while(!UCSRA);
+        UDR = 'C';
 
-        /*
-        if(distancia > 0x4E){
+        while(!UCSRA);
+        UDR = distancia;
 
-            motores_rotar_derecha();
-            //motores_avanzar(190,190);
-            //motores_retroceder(190,190);
-        }
-
-        else
-            motores_avanzar(190,190);
-
-            */
-
-        /*Prueba rotación
-
-            _delay_ms(1000);
-
-            motores_rotar_der_90_grados();
-
-            motores_detener();
-
-            _delay_ms(1000);
-
-            motores_rotar_izq_90_grados();
-
-            motores_detener();
-
-            *//*
-
-            motores_avanzar(190,190);
-
-            distancia = prueba_rapida_sensor_pared(SENSOR_PARED_DER);
-
-            if(distancia < DISTANCIA_CHICA){*/
-
-                /*
-                while(distancia < DISTANCIA_CHICA){
-                distancia = prueba_rapida_sensor_pared(SENSOR_PARED_DER);
-                girar_poquito_izquierda();
-                }
-                *//*
-            }
-
-            else{
-
-                if(distancia > DISTANCIA_GRANDE){
-                    motores_rotar_der_90_grados();
-
-
-                }
-
-                else{*/
-                    /*
-                    while(distancia < DISTANCIA_CHICA){
-                    distancia = prueba_rapida_sensor_pared(SENSOR_PARED_DER);
-                    girar_poquito_derecha();
-                    }
-                    *//*
-
-                }
-            }
-
-            distancia = prueba_rapida_sensor_pared(SENSOR_PARED_CEN);
-
-            if(distancia < DISTANCIA_CHICA){
-
-                distancia = prueba_rapida_sensor_pared(SENSOR_PARED_IZQ);
-
-                if(distancia < DISTANCIA_CHICA){
-
-                    motores_rotar_der_90_grados();
-                    motores_rotar_der_90_grados();
-
-                }
-
-                else{
-                    motores_rotar_izq_90_grados();
-                }
-            }*/
     }
 
 	return 0;
@@ -241,42 +81,9 @@ ISR (USART_RXC_vect){
 
 
 //Interruoción overflow timer 0
+//Interruoción overflow timer 0
 ISR (TIMER0_OVF_vect){
 
 	status_flag = 1;
 
 }
-
-
-void mantener_distancia (uint8_t direccion, uint8_t distancia){
-
-    uint8_t distancia_medida = prueba_rapida_sensor_pared(direccion);
-
-    while(distancia_medida != distancia){
-
-        if(distancia_medida < distancia)
-
-            motores_retroceder(127,127);
-
-        else
-            motores_avanzar(127,127);
-    }
-
-}
-
-/*
-void seguir_pared(uint8_t direccion , uint8_t distancia, uint8_t velocidad_izq, uint8_t velocidad_der){
-
-    motores_avanzar(velocidad_izq,velocidad_der);
-
-    uint8_t distancia_medida = prueba_rapida_sensor_pared(direccion);
-
-
-
-
-}
-*/
-
-
-
-
