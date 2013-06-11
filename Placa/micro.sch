@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date mar 11 jun 2013 15:56:30 ART
+EESchema Schematic File Version 2  date mar 11 jun 2013 16:06:38 ART
 LIBS:power
 LIBS:device
 LIBS:transistors
@@ -49,6 +49,17 @@ Comment2 ""
 Comment3 ""
 Comment4 ""
 $EndDescr
+Connection ~ 9900 4150
+Connection ~ 9900 4450
+Wire Wire Line
+	9250 4450 9900 4450
+Connection ~ 10300 4150
+Connection ~ 10300 4450
+Connection ~ 10800 4150
+Connection ~ 10800 4450
+Connection ~ 10800 4550
+Wire Wire Line
+	10800 4150 10800 4550
 Wire Notes Line
 	5200 4700 8600 4700
 Wire Notes Line
@@ -589,6 +600,67 @@ Connection ~ 6750 5800
 Connection ~ 6750 6100
 Wire Notes Line
 	8600 6900 5200 6900
+Wire Notes Line
+	9150 3800 9150 4650
+Wire Notes Line
+	9150 3800 11150 3800
+Wire Notes Line
+	11150 3800 11150 4650
+Wire Notes Line
+	11150 4650 9150 4650
+Wire Wire Line
+	9250 4150 9900 4150
+$Comp
+L GND #PWR?
+U 1 1 51B77519
+P 10800 4550
+F 0 "#PWR?" H 10800 4550 30  0001 C CNN
+F 1 "GND" H 10800 4480 30  0001 C CNN
+	1    10800 4550
+	1    0    0    -1  
+$EndComp
+$Comp
+L R R?
+U 1 1 51B774F4
+P 10550 4450
+F 0 "R?" V 10630 4450 50  0000 C CNN
+F 1 "470" V 10550 4450 50  0000 C CNN
+	1    10550 4450
+	0    -1   -1   0   
+$EndComp
+$Comp
+L R R?
+U 1 1 51B774EF
+P 10550 4150
+F 0 "R?" V 10630 4150 50  0000 C CNN
+F 1 "470" V 10550 4150 50  0000 C CNN
+	1    10550 4150
+	0    -1   -1   0   
+$EndComp
+$Comp
+L LED D?
+U 1 1 51B774C9
+P 10100 4450
+F 0 "D?" H 10100 4550 50  0000 C CNN
+F 1 "LED" H 10100 4350 50  0000 C CNN
+	1    10100 4450
+	1    0    0    -1  
+$EndComp
+$Comp
+L LED D?
+U 1 1 51B774C5
+P 10100 4150
+F 0 "D?" H 10100 4250 50  0000 C CNN
+F 1 "LED" H 10100 4050 50  0000 C CNN
+	1    10100 4150
+	1    0    0    -1  
+$EndComp
+Text Label 9250 4450 0    60   ~ 0
+Led_Test_Rojo
+Text Label 9250 4150 0    60   ~ 0
+Led_Test_Verde
+Text Notes 9200 3950 0    60   ~ 0
+LEDs indicadores
 Text Notes 6900 4850 0    60   ~ 0
 OR de diodos para la interrupción
 Text Label 7850 6400 2    60   ~ 0
@@ -607,7 +679,7 @@ L R R?
 U 1 1 51B7721E
 P 7000 6700
 F 0 "R?" V 7080 6700 50  0000 C CNN
-F 1 "R" V 7000 6700 50  0000 C CNN
+F 1 "10 k" V 7000 6700 50  0000 C CNN
 	1    7000 6700
 	0    -1   -1   0   
 $EndComp

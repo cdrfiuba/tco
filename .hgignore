@@ -22,4 +22,5 @@ syntax: glob
 *.gbl
 *.drl
 *-cache.lib
-*.dcm
+*.dcmi
+*.bak
