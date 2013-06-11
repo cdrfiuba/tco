@@ -1,4 +1,4 @@
-EESchema Schematic File Version 2  date jue 06 jun 2013 20:07:57 ART
+EESchema Schematic File Version 2  date mar 11 jun 2013 15:56:30 ART
 LIBS:power
 LIBS:device
 LIBS:transistors
@@ -34,14 +34,15 @@ LIBS:L298
 LIBS:ptn4050
 LIBS:ptn78000w
 LIBS:ptn78020w
+LIBS:TCO-cache
 EELAYER 25  0
 EELAYER END
 $Descr A4 11700 8267
 encoding utf-8
 Sheet 4 5
 Title "TCO - Placa motores"
-Date "6 jun 2013"
-Rev "1"
+Date "11 jun 2013"
+Rev "2"
 Comp ""
 Comment1 ""
 Comment2 ""
