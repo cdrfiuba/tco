@@ -9,7 +9,7 @@
  *	Archivo:	    pwm.h									                                    *
  *	Descripción: 	El presente documento tiene las definiciones para el manejo del PWM.	    *
  *												                                                *
- *	Última modificación: 02/06/2013								                                *
+ *	Última modificación: 10/06/2013								                                *
  *												                                                *
  ***********************************************************************************************/
 

@@ -10,7 +10,7 @@
  *	Descripción: 	El presente documento tiene las definiciones para el manejo de los 	        *
  *			        sensores HC-SR04, para la medición de distancia a las paredes.		        *
  *												                                                *
- *	Última modificación: 06/06/2013								                                *
+ *	Última modificación: 10/06/2013								                                *
  *												                                                *
  ***********************************************************************************************/
 
@@ -25,7 +25,7 @@
 #define	SENSOR_PARED_CEN	(1 << PA5)
 #define SENSOR_PARED_ECHO	    (1 << PB2)
 
-#define CANTIDAD    5
+#define CANTIDAD    10
 
 
 #endif

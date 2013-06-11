@@ -10,7 +10,7 @@
  *	Descripción: 	El presente documento tiene las definiciones para el manejo de los 	        *
  *			        motores.								                                    *
  *												                                                *
- *	Última modificación: 06/06/2013								                                *
+ *	Última modificación: 10/06/2013								                                *
  *												                                                *
  ***********************************************************************************************/
 #ifndef MOTORES_H_

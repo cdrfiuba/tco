@@ -10,7 +10,7 @@
  *	Descripción: 	El presente documento tiene las definiciones para el manejo del		        *
  *			        programa principal.							                                *
  *												                                                *
- *	Última modificación: 06/06/2013								                                *
+ *	Última modificación: 10/06/2013								                                *
  *												                                                *
  ***********************************************************************************************/
 
@@ -37,4 +37,3 @@
 
 //Definición de prototipos
 void usart_init(void);
-void mantener_distancia (uint8_t, uint8_t);
