@@ -18,25 +18,33 @@
 
 volatile uint8_t 	status_flag;
 uint8_t             value, distancia;
+uint32_t            cuenta_encoder_derecha, cuenta_encoder_izquierda;
 
 int main(void)
 {
-	inicializar_timer();	//Configuro la interrupción por timer
+	//inicializar_timer();	//Configuro la interrupción por timer
 	usart_init();		    //Inicialización de la interrupción
 	sei();			        //Activación de las interrupciones
 
-    inicializar_puertos_sensores_pared();
-    inicializar_puertos_motores();
-    inicializar_PWM();
-    motores_detener();
+    //inicializar_puertos_sensores_pared();
+    //inicializar_puertos_motores();
+    //inicializar_PWM();
+    inicializar_encoders();
+    //motores_detener();
 
 	for (;;)
 	{
+        _delay_ms(1000);
+
+        //while(!UCSRA);
+        //UDR = cuenta_encoder_derecha;
+
         _delay_ms(100);
 
         while(!UCSRA);
-        UDR = 'D';
+        UDR = cuenta_encoder_izquierda;
 
+        /*
         distancia = prueba_rapida_sensor_pared(SENSOR_PARED_DER);
 
         while(!UCSRA);
@@ -50,7 +58,7 @@ int main(void)
         UDR = 'C';
 
         while(!UCSRA);
-        UDR = distancia;
+        UDR = distancia;*/
 
     }
 
@@ -86,4 +94,11 @@ ISR (TIMER0_OVF_vect){
 
 	status_flag = 1;
 
+	cuenta_encoder_derecha++;
+
+}
+
+ISR (TIMER2_OVF_vect)   //interrupcion por overflow del timer 2
+{
+    cuenta_encoder_izquierda++;
 }

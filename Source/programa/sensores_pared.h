@@ -10,7 +10,7 @@
  *	Descripción: 	El presente documento tiene las definiciones para el manejo de los 	        *
  *			        sensores HC-SR04, para la medición de distancia a las paredes.		        *
  *												                                                *
- *	Última modificación: 06/06/2013								                                *
+ *	Última modificación: 10/06/2013								                                *
  *												                                                *
  ***********************************************************************************************/
 

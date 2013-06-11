@@ -10,7 +10,7 @@
  *	Descripción: 	El presente documento tiene las definiciones para el manejo del		        *
  *			        programa principal.							                                *
  *												                                                *
- *	Última modificación: 06/06/2013								                                *
+ *	Última modificación: 10/06/2013								                                *
  *												                                                *
  ***********************************************************************************************/
 
@@ -23,6 +23,7 @@
 #include "pwm.h"
 #include "motores.h"
 #include "sensores_pared.h"
+#include "encoders.h"
 
 #define USART_BAUDRATE 	9600
 #define BAUD_PRESCALE 	(((F_CPU / (USART_BAUDRATE * 16UL))) - 1)
