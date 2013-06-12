@@ -1,5 +1,6 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
+#include "sensores_piso.h"
 
 
 /*los tres sensores del piso estan conectados a la misma interrupcion externa INT2

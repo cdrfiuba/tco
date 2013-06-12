@@ -32,8 +32,14 @@ int main(void)
 
 	for (;;)
 	{
+<<<<<<< local
+	   
+	    _delay_ms(100);
+=======
+=======
 
         //Enviar distancia por puerto serie
+>>>>>>> other
         /*
         _delay_ms(10);
 
@@ -152,3 +158,72 @@ ISR (TIMER0_OVF_vect){
 	status_flag = 1;
 
 }
+<<<<<<< local
+
+
+void mantener_distancia (uint8_t direccion, uint8_t distancia){
+
+    uint8_t distancia_medida = prueba_rapida_sensor_pared(direccion);
+
+    while(distancia_medida != distancia){
+
+        if(distancia_medida < distancia)
+
+            motores_retroceder(127,127);
+
+        else
+            motores_avanzar(127,127);
+    }
+
+}
+
+/*
+void seguir_pared(uint8_t direccion , uint8_t distancia, uint8_t velocidad_izq, uint8_t velocidad_der){
+
+    motores_avanzar(velocidad_izq,velocidad_der);
+
+    uint8_t distancia_medida = prueba_rapida_sensor_pared(direccion);
+
+
+
+
+}
+*/
+
+/* Funcion para los sensores de piso*/
+
+void sensores_piso()
+{
+	
+	medir_piso(); //llamo a la funcion para medir le piso
+	
+	if(SENSOR_PISO_IZQ == 1 && SENSOR_PISO_DER == 1 && SENSOR_PISO_CEN == 1) //esta en la celda del final, detenerse
+	{
+		motores_detener();
+		_delay_ms(1000);
+	}
+	else
+	{
+		if(SENSOR_PISO_IZQ == 1 && SENSOR_PISO_DER ==1) //esta avanzando derecho, no hacer correccion 
+		else 
+		{
+			if(SENSOR_PISO_DER == 1) //toco la linea con el sensor derecho, hay que corregir para la derecha
+			{			
+				girar_poquito_derecha();
+				_delay_ms(100);
+			
+			}
+				
+		}
+			if(SENSOR_PISO_IZQ == 1) //toco la linea con el sensor izquierdo, hay que corregir para la izquierda
+			{
+				girar_poquito_izquierda();
+				_delay_ms(100);
+			}
+	}
+
+}
+
+
+=======
+>>>>>>> other
