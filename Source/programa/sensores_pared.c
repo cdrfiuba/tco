@@ -85,4 +85,5 @@ uint8_t prueba_rapida_sensor_pared(uint8_t sensor){
     else
         return TCNT0;
 
+
 }
