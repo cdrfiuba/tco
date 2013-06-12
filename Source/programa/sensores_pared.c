@@ -80,7 +80,7 @@ uint8_t prueba_rapida_sensor_pared(uint8_t sensor){
         return 0xFF;
 
     else if(TCNT0 < 0x02)
-        return 0xFF;
+        return 0x02;
 
     else
         return TCNT0;

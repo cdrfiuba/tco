@@ -32,15 +32,16 @@ int main(void)
 
 	for (;;)
 	{
-
-        //Enviar distancia por puerto serie
         /*
+        //Enviar distancia por puerto serie
+
         _delay_ms(10);
 
         distancia = prueba_rapida_sensor_pared(SENSOR_PARED_CEN);
 
         while(!UCSRA);
         UDR = distancia;
+
         */
 
         motores_avanzar(170,170);

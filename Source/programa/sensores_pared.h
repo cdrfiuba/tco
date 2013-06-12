@@ -23,7 +23,7 @@
 #define	SENSOR_PARED_IZQ	(1 << PA3)
 #define	SENSOR_PARED_DER	(1 << PA4)
 #define	SENSOR_PARED_CEN	(1 << PA5)
-#define SENSOR_PARED_ECHO	    (1 << PB2)
+#define SENSOR_PARED_ECHO	(1 << PB2)
 
 #define CANTIDAD    10
 

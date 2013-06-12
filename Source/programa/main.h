@@ -29,8 +29,8 @@
 
 #define MAX_STRING	25
 
-#define DISTANCIA_CHICA   0x40
-#define DISTANCIA_GRANDE  0x4E//0x8C
+#define DISTANCIA_CHICA   0x11
+#define DISTANCIA_GRANDE  0x25//0x8C
 
 
 #endif /* _MAIN_H_ */
