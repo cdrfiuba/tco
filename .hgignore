@@ -24,3 +24,4 @@ syntax: glob
 *-cache.lib
 *.dcmi
 *.bak
+*.000
