@@ -35,7 +35,7 @@ void inicializar_PWM(void){
 	//OCR1AH = 0;//velocidad_motor_izq;
 	//OCR1BH = 0;//velocidad_motor_der;
 
-
+    TIMSK |= (1<<TOIE1);
 	// Configuración del Timer 1:
 	TCCR1B |= ((0<<CS12)|(0<<CS11)|(1<<CS10)); //Enciendo el Timer sin prescaler (001)
 }

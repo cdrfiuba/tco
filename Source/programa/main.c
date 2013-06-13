@@ -16,13 +16,13 @@
 
 #include "main.h"
 
-volatile uint8_t 	status_flag;
-uint8_t             value, distancia;
+volatile uint32_t   interrupciones_timer_1, distancia;
+volatile uint8_t    status_flag, value;
+uint8_t             sensor_active;
 
 int main(void)
 {
-	inicializar_timer();	//Configuro la interrupción por timer
-	usart_init();		    //Inicialización de la interrupción
+	usart_init();		    //Inicializ••••••••••ación de la interrupción
 	sei();			        //Activación de las interrupciones
 
     inicializar_puertos_sensores_pared();
@@ -32,17 +32,36 @@ int main(void)
 
 	for (;;)
 	{
-        /*
+
         //Enviar distancia por puerto serie
 
-        _delay_ms(10);
+        _delay_ms(1000);
 
         distancia = prueba_rapida_sensor_pared(SENSOR_PARED_CEN);
 
-        while(!UCSRA);
-        UDR = distancia;
+        _delay_ms(100);
 
-        */
+        while(!UCSRA);
+        UDR = (uint8_t)((distancia >> 24) & 0x000000FF);
+
+         _delay_ms(100);
+
+        while(!UCSRA);
+        UDR = (uint8_t)((distancia >> 16) & 0x000000FF);
+
+         _delay_ms(100);
+
+        while(!UCSRA);
+        UDR = (uint8_t)((distancia >> 8) & 0x000000FF);
+
+         _delay_ms(100);
+
+        while(!UCSRA);
+        UDR = (uint8_t)((distancia) & 0x000000FF);
+
+
+
+        /*
 
         motores_avanzar(170,170);
 
@@ -50,7 +69,7 @@ int main(void)
 
         motores_detener();
 
-        distancia = prueba_rapida_sensor_pared(SENSOR_PARED_DER);
+        distancia = prueba_rapida_sensor_pared(SENSOR••••••••••_PARED_DER);
 
         if(distancia > DISTANCIA_GRANDE){
 
@@ -118,7 +137,7 @@ int main(void)
             else{
 
             }
-        }
+        }*/
     }
 
 	return 0;
@@ -150,6 +169,16 @@ ISR (USART_RXC_vect){
 //Interruoción overflow timer 0
 ISR (TIMER0_OVF_vect){
 
-	status_flag = 1;
+
+
+}
+
+ISR (TIMER1_OVF_vect){
+
+    if (sensor_active)
+        interrupciones_timer_1++;
+
+	if(interrupciones_timer_1 > 1000)
+        status_flag = 1;
 
 }

@@ -31,11 +31,11 @@
 #endif
 
 //Definición de prototipos
-inline void  apagar_timer(void);
+inline void apagar_timer(void);
 inline void	encender_timer(void);
 void        inicializar_timer(void);
 void        inicializar_puertos_sensores_pared(void);
-uint8_t     prueba_rapida_sensor_pared(uint8_t);
+uint32_t    prueba_rapida_sensor_pared(uint8_t);
 
 
 

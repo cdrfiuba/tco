@@ -16,21 +16,11 @@
 
 #include "sensores_pared.h"
 
-extern volatile uint8_t status_flag;
+extern volatile uint8_t     status_flag;
+extern volatile uint32_t    interrupciones_timer_1;
+volatile uint32_t           cuentas, cuentas_inicial, cuentas_final;
+extern uint8_t              sensor_active;
 
-inline void 	        apagar_timer(void) 	    {TCCR0 &= ~((1<<CS02)|(1<<CS01)|(1<<CS00));}
-//Con este andaba, lo cambio para ver de tener mas alcance
-//inline void	            encender_timer(void)	{TCCR0 |= ((0<<CS02)|(1<<CS01)|(1<<CS00));}
-inline void	            encender_timer(void)	{TCCR0 |= ((1<<CS02)|(0<<CS01)|(0<<CS00));}
-
-void inicializar_timer(void){
-
-	apagar_timer();
-
-	//configuro TIMER para funcionamiento normal, contando hacia arriba, con prescaler de 256
-	TCCR0 &= ~((1<<WGM01)|(1<<WGM00));	// Modo 0
- 	TIMSK |= (1<<TOIE0);
-}
 
 void inicializar_puertos_sensores_pared(void){
 
@@ -49,7 +39,7 @@ void inicializar_puertos_sensores_pared(void){
 }
 
 
-uint8_t prueba_rapida_sensor_pared(uint8_t sensor){
+uint32_t prueba_rapida_sensor_pared(uint8_t sensor){
 
     //pongo en 1 el trigger
     PORTA |= sensor;
@@ -63,27 +53,30 @@ uint8_t prueba_rapida_sensor_pared(uint8_t sensor){
     //Espero a que el echo sea 1
     while((PINB & SENSOR_PARED_ECHO) != SENSOR_PARED_ECHO);
 
-    TCNT0 = 0;
-    encender_timer();
-
+    interrupciones_timer_1 = 0;
+    cuentas_inicial = TCNT1;
     status_flag = 0;
+    sensor_active = 1;
 
     //Espero a que el echo sea 0
     while( ((PINB & SENSOR_PARED_ECHO) == SENSOR_PARED_ECHO) && (status_flag == 0) );
+    sensor_active = 0;
 
-    apagar_timer();
+    cuentas_final = TCNT1;
 
-    //Apago led indicador de medición en curso
-    PORTC &= ~(1<<PC0);
+    cuentas = (256 - cuentas_inicial) + 256 * interrupciones_timer_1 + cuentas_final;
 
     if (status_flag == 1)
+        return 0xFFFFFFFF;
+/*
+    else if(tiempo == 0)
         return 0xFF;
 
-    else if(TCNT0 < 0x02)
+    else if(tiempo < 0x02)
         return 0x02;
-
+*/
     else
-        return TCNT0;
+        return cuentas;
 
 
 }
