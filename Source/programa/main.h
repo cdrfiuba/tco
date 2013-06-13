@@ -23,6 +23,8 @@
 #include "pwm.h"
 #include "motores.h"
 #include "sensores_pared.h"
+#include "sensores_piso.h"
+#include "encoders.h"
 
 #define USART_BAUDRATE 	9600
 #define BAUD_PRESCALE 	(((F_CPU / (USART_BAUDRATE * 16UL))) - 1)

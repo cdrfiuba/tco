@@ -16,6 +16,8 @@
 
 #include "main.h"
 
+volatile    int estado_sensor_piso_cen,estado_sensor_piso_der,estado_sensor_piso_izq;
+
 volatile uint32_t   interrupciones_timer_1, distancia, cuenta_encoder_derecha, cuenta_encoder_izquierda;
 volatile uint8_t    status_flag, value;
 uint8_t             sensor_active;
@@ -30,6 +32,8 @@ int main(void)
     inicializar_puertos_motores();
     inicializar_PWM();
     motores_detener();
+    medir_piso();
+    inicializar_sensores_piso();
 
 	for (;;)
 	{
@@ -85,7 +89,16 @@ int main(void)
         UDR = (uint8_t)((cuenta_encoder_izquierda) & 0x000000FF);
 
 
+volatile    int estado_sensor_piso_cen,estado_sensor_piso_der,estado_sensor_piso_izq;
 
+while(1){
+        if(estado_sensor_piso_cen == 1)
+            motores_avanzar(170,170);
+        else if (estado_sensor_piso_der==1)
+            motores_detener();
+        else if(estado_sensor_piso_izq == 1)
+            motores_retroceder(170,170);
+        }
         /*
 
         motores_avanzar(170,170);
