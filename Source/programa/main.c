@@ -16,7 +16,7 @@
 
 #include "main.h"
 
-volatile uint32_t   interrupciones_timer_1, distancia;
+volatile uint32_t   interrupciones_timer_1, distancia, cuenta_encoder_derecha, cuenta_encoder_izquierda;
 volatile uint8_t    status_flag, value;
 uint8_t             sensor_active;
 
@@ -26,6 +26,7 @@ int main(void)
 	sei();			        //Activación de las interrupciones
 
     inicializar_puertos_sensores_pared();
+    inicializar_encoders();
     inicializar_puertos_motores();
     inicializar_PWM();
     motores_detener();
@@ -33,7 +34,8 @@ int main(void)
 	for (;;)
 	{
 
-        //Enviar distancia por puerto serie
+        /*
+        //Enviar distancia por puerto serie, funciona OK. Prueba 12/06/13
 
         _delay_ms(1000);
 
@@ -58,6 +60,29 @@ int main(void)
 
         while(!UCSRA);
         UDR = (uint8_t)((distancia) & 0x000000FF);
+        */
+
+
+        //Prueba encoders
+        _delay_ms(1000);
+
+        while(!UCSRA);
+        UDR = (uint8_t)((cuenta_encoder_izquierda >> 24) & 0x000000FF);
+
+        _delay_ms(100);
+
+        while(!UCSRA);
+        UDR = (uint8_t)((cuenta_encoder_izquierda >> 16) & 0x000000FF);
+
+        _delay_ms(100);
+
+        while(!UCSRA);
+        UDR = (uint8_t)((cuenta_encoder_izquierda >> 8) & 0x000000FF);
+
+        _delay_ms(100);
+
+        while(!UCSRA);
+        UDR = (uint8_t)((cuenta_encoder_izquierda) & 0x000000FF);
 
 
 
@@ -166,19 +191,26 @@ ISR (USART_RXC_vect){
 }
 
 
-//Interruoción overflow timer 0
-ISR (TIMER0_OVF_vect){
-
-
-
+//Interrupción Timer 0
+ISR (TIMER0_OVF_vect)
+{
+    cuenta_encoder_derecha++;
 }
 
+
+//Interrupción Timer 1
 ISR (TIMER1_OVF_vect){
 
     if (sensor_active)
         interrupciones_timer_1++;
 
-	if(interrupciones_timer_1 > 1000)
+	if(interrupciones_timer_1 > MAX_INTERRUPCIONES_SENSOR_DISTANCIA)
         status_flag = 1;
+}
 
+
+//Interrupción Timer 2
+ISR (TIMER2_OVF_vect)
+{
+    cuenta_encoder_izquierda++;
 }
