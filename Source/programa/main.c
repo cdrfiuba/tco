@@ -16,9 +16,20 @@
 
 #include "main.h"
 
-uint8_t             sensor_active, estado_sensor_piso_cen, estado_sensor_piso_der, estado_sensor_piso_izq;
-volatile uint32_t   interrupciones_timer_1, distancia, cuenta_encoder_derecha, cuenta_encoder_izquierda;
-volatile uint8_t    status_flag, value;
+//Delacaración de variables globales
+
+volatile uint8_t    value;
+
+//Variables encoders
+volatile uint32_t   cuenta_interrupcion_encoder_izquierda, cuenta_interrupcion_encoder_derecha, cuenta_encoder_izquierda, cuenta_encoder_derecha;
+
+//Variables sensores pared
+volatile uint8_t    sensor_active, status_flag;
+volatile uint32_t   interrupciones_timer_1, distancia;
+
+//Varibles sensores piso
+uint8_t             estado_sensor_piso_cen, estado_sensor_piso_der, estado_sensor_piso_izq;
+
 
 
 int main(void)
@@ -28,45 +39,38 @@ int main(void)
 
 
     inicializar_puertos_sensores_pared();
+    inicializar_sensores_piso();
     inicializar_encoders();             //Al inicializar los encoders lo que se hace es configurar el TIMER 0 y el TIMER 2
     inicializar_puertos_motores();
     inicializar_PWM();                  //Al inicializar el PWM lo que se hace es configurar el TIMER 1
     motores_detener();
-    inicializar_sensores_piso();
 
 	for (;;)
 	{
-/*
 
-        while(1){
+
 
         //Creo una interrupcion por software
-//        _delay_ms(100);
-//        PORTB |= (1<<PORTB2);
-//        _delay_ms(100);
-//        PORTB &= ~(1<<PORTB2);
+        //_delay_ms(100);
+        //PORTB |= (1<<PORTB2);
+        //_delay_ms(100);
+        //PORTB &= ~(1<<PORTB2);
 
 
         if(estado_sensor_piso_cen == 1 && (PINA & (1<<PINA2))){
+
             motores_avanzar(170,170);
-            _delay_ms(100);
-            }
+
+        }
         else {
+
+            estado_sensor_piso_cen = 0;
             motores_detener();
-            estado_sensor_piso_cen=0;
-            _delay_ms(100);
-            }
 
-//        _delay_ms(1000);
-//
-//        estado_sensor_piso_cen=0;
-//        motores_detener();
-//        estado_sensor_piso_cen=0;
-//
-//        _delay_ms(500);
+        }
 
 
-        }*/
+
 //
 //        //Enviar distancia por puerto serie, funciona OK. Prueba 12/06/13
 //
@@ -93,36 +97,34 @@ int main(void)
 //
 //        while(!UCSRA);
 //        UDR = (uint8_t)((distancia) & 0x000000FF);
-//
-//
-//
-//        //Prueba encoders
-//
-//
+
+
+        //Prueba encoders
+
        _delay_ms(1000);
-//
-        while(!UCSRA);
-        UDR = TCNT0;
+
+        cuenta_encoder_derecha = cuenta_interrupcion_encoder_derecha * 256 + TCNT0;
 
         while(!UCSRA);
-        UDR = TCNT2;
-//
-//        _delay_ms(100);
-//
-//        while(!UCSRA);
-//        UDR = (uint8_t)((cuenta_encoder_izquierda >> 16) & 0x000000FF);
-//
-//        _delay_ms(100);
-//
-//        while(!UCSRA);
-//        UDR = (uint8_t)((cuenta_encoder_izquierda >> 8) & 0x000000FF);
-//
-//        _delay_ms(100);
-//
-//        while(!UCSRA);
-//        UDR = (uint8_t)((cuenta_encoder_izquierda) & 0x000000FF);
-//
-//
+        UDR = (uint8_t)((cuenta_encoder_derecha >> 24) & 0x000000FF);
+
+        _delay_ms(100);
+
+        while(!UCSRA);
+        UDR = (uint8_t)((cuenta_encoder_derecha >> 16) & 0x000000FF);
+
+        _delay_ms(100);
+
+        while(!UCSRA);
+        UDR = (uint8_t)((cuenta_encoder_derecha >> 8) & 0x000000FF);
+
+        _delay_ms(100);
+
+        while(!UCSRA);
+        UDR = (uint8_t)((cuenta_encoder_derecha) & 0x000000FF);
+
+
+
 //        motores_avanzar(170,170);
 //
 //        _delay_ms(200);
@@ -229,7 +231,7 @@ ISR (USART_RXC_vect){
 //Interrupción Timer 0
 ISR (TIMER0_OVF_vect)
 {
-    cuenta_encoder_derecha++;
+    cuenta_interrupcion_encoder_derecha++;
 }
 
 
@@ -247,7 +249,7 @@ ISR (TIMER1_OVF_vect){
 //Interrupción Timer 2
 ISR (TIMER2_OVF_vect)
 {
-    cuenta_encoder_izquierda++;
+    cuenta_interrupcion_encoder_izquierda++;
 }
 
 

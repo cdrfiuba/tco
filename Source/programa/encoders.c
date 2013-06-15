@@ -39,12 +39,10 @@ void inicializar_encoders(void){
 
 
     //Configuración del Timer/Counter Interrupt Mask Register – TIMSK
-    TIMSK &= ((0<<OCIE0) | (1<<TOIE0));
-
+    TIMSK |= (1<<TOIE0);
 
     //Bit 0 – TOIE0: Timer/Counter0 Overflow Interrupt Enable             - Se configura en uno, para activar la interrupción por overflow del contador T0
     //Bit 1 – OCIE0: Timer/Counter0 Output Compare Match Interrupt Enable - Se configura en cero, no interesa interrupción por comparación.
-
 
     TIFR |= (1<<TOV0);
 
@@ -52,7 +50,6 @@ void inicializar_encoders(void){
     TCNT0 = 0;
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
     //Configuro el encoder de la rueda izquierda.
 
     //Si bien no es necesario, configuro el pin T2 como entrada.
@@ -61,7 +58,7 @@ void inicializar_encoders(void){
     //Configuración del Timer/Counter Control register
     //FOC2 WGM20 COM21 COM20 WGM21 CS22 CS21 CS20
 
-    TCCR2 &= ~((1<<WGM20) & (1<<WGM21) & (1<<COM21) & (1<<COM20) & (1<<CS22) & (1<<CS21));
+    TCCR2 &= ~((1<<CS22) & (1<<CS21));
     TCCR2 |=  (1<<CS20);
 
     //Asynchronous Operation of the Timer/Counter

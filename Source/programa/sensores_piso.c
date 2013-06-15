@@ -62,9 +62,6 @@ cal one to its Interrupt Flag bit (INTF2) in the GIFR Register before the interr
 
 GICR |= (1<<INT2);
 
-
-
-
 }
 
 
