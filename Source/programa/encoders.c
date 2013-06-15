@@ -58,8 +58,7 @@ void inicializar_encoders(void){
     //Configuración del Timer/Counter Control register
     //FOC2 WGM20 COM21 COM20 WGM21 CS22 CS21 CS20
 
-    TCCR2 &= ~((1<<CS22) & (1<<CS21));
-    TCCR2 |=  (1<<CS20);
+    TCCR2 |=  ((1<<CS22) | (1<<CS21) | (1<<CS20));
 
     //Asynchronous Operation of the Timer/Counter
     //AS2 TCN2UB OCR2UB TCR2UB

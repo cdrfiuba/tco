@@ -125,6 +125,30 @@ int main(void)
 
 
 
+        _delay_ms(1000);
+
+        cuenta_encoder_izquierda = cuenta_interrupcion_encoder_izquierda * 256 + TCNT2;
+
+        while(!UCSRA);
+        UDR = (uint8_t)((cuenta_encoder_izquierda >> 24) & 0x000000FF);
+
+        _delay_ms(100);
+
+        while(!UCSRA);
+        UDR = (uint8_t)((cuenta_encoder_izquierda >> 16) & 0x000000FF);
+
+        _delay_ms(100);
+
+        while(!UCSRA);
+        UDR = (uint8_t)((cuenta_encoder_izquierda >> 8) & 0x000000FF);
+
+        _delay_ms(100);
+
+        while(!UCSRA);
+        UDR = (uint8_t)((cuenta_encoder_izquierda) & 0x000000FF);
+
+
+
 //        motores_avanzar(170,170);
 //
 //        _delay_ms(200);
