@@ -103,6 +103,9 @@ int main(void)
 //
         while(!UCSRA);
         UDR = TCNT0;
+
+        while(!UCSRA);
+        UDR = TCNT2;
 //
 //        _delay_ms(100);
 //
