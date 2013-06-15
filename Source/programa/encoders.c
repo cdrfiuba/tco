@@ -18,6 +18,48 @@
 
 void inicializar_encoders(void){
 
+    //Configuro el encoder de la rueda derecha.
+
+    //Si bien no es necesario, configuro el pin T0 como entrada.
+    DDRB &= ~(1<<PB0);
+
+    //Configuración del Timer/Counter Control register
+    //TCCR0 = FOC0 - WGM00 - COM01 - COM00 - WGM01 - CS02 - CS01 - CS00
+
+    TCCR0 &= ~((1<<WGM01) & (1<<WGM00) & (1<<COM01) & (1<<COM00));
+    TCCR0 |= ((1<<CS02) | (1<<CS01) | (1<<CS00));
+
+    /*
+    Bit 7    – FOC0:    Force Output Compare
+    Bit 3, 6 – WGM01:0: Waveform Generation Mode    - Se configura en modo normal WGM01 = 0 y WGM00 = 0
+    Bit 5:4  – COM01:0: Compare Match Output Mode   - Normal port operation, OC0 disconnected. COM01 = 0 y COM00 = 0
+    Bit 2:0  – CS02:0:  Clock Select                - External clock source on T0 pin. Clock on rising edge. CS02 = CS01 = CS00 = 1
+
+    Supuestamente, de esta forma, se configura el timer 0 para ser incrementado por un flanco ascendente, en el pin T0.
+    */
+
+    //Configuración del Timer/Counter Interrupt Mask Register – TIMSK
+    TIMSK &= ((0<<OCIE0) | (1<<TOIE0));
+
+    /*
+    Bit 0 – TOIE0: Timer/Counter0 Overflow Interrupt Enable             - Se configura en uno, para activar la interrupción por overflow del contador T0
+    Bit 1 – OCIE0: Timer/Counter0 Output Compare Match Interrupt Enable - Se configura en cero, no interesa interrupción por comparación.
+    */
+
+    TIFR |= (1<<TOV0);
+
+    //Pongo en cero el contador.
+    TCNT0 = 0;
+
+
+     //Configuro el encoder de la rueda izquierda.
+
+
+    /*
+
+
+
+
     //Configurando timer0: Registro – TCCR0 = {FOC0 WGM00 COM01 COM00 WGM01 CS02 CS01 CS00}
     //El registro de cuentas se lleva en el registro TCNT0
 
@@ -65,7 +107,7 @@ void inicializar_encoders(void){
     //TOV2: Timer/Counter2 Overflow Flag
 
     TIFR |= (1<<TOV2);
-
+*/
 }
 
 

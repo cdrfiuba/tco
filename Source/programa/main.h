@@ -10,7 +10,7 @@
  *	Descripción: 	El presente documento tiene las definiciones para el manejo del		        *
  *			        programa principal.							                                *
  *												                                                *
- *	Última modificación: 10/06/2013								                                *
+ *	Última modificación: 15/06/2013								                                *
  *												                                                *
  ***********************************************************************************************/
 

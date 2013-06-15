@@ -10,33 +10,33 @@
  *	Descripción: 	El presente documento tiene las definiciones para el manejo del		        *
  *			        programa principal.							                                *
  *												                                                *
- *	Última modificación: 10/06/2013								                                *
+ *	Última modificación: 15/06/2013								                                *
  *												                                                *
  ***********************************************************************************************/
 
 #include "main.h"
 
-int estado_sensor_piso_cen,estado_sensor_piso_der,estado_sensor_piso_izq;
-
+uint8_t             sensor_active, estado_sensor_piso_cen, estado_sensor_piso_der, estado_sensor_piso_izq;
 volatile uint32_t   interrupciones_timer_1, distancia, cuenta_encoder_derecha, cuenta_encoder_izquierda;
 volatile uint8_t    status_flag, value;
-uint8_t             sensor_active;
+
 
 int main(void)
 {
-	usart_init();		    //Inicialización de la interrupción
-	sei();			        //Activación de las interrupciones
+	usart_init();		                //Inicialización de UART para enviar/recibir datos por serie.
+	sei();			                    //Activación de las interrupciones.
+
 
     inicializar_puertos_sensores_pared();
-    inicializar_encoders();
+    inicializar_encoders();             //Al inicializar los encoders lo que se hace es configurar el TIMER 0 y el TIMER 2
     inicializar_puertos_motores();
-    inicializar_PWM();
+    inicializar_PWM();                  //Al inicializar el PWM lo que se hace es configurar el TIMER 1
     motores_detener();
     inicializar_sensores_piso();
 
 	for (;;)
 	{
-
+/*
 
         while(1){
 
@@ -66,7 +66,7 @@ int main(void)
 //        _delay_ms(500);
 
 
-        }
+        }*/
 //
 //        //Enviar distancia por puerto serie, funciona OK. Prueba 12/06/13
 //
@@ -99,10 +99,10 @@ int main(void)
 //        //Prueba encoders
 //
 //
-//        _delay_ms(1000);
+       _delay_ms(1000);
 //
-//        while(!UCSRA);
-//        UDR = (uint8_t)((cuenta_encoder_izquierda >> 24) & 0x000000FF);
+        while(!UCSRA);
+        UDR = TCNT0;
 //
 //        _delay_ms(100);
 //

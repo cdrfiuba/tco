@@ -1,5 +1,19 @@
-#include <avr/io.h>
-#include <avr/interrupt.h>
+/************************************************************************************************
+ *												                                                *
+ *	Proyecto TCO - Robot resolverdor de laberintos						                        *
+ *											                                                	*
+ *	Laboratorio de microcomputadores 66.09 - Club de robótica 2013				                *
+ *											                                                	*
+ *	Integrantes: 	Ignacio Carballeda, Sebastian Cerone y Gisela Farace            			*
+ *												                                                *
+ *	Archivo:	    sensores_piso.c 					                                        *
+ *	Descripción: 	El presente documento tiene las definiciones para el manejo de los	        *
+ *			        sensores del piso       					                                *
+ *												                                                *
+ *	Última modificación: 15/06/2013								                                *
+ *												                                                *
+ ***********************************************************************************************/
+
 #include "sensores_piso.h"
 
 
