@@ -39,7 +39,7 @@ int main(void)
 
 
     inicializar_puertos_sensores_pared();
-    inicializar_sensores_piso();
+    //inicializar_sensores_piso();
     inicializar_encoders();             //Al inicializar los encoders lo que se hace es configurar el TIMER 0 y el TIMER 2
     inicializar_puertos_motores();
     inicializar_PWM();                  //Al inicializar el PWM lo que se hace es configurar el TIMER 1
@@ -47,23 +47,112 @@ int main(void)
 
     cuenta_encoder_derecha = 0;
     cuenta_encoder_izquierda = 0;
+    estado_sensor_piso_cen = 0;
+    _delay_ms(500);
 
-	for (;;)
-	{
-
-        motores_avanzar(170, 170);
-
-        _delay_ms(1000);
-
-        motores_detener();
+	for (;;){
 
         _delay_ms(1000);
 
-        motores_rotar_der_90_grados();
 
-        motores_detener();
+        distancia = prueba_rapida_sensor_pared(SENSOR_PARED_CEN);
 
-        _delay_ms(1000);
+        _delay_ms(100);
+
+        while(!UCSRA);
+        UDR = (uint8_t)((distancia >> 24) & 0x000000FF);
+
+         _delay_ms(100);
+
+        while(!UCSRA);
+        UDR = (uint8_t)((distancia >> 16) & 0x000000FF);
+
+         _delay_ms(100);
+
+        while(!UCSRA);
+        UDR = (uint8_t)((distancia >> 8) & 0x000000FF);
+
+         _delay_ms(100);
+
+        while(!UCSRA);
+        UDR = (uint8_t)((distancia) & 0x000000FF);
+
+//            motores_avanzar(170,170);
+//
+//            _delay_ms(200);
+//
+//            motores_detener();
+//
+//            distancia = prueba_rapida_sensor_pared(SENSOR_PARED_DER);
+//
+//            if(distancia > DISTANCIA_GRANDE){
+//            //Si entro aca es que no tengo pared a la derecha, entonces, giro a la derecha
+//
+//                 motores_detener();
+//                _delay_ms(200);
+//                //motores_avanzar(170,170);
+//                //_delay_ms(200);
+//                motores_rotar_der_90_grados();
+//                _delay_ms(50);
+//                motores_detener();
+//                _delay_ms(200);
+//                motores_avanzar(170,170);
+//                _delay_ms(500);
+//                 motores_detener();
+//
+//            }
+//
+//            else{
+//
+//                //Si entro aca, es que tengo pared a la derecha
+//
+//                distancia = prueba_rapida_sensor_pared(SENSOR_PARED_CEN);
+//
+//                if(distancia < DISTANCIA_CHICA){
+//
+//                    //Si entro aca, tengo pared a la derecha, y tengo pared al frente
+//
+//                    motores_detener();
+//                    _delay_ms(100);
+//                    motores_retroceder(170,170);
+//                    _delay_ms(150);
+//                    motores_detener();
+//                    // motores_avanzar(170,170);
+//                    //_delay_ms(200);
+//                    motores_rotar_izq_90_grados();
+//                    _delay_ms(50);
+//                    motores_detener();
+//                    _delay_ms(200);
+//
+//                    distancia = prueba_rapida_sensor_pared(SENSOR_PARED_CEN);
+//
+//                    if(distancia < DISTANCIA_CHICA){
+//
+//                        //Si entro aca, es que tengo pared a la derecha, al frente y a la izquierda.
+//
+//                        motores_detener();
+//                        _delay_ms(100);
+//                        // motores_avanzar(170,170);
+//                        //_delay_ms(200);
+//                        motores_rotar_izq_90_grados();
+//                        _delay_ms(50);
+//                        motores_detener();
+//                        _delay_ms(200);
+//
+//                    }
+//
+//                    motores_avanzar(170,170);
+//                    _delay_ms(500);
+//                    motores_detener();
+//
+//                }
+//
+//                else{
+//
+//                }
+//
+//
+//            }
 
     }
 

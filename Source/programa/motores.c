@@ -79,9 +79,11 @@ void motores_detener(void){
 
 void motores_rotar_der_90_grados(void){
 
-    uint8_t flag_encoder_derecha = FALSE, flag_encoder_izquierda = FALSE, flag_fin_rotacion = FALSE;
+    uint8_t  flag_fin_rotacion = FALSE;
     uint32_t cuenta_inicial_encoder_derecho     =   cuenta_encoder_derecha;
     uint32_t cuenta_inicial_encoder_izquierdo   =   cuenta_encoder_izquierda;
+
+    variar_PWM(200, 200);
 
     PORTD &= ~MOTOR_DER_DIRECTION; 	//Pongo en bajo el pin DIRECTION del motor 1
     PORTB &= ~MOTOR_DER_BRAKE;	    //Pongo en bajo el pin BRAKE del motor 1
@@ -91,34 +93,28 @@ void motores_rotar_der_90_grados(void){
 
     while(flag_fin_rotacion == FALSE){
 
-        if(cuenta_encoder_derecha >= (cuenta_inicial_encoder_derecho + 240)){
+        if(cuenta_encoder_derecha >= (cuenta_inicial_encoder_derecho + 300)){
 
-            PORTB |= MOTOR_DER_BRAKE;	//Pongo en alto el pin BRAKE del motor 1
+            if(cuenta_encoder_izquierda >= (cuenta_inicial_encoder_izquierdo + 300)){
 
-            flag_encoder_derecha = TRUE;
+                PORTB |= MOTOR_DER_BRAKE;	//Pongo en alto el pin BRAKE del motor 1
+                PORTB |= MOTOR_IZQ_BRAKE;	//Pongo en alto el pin BRAKE del motor 2
 
+                flag_fin_rotacion = TRUE;
+
+            }
         }
-
-        if(cuenta_encoder_izquierda >= (cuenta_inicial_encoder_izquierdo + 200)){
-
-            PORTB |= MOTOR_IZQ_BRAKE;	//Pongo en alto el pin BRAKE del motor 2
-
-            flag_encoder_izquierda = TRUE;
-
-        }
-
-        if((flag_encoder_derecha == TRUE) &&(flag_encoder_izquierda == TRUE))
-            flag_fin_rotacion = TRUE;
-
     }
 }
 
 
 void motores_rotar_izq_90_grados(void){
 
-    uint8_t flag_encoder_derecha = FALSE, flag_encoder_izquierda = FALSE, flag_fin_rotacion = FALSE;
+    uint8_t  flag_fin_rotacion = FALSE;
     uint32_t cuenta_inicial_encoder_derecho     =   cuenta_encoder_derecha;
     uint32_t cuenta_inicial_encoder_izquierdo   =   cuenta_encoder_izquierda;
+
+    variar_PWM(200, 200);
 
     PORTD |= MOTOR_DER_DIRECTION; 	//Pongo en alto el pin DIRECTION del motor 1
     PORTB &= ~MOTOR_DER_BRAKE;	    //Pongo en bajo el pin BRAKE del motor 1
@@ -126,28 +122,21 @@ void motores_rotar_izq_90_grados(void){
     PORTD |= MOTOR_IZQ_DIRECTION; 	//Pongo en alto el pin DIRECTION del motor 2
     PORTB &= ~MOTOR_IZQ_BRAKE;	    //Pongo en bajo el pin BRAKE del motor 2
 
-
     while(flag_fin_rotacion == FALSE){
 
-        if(cuenta_encoder_derecha >= (cuenta_inicial_encoder_derecho + 200)){
+        if(cuenta_encoder_derecha >= (cuenta_inicial_encoder_derecho + 315)){
 
-            PORTB |= MOTOR_DER_BRAKE;	//Pongo en alto el pin BRAKE del motor 1
+            if(cuenta_encoder_izquierda >= (cuenta_inicial_encoder_izquierdo + 315)){
 
-            flag_encoder_derecha = TRUE;
+                //Antes tenia 300
 
+                PORTB |= MOTOR_DER_BRAKE;	//Pongo en alto el pin BRAKE del motor 1
+                PORTB |= MOTOR_IZQ_BRAKE;	//Pongo en alto el pin BRAKE del motor 2
+
+                flag_fin_rotacion = TRUE;
+
+            }
         }
-
-        if(cuenta_encoder_izquierda >= (cuenta_inicial_encoder_izquierdo + 240)){
-
-            PORTB |= MOTOR_IZQ_BRAKE;	//Pongo en alto el pin BRAKE del motor 2
-
-            flag_encoder_izquierda = TRUE;
-
-        }
-
-        if((flag_encoder_derecha == TRUE) &&(flag_encoder_izquierda == TRUE))
-            flag_fin_rotacion = TRUE;
-
     }
 }
 
