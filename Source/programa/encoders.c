@@ -75,7 +75,10 @@ void inicializar_encoders(void){
 
 
     //Configuro el encoder usando el pin como entrada
-    DDRD    &= ~(1<<PD3);
+    DDRC    &= ~(1<<PC6);//Configuro como entrada
+    PORTC   &= ~(1<<PC6);//Desactivo el pull up
+
+
 
 
 }

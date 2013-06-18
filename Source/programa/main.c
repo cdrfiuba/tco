@@ -59,17 +59,17 @@ int main(void)
         //PORTB &= ~(1<<PORTB2);
 
 
-        if(estado_sensor_piso_cen == 1 && (PINA & (1<<PINA2))){
-
-            motores_avanzar(170,170);
-
-        }
-        else {
-
-            estado_sensor_piso_cen = 0;
-            motores_detener();
-
-        }
+//        if(estado_sensor_piso_cen == 1 && (PINA & (1<<PINA2))){
+//
+//            motores_avanzar(170,170);
+//
+//        }
+//        else {
+//
+//            estado_sensor_piso_cen = 0;
+//            motores_detener();
+//
+//        }
 
 
 
@@ -100,85 +100,75 @@ int main(void)
 //        while(!UCSRA);
 //        UDR = (uint8_t)((distancia) & 0x000000FF);
 
-        _delay_ms(1000);
-
-        if(PIND3 == 1){
+        if((PINC & (1<<PC6))  == (1<<PC6)){
 
             flag_encoder = 1;
-
-            while(!UCSRA);
-            UDR = '0';
 
             }
 
         else{
 
-            while(!UCSRA);
-            UDR = '1';
-
-
             if(flag_encoder == 1){
 
                 flag_encoder = 0;
-
-                while(!UCSRA);
-                UDR = '2';
 
                 cuenta_encoder_izquierda++;
 
             }
         }
 
+
+
         //Prueba encoders
-//        if(contador_encoder_1++ > MAX_TIME){
-//
-//            contador_encoder_1 = 0;
-//
-//            cuenta_encoder_derecha = cuenta_interrupcion_encoder_derecha * 256 + TCNT0;
+        if(contador_encoder_1++ > MAX_TIME){
 
-//            while(!UCSRA);
-//            UDR = (uint8_t)((cuenta_encoder_derecha >> 24) & 0x000000FF);
-//
-//            _delay_ms(100);
-//
-//            while(!UCSRA);
-//            UDR = (uint8_t)((cuenta_encoder_derecha >> 16) & 0x000000FF);
-//
-//            _delay_ms(100);
-//
-//            while(!UCSRA);
-//            UDR = (uint8_t)((cuenta_encoder_derecha >> 8) & 0x000000FF);
-//
-//            _delay_ms(100);
-//
-//            while(!UCSRA);
-//            UDR = (uint8_t)((cuenta_encoder_derecha) & 0x000000FF);
-//
-//        }
-//
-//        if(contador_encoder_2++ > MAX_TIME){
-//
-//            contador_encoder_2 = 0;
+            contador_encoder_1 = 0;
 
-//            while(!UCSRA);
-//            UDR = (uint8_t)((cuenta_encoder_izquierda >> 24) & 0x000000FF);
-//
-//            _delay_ms(100);
-//
-//            while(!UCSRA);
-//            UDR = (uint8_t)((cuenta_encoder_izquierda >> 16) & 0x000000FF);
-//
-//            _delay_ms(100);
-//
-//            while(!UCSRA);
-//            UDR = (uint8_t)((cuenta_encoder_izquierda >> 8) & 0x000000FF);
-//
-//            _delay_ms(100);
-//
-//            while(!UCSRA);
-//            UDR = (uint8_t)((cuenta_encoder_izquierda) & 0x000000FF);
-//
-//        }
+            cuenta_encoder_derecha = cuenta_interrupcion_encoder_derecha * 256 + TCNT0;
+
+            while(!UCSRA);
+            UDR = (uint8_t)((cuenta_encoder_derecha >> 24) & 0x000000FF);
+
+            _delay_ms(100);
+
+            while(!UCSRA);
+            UDR = (uint8_t)((cuenta_encoder_derecha >> 16) & 0x000000FF);
+
+            _delay_ms(100);
+
+            while(!UCSRA);
+            UDR = (uint8_t)((cuenta_encoder_derecha >> 8) & 0x000000FF);
+
+            _delay_ms(100);
+
+            while(!UCSRA);
+            UDR = (uint8_t)((cuenta_encoder_derecha) & 0x000000FF);
+
+        }
+
+        if(contador_encoder_2++ > MAX_TIME){
+
+            contador_encoder_2 = 0;
+
+            while(!UCSRA);
+            UDR = (uint8_t)((cuenta_encoder_izquierda >> 24) & 0x000000FF);
+
+            _delay_ms(100);
+
+            while(!UCSRA);
+            UDR = (uint8_t)((cuenta_encoder_izquierda >> 16) & 0x000000FF);
+
+            _delay_ms(100);
+
+            while(!UCSRA);
+            UDR = (uint8_t)((cuenta_encoder_izquierda >> 8) & 0x000000FF);
+
+            _delay_ms(100);
+
+            while(!UCSRA);
+            UDR = (uint8_t)((cuenta_encoder_izquierda) & 0x000000FF);
+
+        }
 
 
 
