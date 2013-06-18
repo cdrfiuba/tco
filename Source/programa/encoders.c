@@ -75,9 +75,14 @@ void inicializar_encoders(void){
 
 
     //Configuro el encoder usando el pin como entrada
-    DDRC    &= ~(1<<PC6);//Configuro como entrada
-    PORTC   &= ~(1<<PC6);//Desactivo el pull up
+    DDRD    &= ~(1<<PD2);   //Configuro como entrada
+    PORTD   &= ~(1<<PD3);   //Desactivo el pull up
 
+    GICR &= ~(1<<INT0);     //Desactivo INT0
+    GICR |= (1<<INT1);      //Activo INT1
+    GICR &= ~(1<<INT2);     //Desactivo INT2
+
+    MCUCR |= ((1<<ISC11) | (1<<ISC10));     //Configuro la INT1 por flanco ascendente
 
 
 

@@ -47,6 +47,10 @@ int main(void)
     inicializar_PWM();                  //Al inicializar el PWM lo que se hace es configurar el TIMER 1
     motores_detener();
 
+
+    cuenta_encoder_izquierda    = 0;
+    cuenta_encoder_derecha      = 0;
+
 	for (;;)
 	{
 
@@ -99,24 +103,6 @@ int main(void)
 //
 //        while(!UCSRA);
 //        UDR = (uint8_t)((distancia) & 0x000000FF);
-
-        if((PINC & (1<<PC6))  == (1<<PC6)){
-
-            flag_encoder = 1;
-
-            }
-
-        else{
-
-            if(flag_encoder == 1){
-
-                flag_encoder = 0;
-
-                cuenta_encoder_izquierda++;
-
-            }
-        }
-
 
 
         //Prueba encoders
@@ -296,48 +282,55 @@ ISR (TIMER1_OVF_vect){
 //Interrupción Timer 2
 //ISR (TIMER2_OVF_vect)
 //{
-//    cuenta_interrupcion_encoder_izquierda++;
+//    cuenta_encoder_izquierda++;
+//
 //}
 
-
-
-//interrupcion sensores de piso
-
-ISR (INT2_vect){
-
-//Averiguamos cual de los tres fue el sensor que detecto un flanco ascendente
-//para ello leemos el PINA={PINA7 PINA6 PINA5 PINA4 PINA3 PINA2 PINA1 PINA0}
-
-
-estado_sensor_piso_cen = 1;
-
-//
-//if (PINA & (1<<PINA0)){
-//    // fue por el sensor izquierdo (tomar medidas en caso seguidor lineas)
-//    estado_sensor_piso_izq=1;
-//    estado_sensor_piso_cen=0;
-//    estado_sensor_piso_der=0;
-//    }
-//else if(PINA & (1<<PINA1)){
-//        //fue por el sensor derecho (tomar medidas en caso seguidor lineas)
-//    estado_sensor_piso_izq=0;
-//    estado_sensor_piso_cen=0;
-//    estado_sensor_piso_der=1;
-//        }
-//else if(PINA & (1<<PINA2)){
-//        //fue por el sensor del centro (tomar medidas en caso seguidor lineas)
-//    estado_sensor_piso_izq=0;
-//    estado_sensor_piso_cen=1;
-//    estado_sensor_piso_der=0;
-//        }
-
-//falta el sistema anti-rebote que quizas podria ser un  _delay_ms() aca mismo
-
-//Finalmente hacemos un clear al registro GIFR de interrupcion como se pide en hoja de datos [1].
-
-GIFR &= ~(1<<INTF2);
+//Interrupción INT 1
+ISR (INT1_vect)
+{
+    cuenta_encoder_izquierda++;
 
 }
 
 
-
+//interrupcion sensores de piso
+//
+//ISR (INT2_vect){
+//
+////Averiguamos cual de los tres fue el sensor que detecto un flanco ascendente
+////para ello leemos el PINA={PINA7 PINA6 PINA5 PINA4 PINA3 PINA2 PINA1 PINA0}
+//
+//
+//estado_sensor_piso_cen = 1;
+//
+////
+////if (PINA & (1<<PINA0)){
+////    // fue por el sensor izquierdo (tomar medidas en caso seguidor lineas)
+////    estado_sensor_piso_izq=1;
+////    estado_sensor_piso_cen=0;
+////    estado_sensor_piso_der=0;
+////    }
+////else if(PINA & (1<<PINA1)){
+////        //fue por el sensor derecho (tomar medidas en caso seguidor lineas)
+////    estado_sensor_piso_izq=0;
+////    estado_sensor_piso_cen=0;
+////    estado_sensor_piso_der=1;
+////        }
+////else if(PINA & (1<<PINA2)){
+////        //fue por el sensor del centro (tomar medidas en caso seguidor lineas)
+////    estado_sensor_piso_izq=0;
+////    estado_sensor_piso_cen=1;
+////    estado_sensor_piso_der=0;
+////        }
+//
+////falta el sistema anti-rebote que quizas podria ser un  _delay_ms() aca mismo
+//
+////Finalmente hacemos un clear al registro GIFR de interrupcion como se pide en hoja de datos [1].
+//
+//GIFR &= ~(1<<INTF2);
+//
+//}
+//
+//
+//
