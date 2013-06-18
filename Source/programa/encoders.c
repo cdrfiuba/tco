@@ -52,26 +52,31 @@ void inicializar_encoders(void){
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //Configuro el encoder de la rueda izquierda.
 
-    //Si bien no es necesario, configuro el pin T2 como entrada.
-    DDRC &= ~(1<<PC6);
+//    //Si bien no es necesario, configuro el pin T2 como entrada.
+//    DDRC &= ~(1<<PC6);
+//
+//    //Configuración del Timer/Counter Control register
+//    //FOC2 WGM20 COM21 COM20 WGM21 CS22 CS21 CS20
+//
+//    TCCR2 |=  ((1<<CS22) | (1<<CS21) | (1<<CS20));
+//
+//    //Asynchronous Operation of the Timer/Counter
+//    //AS2 TCN2UB OCR2UB TCR2UB
+//    ASSR |= (1<<AS2);
+//
+//    //Timer/Counter Interrupt Mask Register
+//    TIMSK |= (1<<TOIE2);
+//
+//    //Timer/Counter Interrupt Flag Register
+//    TIFR |= (1<<TOV2);
+//
+//    //Pongo en cero el contador.
+//    TCNT2 = 0;
 
-    //Configuración del Timer/Counter Control register
-    //FOC2 WGM20 COM21 COM20 WGM21 CS22 CS21 CS20
 
-    TCCR2 |=  ((1<<CS22) | (1<<CS21) | (1<<CS20));
+    //Configuro el encoder usando el pin como entrada
+    DDRD    &= ~(1<<PD3);
 
-    //Asynchronous Operation of the Timer/Counter
-    //AS2 TCN2UB OCR2UB TCR2UB
-    ASSR |= (1<<AS2);
-
-    //Timer/Counter Interrupt Mask Register
-    TIMSK |= (1<<TOIE2);
-
-    //Timer/Counter Interrupt Flag Register
-    TIFR |= (1<<TOV2);
-
-    //Pongo en cero el contador.
-    TCNT2 = 0;
 
 }
 
