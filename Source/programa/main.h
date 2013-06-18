@@ -38,6 +38,7 @@
 
 #define MAX_INTERRUPCIONES_SENSOR_DISTANCIA 1000
 
+
 #endif /* _MAIN_H_ */
 
 //Definición de prototipos

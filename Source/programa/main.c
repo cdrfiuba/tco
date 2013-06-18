@@ -19,11 +19,9 @@
 //Delacaración de variables globales
 
 volatile uint8_t    value;
-uint8_t             flag_encoder;
-uint32_t            contador_encoder_1, contador_encoder_2;
 
 //Variables encoders
-volatile uint32_t   cuenta_interrupcion_encoder_izquierda, cuenta_interrupcion_encoder_derecha, cuenta_encoder_izquierda, cuenta_encoder_derecha;
+volatile uint32_t   cuenta_encoder_izquierda, cuenta_encoder_derecha;
 
 //Variables sensores pared
 volatile uint8_t    sensor_active, status_flag;
@@ -47,192 +45,26 @@ int main(void)
     inicializar_PWM();                  //Al inicializar el PWM lo que se hace es configurar el TIMER 1
     motores_detener();
 
-
-    cuenta_encoder_izquierda    = 0;
-    cuenta_encoder_derecha      = 0;
+    cuenta_encoder_derecha = 0;
+    cuenta_encoder_izquierda = 0;
 
 	for (;;)
 	{
 
+        motores_avanzar(170, 170);
 
+        _delay_ms(1000);
 
-        //Creo una interrupcion por software
-        //_delay_ms(100);
-        //PORTB |= (1<<PORTB2);
-        //_delay_ms(100);
-        //PORTB &= ~(1<<PORTB2);
+        motores_detener();
 
+        _delay_ms(1000);
 
-//        if(estado_sensor_piso_cen == 1 && (PINA & (1<<PINA2))){
-//
-//            motores_avanzar(170,170);
-//
-//        }
-//        else {
-//
-//            estado_sensor_piso_cen = 0;
-//            motores_detener();
-//
-//        }
+        motores_rotar_der_90_grados();
 
+        motores_detener();
 
+        _delay_ms(1000);
 
-//
-//        //Enviar distancia por puerto serie, funciona OK. Prueba 12/06/13
-//
-//        _delay_ms(1000);
-//
-//        distancia = prueba_rapida_sensor_pared(SENSOR_PARED_CEN);
-//
-//        _delay_ms(100);
-//
-//        while(!UCSRA);
-//        UDR = (uint8_t)((distancia >> 24) & 0x000000FF);
-//
-//         _delay_ms(100);
-//
-//        while(!UCSRA);
-//        UDR = (uint8_t)((distancia >> 16) & 0x000000FF);
-//
-//         _delay_ms(100);
-//
-//        while(!UCSRA);
-//        UDR = (uint8_t)((distancia >> 8) & 0x000000FF);
-//
-//         _delay_ms(100);
-//
-//        while(!UCSRA);
-//        UDR = (uint8_t)((distancia) & 0x000000FF);
-
-
-        //Prueba encoders
-        if(contador_encoder_1++ > MAX_TIME){
-
-            contador_encoder_1 = 0;
-
-            cuenta_encoder_derecha = cuenta_interrupcion_encoder_derecha * 256 + TCNT0;
-
-            while(!UCSRA);
-            UDR = (uint8_t)((cuenta_encoder_derecha >> 24) & 0x000000FF);
-
-            _delay_ms(100);
-
-            while(!UCSRA);
-            UDR = (uint8_t)((cuenta_encoder_derecha >> 16) & 0x000000FF);
-
-            _delay_ms(100);
-
-            while(!UCSRA);
-            UDR = (uint8_t)((cuenta_encoder_derecha >> 8) & 0x000000FF);
-
-            _delay_ms(100);
-
-            while(!UCSRA);
-            UDR = (uint8_t)((cuenta_encoder_derecha) & 0x000000FF);
-
-        }
-
-        if(contador_encoder_2++ > MAX_TIME){
-
-            contador_encoder_2 = 0;
-
-            while(!UCSRA);
-            UDR = (uint8_t)((cuenta_encoder_izquierda >> 24) & 0x000000FF);
-
-            _delay_ms(100);
-
-            while(!UCSRA);
-            UDR = (uint8_t)((cuenta_encoder_izquierda >> 16) & 0x000000FF);
-
-            _delay_ms(100);
-
-            while(!UCSRA);
-            UDR = (uint8_t)((cuenta_encoder_izquierda >> 8) & 0x000000FF);
-
-            _delay_ms(100);
-
-            while(!UCSRA);
-            UDR = (uint8_t)((cuenta_encoder_izquierda) & 0x000000FF);
-
-        }
-
-
-
-//        motores_avanzar(170,170);
-//
-//        _delay_ms(200);
-//
-//        motores_detener();
-//
-//        distancia = prueba_rapida_sensor_pared(SENSOR_PARED_DER);
-//
-//        if(distancia > DISTANCIA_GRANDE){
-//
-//        //Si entro aca es que no tengo pared a la derecha, entonces, giro a la derecha
-//
-//             motores_detener();
-//            _delay_ms(200);
-//            //motores_avanzar(170,170);
-//            //_delay_ms(200);
-//            motores_rotar_der_90_grados();
-//            _delay_ms(50);
-//            motores_detener();
-//            _delay_ms(200);
-//            motores_avanzar(170,170);
-//            _delay_ms(500);
-//             motores_detener();
-//
-//        }
-//
-//        else{
-//
-//            //Si entro aca, es que tengo pared a la derecha
-//
-//            distancia = prueba_rapida_sensor_pared(SENSOR_PARED_CEN);
-//
-//            if(distancia < DISTANCIA_CHICA){
-//
-//                //Si entro aca, tengo pared a la derecha, y tengo pared al frente
-//
-//                motores_detener();
-//                _delay_ms(100);
-//                motores_retroceder(170,170);
-//                _delay_ms(150);
-//                motores_detener();
-//                // motores_avanzar(170,170);
-//                //_delay_ms(200);
-//                motores_rotar_izq_90_grados();
-//                _delay_ms(50);
-//                motores_detener();
-//                _delay_ms(200);
-//
-//                distancia = prueba_rapida_sensor_pared(SENSOR_PARED_CEN);
-//
-//                if(distancia < DISTANCIA_CHICA){
-//
-//                    //Si entro aca, es que tengo pared a la derecha, al frente y a la izquierda.
-//
-//                    motores_detener();
-//                    _delay_ms(100);
-//                    // motores_avanzar(170,170);
-//                    //_delay_ms(200);
-//                    motores_rotar_izq_90_grados();
-//                    _delay_ms(50);
-//                    motores_detener();
-//                    _delay_ms(200);
-//
-//                }
-//
-//                motores_avanzar(170,170);
-//                _delay_ms(500);
-//                motores_detener();
-//
-//            }
-//
-//            else{
-//
-//            }
-//        }
     }
 
 	return 0;
@@ -261,13 +93,6 @@ ISR (USART_RXC_vect){
 }
 
 
-//Interrupción Timer 0
-ISR (TIMER0_OVF_vect)
-{
-    cuenta_interrupcion_encoder_derecha++;
-}
-
-
 //Interrupción Timer 1
 ISR (TIMER1_OVF_vect){
 
@@ -278,13 +103,12 @@ ISR (TIMER1_OVF_vect){
         status_flag = 1;
 }
 
+//Interrupción INT 0
+ISR (INT0_vect)
+{
+    cuenta_encoder_derecha++;
 
-//Interrupción Timer 2
-//ISR (TIMER2_OVF_vect)
-//{
-//    cuenta_encoder_izquierda++;
-//
-//}
+}
 
 //Interrupción INT 1
 ISR (INT1_vect)
@@ -295,42 +119,41 @@ ISR (INT1_vect)
 
 
 //interrupcion sensores de piso
+
+ISR (INT2_vect){
+
+//Averiguamos cual de los tres fue el sensor que detecto un flanco ascendente
+//para ello leemos el PINA={PINA7 PINA6 PINA5 PINA4 PINA3 PINA2 PINA1 PINA0}
+
+
+estado_sensor_piso_cen = 1;
+
 //
-//ISR (INT2_vect){
-//
-////Averiguamos cual de los tres fue el sensor que detecto un flanco ascendente
-////para ello leemos el PINA={PINA7 PINA6 PINA5 PINA4 PINA3 PINA2 PINA1 PINA0}
-//
-//
-//estado_sensor_piso_cen = 1;
-//
-////
-////if (PINA & (1<<PINA0)){
-////    // fue por el sensor izquierdo (tomar medidas en caso seguidor lineas)
-////    estado_sensor_piso_izq=1;
-////    estado_sensor_piso_cen=0;
-////    estado_sensor_piso_der=0;
-////    }
-////else if(PINA & (1<<PINA1)){
-////        //fue por el sensor derecho (tomar medidas en caso seguidor lineas)
-////    estado_sensor_piso_izq=0;
-////    estado_sensor_piso_cen=0;
-////    estado_sensor_piso_der=1;
-////        }
-////else if(PINA & (1<<PINA2)){
-////        //fue por el sensor del centro (tomar medidas en caso seguidor lineas)
-////    estado_sensor_piso_izq=0;
-////    estado_sensor_piso_cen=1;
-////    estado_sensor_piso_der=0;
-////        }
-//
-////falta el sistema anti-rebote que quizas podria ser un  _delay_ms() aca mismo
-//
-////Finalmente hacemos un clear al registro GIFR de interrupcion como se pide en hoja de datos [1].
-//
-//GIFR &= ~(1<<INTF2);
-//
-//}
-//
-//
-//
+//if (PINA & (1<<PINA0)){
+//    // fue por el sensor izquierdo (tomar medidas en caso seguidor lineas)
+//    estado_sensor_piso_izq=1;
+//    estado_sensor_piso_cen=0;
+//    estado_sensor_piso_der=0;
+//    }
+//else if(PINA & (1<<PINA1)){
+//        //fue por el sensor derecho (tomar medidas en caso seguidor lineas)
+//    estado_sensor_piso_izq=0;
+//    estado_sensor_piso_cen=0;
+//    estado_sensor_piso_der=1;
+//        }
+//else if(PINA & (1<<PINA2)){
+//        //fue por el sensor del centro (tomar medidas en caso seguidor lineas)
+//    estado_sensor_piso_izq=0;
+//    estado_sensor_piso_cen=1;
+//    estado_sensor_piso_der=0;
+//        }
+
+//falta el sistema anti-rebote que quizas podria ser un  _delay_ms() aca mismo
+
+//Finalmente hacemos un clear al registro GIFR de interrupcion como se pide en hoja de datos [1].
+
+GIFR &= ~(1<<INTF2);
+
+}
+
+

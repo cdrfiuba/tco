@@ -16,8 +16,7 @@
 
 #include "motores.h"
 
-extern uint32_t     cuenta_encoder_derecha, cuenta_encoder_izquierda, cuenta_motor_celda; //harcodear cuenta_motor_X para obtener numero que de con medida de avance necesaria
-uint32_t            cuenta_motor_derecha, cuenta_motor_izquierda;
+extern volatile uint32_t     cuenta_encoder_derecha, cuenta_encoder_izquierda;
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -80,63 +79,77 @@ void motores_detener(void){
 
 void motores_rotar_der_90_grados(void){
 
+    uint8_t flag_encoder_derecha = FALSE, flag_encoder_izquierda = FALSE, flag_fin_rotacion = FALSE;
+    uint32_t cuenta_inicial_encoder_derecho     =   cuenta_encoder_derecha;
+    uint32_t cuenta_inicial_encoder_izquierdo   =   cuenta_encoder_izquierda;
 
-
-    //hacer cuenta para convertir grados en cantidad de eventos encoder
     PORTD &= ~MOTOR_DER_DIRECTION; 	//Pongo en bajo el pin DIRECTION del motor 1
     PORTB &= ~MOTOR_DER_BRAKE;	    //Pongo en bajo el pin BRAKE del motor 1
 
     PORTD &= ~MOTOR_IZQ_DIRECTION; 	//Pongo en bajo el pin DIRECTION del motor 2
     PORTB &= ~MOTOR_IZQ_BRAKE;	    //Pongo en bajo el pin BRAKE del motor 2
 
-    //Agregar cuando detener la rotación
+    while(flag_fin_rotacion == FALSE){
 
-    _delay_ms(300);
+        if(cuenta_encoder_derecha >= (cuenta_inicial_encoder_derecho + 240)){
 
+            PORTB |= MOTOR_DER_BRAKE;	//Pongo en alto el pin BRAKE del motor 1
 
+            flag_encoder_derecha = TRUE;
+
+        }
+
+        if(cuenta_encoder_izquierda >= (cuenta_inicial_encoder_izquierdo + 200)){
+
+            PORTB |= MOTOR_IZQ_BRAKE;	//Pongo en alto el pin BRAKE del motor 2
+
+            flag_encoder_izquierda = TRUE;
+
+        }
+
+        if((flag_encoder_derecha == TRUE) &&(flag_encoder_izquierda == TRUE))
+            flag_fin_rotacion = TRUE;
+
+    }
 }
 
 
 void motores_rotar_izq_90_grados(void){
 
+    uint8_t flag_encoder_derecha = FALSE, flag_encoder_izquierda = FALSE, flag_fin_rotacion = FALSE;
+    uint32_t cuenta_inicial_encoder_derecho     =   cuenta_encoder_derecha;
+    uint32_t cuenta_inicial_encoder_izquierdo   =   cuenta_encoder_izquierda;
+
     PORTD |= MOTOR_DER_DIRECTION; 	//Pongo en alto el pin DIRECTION del motor 1
     PORTB &= ~MOTOR_DER_BRAKE;	    //Pongo en bajo el pin BRAKE del motor 1
-
 
     PORTD |= MOTOR_IZQ_DIRECTION; 	//Pongo en alto el pin DIRECTION del motor 2
     PORTB &= ~MOTOR_IZQ_BRAKE;	    //Pongo en bajo el pin BRAKE del motor 2
 
-    _delay_ms(300);
+
+    while(flag_fin_rotacion == FALSE){
+
+        if(cuenta_encoder_derecha >= (cuenta_inicial_encoder_derecho + 200)){
+
+            PORTB |= MOTOR_DER_BRAKE;	//Pongo en alto el pin BRAKE del motor 1
+
+            flag_encoder_derecha = TRUE;
+
+        }
+
+        if(cuenta_encoder_izquierda >= (cuenta_inicial_encoder_izquierdo + 240)){
+
+            PORTB |= MOTOR_IZQ_BRAKE;	//Pongo en alto el pin BRAKE del motor 2
+
+            flag_encoder_izquierda = TRUE;
+
+        }
+
+        if((flag_encoder_derecha == TRUE) &&(flag_encoder_izquierda == TRUE))
+            flag_fin_rotacion = TRUE;
+
+    }
 }
-
-
-
-//////////////////////////////////////////////////////////////////////////////////////////////////
-
-/*
-
-void motores_rotar_izquierda(unsigned char grados){
-
-	//hacer cuenta para convertir grados en cantidad de eventos encoder
-
-	//El motor derecho avanza.
-	PORTD |= MOTOR_DER_DIRECTION; 	//Pongo en alto el pin DIRECTION del motor 1
-	PORTB &= ~MOTOR_DER_BRAKE;	//Pongo en bajo el pin BRAKE del motor 1
-
-	//El motor izquierdo retrocede
-	PORTD &= ~MOTOR_IZQ_DIRECTION; 	//Pongo en bajo el pin DIRECTION del motor 2
-	PORTB &= ~MOTOR_IZQ_BRAKE;	//Pongo en bajo el pin BRAKE del motor 2
-
-	while(cuenta_motor_izquierda != grados)
-		cuenta_motor_izquierda 	= cuenta_encoder_izquierda   * 256 + TCNT0;
-
-
-}*/
-
-
-//////////////////////////////////////////////////////////////////////////////////////////////////
-
-
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////

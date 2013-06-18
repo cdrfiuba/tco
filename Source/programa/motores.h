@@ -27,6 +27,9 @@
 #define MOTOR_DER_DIRECTION	(1<<PD7)
 #define MOTOR_IZQ_DIRECTION	(1<<PD6)
 
+#define TRUE    1
+#define FALSE   0
+
 #endif /* MOTORES_H_ */
 
 
@@ -35,7 +38,7 @@ void inicializar_puertos_motores	(void);
 void motores_avanzar			    (uint8_t, uint8_t);
 void motores_retroceder			    (uint8_t, uint8_t);
 void motores_detener			    (void);
-void motores_rotar_der_90_grados    (void);
+void motores_rotar_der_90_grados    ();
 void motores_rotar_izq_90_grados    (void);
 void girar_poquito_izquierda        (void);
 void girar_poquito_derecha          (void);
