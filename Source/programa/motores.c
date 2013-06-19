@@ -52,16 +52,32 @@ void motores_retroceder(uint8_t velocidad_izquierda, uint8_t velocidad_derecha){
 
 void motores_avanzar(uint8_t velocidad_izquierda, uint8_t velocidad_derecha){
 
-	//Avance sensito 2: PWM H - Direction L - Brake L
+	uint8_t  flag_fin_avance = FALSE;
+    uint32_t cuenta_inicial_encoder_derecho     =   cuenta_encoder_derecha;
+    uint32_t cuenta_inicial_encoder_izquierdo   =   cuenta_encoder_izquierda;
 
-	PORTD &= ~MOTOR_DER_DIRECTION; 	//Pongo en bajo el pin DIRECTION del motor 1
+    variar_PWM(velocidad_izquierda, velocidad_derecha);
+
+    PORTD &= ~MOTOR_DER_DIRECTION; 	//Pongo en bajo el pin DIRECTION del motor 1
 	PORTB &= ~MOTOR_DER_BRAKE;	    //Pongo en bajo el pin BRAKE del motor 1
 
 	PORTD |= MOTOR_IZQ_DIRECTION; 	//Pongo en alto el pin DIRECTION del motor 2
 	PORTB &= ~MOTOR_IZQ_BRAKE;	    //Pongo en bajo el pin BRAKE del motor 2
 
+    while(flag_fin_avance == FALSE){
 
-	variar_PWM(velocidad_izquierda, velocidad_derecha);
+        if(cuenta_encoder_izquierda >= (cuenta_inicial_encoder_izquierdo + 600)){
+
+            if(cuenta_encoder_derecha >= (cuenta_inicial_encoder_derecho + 600)){
+
+                PORTB |= MOTOR_DER_BRAKE;	//Pongo en alto el pin BRAKE del motor 1
+                PORTB |= MOTOR_IZQ_BRAKE;	//Pongo en alto el pin BRAKE del motor 2
+
+                flag_fin_avance = TRUE;
+
+            }
+        }
+    }
 }
 
 
