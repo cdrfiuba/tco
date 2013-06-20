@@ -54,6 +54,8 @@ int main(void)
 
             motores_avanzar(170,170, 100);
 
+            motores_corregir_rumbo;
+
             distancia = prueba_rapida_sensor_pared(SENSOR_PARED_DER);
 
             if(distancia > DISTANCIA_GRANDE){

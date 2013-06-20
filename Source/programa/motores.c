@@ -182,5 +182,71 @@ void motores_rotar_izq_90_grados(void){
 }
 
 
+void motores_corregir_rumbo (void){
+
+    uint32_t distancia;
+    uint8_t  flag_fin_rotacion = FALSE;
+    uint32_t cuenta_inicial_encoder_derecho     =   cuenta_encoder_derecha;
+    uint32_t cuenta_inicial_encoder_izquierdo   =   cuenta_encoder_izquierda;
+
+
+    distancia = prueba_rapida_sensor_pared(SENSOR_PARED_DER);
+
+    if(distancia < DISTANCIA_CHICA){
+
+        variar_PWM(210, 210);
+
+        PORTD |= MOTOR_DER_DIRECTION; 	//Pongo en alto el pin DIRECTION del motor 1
+        PORTB &= ~MOTOR_DER_BRAKE;	    //Pongo en bajo el pin BRAKE del motor 1
+
+        PORTD |= MOTOR_IZQ_DIRECTION; 	//Pongo en alto el pin DIRECTION del motor 2
+        PORTB &= ~MOTOR_IZQ_BRAKE;	    //Pongo en bajo el pin BRAKE del motor 2
+
+        while(flag_fin_rotacion == FALSE){
+
+            if(cuenta_encoder_derecha >= (cuenta_inicial_encoder_derecho + 50)){
+
+                if(cuenta_encoder_izquierda >= (cuenta_inicial_encoder_izquierdo + 50)){
+
+                    //Antes tenia 300
+
+                    PORTB |= MOTOR_DER_BRAKE;	//Pongo en alto el pin BRAKE del motor 1
+                    PORTB |= MOTOR_IZQ_BRAKE;	//Pongo en alto el pin BRAKE del motor 2
+
+                    flag_fin_rotacion = TRUE;
+
+                }
+            }
+        }
+    }
+
+    if(distancia > DISTANCIA_CHICA){
+
+        variar_PWM(210, 210);
+
+        PORTD &= ~MOTOR_DER_DIRECTION; 	//Pongo en bajo el pin DIRECTION del motor 1
+        PORTB &= ~MOTOR_DER_BRAKE;	    //Pongo en bajo el pin BRAKE del motor 1
+
+        PORTD &= ~MOTOR_IZQ_DIRECTION; 	//Pongo en bajo el pin DIRECTION del motor 2
+        PORTB &= ~MOTOR_IZQ_BRAKE;	    //Pongo en bajo el pin BRAKE del motor 2
+
+        while(flag_fin_rotacion == FALSE){
+
+            if(cuenta_encoder_derecha >= (cuenta_inicial_encoder_derecho + 50)){
+
+                if(cuenta_encoder_izquierda >= (cuenta_inicial_encoder_izquierdo + 50)){
+
+                    PORTB |= MOTOR_DER_BRAKE;	//Pongo en alto el pin BRAKE del motor 1
+                    PORTB |= MOTOR_IZQ_BRAKE;	//Pongo en alto el pin BRAKE del motor 2
+
+                    flag_fin_rotacion = TRUE;
+
+                }
+            }
+        }
+    }
+}
+
+
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
