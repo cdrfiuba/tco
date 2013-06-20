@@ -1,4 +1,4 @@
-Cmp-Mod V01 Created by CvPcb (2012-apr-16-27)-stable date = mar 11 jun 2013 22:27:38 ART
+Cmp-Mod V01 Created by CvPcb (2012-apr-16-27)-stable date = dom 26 may 2013 12:02:43 ART
 
 BeginCmp
 TimeStamp = /51A21B26;
@@ -26,6 +26,62 @@ TimeStamp = /51A21B77;
 Reference = C25;
 ValeurCmp = 100uF;
 IdModule  = C1.5V8V;
+EndCmp
+
+BeginCmp
+TimeStamp = /51A0EECF;
+Reference = D1;
+ValeurCmp = DIODE;
+IdModule  = D4;
+EndCmp
+
+BeginCmp
+TimeStamp = /51A0EED1;
+Reference = D2;
+ValeurCmp = DIODE;
+IdModule  = D4;
+EndCmp
+
+BeginCmp
+TimeStamp = /51A0EED4;
+Reference = D3;
+ValeurCmp = DIODE;
+IdModule  = D4;
+EndCmp
+
+BeginCmp
+TimeStamp = /51A0EEDE;
+Reference = D4;
+ValeurCmp = DIODE;
+IdModule  = D4;
+EndCmp
+
+BeginCmp
+TimeStamp = /51A0EEDD;
+Reference = D5;
+ValeurCmp = DIODE;
+IdModule  = D4;
+EndCmp
+
+BeginCmp
+TimeStamp = /51A0EEDC;
+Reference = D6;
+ValeurCmp = DIODE;
+IdModule  = D4;
+EndCmp
+
+BeginCmp
+TimeStamp = /51A21C78;
+Reference = D7;
+ValeurCmp = LED;
+IdModule  = LED-5MM;
+EndCmp
+
+BeginCmp
+TimeStamp = /51A21D2E;
+Reference = D8;
+ValeurCmp = LED;
+IdModule  = LED-5MM;
 EndCmp
 
 BeginCmp
@@ -71,10 +127,17 @@ IdModule  = SIL-4;
 EndCmp
 
 BeginCmp
-TimeStamp = /51B77760;
+TimeStamp = /51A0E7A7;
 Reference = P17;
-ValeurCmp = CONN_5X2;
+ValeurCmp = CONN_8X2;
 IdModule  = pin_array_8x2;
+EndCmp
+
+BeginCmp
+TimeStamp = /51A0E9BD;
+Reference = P18;
+ValeurCmp = CONN_5X2;
+IdModule  = PIN_ARRAY_5x2;
 EndCmp
 
 BeginCmp
@@ -92,6 +155,20 @@ IdModule  = bornier2;
 EndCmp
 
 BeginCmp
+TimeStamp = /51A0EEF3;
+Reference = R8;
+ValeurCmp = R;
+IdModule  = R4;
+EndCmp
+
+BeginCmp
+TimeStamp = /51A21C7E;
+Reference = R9;
+ValeurCmp = R;
+IdModule  = R4;
+EndCmp
+
+BeginCmp
 TimeStamp = /51A0F356;
 Reference = R10;
 ValeurCmp = 732;
@@ -102,6 +179,13 @@ BeginCmp
 TimeStamp = /51A21B64;
 Reference = R11;
 ValeurCmp = 21_k;
+IdModule  = R4;
+EndCmp
+
+BeginCmp
+TimeStamp = /51A21D2D;
+Reference = R12;
+ValeurCmp = R;
 IdModule  = R4;
 EndCmp
 

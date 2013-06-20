@@ -1,4 +1,4 @@
-# EESchema Netlist Version 1.1 created  mar 11 jun 2013 22:27:38 ART
+# EESchema Netlist Version 1.1 created  dom 26 may 2013 12:02:43 ART
 (
  ( /51A21B26 C2 C20 2,2uF
   ( 1 GND )
@@ -16,46 +16,96 @@
   ( 1 +5V )
   ( 2 GND )
  )
+ ( /51A0EECF D4 D1 DIODE
+  ( 1 /Output_sensor_pared_derecho )
+  ( 2 /Interrupción_sensores )
+ )
+ ( /51A0EED1 D4 D2 DIODE
+  ( 1 /Output_sensor_pared_centro )
+  ( 2 /Interrupción_sensores )
+ )
+ ( /51A0EED4 D4 D3 DIODE
+  ( 1 /Output_sensor_pared_izquierda )
+  ( 2 /Interrupción_sensores )
+ )
+ ( /51A0EEDE D4 D4 DIODE
+  ( 1 /PA2_-_Sensor_piso_derecha )
+  ( 2 /Interrupción_sensores )
+ )
+ ( /51A0EEDD D4 D5 DIODE
+  ( 1 /PA1_-_Sensor_piso_Centro )
+  ( 2 /Interrupción_sensores )
+ )
+ ( /51A0EEDC D4 D6 DIODE
+  ( 1 /PA0_-_Sensor_piso_izquierda )
+  ( 2 /Interrupción_sensores )
+ )
+ ( /51A21C78 LED-5MM D7 LED
+  ( 1 N-000012 )
+  ( 2 N-000013 )
+ )
+ ( /51A21D2E LED-5MM D8 LED
+  ( 1 N-000028 )
+  ( 2 N-000014 )
+ )
  ( /51A0D0E7 molex_2_recto P11 CONN_2
-  ( 1 N-000016 )
-  ( 2 N-000017 )
+  ( 1 N-000022 )
+  ( 2 N-000020 )
  )
  ( /51A0D0ED molex_2_recto P12 CONN_2
-  ( 1 N-000017 )
-  ( 2 N-000015 )
+  ( 1 N-000020 )
+  ( 2 N-000021 )
  )
  ( /51A0D0F1 molex_2_recto P13 CONN_2
-  ( 1 N-000015 )
+  ( 1 N-000021 )
   ( 2 GND )
  )
  ( /51A0DBA8 SIL-4 P14 CONN_4
-  ( 1 /Encendido_Sens_Pared_Der )
-  ( 2 /Trigger_Sens_Pared_Der )
-  ( 3 /Echo_Sens_Pared_Der )
+  ( 1 +5V )
+  ( 2 /PA4_-_Sensor_pared_derecha )
+  ( 3 /Output_sensor_pared_derecho )
   ( 4 GND )
  )
  ( /51A0DC7B SIL-4 P15 CONN_4
-  ( 1 /Encendido_Sens_Pared_Cen )
-  ( 2 /Trigger_Sens_Pared_Cen )
-  ( 3 /Echo_Sens_Pared_Cen )
+  ( 1 +5V )
+  ( 2 /PA5_-_Sensor_pared_centro )
+  ( 3 /Output_sensor_pared_centro )
   ( 4 GND )
  )
  ( /51A0DC82 SIL-4 P16 CONN_4
-  ( 1 /Encendido_Sens_Pared_Izq )
-  ( 2 /Trigger_Sens_Pared_Izq )
-  ( 3 /Echo_Sens_Pared_Izq )
+  ( 1 +5V )
+  ( 2 /PA3_-_Sensor_pared_izquierda )
+  ( 3 /Output_sensor_pared_izquierda )
   ( 4 GND )
  )
- ( /51B77760 pin_array_8x2 P17 CONN_5X2
-  ( 1 /Encendido_Sens_Pared_Cen )
-  ( 2 /Encendido_Sens_Pared_Der )
-  ( 3 /Trigger_Sens_Pared_Cen )
-  ( 4 /Trigger_Sens_Pared_Der )
-  ( 5 /Echo_Sens_Pared_Cen )
-  ( 6 /Echo_Sens_Pared_Der )
-  ( 7 /Encendido_Sens_Pared_Izq )
-  ( 8 /Echo_Sens_Pared_Izq )
-  ( 9 /Trigger_Sens_Pared_Izq )
+ ( /51A0E7A7 pin_array_8x2 P17 CONN_8X2
+  ( 1 /PA2_-_Sensor_piso_derecha )
+  ( 2 /PA5_-_Sensor_pared_centro )
+  ( 3 /Vcc_sensor_piso_derecha )
+  ( 4 ? )
+  ( 5 /PA0_-_Sensor_piso_izquierda )
+  ( 6 /PA4_-_Sensor_pared_derecha )
+  ( 7 /Vcc_sensor_piso_izquierda )
+  ( 8 N-000028 )
+  ( 9 /PA1_-_Sensor_piso_Centro )
+  ( 10 /PA3_-_Sensor_pared_izquierda )
+  ( 11 /Vcc_sensor_piso_centro )
+  ( 12 ? )
+  ( 13 /Interrupción_sensores )
+  ( 14 N-000012 )
+  ( 15 /GND_LED_sensores )
+  ( 16 GND )
+ )
+ ( /51A0E9BD PIN_ARRAY_5x2 P18 CONN_5X2
+  ( 1 /PA2_-_Sensor_piso_derecha )
+  ( 2 /Vcc_sensor_piso_derecha )
+  ( 3 /PA0_-_Sensor_piso_izquierda )
+  ( 4 /Vcc_sensor_piso_izquierda )
+  ( 5 /PA1_-_Sensor_piso_Centro )
+  ( 6 /Vcc_sensor_piso_centro )
+  ( 7 ? )
+  ( 8 /GND_LED_sensores )
+  ( 9 +5V )
   ( 10 GND )
  )
  ( /51A1075C bornier2 P19 CONN_2
@@ -66,31 +116,43 @@
   ( 1 +12V )
   ( 2 GND )
  )
+ ( /51A0EEF3 R4 R8 R
+  ( 1 /Interrupción_sensores )
+  ( 2 GND )
+ )
+ ( /51A21C7E R4 R9 R
+  ( 1 N-000013 )
+  ( 2 GND )
+ )
  ( /51A0F356 R4 R10 732
   ( 1 GND )
-  ( 2 N-000020 )
+  ( 2 N-000002 )
  )
  ( /51A21B64 R4 R11 21_k
-  ( 1 N-000002 )
+  ( 1 N-000015 )
+  ( 2 GND )
+ )
+ ( /51A21D2D R4 R12 R
+  ( 1 N-000014 )
   ( 2 GND )
  )
  ( /51A0D10A SW_SPDT SW3 SWITCH_INV
   ( 1 ? )
-  ( 2 N-000016 )
+  ( 2 N-000022 )
   ( 3 +BATT )
  )
  ( /51A21AE7 PTN78000WAS U2 PTN78000W
   ( 1 GND )
   ( 2 +BATT )
   ( 3 ? )
-  ( 4 N-000002 )
+  ( 4 N-000015 )
   ( 5 +5V )
  )
  ( /51A0FEA3 PTN78020W U3 PTN78020W
   ( 1 GND )
   ( 2 +BATT )
   ( 3 ? )
-  ( 4 N-000020 )
+  ( 4 N-000002 )
   ( 5 +12V )
   ( 6 +12V )
   ( 7 GND )
@@ -116,6 +178,62 @@ $component C25
  CP*
  SM*
 $endlist
+$component D1
+ D?
+ S*
+$endlist
+$component D2
+ D?
+ S*
+$endlist
+$component D3
+ D?
+ S*
+$endlist
+$component D4
+ D?
+ S*
+$endlist
+$component D5
+ D?
+ S*
+$endlist
+$component D6
+ D?
+ S*
+$endlist
+$component D7
+ LED-3MM
+ LED-5MM
+ LED-10MM
+ LED-0603
+ LED-0805
+ LED-1206
+ LEDV
+$endlist
+$component D8
+ LED-3MM
+ LED-5MM
+ LED-10MM
+ LED-0603
+ LED-0805
+ LED-1206
+ LEDV
+$endlist
+$component R8
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$component R9
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
 $component R10
  R?
  SM0603
@@ -124,6 +242,13 @@ $component R10
  SM1206
 $endlist
 $component R11
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
+$endlist
+$component R12
  R?
  SM0603
  SM0805

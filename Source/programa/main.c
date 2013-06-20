@@ -51,17 +51,27 @@ int main(void)
 
 	for (;;){
 
+        if(estado_sensor_piso_cen == 1 && (PINA & (1<<PINA2))){
+
+            //Si entro acá es que tengo el piso de color blanco
+
+        }
+
+        else {
+
+            //Si entro acá es que tengo el piso de color negro
 
             motores_avanzar(170,170, 100);
 
-            motores_corregir_rumbo;
+            motores_corregir_rumbo();
 
             distancia = prueba_rapida_sensor_pared(SENSOR_PARED_DER);
 
             if(distancia > DISTANCIA_GRANDE){
-            //Si entro aca es que no tengo pared a la derecha, entonces, giro a la derecha
 
-                 motores_detener();
+                //Si entro aca es que no tengo pared a la derecha, entonces, giro a la derecha
+
+                motores_detener();
                 _delay_ms(200);
                 //motores_avanzar(170,170);
                 //_delay_ms(200);
@@ -75,14 +85,11 @@ int main(void)
             }
 
             else{
-
                 //Si entro aca, es que tengo pared a la derecha
 
                 distancia = prueba_rapida_sensor_pared(SENSOR_PARED_CEN);
 
                 if(distancia < DISTANCIA_CHICA){
-
-
 
                     //Si entro aca, tengo pared a la derecha, y tengo pared al frente
 
@@ -123,10 +130,8 @@ int main(void)
                 else{
 
                 }
-
-
             }
-
+        }
     }
 
 	return 0;
