@@ -52,26 +52,20 @@ int main(void)
 	for (;;){
 
 
-            motores_avanzar(170,170, 100);
+            motores_avanzar(170,170, 50);
 
-            motores_corregir_rumbo;
+            motores_corregir_rumbo();
 
             distancia = prueba_rapida_sensor_pared(SENSOR_PARED_DER);
+
+            enviar_dato(distancia);
 
             if(distancia > DISTANCIA_GRANDE){
             //Si entro aca es que no tengo pared a la derecha, entonces, giro a la derecha
 
-                 motores_detener();
-                _delay_ms(200);
-                //motores_avanzar(170,170);
-                //_delay_ms(200);
+                motores_avanzar(170,170, 150);
                 motores_rotar_der_90_grados();
-                _delay_ms(50);
-                motores_detener();
-                _delay_ms(200);
-                motores_avanzar(170,170, 200);
-                motores_avanzar(170,170, 200);
-                _delay_ms(200);
+                motores_avanzar(170,170, 400);
             }
 
             else{
@@ -82,21 +76,8 @@ int main(void)
 
                 if(distancia < DISTANCIA_CHICA){
 
-
-
                     //Si entro aca, tengo pared a la derecha, y tengo pared al frente
-
-                    motores_detener();
-                    _delay_ms(100);
-                    motores_retroceder(170,170);
-                    _delay_ms(150);
-                    motores_detener();
-                    // motores_avanzar(170,170);
-                    //_delay_ms(200);
                     motores_rotar_izq_90_grados();
-                    _delay_ms(50);
-                    motores_detener();
-                    _delay_ms(200);
 
                     distancia = prueba_rapida_sensor_pared(SENSOR_PARED_CEN);
 
@@ -104,20 +85,10 @@ int main(void)
 
                         //Si entro aca, es que tengo pared a la derecha, al frente y a la izquierda.
 
-                        motores_detener();
-                        _delay_ms(100);
-                        // motores_avanzar(170,170);
-                        //_delay_ms(200);
                         motores_rotar_izq_90_grados();
-                        _delay_ms(50);
-                        motores_detener();
-                        _delay_ms(200);
-
                     }
 
-                    motores_avanzar(170,170, 200);
-                    motores_avanzar(170,170, 200);
-                    _delay_ms(200);
+                    motores_avanzar(170,170, 400);
                 }
 
                 else{
@@ -215,6 +186,23 @@ estado_sensor_piso_cen = 1;
 //Finalmente hacemos un clear al registro GIFR de interrupcion como se pide en hoja de datos [1].
 
 GIFR &= ~(1<<INTF2);
+
+}
+
+
+void enviar_dato (uint32_t dato){
+
+        while(!UCSRA);
+        UDR = (uint8_t)((dato >> 24) & 0x000000FF);
+
+        while(!UCSRA);
+        UDR = (uint8_t)((dato >> 16) & 0x000000FF);
+
+        while(!UCSRA);
+        UDR = (uint8_t)((dato >> 8) & 0x000000FF);
+
+        while(!UCSRA);
+        UDR = (uint8_t)((dato) & 0x000000FF);
 
 }
 

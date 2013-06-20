@@ -43,3 +43,4 @@
 
 //Definición de prototipos
 void usart_init(void);
+void enviar_dato (uint32_t);

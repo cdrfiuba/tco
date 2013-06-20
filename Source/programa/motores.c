@@ -46,17 +46,62 @@ void motores_detener(void){
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
 
-void motores_retroceder(uint8_t velocidad_izquierda, uint8_t velocidad_derecha){
+void motores_retroceder(uint8_t velocidad_izquierda, uint8_t velocidad_derecha, uint32_t cantidad_cuentas){
 
 	//Avance sentido 1: PWM H - Direction H - Brake L
+    void motores_avanzar(uint8_t velocidad_izquierda, uint8_t velocidad_derecha, uint32_t cantidad_cuentas){
 
-	PORTD |= MOTOR_DER_DIRECTION; 	//Pongo en alto el pin DIRECTION del motor 1
+	uint8_t  flag_fin_avance = FALSE;
+    uint32_t cuenta_encoder_derecha_anterior;
+
+    cuenta_encoder_derecha = 0;
+    cuenta_encoder_izquierda = 0;
+    cuenta_encoder_derecha_anterior = 0;
+
+    variar_PWM(velocidad_izquierda, velocidad_derecha);
+
+    PORTD |= MOTOR_DER_DIRECTION; 	//Pongo en alto el pin DIRECTION del motor 1
 	PORTB &= ~MOTOR_DER_BRAKE;	    //Pongo en bajo el pin BRAKE del motor 1
 
 	PORTD &= ~MOTOR_IZQ_DIRECTION; 	//Pongo en bajo el pin DIRECTION del motor 2
 	PORTB &= ~MOTOR_IZQ_BRAKE;	    //Pongo en bajo el pin BRAKE del motor 2
 
-    variar_PWM(velocidad_izquierda, velocidad_derecha);
+
+
+    while(flag_fin_avance == FALSE){
+
+        if((cuenta_encoder_derecha_anterior + 35) >= cuenta_encoder_derecha){
+
+            cuenta_encoder_derecha_anterior = cuenta_encoder_derecha;
+
+            if(cuenta_encoder_derecha < cuenta_encoder_izquierda){
+
+                if(velocidad_derecha < 255)
+                    variar_PWM(velocidad_izquierda, velocidad_derecha += 5);
+
+                }
+
+            if(cuenta_encoder_derecha > cuenta_encoder_izquierda){
+
+                if(velocidad_derecha > 127)
+                    variar_PWM(velocidad_izquierda, velocidad_derecha -= 5);
+
+            }
+        }
+
+        if(cantidad_cuentas < cuenta_encoder_derecha){
+
+            PORTB |= MOTOR_DER_BRAKE;	//Pongo en alto el pin BRAKE del motor 1
+            PORTB |= MOTOR_IZQ_BRAKE;	//Pongo en alto el pin BRAKE del motor 2
+
+
+            flag_fin_avance = TRUE;
+
+        }
+    }
+}
+
+
 
 }
 
@@ -134,9 +179,9 @@ void motores_rotar_der_90_grados(void){
 
     while(flag_fin_rotacion == FALSE){
 
-        if(cuenta_encoder_derecha >= (cuenta_inicial_encoder_derecho + 320)){
+        if(cuenta_encoder_derecha >= (cuenta_inicial_encoder_derecho + 350)){
 
-            if(cuenta_encoder_izquierda >= (cuenta_inicial_encoder_izquierdo + 320)){
+            if(cuenta_encoder_izquierda >= (cuenta_inicial_encoder_izquierdo + 350)){
 
                 PORTB |= MOTOR_DER_BRAKE;	//Pongo en alto el pin BRAKE del motor 1
                 PORTB |= MOTOR_IZQ_BRAKE;	//Pongo en alto el pin BRAKE del motor 2
@@ -165,9 +210,9 @@ void motores_rotar_izq_90_grados(void){
 
     while(flag_fin_rotacion == FALSE){
 
-        if(cuenta_encoder_derecha >= (cuenta_inicial_encoder_derecho + 320)){
+        if(cuenta_encoder_derecha >= (cuenta_inicial_encoder_derecho + 375)){
 
-            if(cuenta_encoder_izquierda >= (cuenta_inicial_encoder_izquierdo + 320)){
+            if(cuenta_encoder_izquierda >= (cuenta_inicial_encoder_izquierdo + 375)){
 
                 //Antes tenia 300
 
@@ -204,9 +249,9 @@ void motores_corregir_rumbo (void){
 
         while(flag_fin_rotacion == FALSE){
 
-            if(cuenta_encoder_derecha >= (cuenta_inicial_encoder_derecho + 50)){
+            if(cuenta_encoder_derecha >= (cuenta_inicial_encoder_derecho + 25)){
 
-                if(cuenta_encoder_izquierda >= (cuenta_inicial_encoder_izquierdo + 50)){
+                if(cuenta_encoder_izquierda >= (cuenta_inicial_encoder_izquierdo + 25)){
 
                     //Antes tenia 300
 
@@ -232,9 +277,9 @@ void motores_corregir_rumbo (void){
 
         while(flag_fin_rotacion == FALSE){
 
-            if(cuenta_encoder_derecha >= (cuenta_inicial_encoder_derecho + 50)){
+            if(cuenta_encoder_derecha >= (cuenta_inicial_encoder_derecho + 25)){
 
-                if(cuenta_encoder_izquierda >= (cuenta_inicial_encoder_izquierdo + 50)){
+                if(cuenta_encoder_izquierda >= (cuenta_inicial_encoder_izquierdo + 25)){
 
                     PORTB |= MOTOR_DER_BRAKE;	//Pongo en alto el pin BRAKE del motor 1
                     PORTB |= MOTOR_IZQ_BRAKE;	//Pongo en alto el pin BRAKE del motor 2
