@@ -35,7 +35,7 @@
 
 //Definición de prototipos
 void inicializar_puertos_motores	(void);
-void motores_avanzar			    (uint8_t, uint8_t);
+void motores_avanzar			    (uint8_t, uint8_t, uint32_t);
 void motores_retroceder			    (uint8_t, uint8_t);
 void motores_detener			    (void);
 void motores_rotar_der_90_grados    ();
