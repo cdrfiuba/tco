@@ -23,11 +23,24 @@ extern volatile uint32_t     cuenta_encoder_derecha, cuenta_encoder_izquierda;
 void inicializar_puertos_motores(void){
 
 	//Configuro pines como salida
-	DDRB |= MOTOR_DER_BRAKE;
-	DDRB |= MOTOR_IZQ_BRAKE;
-
 	DDRD |= MOTOR_DER_DIRECTION;
-	DDRD |= MOTOR_IZQ_DIRECTION;
+	DDRB |= MOTOR_DER_BRAKE;
+
+	DDRB |= MOTOR_IZQ_BRAKE;
+    DDRD |= MOTOR_IZQ_DIRECTION;
+
+    //Detengo los motores una vez que inicializo los puertos.
+    motores_detener();
+}
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////
+
+void motores_detener(void){
+
+	//Freno: poner brake en alto
+	PORTB |= MOTOR_DER_BRAKE;	//Pongo en alto el pin BRAKE del motor 1
+	PORTB |= MOTOR_IZQ_BRAKE;	//Pongo en alto el pin BRAKE del motor 2
 }
 
 
@@ -55,6 +68,7 @@ void motores_avanzar(uint8_t velocidad_izquierda, uint8_t velocidad_derecha){
 	uint8_t  flag_fin_avance = FALSE;
     uint32_t cuenta_inicial_encoder_derecho     =   cuenta_encoder_derecha;
     uint32_t cuenta_inicial_encoder_izquierdo   =   cuenta_encoder_izquierda;
+    uint32_t cuenta_encoder_derecha_anterior;
 
     variar_PWM(velocidad_izquierda, velocidad_derecha);
 
@@ -64,31 +78,50 @@ void motores_avanzar(uint8_t velocidad_izquierda, uint8_t velocidad_derecha){
 	PORTD |= MOTOR_IZQ_DIRECTION; 	//Pongo en alto el pin DIRECTION del motor 2
 	PORTB &= ~MOTOR_IZQ_BRAKE;	    //Pongo en bajo el pin BRAKE del motor 2
 
+    cuenta_encoder_derecha = 0;
+    cuenta_encoder_izquierda = 0;
+    cuenta_encoder_derecha_anterior = 0;
+
     while(flag_fin_avance == FALSE){
 
-        if(cuenta_encoder_izquierda >= (cuenta_inicial_encoder_izquierdo + 600)){
+        if((cuenta_encoder_derecha_anterior + 100) >= cuenta_encoder_derecha){
 
-            if(cuenta_encoder_derecha >= (cuenta_inicial_encoder_derecho + 600)){
+            cuenta_encoder_derecha_anterior = cuenta_encoder_derecha;
 
-                PORTB |= MOTOR_DER_BRAKE;	//Pongo en alto el pin BRAKE del motor 1
-                PORTB |= MOTOR_IZQ_BRAKE;	//Pongo en alto el pin BRAKE del motor 2
+            if(cuenta_encoder_derecha < cuenta_encoder_izquierda){
 
-                flag_fin_avance = TRUE;
+                if(velocidad_derecha < 255)
+                    variar_PWM(velocidad_izquierda, velocidad_derecha++);
 
-            }
+                }
+
+            if(cuenta_encoder_derecha > cuenta_encoder_izquierda){
+
+                if(velocidad_derecha > 127)
+                    variar_PWM(velocidad_izquierda, velocidad_derecha--);
+
+                }
+
+//            else
+//                variar_PWM(velocidad_izquierda, velocidad_derecha);
+
         }
+
     }
-}
 
+//        if(cuenta_encoder_izquierda >= (cuenta_inicial_encoder_izquierdo + 10000)){
+//
+//            if(cuenta_encoder_derecha >= (cuenta_inicial_encoder_derecho + 10000)){
+//
+//                PORTB |= MOTOR_DER_BRAKE;	//Pongo en alto el pin BRAKE del motor 1
+//                PORTB |= MOTOR_IZQ_BRAKE;	//Pongo en alto el pin BRAKE del motor 2
+//
+//                flag_fin_avance = TRUE;
+//
+//            }
+//        }
+    }
 
-//////////////////////////////////////////////////////////////////////////////////////////////////
-
-void motores_detener(void){
-
-	//Freno: poner brake en alto
-	PORTB |= MOTOR_DER_BRAKE;	//Pongo en alto el pin BRAKE del motor 1
-	PORTB |= MOTOR_IZQ_BRAKE;	//Pongo en alto el pin BRAKE del motor 2
-}
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -155,6 +188,7 @@ void motores_rotar_izq_90_grados(void){
         }
     }
 }
+
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////////
