@@ -186,15 +186,41 @@ void motores_corregir_rumbo (void){
 
     uint32_t distancia;
     uint8_t  flag_fin_rotacion = FALSE;
-    uint32_t cuenta_inicial_encoder_derecho     =   cuenta_encoder_derecha;
-    uint32_t cuenta_inicial_encoder_izquierdo   =   cuenta_encoder_izquierda;
 
+    cuenta_encoder_derecha = 0;
+    cuenta_encoder_izquierda = 0;
+
+    _delay_ms(10);
 
     distancia = prueba_rapida_sensor_pared(SENSOR_PARED_DER);
 
-    if(distancia < DISTANCIA_CHICA){
+    _delay_ms(10);
 
-        variar_PWM(210, 210);
+//    _delay_ms(100);
+//
+//    while(!UCSRA);
+//    UDR = (uint8_t)((distancia >> 24) & 0x000000FF);
+//
+//    _delay_ms(100);
+//
+//    while(!UCSRA);
+//    UDR = (uint8_t)((distancia >> 16) & 0x000000FF);
+//
+//    _delay_ms(100);
+//
+//    while(!UCSRA);
+//    UDR = (uint8_t)((distancia >> 8) & 0x000000FF);
+//
+//    _delay_ms(100);
+//
+//    while(!UCSRA);
+//    UDR = (uint8_t)((distancia) & 0x000000FF);
+//
+//    _delay_ms(100);
+
+    if(distancia < 0x00000550){
+
+        variar_PWM(200, 200);
 
         PORTD |= MOTOR_DER_DIRECTION; 	//Pongo en alto el pin DIRECTION del motor 1
         PORTB &= ~MOTOR_DER_BRAKE;	    //Pongo en bajo el pin BRAKE del motor 1
@@ -204,14 +230,9 @@ void motores_corregir_rumbo (void){
 
         while(flag_fin_rotacion == FALSE){
 
-            if(cuenta_encoder_derecha >= (cuenta_inicial_encoder_derecho + 50)){
+            if(cuenta_encoder_derecha >= 20){
 
-                if(cuenta_encoder_izquierda >= (cuenta_inicial_encoder_izquierdo + 50)){
-
-                    //Antes tenia 300
-
-                    PORTB |= MOTOR_DER_BRAKE;	//Pongo en alto el pin BRAKE del motor 1
-                    PORTB |= MOTOR_IZQ_BRAKE;	//Pongo en alto el pin BRAKE del motor 2
+                if(cuenta_encoder_izquierda >= 20){
 
                     flag_fin_rotacion = TRUE;
 
@@ -220,9 +241,9 @@ void motores_corregir_rumbo (void){
         }
     }
 
-    if(distancia > DISTANCIA_CHICA){
+    if(distancia > 0x00000575){
 
-        variar_PWM(210, 210);
+        variar_PWM(200, 200);
 
         PORTD &= ~MOTOR_DER_DIRECTION; 	//Pongo en bajo el pin DIRECTION del motor 1
         PORTB &= ~MOTOR_DER_BRAKE;	    //Pongo en bajo el pin BRAKE del motor 1
@@ -232,12 +253,9 @@ void motores_corregir_rumbo (void){
 
         while(flag_fin_rotacion == FALSE){
 
-            if(cuenta_encoder_derecha >= (cuenta_inicial_encoder_derecho + 50)){
+            if(cuenta_encoder_derecha >= 15){
 
-                if(cuenta_encoder_izquierda >= (cuenta_inicial_encoder_izquierdo + 50)){
-
-                    PORTB |= MOTOR_DER_BRAKE;	//Pongo en alto el pin BRAKE del motor 1
-                    PORTB |= MOTOR_IZQ_BRAKE;	//Pongo en alto el pin BRAKE del motor 2
+                if(cuenta_encoder_izquierda >= 15){
 
                     flag_fin_rotacion = TRUE;
 

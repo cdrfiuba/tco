@@ -51,9 +51,9 @@ int main(void)
 
 	for (;;){
 
-            motores_avanzar(200,200, 100);
+            motores_corregir_rumbo();
 
-            //motores_corregir_rumbo;
+            motores_avanzar(200,200, 75);
 
             distancia = prueba_rapida_sensor_pared(SENSOR_PARED_DER);
 
@@ -64,7 +64,7 @@ int main(void)
 
                 motores_rotar_der_90_grados();
 
-                motores_avanzar(200,200, 400);
+                motores_avanzar(200,200, 450);
 
             }
 
@@ -85,7 +85,7 @@ int main(void)
 
                     _delay_ms(10);
 
-                    if(distancia < DISTANCIA_CHICA){
+                    if(distancia < 0x00001800){
 
                         //Si entro aca, es que tengo pared a la derecha, al frente y a la izquierda.
 
@@ -93,7 +93,7 @@ int main(void)
 
                     }
 
-                    motores_avanzar(200,200, 400);
+                    motores_avanzar(200,200, 450);
                 }
 
                 else{
