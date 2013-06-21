@@ -21,7 +21,7 @@
 volatile uint8_t    value;
 
 //Variables encoders
-volatile uint32_t   cuenta_encoder_izquierda, cuenta_encoder_derecha;
+volatile uint32_t   cuenta_encoder_izquierda, cuenta_encoder_derecha, cuenta_encoder_derecha_anterior, cuenta_encoder_izquierda_anterior;
 
 //Variables sensores pared
 volatile uint8_t    sensor_active, status_flag;
@@ -51,27 +51,21 @@ int main(void)
 
 	for (;;){
 
+            motores_avanzar(200,200, 100);
 
-            motores_avanzar(170,170, 100);
-
-            motores_corregir_rumbo;
+            //motores_corregir_rumbo;
 
             distancia = prueba_rapida_sensor_pared(SENSOR_PARED_DER);
 
             if(distancia > DISTANCIA_GRANDE){
             //Si entro aca es que no tengo pared a la derecha, entonces, giro a la derecha
 
-                 motores_detener();
-                _delay_ms(200);
-                //motores_avanzar(170,170);
-                //_delay_ms(200);
+                motores_avanzar(200,200, 200);
+
                 motores_rotar_der_90_grados();
-                _delay_ms(50);
-                motores_detener();
-                _delay_ms(200);
-                motores_avanzar(170,170, 200);
-                motores_avanzar(170,170, 200);
-                _delay_ms(200);
+
+                motores_avanzar(200,200, 400);
+
             }
 
             else{
@@ -82,42 +76,24 @@ int main(void)
 
                 if(distancia < DISTANCIA_CHICA){
 
-
-
                     //Si entro aca, tengo pared a la derecha, y tengo pared al frente
-
-                    motores_detener();
-                    _delay_ms(100);
-                    motores_retroceder(170,170);
-                    _delay_ms(150);
-                    motores_detener();
-                    // motores_avanzar(170,170);
-                    //_delay_ms(200);
                     motores_rotar_izq_90_grados();
-                    _delay_ms(50);
-                    motores_detener();
-                    _delay_ms(200);
+
+                    _delay_ms(10);
 
                     distancia = prueba_rapida_sensor_pared(SENSOR_PARED_CEN);
+
+                    _delay_ms(10);
 
                     if(distancia < DISTANCIA_CHICA){
 
                         //Si entro aca, es que tengo pared a la derecha, al frente y a la izquierda.
 
-                        motores_detener();
-                        _delay_ms(100);
-                        // motores_avanzar(170,170);
-                        //_delay_ms(200);
                         motores_rotar_izq_90_grados();
-                        _delay_ms(50);
-                        motores_detener();
-                        _delay_ms(200);
 
                     }
 
-                    motores_avanzar(170,170, 200);
-                    motores_avanzar(170,170, 200);
-                    _delay_ms(200);
+                    motores_avanzar(200,200, 400);
                 }
 
                 else{
@@ -170,12 +146,17 @@ ISR (INT0_vect)
 {
     cuenta_encoder_derecha++;
 
+    cuenta_encoder_derecha_anterior = cuenta_encoder_derecha;
+
+
 }
 
 //Interrupción INT 1
 ISR (INT1_vect)
 {
     cuenta_encoder_izquierda++;
+
+    cuenta_encoder_izquierda_anterior = cuenta_encoder_izquierda;
 
 }
 
@@ -219,3 +200,47 @@ GIFR &= ~(1<<INTF2);
 }
 
 
+//_delay_ms(100);
+//
+//while(!UCSRA);
+//UDR = (uint8_t)((cuenta_encoder_derecha >> 24) & 0x000000FF);
+//
+//_delay_ms(100);
+//
+//while(!UCSRA);
+//UDR = (uint8_t)((cuenta_encoder_derecha >> 16) & 0x000000FF);
+//
+//_delay_ms(100);
+//
+//while(!UCSRA);
+//UDR = (uint8_t)((cuenta_encoder_derecha >> 8) & 0x000000FF);
+//
+//_delay_ms(100);
+//
+//while(!UCSRA);
+//UDR = (uint8_t)((cuenta_encoder_derecha) & 0x000000FF);
+//
+//_delay_ms(500);
+//
+//
+//_delay_ms(100);
+//
+//while(!UCSRA);
+//UDR = (uint8_t)((cuenta_encoder_izquierda >> 24) & 0x000000FF);
+//
+//_delay_ms(100);
+//
+//while(!UCSRA);
+//UDR = (uint8_t)((cuenta_encoder_izquierda >> 16) & 0x000000FF);
+//
+//_delay_ms(100);
+//
+//while(!UCSRA);
+//UDR = (uint8_t)((cuenta_encoder_izquierda >> 8) & 0x000000FF);
+//
+//_delay_ms(100);
+//
+//while(!UCSRA);
+//UDR = (uint8_t)((cuenta_encoder_izquierda) & 0x000000FF);
+//
+//_delay_ms(2500);

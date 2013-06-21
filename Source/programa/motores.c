@@ -89,14 +89,14 @@ void motores_avanzar(uint8_t velocidad_izquierda, uint8_t velocidad_derecha, uin
 
             if(cuenta_encoder_derecha < cuenta_encoder_izquierda){
 
-                if(velocidad_derecha < 255)
+                if(velocidad_derecha < 240)
                     variar_PWM(velocidad_izquierda, velocidad_derecha += 5);
 
                 }
 
             if(cuenta_encoder_derecha > cuenta_encoder_izquierda){
 
-                if(velocidad_derecha > 127)
+                if(velocidad_derecha > 130)
                     variar_PWM(velocidad_izquierda, velocidad_derecha -= 5);
 
             }
@@ -134,9 +134,9 @@ void motores_rotar_der_90_grados(void){
 
     while(flag_fin_rotacion == FALSE){
 
-        if(cuenta_encoder_derecha >= (cuenta_inicial_encoder_derecho + 320)){
+        if(cuenta_encoder_derecha >= (cuenta_inicial_encoder_derecho + 360)){
 
-            if(cuenta_encoder_izquierda >= (cuenta_inicial_encoder_izquierdo + 320)){
+            if(cuenta_encoder_izquierda >= (cuenta_inicial_encoder_izquierdo + 360)){
 
                 PORTB |= MOTOR_DER_BRAKE;	//Pongo en alto el pin BRAKE del motor 1
                 PORTB |= MOTOR_IZQ_BRAKE;	//Pongo en alto el pin BRAKE del motor 2
@@ -165,9 +165,9 @@ void motores_rotar_izq_90_grados(void){
 
     while(flag_fin_rotacion == FALSE){
 
-        if(cuenta_encoder_derecha >= (cuenta_inicial_encoder_derecho + 320)){
+        if(cuenta_encoder_derecha >= (cuenta_inicial_encoder_derecho + 370)){
 
-            if(cuenta_encoder_izquierda >= (cuenta_inicial_encoder_izquierdo + 320)){
+            if(cuenta_encoder_izquierda >= (cuenta_inicial_encoder_izquierdo + 370)){
 
                 //Antes tenia 300
 
