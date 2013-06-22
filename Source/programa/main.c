@@ -51,58 +51,49 @@ int main(void)
 
 	for (;;){
 
-            motores_corregir_rumbo();
+        motores_corregir_rumbo();
 
-            motores_avanzar(200,200, 40);
+        motores_avanzar(210,210, 25);
 
-            distancia = prueba_rapida_sensor_pared(SENSOR_PARED_DER);
+        distancia = prueba_rapida_sensor_pared(SENSOR_PARED_DER);
 
-            if(distancia > DISTANCIA_GRANDE){
-            //Si entro aca es que no tengo pared a la derecha, entonces, giro a la derecha
+        if(distancia > DISTANCIA_GRANDE){
+        //Si entro aca es que no tengo pared a la derecha, entonces, giro a la derecha
 
-                motores_avanzar(200,200, 200);
+            motores_avanzar(200,200, 200);
 
-                motores_rotar_der_90_grados();
+            motores_rotar_der_90_grados();
 
-                motores_avanzar(200,200, 450);
+            motores_avanzar(200,200, 450);
 
-            }
+        }
 
-            else{
+        else{
 
-                //Si entro aca, es que tengo pared a la derecha
+            //Si entro aca, es que tengo pared a la derecha
+
+            distancia = prueba_rapida_sensor_pared(SENSOR_PARED_CEN);
+
+            if(distancia < DISTANCIA_CHICA){
+
+                //Si entro aca, tengo pared a la derecha, y tengo pared al frente
+                motores_rotar_izq_90_grados();
+
+                _delay_ms(10);
 
                 distancia = prueba_rapida_sensor_pared(SENSOR_PARED_CEN);
 
-                if(distancia < DISTANCIA_CHICA){
+                _delay_ms(10);
 
-                    //Si entro aca, tengo pared a la derecha, y tengo pared al frente
+                if(distancia < 0x00001800){
+
+                    //Si entro aca, es que tengo pared a la derecha, al frente y a la izquierda.
+
                     motores_rotar_izq_90_grados();
 
-                    _delay_ms(10);
-
-                    distancia = prueba_rapida_sensor_pared(SENSOR_PARED_CEN);
-
-                    _delay_ms(10);
-
-                    if(distancia < 0x00001800){
-
-                        //Si entro aca, es que tengo pared a la derecha, al frente y a la izquierda.
-
-                        motores_rotar_izq_90_grados();
-
-                    }
-
-                    motores_avanzar(200,200, 450);
                 }
-
-                else{
-
-                }
-
-
             }
-
+        }
     }
 
 	return 0;
