@@ -165,9 +165,9 @@ void motores_rotar_izq_90_grados(void){
 
     while(flag_fin_rotacion == FALSE){
 
-        if(cuenta_encoder_derecha >= (cuenta_inicial_encoder_derecho + 370)){
+        if(cuenta_encoder_derecha >= (cuenta_inicial_encoder_derecho + 360)){
 
-            if(cuenta_encoder_izquierda >= (cuenta_inicial_encoder_izquierdo + 370)){
+            if(cuenta_encoder_izquierda >= (cuenta_inicial_encoder_izquierdo + 360)){
 
                 //Antes tenia 300
 
@@ -194,31 +194,27 @@ void motores_corregir_rumbo (void){
 
     distancia = prueba_rapida_sensor_pared(SENSOR_PARED_DER);
 
-    _delay_ms(10);
-
-//    _delay_ms(100);
-//
 //    while(!UCSRA);
 //    UDR = (uint8_t)((distancia >> 24) & 0x000000FF);
 //
-//    _delay_ms(100);
+//    _delay_ms(10);
 //
 //    while(!UCSRA);
 //    UDR = (uint8_t)((distancia >> 16) & 0x000000FF);
 //
-//    _delay_ms(100);
+//    _delay_ms(10);
 //
 //    while(!UCSRA);
 //    UDR = (uint8_t)((distancia >> 8) & 0x000000FF);
 //
-//    _delay_ms(100);
+//    _delay_ms(10);
 //
 //    while(!UCSRA);
 //    UDR = (uint8_t)((distancia) & 0x000000FF);
-//
-//    _delay_ms(100);
 
-    if(distancia < 0x00000550){
+    _delay_ms(10);
+
+    if(distancia < 0x00000650){
 
         variar_PWM(200, 200);
 
@@ -230,9 +226,9 @@ void motores_corregir_rumbo (void){
 
         while(flag_fin_rotacion == FALSE){
 
-            if(cuenta_encoder_derecha >= 20){
+            if(cuenta_encoder_derecha >= 15){
 
-                if(cuenta_encoder_izquierda >= 20){
+                if(cuenta_encoder_izquierda >= 15){
 
                     flag_fin_rotacion = TRUE;
 
@@ -241,7 +237,7 @@ void motores_corregir_rumbo (void){
         }
     }
 
-    if(distancia > 0x00000575){
+    if(distancia > 0x00000750){
 
         variar_PWM(200, 200);
 

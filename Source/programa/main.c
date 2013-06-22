@@ -53,7 +53,7 @@ int main(void)
 
             motores_corregir_rumbo();
 
-            motores_avanzar(200,200, 75);
+            motores_avanzar(200,200, 40);
 
             distancia = prueba_rapida_sensor_pared(SENSOR_PARED_DER);
 
