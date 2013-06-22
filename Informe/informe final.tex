@@ -1,0 +1,392 @@
+\documentclass[a4paper,12pt]{article}	%Hoja A4, tamaño de letra 12 puntos
+\usepackage[latin1]{inputenc}		%Encoding del archivo de texto plano (txt), así podés escribir letras con diacríticas 
+\usepackage[T1]{fontenc}		%Encoding de la fuente
+\usepackage[spanish]{babel} 		%Estilos, hyphenation y nombres de entornos (abstract-->resumen) en español
+\usepackage{times}			%Para agregar la fecha al documento		
+\usepackage{amsmath}			%Simbolos matemáticos que sino no funcionan
+\usepackage{amssymb}             	%Simbolos matemáticos que sino no funcionan
+\usepackage{amsfonts}            	%Fuentes extras para modo mátemático
+\usepackage{units}               	%Para agregar unidades y fracciones con formato especial
+\usepackage{esint}               	%Para integrales dobles cerradas
+%\usepackage{wasysym}            	%Para integrales dobles cerradas (no tan lindo como las de `esint')
+%\usepackage{pdfpages}			%Para incluir otros pdfs, en un nuestro documento Latex
+%\usepackage{eso-pic}
+%\usepackage{everyshi}
+%\usepackage{ifthen}
+%\usepackage{calc}
+%\usepackage{watermark}          	%Permite incluir marcas de agua
+\usepackage{float}               	%Permite fijar una figura a un lugar específico del archivo con el parámetro [H] 
+\usepackage{fancyhdr}			%Manejo enriquecido de encabezados y pie de página
+\usepackage{fancybox}            	%Permite agregar marcos especiales en las páginas
+%\usepackage{anysize}			%Habilita el comando \marginsize{left}{right}{top}{bottom}
+%\usepackage{mathptmx}			%Tipografía Times
+%\usepackage[pdflatex]{graphicx}	%Permite incluir imágenes en el documento. Usando ``dvipdfm'' se pueden manejar archivos jpg, jpeg, png, y pdf. Pero hay que generar un archivo .bb que contiene el tamaño de la imagen entre otros datos. Para eso miktex-->bin-->ebb.exe 
+\usepackage{threeparttable}		%Permite agregar notas al pie en tablas
+\usepackage{cancel}			%Permite tachar cosas en modo matemático
+					%hyperref posibilita referencia internas y externas, a continuacion las opciones de config:
+\usepackage[a4paper,
+         	dvipdfm,             	%Usar sólo si después se va a pasar de dvi a pdf
+		%dvips,%		%Usar si se va a trabajar en dvi, o si después se va a pasar de dvi a ps (y eventualmente de ps a pdf ---pero ojo que los enlaces quedan más lindos si se pasa directamente de dvi a pdf, usando dvipdfm)
+		pdfdisplaydoctitle=true,%Muestra el título en el marco superior de la ventana del visor de pdf
+		colorlinks=true,     	%Al encender esta función, ya nohay recuadros feos alrededor de los links
+		pdfnewwindow=true,   	%Para que el link a nuevos pdf, no se abran en la misma ventana
+		linkcolor=black,     	%Color para links internos
+		citecolor=green,     	%Color para links a Bibliografia
+           	filecolor=blue,      	%Color para links a archivos
+		pdftitle={Proyecto (66.09) [Junio 2010] - Robótica Colaborativa},
+		pdfauthor={Manuel I. Fernandez, Marcela F. Luberto y Sebastián García Marra}]
+		{hyperref}					
+
+
+\newcommand{\autor}[3]{\vspace{5mm}%
+											{\bf #1}\\%
+											{\bf Padrón:} #2\\%
+											\texttt{#3}\\}
+
+
+%Determinación del estilo de página (encabezado y pie)
+
+\lhead{\small Proyecto (66.09) [Junio 2013]}
+\chead{}
+\rhead{\small TCO}
+\rfoot{}
+\cfoot{Página {\thepage}}
+\lfoot{}
+
+%Manejo de márgenes
+
+%\marginsize{left}{right}{top}{bottom}
+\addtolength{\textwidth}{2cm}  		%Agrega 2cm al ancho por defecto (usado junto con hoffset, no se pierde el centrado)
+\addtolength{\hoffset}{-1cm}   		%Quita 1cm al margen, pero mantiene la relación repecto de cada margen
+\addtolength{\textheight}{2cm}
+\addtolength{\voffset}{-1cm}
+\setlength{\headheight}{14pt}
+
+
+%Manejo de contadores (counters)
+
+%\setcounter{tocdepth}{2}		%Profundidad de la aparición de las secciones en el índice:
+					%-1 Part, 0 Chapter, 1 Section, 2 Subsection, 3 Subsubsection, 4 Titled
+
+\setcounter{secnumdepth}{1}  		%Profundidad en la enumeración de las secciones:
+%-1 Part, 0 Chapter, 1 Section, 2 Subsection, 3 Subsubsection, 4 Titled paragraph, 5 Titled subparagraph %paragraph, 5 Titled subparagraph
+
+
+%==================================== Comienzo del documento ===================================
+ 
+\begin{document}	
+					
+%========================================== Caratula ===========================================
+
+\pagestyle{fancy}
+
+%\includegraphics{caratula6609.pdf}
+%\thispagestyle{empty}
+
+%======================= Carátula que no se usa poruqe hay una oficial =========================
+
+%\newpage
+%Empiezo la caratula
+%\setlength{\unitlength}{1 cm}
+%\thispagestyle{empty}
+%\begin{picture}(5,4)
+%\put(-1,0){\includegraphics{./img/fiuba}}
+%\end{picture}
+%\vspace{3cm}
+%
+%\begin{center}
+%\textbf{\LARGE Laboratorio de Microcomputadoras [66.09]}\\
+
+%\vspace{2cm}
+%
+%{\Large \textbf{ Proyecto TCO\\[1.25cm]}}
+%
+%\vspace{2cm}
+%{\textbf{Primer Cuatrimestre 2013\\[1.25cm]
+%}}
+%\vspace{2cm}
+
+%\begin{tabbing}
+%\hspace*{3cm} \= \hspace*{3cm} \= \hspace*{3cm}\= \hspace*{3cm} \kill
+%\textbf{Nombre} \> \textbf{Apellido} \> \textbf{Padrón} \> \textbf{Mail} \\
+% \>  \>  \>  \\
+%Sebastian \> Cerone \> 90259 \> sebascerone@gmail.com\\
+%Gisela \> Farace \> xxxxx \> xxx@gmail.com\\
+%Ignacio L. J. \> Carballeda \> 91646\> carballeda.ignacio@gmail.com\\
+%\end{tabbing}
+%\end{center}
+%\newpage
+
+%===============================================================================================
+
+%=========================================== Presentación ======================================
+
+
+
+\begin{figure}[H]
+\vspace{35mm}
+		%\includegraphics[width=160pt]{img/img8.jpg}
+\end{figure}	
+
+\vspace{-58mm}
+\begin{figure}[H]
+\hspace{100mm}
+		%\includegraphics[width=160pt]{img/img13.jpg}
+\end{figure}
+
+\vspace{-10mm}
+\begin{figure}[H]
+	\begin{center}
+		%\includegraphics[width=250pt]{img/img9.jpg}
+	\end{center}
+\end{figure}
+
+%===============================================================================================
+
+%=========================================== Indice ============================================
+\newpage
+
+\tableofcontents							
+
+\newpage
+
+%=========================================== Informe ===========================================
+
+\section{Motivación}
+
+	La motivación de este proyecto está dada por una de las aplicaciones que puede desprenderse de la rama de la Robótica, que investiga la manera óptima de hacer interactuar a un conjunto de robots, en un ambiente determinado, para cumplir un objetivo común, que hubiera sido dificultoso de resolver en forma individual por cada uno de los integrantes del conjunto. O bien, por la naturaleza del problema, no fuese útil disponer de un solo robot, sino que es inherentemente necesario disponer de una \emph{Red} de individuos. 
+	
+	Esta aplicación a la que se hizo referencia al principio de este texto, es aquella vinculada al uso de una red de robots en un área de desastre, o de difícil acceso para los humanos. En la cuál estos robots pudieran buscar explosivos, objetos específicos, o incluso buscar por personas en situación riesgosa, que requieran de ayuda, ejemplo, en caso de haber sido víctimas de algún fenómeno natural, o de otro tipo.
+	
+	Planteado el problema, se podría pensar en un conjunto de individuos (robots), cada uno de los cuales no estuviera preparado para resolver cualquier tipo de problema, sino que estuvieran dotados de sistemas que les permitieran reconocer un área, mapearla, tomar datos varios relacionados con el entorno, y eventualmente transmitirlos a un grupo humano, u otro grupo de robots, que al recorrer la misma zona, ya estarían advertidos de morfología del lugar, e incluso de ciertos peligros puntuales, de los que tuvieran que mantenerse alejados. 
+
+\vspace{5mm}
+\section{Objetivo}
+	
+	El objetivo de este trabajo es la fabricación de un robot capaz de salir de un laberinto. 
+
+\newpage
+
+\section{Descripción general}
+
+\subsection{Robot:}
+	Para llevar a cabo este proyecto se fabricó un robot. El mismo esta dotado de un microcontrolador ATmega16, dos motores con encoders, sensores de distancia por ultrasonido y sensores opticos para detectar colores. 
+	La función de los sensores de distancia por ultrasonido es la medición de la distancia a cada pared del laberinto.
+	La función de los sensores de colores, es detectar si el piso es blanco o negro, y de esta forma saber cuando se ingresó a una nueva celda o se encontró la salida del laberinto
+	
+\subsection{Laberinto:}
+	El laberinto fue fabricado como módulos encastrables con únidad minima modelizable como una matriz perteneciente a $\mathbb{R}^{3x3}$, donde las paredes internas del mismo, definen \emph{celdas} que se pueden interpretar como posiciones dentro de la matriz.
+	
+	El mismo se contruyó con paredes color blanco y piso color negro, dividiendo cada celda por una linea blanca, porque sobre este color es óptimo el rebote de luz infrarroja para los sensores del piso, en el cual las marcas blancas sobre fondo negro dan un gran constraste, lo que se traduce en un marcado cambio de nivel en la señal de salida, y facilita la detección.
+	
+	Como se mencionó subyacentemente en párrafos previos, cada celda se marcó con líneas blancas dispuesta en forma de cuadrado. Estas líneas sirven al robot para ``saber'' que a llegado a una nueva celda. El hecho de que las líneas formaran un cuadrado, es porque el robot podría venir de varias direcciones; es decir, al doblar para tomar un camino alternativo, atravesarían las celdas en sentido transversal al sentido de avance original.
+
+\section{Algoritmo}
+	El algoritmo implementado para dotar a los robots de ``inteligencia'', se basa en un sistema básico para la resolución de laberintos, que consiste en girar simpre para el mismo lado (derecha o izquierda). De esta forma siempre se encontrará la salida, aunque puede que sea no por el camino optimo.
+	
+\subsection{Resumen de funcionamiento:}	
+	
+	
+\newpage
+
+\section{Listado de componentes}
+
+\subsection{Robot principal:}
+
+\begin{tabular}{|l|r|r|r|r|}\hline
+	{\bf Referencia}	 &	{\bf Descripción}	 &{\bf Cantidad} &	{\bf Precio unitario} & {\bf Total} \\			
+\hline		
+		R11, R9, R10&1.5k & 3    &    &    \\
+\hline      
+      R19, R12, R13, R14, R18&100&  5&    &    \\    
+\hline      
+	  C3& 100n&  1&    &    \\
+\hline      
+	  C2, C1& 100u&  2&    &     \\ 
+\hline
+     C6,C7,C8 & 10u & 3 & & \\	   
+\hline      
+	  RV2, R1, R2, R3, R4, R5, R6, RV1 & 10k&  8&    &      \\
+\hline      
+D1, D2, D3, D4, D6, D7, D8,D9  & 1N4148&  8&    &   \\    
+\hline      
+	  C5&  22u&  1&    &       \\
+\hline      
+	  R15, R16,R17 & 330&  3&    &    \\    
+\hline      
+	  R8&  390&  1&    &       \\
+\hline      
+	  R7& 4.7K&  1&    &     \\  
+\hline      
+	  C4&  470n&  1&    &     \\   
+\hline      
+	  Q3, Q1, Q2& BC548&  3&    &   \\    
+\hline
+	  IC1&C8051F330D&  1&    &       \\
+\hline      
+	  U4, U3&  CNY70&  2&    &      \\
+\hline      
+	  P1&CON. BAT&  1&    &       \\
+\hline      
+	  P7& CONN\_1&  1&    &      \\
+\hline      
+	  D10&   IR1&  1&    &        \\
+\hline   
+   D11&   IR2&  1&    &        \\
+\hline      
+	  D12&  IR3&  1&    &       \\
+\hline      
+	  K1&IRU101533&  1&    &      \\ 
+\hline      
+	  k4, k2, k3&  ISU60&  3&     &   \\    
+\hline      
+	  U2&  L298D&  1&    &      \\
+\hline      
+	  D5&  LED\_1&  1&    &     \\
+\hline     
+	  U1& LM2940&  1&    &       \\
+\hline      
+	  P3& MOTOR\_L&  1&    &      \\
+\hline     
+	 P4& MOTOR\_R&  1&    &      \\
+\hline     
+	 P2& PROG&  1&    &      \\
+\hline   
+   SW1& RE-TRANS&  1&    &    \\   
+\hline   
+   P5& RF\_EMIT&  1&    &        \\
+\hline 
+ P8& SENS PLACA&  1&    &       \\
+\hline 
+ P9&  SENS uC&  1&    &       \\
+\hline 
+ SW2&  SW\_PUSH&  1&    &       \\
+\hline 
+ P10&SWITCH\_GRAL&  1&    &       \\
+\hline   
+   P6&   Tx/Rx&  1&    &     \\\hline
+\end{tabular}
+
+\newpage
+
+%\begin{itemize}
+
+%ACA VA UNA REFERENCIA A LOS DATASHEETS
+
+%\item Placa virgen FR4 de 10mc x 10cm                         (1)
+%\item Microprocesador SiLabs 8051F330                         (1)
+%\item Puente H dual L298 												  (1)
+%\item Regulador de tensión de 5V de baja caída LM2940         (1)
+%\item Regulador de tensión de 3.3V de baja caída IRU101533    (1)
+%\item Emisor IR y Fotorreceptor (en un solo encapsulado) CNY70(2)
+%\item Emisores IR LEDs                                        (3)
+%\item Fotoreceptores IS1U60, con filtro pasabandas en 38kHz   (3)
+%\item Conectores Molex  de dos vías                           (3)              
+%\item Conectores de cable plano de 10 hilos                   (1) 
+%\item LED color rojo                                          (1)
+%\item Resistencias $100\Omega$ 			(3)   
+%\item Resistencias $330\Omega$ 			(3)
+%\item Resistencias $1k\Omega$  			(3)
+%\item Resistencias $220\Omega$ 			(1)
+%\item Resistencias $4.7k\Omega$			(1)
+%\item Resistencias $10k\Omega$ 			(6)
+%\item Capacitores  $10\mu$F   			(5)		
+%\item Capacitores  $100\mu$F  			(2)
+%\item Capacitores  $100n$F     			(1)
+%\item Transistores BC548       			(3)
+%\item Diodos 1N4148            			(8)
+%\item Pulsadores               			(2)
+%\item Módulo emisor de RF a 418MHz     (1)
+ 
+%\end{itemize}
+
+%\newpage
+
+\subsection{Robot secundario:}
+
+\begin{itemize}
+
+\item Placa experimental FR2 de 10mc x 10cm                   (1)
+\item Microprocesador SiLabs 8051F330                         (1)
+\item Puente H dual L298 												  (1)
+\item Regulador de tensión de 5V de baja caída LM2940         (1)
+\item Regulador de tensión de 3.3V de baja caída IRU101533    (1)
+\item Emisor IR y Fotorreceptor (en un solo encapsulado) CNY70 (2)
+\item Conectores Molex  de dos vías                           (3)              
+\item Conectores de cable plano de 10 hilos                   (1) 
+\item LED color amarillo                                      (1)
+\item Resistencias $100\Omega$ 			(3)   
+\item Resistencias $330\Omega$ 			(3)
+\item Resistencias $1k\Omega$  			(3)
+\item Resistencias $220\Omega$ 			(1)
+\item Resistencias $4.7k\Omega$			(1)
+\item Resistencias $10k\Omega$ 			(6)
+\item Capacitores  $10\mu$F   			(5)		
+\item Capacitores  $100\mu$F  			(2)
+\item Capacitores  $100n$F     			(1)
+\item Transistores BC548       			(3)
+\item Diodos 1N4148            			(8)
+\item Pulsador                			(1)
+\item Módulo receptor de RF a 418MHz   (1)
+
+\end{itemize}
+
+%\newpage
+
+
+\section{Herramientas de software}
+
+\begin{itemize}
+
+\item Keil $\mu$Vision 4 (v4.02): IDE para desarrollo del firmware.
+\item \href{http://kicad.sourceforge.net/wiki/index.php/Main_Page}{KiCAD (Build: 20100406 SVN-R2508)-final: Diseño de esquemáticos y ruteo de placas}
+\item CuteCom (v0.22.0): Captura de datos por puerto serie (S.O. Linux - Ubuntu)
+\item \LaTeX (compilado con MikTeX v2.7):Lenguaje para paginado de este informe
+\item TeXnicCenter (v1.0): Editor de textos para \LaTeX
+
+\end{itemize}
+
+
+%\newpage
+
+\section{Bibliografía}
+
+\begin{itemize}
+
+\item \href{http://www.scribd.com/doc/13138464/The-8051-Micro-Controller-Book-by-Scott-Mackenzie-Online}{I.Scott Mackenzie, "The 8051 Microcontroller",Prentice Hall, 1995}
+\item \href{datasheets/C8051F33x.pdf}{Datasheet del Microcontrolador 8051F330}
+\item \href{infoalgoritmo/InteligenciaArtificialyRedesNeuronales.pdf}{M. Daniela López De Luise,"Inteligencia Artificial y Redes Neuronales", EnterpriseWare SRL, Junio de 2001}
+%\item \href{infoalgoritmo/TheFloodfill.pdf}{The Flood-fill Algorithm ()}
+%\item \href{infoalgoritmo/backtracking}{El Esquema Algorítmico del Backtracking}
+\end{itemize}
+
+\section{Apéndice}
+
+\subsection{Esquemáticos:}
+
+\begin{itemize}
+
+\item \href{robotesquematico.pdf}{Esquematico versión pdf}
+%\item \href{diseno/placa_robot.pro}{Esquematico y board en versión KiCAD}
+
+\end{itemize}
+
+\subsection{Links útiles:}
+
+\begin{itemize}
+\item \href{http://en.wikipedia.org/wiki/Maze_solving_algorithm}{Wikipedia - Resumen de los algoritmos más conocidos 
+para resolución de laberintos}
+\item \href{http://www.micromouseinfo.com/}{Página dedicada a competencias de \emph{Micromouse} (Resolvedores de laberintos)}
+\item \href{http://sensorwiki.org/doku.php}{Referencia a un gran número de sensores diferentes}
+\item \href{http://www.societyofrobots.com}{Página dedicada a la robótica en general}
+\end{itemize}
+
+\subsection{Diagrama en bloques (*)}
+
+\subsection{Diagrama de flujo (*)}
+
+\subsection{Código fuente (*)}
+
+\small *Ver páginas adjuntas a este informe.
+
+\end{document}
