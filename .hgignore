@@ -25,3 +25,11 @@ syntax: glob
 *.dcmi
 *.bak
 *.000
+
+# archivos de latex
+*.aux
+*.log
+*.toc
+*.jpg
+*.out
+
