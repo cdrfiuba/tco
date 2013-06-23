@@ -30,8 +30,8 @@ void inicializar_puertos_sensores_pared(void){
 	DDRA |= SENSOR_PARED_IZQ;
 
 	//Configuro el puerto de ECHO como entrada.
-	DDRB &= ~SENSOR_PARED_ECHO;
-	PORTB |= SENSOR_PARED_ECHO;
+//	DDRB &= ~SENSOR_PARED_ECHO;
+//	PORTB |= SENSOR_PARED_ECHO;
 
 	//Configuro los puertos encendido como salida.
 	DDRA |= (1<<PA0);
@@ -42,6 +42,10 @@ void inicializar_puertos_sensores_pared(void){
 uint32_t prueba_rapida_sensor_pared(uint8_t sensor){
 
     uint32_t    cuentas = 0;
+
+    //Desactivo la interrupción al medir, para evitar problemas.
+    GICR &= ~(1<<INT2);     //Desactivo INT2
+
 
     while(cuentas == 0){
 
@@ -71,6 +75,9 @@ uint32_t prueba_rapida_sensor_pared(uint8_t sensor){
         cuentas = (256 - cuentas_inicial) + 256 * interrupciones_timer_1 + cuentas_final;
 
     }
+
+    GICR |= (1<<INT2);     //Vuelvo a activar la interrupcion INT2
+
 
     if (status_flag == 1)
         return 0xFFFFFFFF;

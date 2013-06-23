@@ -28,7 +28,7 @@ void inicializar_encoders(void){
 
     GICR |= (1<<INT0);      //Activo INT0
     GICR |= (1<<INT1);      //Activo INT1
-    GICR &= ~(1<<INT2);     //Desactivo INT2
+   // GICR &= ~(1<<INT2);     //Desactivo INT2
 
     MCUCR |= ((1<<ISC01) | (1<<ISC00));     //Configuro la INT0 por flanco ascendente
     MCUCR |= ((1<<ISC11) | (1<<ISC10));     //Configuro la INT1 por flanco ascendente

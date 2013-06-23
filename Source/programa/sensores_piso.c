@@ -43,8 +43,8 @@ PORTB &= ~(1<<2);
 
 //configuramos PA0 PA1 y PA2 como entradas sin pullup
 
-DDRA &= ~((DDA0)&(DDA1)&(DDA2));
-PORTA &= ~((PORTA0)&(PORTA1)&(PORTA2));
+//DDRA &= ~((1<<DDA0)|(1<<DDA1)|(1<<DDA2));
+//PORTA &= ~((1<<PORTA0)|(1<<PORTA1)|(1<<PORTA2));
 
 //configuro registro MCUCSR ={JTD ISC2 – JTRF WDRF BORF EXTRF PORF }
 
@@ -63,5 +63,3 @@ cal one to its Interrupt Flag bit (INTF2) in the GIFR Register before the interr
 GICR |= (1<<INT2);
 
 }
-
-

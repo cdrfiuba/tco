@@ -18,7 +18,7 @@
 
 //Delacaración de variables globales
 
-volatile uint8_t    value;
+volatile uint8_t    value, flag_piso_blanco;
 
 //Variables encoders
 volatile uint32_t   cuenta_encoder_izquierda, cuenta_encoder_derecha, cuenta_encoder_derecha_anterior, cuenta_encoder_izquierda_anterior;
@@ -49,52 +49,77 @@ int main(void)
     estado_sensor_piso_cen = 0;
     _delay_ms(500);
 
+
 	for (;;){
 
-        motores_corregir_rumbo();
+        if(flag_piso_blanco == TRUE){
 
-        motores_avanzar(210,210, 25);
+            if((PINA & (1 << PA2)) == (1 << PA2)){
 
-        distancia = prueba_rapida_sensor_pared(SENSOR_PARED_DER);
+                motores_detener();
 
-        if(distancia > DISTANCIA_GRANDE){
-        //Si entro aca es que no tengo pared a la derecha, entonces, giro a la derecha
+                _delay_ms(10000);
 
-            motores_avanzar(200,200, 200);
+            }
 
-            motores_rotar_der_90_grados();
-
-            motores_avanzar(200,200, 450);
+            flag_piso_blanco = FALSE;
 
         }
 
-        else{
+            motores_corregir_rumbo();
 
-            //Si entro aca, es que tengo pared a la derecha
+            motores_avanzar(200,200, 40);
 
-            distancia = prueba_rapida_sensor_pared(SENSOR_PARED_CEN);
+            distancia = prueba_rapida_sensor_pared(SENSOR_PARED_DER);
 
-            if(distancia < DISTANCIA_CHICA){
+            if(distancia > DISTANCIA_GRANDE){
+            //Si entro aca es que no tengo pared a la derecha, entonces, giro a la derecha
 
-                //Si entro aca, tengo pared a la derecha, y tengo pared al frente
-                motores_rotar_izq_90_grados();
+                motores_avanzar(200,200, 200);
 
-                _delay_ms(10);
+                motores_rotar_der_90_grados();
+
+                motores_avanzar(200,200, 450);
+
+            }
+
+            else{
+
+                //Si entro aca, es que tengo pared a la derecha
 
                 distancia = prueba_rapida_sensor_pared(SENSOR_PARED_CEN);
 
-                _delay_ms(10);
+                if(distancia < DISTANCIA_CHICA){
 
-                if(distancia < 0x00001800){
-
-                    //Si entro aca, es que tengo pared a la derecha, al frente y a la izquierda.
-
+                    //Si entro aca, tengo pared a la derecha, y tengo pared al frente
                     motores_rotar_izq_90_grados();
 
+                    _delay_ms(10);
+
+                    distancia = prueba_rapida_sensor_pared(SENSOR_PARED_CEN);
+
+                    _delay_ms(10);
+
+                    if(distancia < 0x00001800){
+
+                        //Si entro aca, es que tengo pared a la derecha, al frente y a la izquierda.
+
+                        motores_rotar_izq_90_grados();
+
+                    }
+
+                    motores_avanzar(200,200, 450);
                 }
+
+                else{
+
+                }
+
+
             }
-        }
+
     }
+
 
 	return 0;
 }
@@ -156,36 +181,14 @@ ISR (INT1_vect)
 
 ISR (INT2_vect){
 
-//Averiguamos cual de los tres fue el sensor que detecto un flanco ascendente
-//para ello leemos el PINA={PINA7 PINA6 PINA5 PINA4 PINA3 PINA2 PINA1 PINA0}
+    if((PINA & (1 << PA2)) == (1 << PA2)){
 
+       flag_piso_blanco = TRUE;
 
-estado_sensor_piso_cen = 1;
+    }
 
-//
-//if (PINA & (1<<PINA0)){
-//    // fue por el sensor izquierdo (tomar medidas en caso seguidor lineas)
-//    estado_sensor_piso_izq=1;
-//    estado_sensor_piso_cen=0;
-//    estado_sensor_piso_der=0;
-//    }
-//else if(PINA & (1<<PINA1)){
-//        //fue por el sensor derecho (tomar medidas en caso seguidor lineas)
-//    estado_sensor_piso_izq=0;
-//    estado_sensor_piso_cen=0;
-//    estado_sensor_piso_der=1;
-//        }
-//else if(PINA & (1<<PINA2)){
-//        //fue por el sensor del centro (tomar medidas en caso seguidor lineas)
-//    estado_sensor_piso_izq=0;
-//    estado_sensor_piso_cen=1;
-//    estado_sensor_piso_der=0;
-//        }
-
-//falta el sistema anti-rebote que quizas podria ser un  _delay_ms() aca mismo
 
 //Finalmente hacemos un clear al registro GIFR de interrupcion como se pide en hoja de datos [1].
-
 GIFR &= ~(1<<INTF2);
 
 }

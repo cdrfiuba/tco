@@ -165,9 +165,9 @@ void motores_rotar_izq_90_grados(void){
 
     while(flag_fin_rotacion == FALSE){
 
-        if(cuenta_encoder_derecha >= (cuenta_inicial_encoder_derecho + 350)){
+        if(cuenta_encoder_derecha >= (cuenta_inicial_encoder_derecho + 360)){
 
-            if(cuenta_encoder_izquierda >= (cuenta_inicial_encoder_izquierdo + 350)){
+            if(cuenta_encoder_izquierda >= (cuenta_inicial_encoder_izquierdo + 360)){
 
                 //Antes tenia 300
 
@@ -226,9 +226,9 @@ void motores_corregir_rumbo (void){
 
         while(flag_fin_rotacion == FALSE){
 
-            if(cuenta_encoder_derecha >= 20){
+            if(cuenta_encoder_derecha >= 15){
 
-                if(cuenta_encoder_izquierda >= 20){
+                if(cuenta_encoder_izquierda >= 15){
 
                     flag_fin_rotacion = TRUE;
 
@@ -237,7 +237,7 @@ void motores_corregir_rumbo (void){
         }
     }
 
-    else if(distancia > 0x00000700){
+    if(distancia > 0x00000750){
 
         variar_PWM(200, 200);
 
@@ -249,9 +249,9 @@ void motores_corregir_rumbo (void){
 
         while(flag_fin_rotacion == FALSE){
 
-            if(cuenta_encoder_derecha >= 20){
+            if(cuenta_encoder_derecha >= 15){
 
-                if(cuenta_encoder_izquierda >= 20){
+                if(cuenta_encoder_izquierda >= 15){
 
                     flag_fin_rotacion = TRUE;
 
@@ -259,10 +259,6 @@ void motores_corregir_rumbo (void){
             }
         }
     }
-
-    else
-        motores_avanzar(210,210, 75);
-
 }
 
 
