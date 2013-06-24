@@ -52,20 +52,6 @@ int main(void)
 
 	for (;;){
 
-        if(flag_piso_blanco == TRUE){
-
-            if((PINA & (1 << PA2)) == (1 << PA2)){
-
-                motores_detener();
-
-                _delay_ms(10000);
-
-            }
-
-            flag_piso_blanco = FALSE;
-
-        }
-
             motores_corregir_rumbo();
 
             motores_avanzar(200,200, 40);
@@ -74,6 +60,22 @@ int main(void)
 
             if(distancia > DISTANCIA_GRANDE){
             //Si entro aca es que no tengo pared a la derecha, entonces, giro a la derecha
+
+                encender_sensores_piso();
+
+                _delay_us(100);
+
+                if((PINA & (1 << PA2)) == (1 << PA2)){
+
+                    motores_avanzar(200,200,200);
+
+                    motores_detener();
+
+                    _delay_ms(10000);
+
+                }
+
+                apagar_sensores_piso();
 
                 motores_avanzar(200,200, 200);
 

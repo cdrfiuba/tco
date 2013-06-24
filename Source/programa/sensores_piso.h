@@ -25,4 +25,6 @@
 
 
 //prototipos de funcion.
-void    inicializar_sensores_piso   (void);
+inline void encender_sensores_piso(void);
+inline void apagar_sensores_piso(void);
+void        inicializar_sensores_piso(void);

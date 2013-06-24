@@ -23,14 +23,26 @@ La idea con este codigo es primero inicializar las interrupciones por flanco asc
 y poder identificar que interrupción fue activada para luego poder usarla en el codigo del robot.
 */
 
+inline void encender_sensores_piso(void){
+
+    PORTC |= (1<<1);
+
+}
+
+
+inline void apagar_sensores_piso(void){
+
+    PORTC &= ~(1<<1);
+
+}
+
 
 void inicializar_sensores_piso(void)
 {
 
-//enciendo los Leds de los CNY70
-
+//Configuro el pin de los CNY70 como salida.
 DDRC |= (1<<1);
-PORTC |= (1<<1);
+
 
 //GIMSK  |= (1<<INT2);
 
