@@ -33,3 +33,6 @@ syntax: glob
 *.jpg
 *.out
 
+#imagenes
+*.eps
+
