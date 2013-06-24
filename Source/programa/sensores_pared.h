@@ -10,7 +10,7 @@
  *	Descripción: 	El presente documento tiene las definiciones para el manejo de los 	        *
  *			        sensores HC-SR04, para la medición de distancia a las paredes.		        *
  *												                                                *
- *	Última modificación: 10/06/2013								                                *
+ *	Última modificación: 24/06/2013								                                *
  *												                                                *
  ***********************************************************************************************/
 
@@ -27,7 +27,6 @@
 
 #define CANTIDAD    10
 
-
 #endif
 
 //Definición de prototipos
@@ -35,7 +34,7 @@ inline void apagar_timer(void);
 inline void	encender_timer(void);
 void        inicializar_timer(void);
 void        inicializar_puertos_sensores_pared(void);
-uint32_t    prueba_rapida_sensor_pared(uint8_t);
+uint32_t    medicion_distancia_pared(uint8_t);
 
 
 

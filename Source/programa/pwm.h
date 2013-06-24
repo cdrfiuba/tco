@@ -4,12 +4,12 @@
  *												                                                *
  *	Laboratorio de microcomputadores 66.09 - Club de robótica 2013				                *
  *												                                                *
- *	Integrantes: 	Ignacio Carballeda, Sebastian Cerone y Gisela Farace			            *
+ *	Integrantes: 	    Ignacio Carballeda, Sebastian Cerone y Gisela Farace			        *
  *										                                                		*
- *	Archivo:	    pwm.h									                                    *
- *	Descripción: 	El presente documento tiene las definiciones para el manejo del PWM.	    *
+ *	Archivo:	        pwm.h									                                *
+ *	Descripción: 	    El presente documento tiene las definiciones para el manejo del PWM.    *
  *												                                                *
- *	Última modificación: 10/06/2013								                                *
+ *	Última modificación: 24/06/2013								                                *
  *												                                                *
  ***********************************************************************************************/
 

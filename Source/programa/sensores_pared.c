@@ -10,17 +10,14 @@
  *	Descripción: 	El presente documento tiene las definiciones para el manejo de los 	        *
  *			        sensores HC-SR04, para la medición de distancia a las paredes.		        *
  *												                                                *
- *	Última modificación: 10/06/2013								                                *
+ *	Última modificación: 24/06/2013								                                *
  *												                                                *
  ***********************************************************************************************/
 
 #include "sensores_pared.h"
 
-extern volatile uint8_t     status_flag;
+extern volatile uint8_t     status_flag, sensor_active;
 extern volatile uint32_t    interrupciones_timer_1;
-volatile uint32_t           cuentas_inicial, cuentas_final;
-extern uint8_t              sensor_active;
-
 
 void inicializar_puertos_sensores_pared(void){
 
@@ -30,8 +27,7 @@ void inicializar_puertos_sensores_pared(void){
 	DDRA |= SENSOR_PARED_IZQ;
 
 	//Configuro el puerto de ECHO como entrada.
-//	DDRB &= ~SENSOR_PARED_ECHO;
-//	PORTB |= SENSOR_PARED_ECHO;
+	DDRB &= ~SENSOR_PARED_ECHO;
 
 	//Configuro los puertos encendido como salida.
 	DDRA |= (1<<PA0);
@@ -39,13 +35,12 @@ void inicializar_puertos_sensores_pared(void){
 }
 
 
-uint32_t prueba_rapida_sensor_pared(uint8_t sensor){
+uint32_t medicion_distancia_pared(uint8_t sensor){
 
-    uint32_t    cuentas = 0;
+    uint32_t    cuentas = 0, cuentas_inicial, cuentas_final;
 
-    //Desactivo la interrupción al medir, para evitar problemas.
-    GICR &= ~(1<<INT2);     //Desactivo INT2
-
+    //Desactivo INT 2 al medir, para evitar problemas.
+    GICR &= ~(1<<INT2);
 
     while(cuentas == 0){
 
@@ -53,7 +48,7 @@ uint32_t prueba_rapida_sensor_pared(uint8_t sensor){
         PORTA |= sensor;
 
         //Espero 10 us
-        _delay_us(15);
+        _delay_us(10);
 
         //pongo en 0 el trigger
         PORTA &= ~sensor;
@@ -76,21 +71,14 @@ uint32_t prueba_rapida_sensor_pared(uint8_t sensor){
 
     }
 
-    GICR |= (1<<INT2);     //Vuelvo a activar la interrupcion INT2
+    //Vuelvo a activar la interrupcion INT2
+    GICR |= (1<<INT2);
 
 
     if (status_flag == 1)
         return 0xFFFFFFFF;
-    /*
-    else if(tiempo == 0)
-    return 0xFF;
 
-    else if(cuentas < 0x02)
-    return 0x02;
-    */
 
     else
         return cuentas;
-
-
 }

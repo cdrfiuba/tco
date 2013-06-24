@@ -10,7 +10,7 @@
  *	Descripción: 	El presente documento tiene las definiciones para el manejo de los 	        *
  *			        motores.								                                    *
  *												                                                *
- *	Última modificación: 10/06/2013								                                *
+ *	Última modificación: 24/06/2013								                                *
  *												                                                *
  ***********************************************************************************************/
 
@@ -165,9 +165,9 @@ void motores_rotar_izq_90_grados(void){
 
     while(flag_fin_rotacion == FALSE){
 
-        if(cuenta_encoder_derecha >= (cuenta_inicial_encoder_derecho + 360)){
+        if(cuenta_encoder_derecha >= (cuenta_inicial_encoder_derecho + 370)){
 
-            if(cuenta_encoder_izquierda >= (cuenta_inicial_encoder_izquierdo + 360)){
+            if(cuenta_encoder_izquierda >= (cuenta_inicial_encoder_izquierdo + 370)){
 
                 //Antes tenia 300
 
@@ -192,25 +192,7 @@ void motores_corregir_rumbo (void){
 
     _delay_ms(10);
 
-    distancia = prueba_rapida_sensor_pared(SENSOR_PARED_DER);
-
-//    while(!UCSRA);
-//    UDR = (uint8_t)((distancia >> 24) & 0x000000FF);
-//
-//    _delay_ms(10);
-//
-//    while(!UCSRA);
-//    UDR = (uint8_t)((distancia >> 16) & 0x000000FF);
-//
-//    _delay_ms(10);
-//
-//    while(!UCSRA);
-//    UDR = (uint8_t)((distancia >> 8) & 0x000000FF);
-//
-//    _delay_ms(10);
-//
-//    while(!UCSRA);
-//    UDR = (uint8_t)((distancia) & 0x000000FF);
+    distancia = medicion_distancia_pared(SENSOR_PARED_DER);
 
     _delay_ms(10);
 

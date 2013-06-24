@@ -10,7 +10,7 @@
  *	Descripción: 	El presente documento tiene las definiciones para el manejo de los	        *
  *			        sensores del piso       					                                *
  *												                                                *
- *	Última modificación: 15/06/2013								                                *
+ *	Última modificación: 24/06/2013								                                *
  *												                                                *
  ***********************************************************************************************/
 

@@ -10,7 +10,7 @@
  *	Descripción: 	El presente documento tiene las definiciones para el manejo de los          *
  *			        encoders.                                                                   *
  *												                                                *
- *	Última modificación: 13/06/2013								                                *
+ *	Última modificación: 24/06/2013								                                *
  *												                                                *
  ***********************************************************************************************/
 

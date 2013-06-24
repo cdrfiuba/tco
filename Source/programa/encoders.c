@@ -10,7 +10,7 @@
  *	Descripción: 	El presente documento tiene las definiciones para el manejo de los          *
  *			        encoders.                                                                   *
  *												                                                *
- *	Última modificación: 13/06/2013								                                *
+ *	Última modificación: 24/06/2013								                                *
  *												                                                *
  ***********************************************************************************************/
 
@@ -26,12 +26,12 @@ void inicializar_encoders(void){
     DDRD    &= ~(1<<PD2);   //Configuro como entrada
     PORTD   &= ~(1<<PD2);   //Desactivo el pull up
 
-    GICR |= (1<<INT0);      //Activo INT0
-    GICR |= (1<<INT1);      //Activo INT1
-   // GICR &= ~(1<<INT2);     //Desactivo INT2
+    GICR    |= (1<<INT0);   //Activo INT0
+    GICR    |= (1<<INT1);   //Activo INT1
+   // GICR &= ~(1<<INT2);   //Desactivo INT2
 
-    MCUCR |= ((1<<ISC01) | (1<<ISC00));     //Configuro la INT0 por flanco ascendente
-    MCUCR |= ((1<<ISC11) | (1<<ISC10));     //Configuro la INT1 por flanco ascendente
+    MCUCR   |= ((1<<ISC01) | (1<<ISC00));     //Configuro la INT0 por flanco ascendente
+    MCUCR   |= ((1<<ISC11) | (1<<ISC10));     //Configuro la INT1 por flanco ascendente
 
 }
 

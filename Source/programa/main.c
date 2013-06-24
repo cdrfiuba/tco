@@ -10,7 +10,7 @@
  *	Descripción: 	El presente documento tiene las definiciones para el manejo del		        *
  *			        programa principal.							                                *
  *												                                                *
- *	Última modificación: 15/06/2013								                                *
+ *	Última modificación: 24/06/2013								                                *
  *												                                                *
  ***********************************************************************************************/
 
@@ -21,15 +21,11 @@
 volatile uint8_t    value, flag_piso_blanco;
 
 //Variables encoders
-volatile uint32_t   cuenta_encoder_izquierda, cuenta_encoder_derecha, cuenta_encoder_derecha_anterior, cuenta_encoder_izquierda_anterior;
+volatile uint32_t   cuenta_encoder_izquierda, cuenta_encoder_derecha;
 
 //Variables sensores pared
 volatile uint8_t    sensor_active, status_flag;
 volatile uint32_t   interrupciones_timer_1, distancia;
-
-//Varibles sensores piso
-uint8_t             estado_sensor_piso_cen, estado_sensor_piso_der, estado_sensor_piso_izq;
-
 
 
 int main(void)
@@ -46,82 +42,80 @@ int main(void)
 
     cuenta_encoder_derecha = 0;
     cuenta_encoder_izquierda = 0;
-    estado_sensor_piso_cen = 0;
     _delay_ms(500);
 
 
 	for (;;){
 
-            motores_corregir_rumbo();
+        //Se corrige el rumbo, midiendo la distancia a la pared derecha.
+        motores_corregir_rumbo();
 
-            motores_avanzar(200,200, 40);
+        //Se avanza una distancia muy pequeña.
+        motores_avanzar(200,200, 40);
 
-            distancia = prueba_rapida_sensor_pared(SENSOR_PARED_DER);
+        //Se mide a la derecha para saber si hay pared o no.
+        distancia = medicion_distancia_pared(SENSOR_PARED_DER);
 
-            if(distancia > DISTANCIA_GRANDE){
-            //Si entro aca es que no tengo pared a la derecha, entonces, giro a la derecha
+        //Si se entra acá es que no hay pared a la derecha, entonces, se giro a la derecha
+        if(distancia > DISTANCIA_GRANDE){
 
-                encender_sensores_piso();
+            //Se revisa si el piso es de color blanco, para saber si llegó al final del laberinto
+            //Para esto, primero se encienden los sensores del piso y se mide. Si hay suelo blanco,
+            //se avanza y se mide de nuevo. Si hay doble confirmación, entonces estoy en la casilla final.
+            encender_sensores_piso();
 
-                _delay_us(100);
+            _delay_us(100);
 
-                if((PINA & (1 << PA2)) == (1 << PA2)){
+            if((PINA & (1 << PA2)) == (1 << PA2)){
 
-                    motores_avanzar(200,200,200);
+                motores_avanzar(200,200,200);
 
-                    motores_detener();
+                motores_detener();
 
-                    _delay_ms(10000);
-
-                }
-
-                apagar_sensores_piso();
-
-                motores_avanzar(200,200, 200);
-
-                motores_rotar_der_90_grados();
-
-                motores_avanzar(200,200, 450);
+                _delay_ms(10000);
 
             }
 
-            else{
+            //Si se llega a este punto, el suelo es color negro.
+            apagar_sensores_piso();
 
-                //Si entro aca, es que tengo pared a la derecha
+            motores_avanzar(200,200, 200);
 
-                distancia = prueba_rapida_sensor_pared(SENSOR_PARED_CEN);
+            motores_rotar_der_90_grados();
 
-                if(distancia < DISTANCIA_CHICA){
+            motores_avanzar(200,200, 450);
 
-                    //Si entro aca, tengo pared a la derecha, y tengo pared al frente
+        }
+
+        //Si se entra acá, es que hay una pared a la derecha
+        else{
+
+            distancia = medicion_distancia_pared(SENSOR_PARED_CEN);
+
+            //Si se entra acá, es que hay pared a la derecha, y al frente
+            if(distancia < DISTANCIA_CHICA){
+
+                motores_rotar_izq_90_grados();
+
+                _delay_ms(10);
+
+                distancia = medicion_distancia_pared(SENSOR_PARED_CEN);
+
+                _delay_ms(10);
+
+                //Si se entra acá, es que hay pared a la derecha, al frente y a la izquierda.
+                //Entonces rota 180 grados.
+                //La distancia tiene que se mayor a distancia chica, porque a veces no queda centrado en la casilla
+                if(distancia < 0x00001800){
+
                     motores_rotar_izq_90_grados();
 
-                    _delay_ms(10);
-
-                    distancia = prueba_rapida_sensor_pared(SENSOR_PARED_CEN);
-
-                    _delay_ms(10);
-
-                    if(distancia < 0x00001800){
-
-                        //Si entro aca, es que tengo pared a la derecha, al frente y a la izquierda.
-
-                        motores_rotar_izq_90_grados();
-
-                    }
-
-                    motores_avanzar(200,200, 450);
                 }
 
-                else{
-
-                }
-
-
+                motores_avanzar(200,200, 450);
             }
-
+        }
     }
-
 
 	return 0;
 }
@@ -143,7 +137,6 @@ void usart_init()
 ISR (USART_RXC_vect){
 
     //Echo: Esta función recibe un dato por el puerto serie y lo reenvia. Sirve para probar que la conexión esta OK
-
 	value = UDR;    // Tomo el valor recibido, y lo cargo en la variable value
 	UDR = value;	// Cargo el buffer con lo almacenado en la variable value
 }
@@ -164,17 +157,12 @@ ISR (INT0_vect)
 {
     cuenta_encoder_derecha++;
 
-    cuenta_encoder_derecha_anterior = cuenta_encoder_derecha;
-
-
 }
 
 //Interrupción INT 1
 ISR (INT1_vect)
 {
     cuenta_encoder_izquierda++;
-
-    cuenta_encoder_izquierda_anterior = cuenta_encoder_izquierda;
 
 }
 
@@ -183,15 +171,12 @@ ISR (INT1_vect)
 
 ISR (INT2_vect){
 
-    if((PINA & (1 << PA2)) == (1 << PA2)){
+    if((PINA & (1 << PA2)) == (1 << PA2))
 
        flag_piso_blanco = TRUE;
 
-    }
-
-
-//Finalmente hacemos un clear al registro GIFR de interrupcion como se pide en hoja de datos [1].
-GIFR &= ~(1<<INTF2);
+    //Finalmente hacemos un clear al registro GIFR de interrupcion como se pide en hoja de datos [1].
+    GIFR &= ~(1<<INTF2);
 
 }
 
