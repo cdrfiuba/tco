@@ -198,6 +198,27 @@ Ignacio L. J. \> Carballeda \> 91646\> carballeda.ignacio@gmail.com\\
 
 \subsection{Identificación del color del piso}
 
+Sensado del suelo:
+
+Con el objetivo de detectar la celda blanca que le indica al robot que salió correctamente del laberinto, se utilizaron tres sensores detectores de color en la parte baja del mismo.
+Los sensores utilizados son CNY70 , los mismos se componen de un emisor (led infrarrojo) y un receptor (transistor TBJ NPN).
+
+Estos sensores pueden ser encendidos y apagados a voluntad por el microcontrolador.
+
+Cuando el robot está situado en una celda blanca (salida) la luz emitida por el led del sensor se refleja en la superficie y excita la base del transistor permitiendo de esta forma un flujo de corriente de emisor a colector.
+
+Debido a que el microcontrolador sólo puede detectar cambios de tensión ubicamos un resistor entre el emisor del transistor y la referencia del circuito (GND); luego obtenemos nuestra tensión en el emisor.
+
+En la hoja de datos del ATmega16 se especifica que la máxima tensión admisible para un cero lógico (con el pin configurado como entrada ) es de $0.2 \times VCC$ , en nuestro caso $VCC= 5 \, V$ => $V_{IL_{max}}=1 \, V$ por lo tanto una tensión que no supere 1 Volt será considerada como un cero logico.
+Luego $V_{IH_{min}}=0.6\timesVCC=0.6\times5V=3V$ (mínima tensión para detectar un uno lógico en un pin configurado como entrada).
+
+Cuando un sensor es situado sobre una celda blanca la tensión en su emisor alcanza los 4.5 V, por lo tanto a efectos del microcontrolador es un uno lógico.
+Cuando el sensor esta ubicado sobre una celda negra la tensión medida es aproximadamente cero, ya que la luz no es reflejada en esta superficie (interpretado como cero logico).
+
+El microcontrolador enciende los sensores durante un tiempo muy corto cada vez que el robot decide girar a su derecha, de esta forma impedimos que se malinterpreten las líneas blancas que dividen las celdas como la salida del laberinto y además evitamos derrochar corriente que estaría siendo drenada constantemente por los leds infrarrojos de los CNY70 (aprox $20mA$ por sensor).
+
+
+
 \subsection{Comunicación serie}
 
 
