@@ -6,19 +6,9 @@
 			<Cursor1 position="543" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="../../programa/sensores_piso.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="951" topLine="0" />
-		</Cursor>
-	</File>
 	<File name="../../programa/main.c" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="5347" topLine="144" />
-		</Cursor>
-	</File>
-	<File name="../../programa/encoders.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="960" topLine="0" />
+			<Cursor1 position="2902" topLine="36" />
 		</Cursor>
 	</File>
 	<File name="../../programa/motores.h" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -26,19 +16,9 @@
 			<Cursor1 position="1527" topLine="18" />
 		</Cursor>
 	</File>
-	<File name="../../programa/sensores_pared.c" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="../../programa/motores.c" open="1" top="1" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1668" topLine="30" />
-		</Cursor>
-	</File>
-	<File name="../../programa/main.h" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1528" topLine="15" />
-		</Cursor>
-	</File>
-	<File name="../../programa/sensores_piso.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2061" topLine="0" />
+			<Cursor1 position="6085" topLine="145" />
 		</Cursor>
 	</File>
 	<File name="../../programa/encoders.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -46,19 +26,39 @@
 			<Cursor1 position="1661" topLine="10" />
 		</Cursor>
 	</File>
-	<File name="../../programa/motores.c" open="1" top="1" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="../../programa/main.h" open="0" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="6085" topLine="146" />
+			<Cursor1 position="1528" topLine="15" />
 		</Cursor>
 	</File>
-	<File name="../../programa/pwm.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="../../programa/sensores_piso.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="972" topLine="18" />
+			<Cursor1 position="951" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="../../programa/encoders.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="960" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="../../programa/sensores_piso.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2061" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="../../programa/sensores_pared.c" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1956" topLine="20" />
 		</Cursor>
 	</File>
 	<File name="../../programa/sensores_pared.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="1676" topLine="9" />
+		</Cursor>
+	</File>
+	<File name="../../programa/pwm.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="972" topLine="18" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>
