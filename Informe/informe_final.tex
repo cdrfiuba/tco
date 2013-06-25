@@ -36,7 +36,29 @@
            	filecolor=blue,      	%Color para links a archivos
 		pdftitle={Proyecto (66.09) [Junio 2010] - Robótica Colaborativa},
 		pdfauthor={Manuel I. Fernandez, Marcela F. Luberto y Sebastián García Marra}]
-		{hyperref}					
+		{hyperref}
+
+\usepackage{color}				
+\usepackage{listings}		%Este paquete es para poder insertar codigo en el informe y su respectivo set
+\lstset{ 
+language=C++,                	% choose the language of the code
+basicstyle=\footnotesize,       % the size of the fonts that are used for the code
+numbers=left,                   % where to put the line-numbers
+numberstyle=\footnotesize,      % the size of the fonts that are used for the line-numbers
+stepnumber=1,                   % the step between two line-numbers. If it is 1 each line will be numbered
+numbersep=5pt,                  % how far the line-numbers are from the code
+backgroundcolor=\color{white},  % choose the background color. You must add \usepackage{color}
+showspaces=false,               % show spaces adding particular underscores
+showstringspaces=false,         % underline spaces within strings
+showtabs=false,                 % show tabs within strings adding particular underscores
+frame=single,         		% adds a frame around the code
+tabsize=2,         		% sets default tabsize to 2 spaces
+captionpos=b,           	% sets the caption-position to bottom
+breaklines=true,        	% sets automatic line breaking
+breakatwhitespace=false,    	% sets if automatic breaks should only happen at whitespace
+escapeinside={\%*}{*)}          % if you want to add a comment within your code
+}
+					
 
 
 \newcommand{\autor}[3]{\vspace{5mm}%
@@ -196,27 +218,66 @@ Ignacio L. J. \> Carballeda \> 91646\> carballeda.ignacio@gmail.com\\
 
 \subsection{Medición de distancia}
 
+Para medir la distancia del robot a las paredes utilizamos tres módulos HC-SR04, los mismos funcionan por ultrasonido.
+
+Elegimos este sensor por varios razones:
+\begin{itemize}
+\item Su rango de 2 centímetros a 4 metros, ideal para las distancias que necesitamos medir
+\item Su resolución nos pareció adecuada (aproximadamente 0.3cm).
+\item Simplicidad y costo reducido.
+\end{itemize}
+
+Desconocemos de la circuiteria interna de este módulo y lo tratamos más bien como a una caja negra con la cual podemos interactuar mediante
+sus pines de E/S.\\
+
+El HC-SR04 además de sus pines para alimentación (VCC y GND) tiene otros dos pines: Trigger y Echo. Para obtener una medición el modulo solo 
+requiere un pulso de $10 \mu S$ en su pin Trigger, luego el módulo devuelve un pulso por el pin de Echo con un tiempo en alto 
+proporcional a la distancia medida.\\
+
+En nuestro código configuramos una interrupción para que se active con cada desbordamiento del timer/contador1, la cual en cada iteración 
+incrementa en 1 la variable \textbf{interrupciones\_timer\_1}. También configuramos los pines Echo y Trigger como entrada y salida respectivamente.\\
+
+Para obtener una medición lo primero que hacemos es enviar el antedicho pulso de $10 \mu S$ al pin de Trigger, luego esperamos con un ciclo ``while'' 
+a obtener un ``uno'' en pin de Echo , acto seguido tomamos el valor actual del contador/timer1 y lo guardamos en variable \textbf{cuentas\_inicial}. 
+A continuación esperamos a que el pin de Echo vuelva a cero con otro ciclo ``while'' y guardamos el valor del registro del contador/timer1 en otra variable 
+llamada \textbf{cuentas\_final}.
+
+Luego, teniendo en cuenta que el timer1 fué configurado para que desborde a las 256 cuentas, para obtener el número total de cuentas 
+utilizamos el siguiente código:\\
+
+\begin{lstlisting}
+cuentas = (256 - cuentas_inicial) + 256 * interrupciones_timer_1 + cuentas_final;
+\end{lstlisting}
+
+Finalmente realizamos una conversión de modo tal que podamos relacionar las cuentas con una distancia aproximada.
+
 \subsection{Identificación del color del piso}
 
-Sensado del suelo:
-
-Con el objetivo de detectar la celda blanca que le indica al robot que salió correctamente del laberinto, se utilizaron tres sensores detectores de color en la parte baja del mismo.
+Con el objetivo de detectar la celda blanca que le indica al robot que salió correctamente del laberinto,
+se utilizaron tres sensores detectores de color en la parte baja del mismo.
 Los sensores utilizados son CNY70 , los mismos se componen de un emisor (led infrarrojo) y un receptor (transistor TBJ NPN).
 
 Estos sensores pueden ser encendidos y apagados a voluntad por el microcontrolador.
 
-Cuando el robot está situado en una celda blanca (salida) la luz emitida por el led del sensor se refleja en la superficie y excita la base del transistor permitiendo de esta forma un flujo de corriente de emisor a colector.
+Cuando el robot está situado en una celda blanca (salida) la luz emitida por el led del sensor se refleja en la 
+superficie y excita la base del transistor permitiendo de esta forma un flujo de corriente de emisor a colector.
 
-Debido a que el microcontrolador sólo puede detectar cambios de tensión ubicamos un resistor entre el emisor del transistor y la referencia del circuito (GND); luego obtenemos nuestra tensión en el emisor.
+Debido a que el microcontrolador sólo puede detectar cambios de tensión ubicamos un resistor entre el emisor del transistor 
+y la referencia del circuito (GND); luego obtenemos nuestra tensión en el emisor.
 
-En la hoja de datos del ATmega16 se especifica que la máxima tensión admisible para un cero lógico (con el pin configurado como entrada ) es de $0.2 \times VCC$ , en nuestro caso $VCC= 5 \, V$ => $V_{IL_{max}}=1 \, V$ por lo tanto una tensión que no supere 1 Volt será considerada como un cero logico.
-Luego $V_{IH_{min}}=0.6\timesVCC=0.6\times5V=3V$ (mínima tensión para detectar un uno lógico en un pin configurado como entrada).
+En la hoja de datos del ATmega16 se especifica que la máxima tensión admisible para un cero lógico (con el pin configurado como entrada ) 
+es de $0.2 \times VCC$ , en nuestro caso $VCC= 5 V$ $\Rightarrow$ $V_{IL_{max}}=1 V$ por lo tanto una tensión que no supere 1 Volt
+será considerada como un cero logico.
+Luego $V_{IH_{min}}=0.6\times VCC=0.6\times5V=3V$ (mínima tensión para detectar un uno lógico en un pin configurado como entrada).
 
-Cuando un sensor es situado sobre una celda blanca la tensión en su emisor alcanza los 4.5 V, por lo tanto a efectos del microcontrolador es un uno lógico.
-Cuando el sensor esta ubicado sobre una celda negra la tensión medida es aproximadamente cero, ya que la luz no es reflejada en esta superficie (interpretado como cero logico).
+Cuando un sensor es situado sobre una celda blanca la tensión en su emisor alcanza los 4.5 V, por lo tanto a efectos del microcontrolador
+es un uno lógico.
+Cuando el sensor esta ubicado sobre una celda negra la tensión medida es aproximadamente cero, ya que la luz no es reflejada en esta
+superficie (interpretado como cero logico).
 
-El microcontrolador enciende los sensores durante un tiempo muy corto cada vez que el robot decide girar a su derecha, de esta forma impedimos que se malinterpreten las líneas blancas que dividen las celdas como la salida del laberinto y además evitamos derrochar corriente que estaría siendo drenada constantemente por los leds infrarrojos de los CNY70 (aprox $20mA$ por sensor).
-
+El microcontrolador enciende los sensores durante un tiempo muy corto cada vez que el robot decide girar a su derecha, de esta forma 
+impedimos que se malinterpreten las líneas blancas que dividen las celdas como la salida del laberinto y además evitamos derrochar 
+corriente que estaría siendo drenada constantemente por los leds infrarrojos de los CNY70 (aprox $20mA$ por sensor).
 
 
 \subsection{Comunicación serie}
