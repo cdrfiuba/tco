@@ -135,11 +135,12 @@ escapeinside={\%*}{*)}          % if you want to add a comment within your code
 %\vspace{1cm}
 \begin{tabbing}
 \hspace*{3cm} \= \hspace*{3cm} \= \hspace*{3cm}\= \hspace*{3cm} \kill
-\textbf{Nombre} \> \textbf{Apellido} \> \textbf{Padrón} \> \textbf{Mail} \\
+\textbf{Apellido} \> \textbf{Nombre} \> \textbf{Padrón} \> \textbf{Mail} \\
  \>  \>  \>  \\
-Sebastian \> Cerone \> 90259 \> sebascerone@gmail.com\\
-Gisela \> Farace \> 92457 \> gisela.farace@gmail.com\\
-Ignacio L. J. \> Carballeda \> 91646\> carballeda.ignacio@gmail.com\\
+Carballeda \> Ignacio L. J. \>  91646\> carballeda.ignacio@gmail.com\\
+Cerone \> Sebastian \>  90259 \> sebascerone@gmail.com\\
+Farace \> Gisela \>  92457 \> gisela.farace@gmail.com\\
+
 \end{tabbing}
 \end{center}
 \newpage
@@ -157,19 +158,21 @@ Ignacio L. J. \> Carballeda \> 91646\> carballeda.ignacio@gmail.com\\
 
 \section{Motivación}
 
-	Este desarrollo surge como un proyecto extracurricular del \emph{Club de Robótica} de la \emph{Facultad de Ingeniería de la Universidad de Buenos Aires} a realizarse dentro del ambito \emph{Laboratorio Abierto (LABI)}.
+Este desarrollo surge como un proyecto extracurricular del \emph{Club de Robótica} de la \emph{Facultad de Ingeniería de la Universidad de Buenos Aires} a realizarse dentro del ámbito del \emph{Laboratorio Abierto (LABI)}.
 
-	Desde el año 2011, el \emph{Club de Robótica} realiza una competencia anual de robótica. 
-	Primero empezó con una carrera de robot velocistas; que consiste en que un robot realice por sus propios medios, en el menor tiempo posible, un recorrido delimitado por una linea blanca sobre una superficie negra. Al año siguiente, se incorporó la competencia de "Mini-sumo"; en donde dos robots se enfrentan, cual luchadores de sumo, y tienen que sacar al oponente de un "tatami". Finalmente, este año, se incorporó la competencia "Laberinto", en donde un robot, en el menor tiempo posible, debe encontrar la salida del laberinto.
+Desde el año 2011, el \emph{Club de Robótica} realiza una competencia anual de robótica. 
+En un primer momento, empezó con una carrera de robots velocistas; que consiste en que un robot realice por sus propios medios, en el menor tiempo posible, un recorrido delimitado por una línea blanca sobre una superficie negra. 
+Al año siguiente, se incorporó la competencia de "Mini-sumo"; en donde dos robots se enfrentan, cual luchadores de sumo, y deben empujar al oponente fuera del "tatami". 
+Finalmente, este año, se incorporó la categoría "Laberinto", en donde un robot, en el menor tiempo posible, debe encontrar la salida de un laberinto.
 
-	Es por esta razón que se opto por realizar un proyecto que sirva para aprender los temas de la asignatura \emph{Laboratorio de microcomputadores} y pueda representar al \emph{Club de Robótica} en la competencia anual.
+Es por esta razón, que se opto por realizar un proyecto que sirva para aprender los temas de la asignatura \emph{Laboratorio de microcomputadores} y pueda representar al \emph{Club de Robótica} en la competencia anual.
 
-	Cabe aclarar, la elección del nombre \emph{TCO}, esta inspirado en el personaje de la mitología griega \emph{Teseo}, quien logró salir de un laberinto luego de derrotar al Minotauro.
+Cabe aclarar, la elección del nombre \emph{TCO}, está inspirado en el personaje de la mitología griega \emph{Teseo}, quien logró salir de un laberinto luego de derrotar al Minotauro.
 
 \vspace{5mm}
 \section{Objetivo}
 	
-	Por las razones planteadas anteriormente, se plantió como objetivo de este trabajo el diseño, fabricación y programación de un robot capaz de salir de un laberinto por sus propios medios. 
+Por las razones planteadas anteriormente, el objetivo de este trabajo es el diseño, fabricación y programación de un robot capaz de salir de un laberinto por sus propios medios. 
 
 \newpage
 
@@ -179,20 +182,20 @@ Ignacio L. J. \> Carballeda \> 91646\> carballeda.ignacio@gmail.com\\
 
 \begin{figure}[H]
   \centering
-%    \includegraphics[width=0.7\textwidth]{img/diagrama.eps}
+    \includegraphics[width=0.7\textwidth]{img/diagrama.eps}
   \caption{Diagrama de bloques del robot.}
 \end{figure}
 
-Para llevar a cabo este proyecto se fabricó un robot. El mismo esta compuesto de las siguientas partes.
+Para llevar a cabo este proyecto se fabricó un robot. El mismo esta compuesto de las siguientas partes:
 
 \begin{itemize}
 
-\item Microcontrolador: Se eligió un ATMega16 de AVR. Este microcontrolador de AVR, muy sensillo, tiene la cantidad justa de períferícos necesaria para la realización de este proyecto. 
-\item Motores: Se eligieron dos motores de la marca pololu. Estos tiene encoders integrados, lo que facilita un mejor control del desplazamiento.
-\item Puente H LMD18200: Este puente H simple, maneja cargas de hasta 3 Ampere y flag de advertencia de alta temperatura.
+\item Microcontrolador: Se eligió un \emph{ATMEGA16} de \emph{AVR}. Este microcontrolador, muy sencillo, tiene la cantidad adecuada de períferícos necesarios para la realización de este proyecto. 
+\item Motores: Se optó por dos motores de la marca \emph{pololu}. Éstos tienen encoders integrados, que facilitan un mejor control del desplazamiento.
+\item Puente H LMD18200: Este puente H simple, maneja cargas de hasta 3 Amperes y posee un flag de advertencia de alta temperatura.
 \item Sensores HC - SR04: Estos sensores de distancia por ultrasonido, sencillos de utilizar, y muy estables, detectan distancia en un rango de 2 cm a 450 cm, con un margen de error de 0,3 cm.
-\item Sensores CNY70: Estos sensores opticos, se utilizan para detectar si el piso es de color negro o blanco. En este caso, se utilizaran para saber si el robot llegó al final del laberinto.
-\item Baterías y fuente de alimentación: El robót cuenta con 3 baterías de Li-ion, 2 de 7,2 v y 1 de 3,7 v. Junto con dos fuentes DC/DC de texas proporcionand 12 v y 5 v.
+\item Sensores CNY70: Estos sensores ópticos, se utilizan para diferenciar el color del piso entre blanco o negro. En este caso, se utilizarán para detectar si el robot llegó al final del laberinto.
+\item Baterías y fuente de alimentación: El robót cuenta con 3 baterías de Li-ion, 2 de 7,2 v y 1 de 3,7 v. Junto con dos fuentes DC/DC de texas proporcionando 12 v y 5 v.
 
 
 \begin{figure}[H]
@@ -206,14 +209,14 @@ Para llevar a cabo este proyecto se fabricó un robot. El mismo esta compuesto de
 
 	
 \subsection{Laberinto}
-	El laberinto fue fabricado como módulos encastrables con únidad minima modelizable como una matriz perteneciente a $\mathbb{R}^{3x3}$, donde las paredes internas del mismo, definen \emph{celdas} que se pueden interpretar como posiciones dentro de la matriz.
+	El laberinto se fabricó como un módulo modelizable como una matriz perteneciente a $\mathbb{R}^{3x3}$, donde sus paredes internas, definen \emph{celdas} que se pueden interpretar como posiciones dentro de la matriz.
 	
-	El mismo se contruyó con paredes color blanco y piso color negro, dividiendo cada celda por una linea blanca, porque sobre este color es óptimo el rebote de luz infrarroja para los sensores del piso, en el cual las marcas blancas sobre fondo negro dan un gran constraste, lo que se traduce en un marcado cambio de nivel en la señal de salida, y facilita la detección.
+	El mismo se contruyó con paredes color blanco y piso color negro, dividiendo cada celda por una línea blanca, siendo que sobre este color el rebote de luz infrarroja resulta óptimo para los sensores del piso, y facilita la detección entre una celda y otra.
 	
 \begin{figure}[H]
   \centering
-%    \includegraphics[width=0.7\textwidth]{img/laberinto.eps}
-    \caption{Laberinto}
+    \includegraphics[width=0.7\textwidth]{img/laberinto.eps}
+  \caption{Laberinto}
 \end{figure}
 
 
@@ -244,19 +247,19 @@ Se eligieron estos sensores por varias razones:
 \item Simplicidad y costo reducido.
 \end{itemize}
 
-Se desconoce la circuiteria interna del mismo, por lo que será tratado como a una caja negra con el cual se puede interactuar mediante
-sus pines de E/S.\\
+Se desconoce la circuitería interna del mismo, por lo que será tratado como a una caja negra con el cual se puede interactuar mediante
+sus pines de Entrada/Salida.\\
 
-El HC-SR04 además de sus pines para alimentación (VCC y GND) tiene otros dos pines: Trigger y Echo. Para obtener una medición el modulo solo 
-requiere un pulso de $10 \mu S$ en su pin Trigger, luego el módulo pone en alto el pin de Echo con un tiempo proporcional a la distancia medida.\\
+El HC-SR04 además de sus pines para alimentación (VCC y GND), tiene otros dos pines: Trigger y Echo. Para obtener una medición, el módulo sólo 
+requiere un pulso de $10 \mu S$ en el pin Trigger, luego el módulo pone en alto el pin de Echo con un tiempo proporcional a la distancia medida.\\
 
-En el código fuente de este proyecto se configuró una interrupción para que se active con cada desbordamiento del \emph{timer/contador1}, la cual en cada iteración incrementa en 1 la variable \textbf{interrupciones\_timer\_1}. También se configura los pines Echo y Trigger como entrada y salida respectivamente.\\
+En el código fuente de este proyecto, se configuró una interrupción para que se active con cada desbordamiento del \emph{timer/contador1}. Esta interrupción en cada iteración incrementa en 1 la variable \textbf{interrupciones\_timer\_1}. También se configuran los pines Echo y Trigger como entrada y salida respectivamente.\\
 
-Para obtener una medición primero se pone en alto el pin de Trigger por un tiempo mayor a $10 \mu S$, luego se espera con un ciclo ``while'' 
-a obtener un ``uno'' en pin de Echo , acto seguido se toma el valor actual del contador/timer1 y se guarda en la variable \textbf{cuentas\_inicial}. 
-A continuación se espera a que el pin de Echo vuelva a cero con otro ciclo ``while'' y se guarda el valor del registro del contador/timer1 en otra variable llamada \textbf{cuentas\_final}.
+Para obtener una medición, primero se pone en alto el pin de Trigger por un tiempo mayor a $10 \mu S$, luego se espera con un ciclo ``while'' 
+a obtener un ``uno'' en pin de Echo; acto seguido se toma el valor actual del contador/timer1 y se guarda en la variable \textbf{cuentas\_inicial}. 
+A continuación, se espera a que el pin de Echo vuelva a cero con otro ciclo ``while'' y se guarda el valor del registro del contador/timer1 en otra variable llamada \textbf{cuentas\_final}.
 
-Luego, teniendo en cuenta que el timer1 fué configurado para que desborde a las 256 cuentas, para obtener el número total de cuentas 
+Luego, teniendo en cuenta que el timer1 fué configurado para que desborde a las 256 cuentas; para obtener el número total de cuentas 
 se utiliza el siguiente código:\\
 
 \begin{lstlisting}
@@ -264,34 +267,29 @@ cuentas = (256 - cuentas_inicial) + 256 * interrupciones_timer_1 + cuentas_final
 \end{lstlisting}
 
 Finalmente se realiza una conversión para relacionar las cuentas con una distancia aproximada.
+\vspace{5mm}
+
 
 \subsection{Identificación del color del piso}
 
-Con el objetivo de detectar la celda blanca que le indica al robot que salió correctamente del laberinto,
-se utilizaron tres sensores detectores de color en la parte baja del mismo.
-Los sensores utilizados son CNY70 , los mismos se componen de un emisor (led infrarrojo) y un receptor (transistor TBJ NPN).
+Con el objetivo de detectar la celda blanca, se utilizaron tres sensores detectores de color en la parte baja del mismo, que le indican al robot que salió correctamente del laberinto.
+Los sensores utilizados son los \emph{CNY70}, compuestos por un emisor (led infrarrojo) y un receptor (transistor TBJ NPN).
 
 Estos sensores pueden ser encendidos y apagados a voluntad por el microcontrolador.
 
-Cuando el robot está situado en una celda blanca (salida) la luz emitida por el led del sensor se refleja en la 
-superficie y excita la base del transistor permitiendo de esta forma un flujo de corriente de emisor a colector.
+Cuando el robot está situado en una celda blanca (salida), la luz emitida por el led del sensor se refleja en la superficie y excita la base del transistor, permitiendo de esta forma un flujo de corriente de emisor a colector.
 
-Debido a que el microcontrolador sólo puede detectar cambios de tensión se ubicó un resistor entre el emisor del transistor 
-y la referencia del circuito (GND); luego se mide la tensión en el emisor.
+Se ubicó un resistor entre el emisor del transistor y la referencia del circuito (GND), para detectar los cambios de tensión.
 
-En la hoja de datos del ATmega16 se especifica que la máxima tensión admisible para un cero lógico (con el pin configurado como entrada ) 
-es de $0.2 \times VCC$ , en nuestro caso $VCC= 5 V$ $\Rightarrow$ $V_{IL_{max}}=1 V$ por lo tanto una tensión que no supere 1 Volt
-será considerada como un cero logico.
-Luego $V_{IH_{min}}=0.6\times VCC=0.6\times5V=3V$ (mínima tensión para detectar un uno lógico en un pin configurado como entrada).
+En la hoja de datos del \emph{ATMEGA16} se especifica que la máxima tensión admisible para un cero lógico (con el pin configurado como entrada), es de $0.2 \times VCC$ , en nuestro caso $VCC= 5 V$ $\Rightarrow$ $V_{IL_{max}}=1 V$. Por lo tanto una tensión que no supere 1 Volt, será considerada como un cero logico.
+Por otro lado, $V_{IH_{min}}=0.6\times VCC=0.6\times5V=3V$ es la mínima tensión para detectar un uno lógico en un pin configurado como entrada.
 
-Cuando un sensor es situado sobre una celda blanca la tensión en su emisor alcanza los 4.5 V, por lo tanto a efectos del microcontrolador
-es un uno lógico.
-Cuando el sensor esta ubicado sobre una celda negra la tensión medida es aproximadamente cero, ya que la luz no es reflejada en esta
-superficie (interpretado como cero logico).
+Cuando un sensor es situado sobre una celda blanca, la tensión en su emisor alcanza los 4.5 V, valor considerado por el microcontrolador como un ''uno'' lógico. En cambio, ubicado sobre una celda negra, la tensión medida es aproximadamente cero, ya que la luz no es reflejada en esta
+superficie y esto es interpretado como cero lógico.
 
-El microcontrolador enciende los sensores durante un tiempo muy corto cada vez que el robot decide girar a su derecha, de esta forma 
-se evita que las líneas blancas que dividen las celdas como la salida del laberinto.
-
+El microcontrolador enciende los sensores durante un tiempo muy breve cada vez que el robot decide girar a su derecha, de esta forma 
+se evita que las líneas blancas que dividen las celdas sean interpretadas como la salida del laberinto.
+\vspace{5mm}
 
 \subsection{Comunicación serie}
 
@@ -370,6 +368,8 @@ se evita que las líneas blancas que dividen las celdas como la salida del laberi
 	SW3				& Llave dos vias& 1	&    	&     	\\    
 \hline      
 	Q1				& NPN		& 1	&    	&     	\\  
+\hline    
+
 \end{tabular}
 
 
