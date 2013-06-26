@@ -311,17 +311,37 @@ Esta función es utilizara para \emph{debugging}.
 
 Se configuró la \emph{UART} para enviar y recibir datos, y se configuró una interrupción, que se activa cuando se recibe un dato por el puerto serie.
  
- 
 \newpage
 \section{Desarrollo del proyecto}
  
 \subsection{Decisiones de diseño}
+
+Para el diseño del robot, primero se analizó la forma en la cual éste se desplazaría dentro del laberinto. Como, entre los moviemientos a realizar, hay que rotar 90° o 180° se pensó que la estructura del robot debía ser circular, para evitar complicaciones al momento de rotar. \\
+
+Por otro lado, se diagramó el robot en diferentes módulos, con las partes importantes, como el microcontrolador, los puentes H y los motores, la alimentación y los sensores de pared, y los sensores de piso. Por lo tanto, se armaron distintas placas, para cada uno de los módulos. De esta forma, se pudo probar cada parte por separado y corregir los errores fácilmente. Ésto, tambien fue muy ventajoso, al momento de solucionar problemas o fallas. \\
+
+Se dispusieron las placas pequeñas dentro de la placa circular de forma tal de colocar las baterías abajo, haciendo que el centro de gravedad este lo más cerca del piso. \\
+
+Para colocar la placa con los sensores de piso, se utilizaron dos tornillos largos atornillados en el robot. De esta forma logramos que los sensores queden al ras del piso para medir mejor. 
+\vspace{5mm}
  
 \subsection{Armado del robot}
  
+El robot esta montado sobre los mismos PCB. La placa de alimentación es el disco central, donde se atornillaron los motores, y las placas del microcontrolador y los puente H. Las baterías se agarraron con presintos. Las placas estan conectadas entre si, por medio de cables planos.
+\vspace{5mm}
+
 \subsection{Problemas hallados}
- 
-\subsection{Experiencia competencia Megaman 2013}
+
+Durante la realización del proyecto se hallaron varios problemas. Se lista a continución algunos de ellos:
+
+\begin{itemize}
+\item Al momento de comprar los motores, no se analizó como encastrar las ruedas. Por lo que se tuvo que mandar a fabricar un adaptador especial.
+\item Las ruedas compradas eran muy pequeñas. Por lo que se adaptaron rodillos de una impresora, para cumplir la función de rueda.
+\item Se tuvo que crear un adaptador especial para sostener los motores.
+\item Durante toda la experiencia, hubo muchos problemas con las placas. Desde pistas cortadas, agujeros mal colocados o errores en el diametro de los mismos, errores en las dimensiones de los componentes. Por ejemplo, la placa de los puente H, se fabricó 3 veces, ya que se hallaron problemas, tanto de diseño como de fabricación.
+\end{itemize}
+\vspace{5mm}
+  
  
  
 \newpage
@@ -329,7 +349,7 @@ Se configuró la \emph{UART} para enviar y recibir datos, y se configuró una inte
      
 Los resultados obtenidos en el presente proyecto han sido satisfactorios. Se ha realizado un robot capaz de cumplir con el objetivo propuesto, salir de un laberinto por sus propios medios.
 
-También, el proyecto a sido galardonado con el segundo premio en la categoría \emph{Laberinto}, en la competencia de robótica \emph{Megaman 2013} organizada por el \emph{Club de Robótica} de la \emph{Facultad de ingeniería de la Universidad de Buenos Aires}.
+También, el proyecto a sido galardonado con el segundo premio en la categoría \emph{Laberinto}, en la competencia de robótica \emph{Megaman 2013} organizada por el \emph{Club de Robótica} de la \emph{Facultad de ingeniería de la Universidad de Buenos Aires}.\\
 
 A futuro, se realizaran algunas mejoras, como por ejemplo:
 \begin{itemize}
