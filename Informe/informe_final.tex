@@ -248,7 +248,7 @@ Para controlar los motores, se realizaron funciones que usan en conjunto las cue
 
 Ambos motores tienen un sensor de efecto Hall en el extremo; estos, gracias a la circuiteria integrada, emiten un pulso cuadrado por cada vez que se da el efecto Hall en ellos. \\
 Sabiendo que por cada revolución de motor se producen 64 pulsos cuadrados y teniendo en cuenta la reducción de 29:1 en los motores, se puede determinar con precisión la cantidad de giro en cada rueda.
-Para que el microcontrolador pueda llevar la cuenta de los encoders, se conecto la salida de cada uno a pines de interrupción externa INT1 e INT2. De esta forma; cada vez que hay un flanco ascendente en alguna de las interrupciones, se incrementa una variable.
+Para que el microcontrolador pueda llevar la cuenta de los encoders, se conecto la salida de cada uno a los pines de interrupción externa INT1 e INT2. De esta forma; cada vez que hay un flanco ascendente en alguna de las interrupciones, se incrementa una variable.
 
 \subsection{Medición de distancia}
  
