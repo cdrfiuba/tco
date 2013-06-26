@@ -232,18 +232,17 @@ Para llevar a cabo este proyecto se fabricó un robot. El mismo esta compuesto de
  
 \subsection{PWM y Motores}
 
-Para tener la libertad de poder cambiar la velocidad de los motores se utilizó una señal PWM. Se configuró el \emph{timer/contador1} en modo \emph{Fast PWM}. Básicamente el contador incrementa de $0$ a $256$ cuentas
-y cuando alcanza esta última se desborda y comienza otra vez desde cero. Luego realizando dos comparaciones se puede variar el ancho de pulso de dos señales que se usan para regular la potencia entregada a cada motor.
+Para tener la libertad de poder cambiar la velocidad de los motores, se utilizó una señal PWM. Se configuró el \emph{timer/contador1} en modo \emph{Fast PWM}. De esta forma, el contador se incrementa de $0$ a $256$ cuentas. Cuando alcanza este último valor, se desborda y comienza otra vez desde cero. Luego, realizando dos comparaciones, se puede variar el ancho de pulso de dos señales que se usan para regular la potencia entregada a cada motor.
 
 También se utilizaron dos puentes H \emph{LMD18200} para poder frenar y cambiar el sentido de giro de cada motor por separado.\\
 
 Los motores del robot son de la marca \emph{Pololu}, los mismos vienen equipados con reducciones $29:1$ y encoders en tablatura con una resolución de 64 pasos por vuelta de motor.
 Gracias a la reducción incorporada en los motores se obtiene una buena relación velocidad/torque sin las complicaciones mecánicas que conlleva utilizar un sistema de engranajes por separado. 
-Por otra parte los encoders dotan al robot de una resolución de $29\times 64 = 1856$ cuentas por revolución de rueda.\\
+Por otra parte, los encoders dotan al robot de una resolución de $29\times 64 = 1856$ cuentas por revolución de rueda.\\
 
 Los motores requieren una tensión de $12V$ y pueden llegar a consumir una corriente de $3A$ cuando están bloqueados, por esta razón se incorporó una fuente DC/DC de $12V$ $6A$ \emph{PTN78020} marca \emph{Texas Instruments}.
 
-Para controlar los motores se realizaron funciones que usan en conjunto las cuentas obtenidas de los encoders, variaciones de la señal PWM y combinaciones en los pines de los puentes H. Estas funciones se encuentran en el archivo \emph{motores.c} y permiten realizar un código más inteligible.
+Para controlar los motores, se realizaron funciones que usan en conjunto las cuentas obtenidas de los encoders, variaciones de la señal PWM y combinaciones en los pines de los puentes H. Estas funciones se encuentran en el archivo \emph{motores.c}.
 
 \subsection{Funcionamiento de los encoders}
 
