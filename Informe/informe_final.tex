@@ -246,9 +246,10 @@ Para controlar los motores, se realizaron funciones que usan en conjunto las cue
 
 \subsection{Funcionamiento de los encoders}
 
-Ambos motores tienen un sensor de efecto Hall en el extremo, estos sirven para medir las revoluciones, pudiendo de esta forma, medir con precisión cuanto gira cada rueda.
-Las salidas de los encoders, se conectaron a los pines de interrupción externa IN1 e IN2. De esta forma; cada vez que hay un flanco ascendente en alguna de las interrupciones, se incrementa una variable.
- 
+Ambos motores tienen un sensor de efecto Hall en el extremo; estos, gracias a la circuiteria integrada, emiten un pulso cuadrado por cada vez que se da el efecto Hall en ellos. \\
+Sabiendo que por cada revolución de motor se producen 64 pulsos cuadrados y teniendo en cuenta la reducción de 29:1 en los motores, se puede determinar con precisión la cantidad de giro en cada rueda.
+Para que el microcontrolador pueda llevar la cuenta de los encoders, se conecto la salida de cada uno a pines de interrupción externa INT1 e INT2. De esta forma; cada vez que hay un flanco ascendente en alguna de las interrupciones, se incrementa una variable.
+
 \subsection{Medición de distancia}
  
 Para medir la distancia del robot a las paredes se utilizaron tres módulos \emph{HC-SR04}, los mismos funcionan por ultrasonido.
@@ -288,6 +289,7 @@ Finalmente se realiza una conversión para relacionar las cuentas con una distanc
 Con el objetivo de detectar la celda blanca, se utilizaron tres sensores detectores de color en la parte baja del mismo, que le indican al robot que salió correctamente del laberinto.
 Los sensores utilizados son los \emph{CNY70}, compuestos por un emisor (led infrarrojo) y un receptor (transistor TBJ NPN).
  
+
 Estos sensores pueden ser encendidos y apagados a voluntad por el microcontrolador.
  
 Cuando el robot está situado en una celda blanca (salida), la luz emitida por el led del sensor se refleja en la superficie y excita la base del transistor, permitiendo de esta forma un flujo de corriente de emisor a colector.
@@ -428,6 +430,10 @@ A futuro, se realizaran algunas mejoras, como por ejemplo:
 \item \href{http://kicad.sourceforge.net/wiki/index.php/Main_Page}{KiCAD (Build: 20100406 SVN-R2508)-final: Diseño de esquemáticos y ruteo de placas}
 \item CuteCom (v0.22.0): Captura de datos por puerto serie (S.O. Linux - Ubuntu)
 \item \LaTeX Lenguaje para paginado de este informe
+\item Dia (v0.97.1) Creación de diagramas de flujo y bloques. (S.O. Linux - Debian)
+\item Kile (v2.0.85) Entorno gráfico para desarrollar código \LaTeX. (S.O. Linux - Debian)
+\item Mercurial (v1.6.4) Sistema para el control de versiones.
+\item TortoiseHG (v1.1.1) Entorno gráfico para utilización de Mercurial. (S.O. Linux - Debian)
  
 \end{itemize}
  
