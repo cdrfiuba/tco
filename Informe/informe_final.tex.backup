@@ -20,8 +20,6 @@
 \usepackage{fancybox}            	%Permite agregar marcos especiales en las páginas
 %\usepackage{anysize}			%Habilita el comando \marginsize{left}{right}{top}{bottom}
 %\usepackage{mathptmx}			%Tipografía Times
-\usepackage[hang,bf]{caption2}		%Numerar subsection
-\usepackage{subfigure}
 \usepackage{graphicx}
 %\usepackage[pdflatex]{graphicx}	%Permite incluir imágenes en el documento. Usando ``dvipdfm'' se pueden manejar archivos jpg, jpeg, png, y pdf. Pero hay que generar un archivo .bb que contiene el tamaño de la imagen entre otros datos. Para eso miktex-->bin-->ebb.exe 
 \usepackage{threeparttable}		%Permite agregar notas al pie en tablas
@@ -169,21 +167,14 @@ Ignacio L. J. \> Carballeda \> 91646\> carballeda.ignacio@gmail.com\\
 \vspace{5mm}
 \section{Objetivo}
 	
-	Por las razones planteadas anteriormente, se plantió como objetivo de este trabajo el diseño, fabricación y programación de un robot capaz de salir de un laberinto por sus propios medios. 
+	Por las razones planteadas anteriormente, se plantió como objetivo de este trabajo la fabricación de un robot capaz de salir de un laberinto por sus propios medios. 
 
 \newpage
 
 \section{Descripción general}
 
 \subsection{Robot}
-
-\begin{figure}[H]
-  \centering
-%    \includegraphics[width=0.7\textwidth]{img/diagrama.eps}
-  \caption{Diagrama de bloques del robot.}
-\end{figure}
-
-Para llevar a cabo este proyecto se fabricó un robot. El mismo esta compuesto de las siguientas partes.
+	Para llevar a cabo este proyecto se fabricó un robot. El mismo esta compuesto de las siguientas partes.
 
 \begin{itemize}
 
@@ -194,12 +185,11 @@ Para llevar a cabo este proyecto se fabricó un robot. El mismo esta compuesto de
 \item Sensores CNY70: Estos sensores opticos, se utilizan para detectar si el piso es de color negro o blanco. En este caso, se utilizaran para saber si el robot llegó al final del laberinto.
 \item Baterías y fuente de alimentación: El robót cuenta con 3 baterías de Li-ion, 2 de 7,2 v y 1 de 3,7 v. Junto con dos fuentes DC/DC de texas proporcionand 12 v y 5 v.
 
-
-\begin{figure}[H]
-  \centering
-    \includegraphics[width=0.7\textwidth]{img/TCO.eps}
-  \caption{TCO}
-\end{figure}
+%\begin{figure}[H]
+%  \centering
+%    \includegraphics[width=0.7\textwidth]{img/TCO-calidad.eps}
+%  \caption{Texto abajo de la foto}
+%\end{figure}
 
 
 \end{itemize}
@@ -210,21 +200,14 @@ Para llevar a cabo este proyecto se fabricó un robot. El mismo esta compuesto de
 	
 	El mismo se contruyó con paredes color blanco y piso color negro, dividiendo cada celda por una linea blanca, porque sobre este color es óptimo el rebote de luz infrarroja para los sensores del piso, en el cual las marcas blancas sobre fondo negro dan un gran constraste, lo que se traduce en un marcado cambio de nivel en la señal de salida, y facilita la detección.
 	
-\begin{figure}[H]
-  \centering
+%\begin{figure}[H]
+%  \centering
 %    \includegraphics[width=0.7\textwidth]{img/laberinto.eps}
-    \caption{Laberinto}
-\end{figure}
+%  \caption{Texto abajo de la foto}
+%\end{figure}
 
-
-\newpage
 \subsection{Algoritmo}
-
-\begin{figure}[H]
-  \centering
-    \includegraphics[width=0.7\textwidth]{img/diagrama_flujo_algoritmo.eps}
-    \caption{Laberinto}
-\end{figure}	
+	
 
 \newpage
 \section{Resumen de funcionamiento}	
@@ -235,35 +218,38 @@ Para llevar a cabo este proyecto se fabricó un robot. El mismo esta compuesto de
 
 \subsection{Medición de distancia}
 
-Para medir la distancia del robot a las paredes se utilizaron tres módulos \emph{HC-SR04}, los mismos funcionan por ultrasonido.
+Para medir la distancia del robot a las paredes utilizamos tres módulos HC-SR04, los mismos funcionan por ultrasonido.
 
-Se eligieron estos sensores por varias razones:
+Elegimos este sensor por varios razones:
 \begin{itemize}
-\item Su rango de 2 centímetros a 4 metros.
-\item Su resolución de 3 milímetros.
+\item Su rango de 2 centímetros a 4 metros, ideal para las distancias que necesitamos medir
+\item Su resolución nos pareció adecuada (aproximadamente 0.3cm).
 \item Simplicidad y costo reducido.
 \end{itemize}
 
-Se desconoce la circuiteria interna del mismo, por lo que será tratado como a una caja negra con el cual se puede interactuar mediante
+Desconocemos de la circuiteria interna de este módulo y lo tratamos más bien como a una caja negra con la cual podemos interactuar mediante
 sus pines de E/S.\\
 
 El HC-SR04 además de sus pines para alimentación (VCC y GND) tiene otros dos pines: Trigger y Echo. Para obtener una medición el modulo solo 
-requiere un pulso de $10 \mu S$ en su pin Trigger, luego el módulo pone en alto el pin de Echo con un tiempo proporcional a la distancia medida.\\
+requiere un pulso de $10 \mu S$ en su pin Trigger, luego el módulo devuelve un pulso por el pin de Echo con un tiempo en alto 
+proporcional a la distancia medida.\\
 
-En el código fuente de este proyecto se configuró una interrupción para que se active con cada desbordamiento del \emph{timer/contador1}, la cual en cada iteración incrementa en 1 la variable \textbf{interrupciones\_timer\_1}. También se configura los pines Echo y Trigger como entrada y salida respectivamente.\\
+En nuestro código configuramos una interrupción para que se active con cada desbordamiento del timer/contador1, la cual en cada iteración 
+incrementa en 1 la variable \textbf{interrupciones\_timer\_1}. También configuramos los pines Echo y Trigger como entrada y salida respectivamente.\\
 
-Para obtener una medición primero se pone en alto el pin de Trigger por un tiempo mayor a $10 \mu S$, luego se espera con un ciclo ``while'' 
-a obtener un ``uno'' en pin de Echo , acto seguido se toma el valor actual del contador/timer1 y se guarda en la variable \textbf{cuentas\_inicial}. 
-A continuación se espera a que el pin de Echo vuelva a cero con otro ciclo ``while'' y se guarda el valor del registro del contador/timer1 en otra variable llamada \textbf{cuentas\_final}.
+Para obtener una medición lo primero que hacemos es enviar el antedicho pulso de $10 \mu S$ al pin de Trigger, luego esperamos con un ciclo ``while'' 
+a obtener un ``uno'' en pin de Echo , acto seguido tomamos el valor actual del contador/timer1 y lo guardamos en variable \textbf{cuentas\_inicial}. 
+A continuación esperamos a que el pin de Echo vuelva a cero con otro ciclo ``while'' y guardamos el valor del registro del contador/timer1 en otra variable 
+llamada \textbf{cuentas\_final}.
 
 Luego, teniendo en cuenta que el timer1 fué configurado para que desborde a las 256 cuentas, para obtener el número total de cuentas 
-se utiliza el siguiente código:\\
+utilizamos el siguiente código:\\
 
 \begin{lstlisting}
 cuentas = (256 - cuentas_inicial) + 256 * interrupciones_timer_1 + cuentas_final;
 \end{lstlisting}
 
-Finalmente se realiza una conversión para relacionar las cuentas con una distancia aproximada.
+Finalmente realizamos una conversión de modo tal que podamos relacionar las cuentas con una distancia aproximada.
 
 \subsection{Identificación del color del piso}
 
@@ -276,8 +262,8 @@ Estos sensores pueden ser encendidos y apagados a voluntad por el microcontrolad
 Cuando el robot está situado en una celda blanca (salida) la luz emitida por el led del sensor se refleja en la 
 superficie y excita la base del transistor permitiendo de esta forma un flujo de corriente de emisor a colector.
 
-Debido a que el microcontrolador sólo puede detectar cambios de tensión se ubicó un resistor entre el emisor del transistor 
-y la referencia del circuito (GND); luego se mide la tensión en el emisor.
+Debido a que el microcontrolador sólo puede detectar cambios de tensión ubicamos un resistor entre el emisor del transistor 
+y la referencia del circuito (GND); luego obtenemos nuestra tensión en el emisor.
 
 En la hoja de datos del ATmega16 se especifica que la máxima tensión admisible para un cero lógico (con el pin configurado como entrada ) 
 es de $0.2 \times VCC$ , en nuestro caso $VCC= 5 V$ $\Rightarrow$ $V_{IL_{max}}=1 V$ por lo tanto una tensión que no supere 1 Volt
@@ -290,7 +276,8 @@ Cuando el sensor esta ubicado sobre una celda negra la tensión medida es aproxim
 superficie (interpretado como cero logico).
 
 El microcontrolador enciende los sensores durante un tiempo muy corto cada vez que el robot decide girar a su derecha, de esta forma 
-se evita que las líneas blancas que dividen las celdas como la salida del laberinto.
+impedimos que se malinterpreten las líneas blancas que dividen las celdas como la salida del laberinto y además evitamos derrochar 
+corriente que estaría siendo drenada constantemente por los leds infrarrojos de los CNY70 (aprox $20mA$ por sensor).
 
 
 \subsection{Comunicación serie}
@@ -310,6 +297,13 @@ se evita que las líneas blancas que dividen las celdas como la salida del laberi
 
 \newpage
 \section{Conclusiones}
+
+Bibliografía.
+Apéndice: Planos. Listas de componentes. Herramientas utilizas. Algún video del funcionamiento.
+
+
+	
+
 	
 	
 \newpage
@@ -319,57 +313,77 @@ se evita que las líneas blancas que dividen las celdas como la salida del laberi
 \subsection{Robot}
 
 \begin{tabular}{|l|r|r|r|r|}\hline
-{\bf Referencia}	 &	{\bf Descripción}	 &{\bf Cantidad} &	{\bf Precio unitario} & {\bf Total} \\			
+	{\bf Referencia}	 &	{\bf Descripción}	 &{\bf Cantidad} &	{\bf Precio unitario} & {\bf Total} \\			
 \hline		
-	C3, C9, C11 			& 100 nF	& 3	&	&    	\\
+	R11, R9, R10&1.5k & 3    &    &    	\\
 \hline      
-      	C25				& 100 uF	& 1	&    	& 	\\    
+      	R19, R12, R13, R14, R18&100&  5&    & 	\\    
 \hline      
-	C14, C15, C18, C19		& 10 n 		&  4	&    	&    	\\
+	C3& 100n&  1&    &    \\
 \hline      
-	C4, C5, C6, C7, C8, C13, C17	& 1 uF		& 7	&    	&     	\\ 
+	C2, C1& 100u&  2&    &     \\ 
 \hline
-     	C1, C12 			& 12 p 		& 2 	& 	& 	\\	   
+     	C6,C7,C8 & 10u & 3 & & \\	   
 \hline      
-	C12, C16 			& 220 uF	& 2	&    	&      	\\
+	RV2, R1, R2, R3, R4, R5, R6, RV1 & 10k&  8&    &      \\
 \hline      
-	C20, C21 			& 2,2 uF	& 2	&    	&      	\\
+	D1, D2, D3, D4, D6, D7, D8,D9  & 1N4148&  8&    &   \\    
 \hline      
-	C23				& 330 uF	& 1	&    	&   	\\    
+	C5&  22u&  1&    &       \\
 \hline      
-	R1				& 10 k		& 1	&    	&   	\\    
+	R15, R16,R17 & 330&  3&    &    \\    
 \hline      
-	R11				& 21 k		& 1	&    	&       \\
+	R8&  390&  1&    &       \\
 \hline      
-	R10 				& 732		& 1	&    	&    	\\    
+	R7& 4.7K&  1&    &     \\  
 \hline      
-	R2, R3, R4, R5, R6, R7		& R		& 6	&    	&     	\\    
+	C4&  470n&  1&    &     \\   
 \hline      
-	X1				& 8 MHz		& 1	&    	&       \\
-\hline      
-	IC1				& ATMEGA16-A	& 1	&    	&     	\\    
-\hline      
-	U1				& MAX232	& 1	&    	&     	\\  
-\hline      
-	U2				& PTN78000W	& 1	&    	&     	\\  
-\hline      
-	U3				& PTN78020W	& 1	&    	&     	\\    
-\hline      
-	Puente1, Puente2		& LMD18200	& 2	&    	&     	\\    
-\hline      
-	L1				& Inductor	& 1	&    	&     	\\  
-\hline      
-	Conector 2x1			& Conector 2x1	& 7	&    	&     	\\   
-\hline      
-	Conector 3x2			& Conector 3x2	& 1	&    	&   	\\    
+	Q3, Q1, Q2& BC548&  3&    &   \\    
 \hline
-	Conectores			& Conectores 	& 9   	&       &	\\
+	IC1&C8051F330D&  1&    &       \\
 \hline      
-	SW1, SW2, 			& Pulsador NA	& 2	&    	&     	\\    
+	U4, U3&  CNY70&  2&    &      \\
 \hline      
-	SW3				& Llave dos vias& 1	&    	&     	\\    
+	P1&CON. BAT&  1&    &       \\
 \hline      
-	Q1				& NPN		& 1	&    	&     	\\  
+	P7& CONN\_1&  1&    &      \\
+\hline      
+	D10&   IR1&  1&    &        \\
+\hline   
+   	D11&   IR2&  1&    &        \\
+\hline      
+	D12&  IR3&  1&    &       \\
+\hline      
+	K1&IRU101533&  1&    &      \\ 
+\hline      
+	k4, k2, k3&  ISU60&  3&     &   \\    
+\hline      
+	U2&  L298D&  1&    &      \\
+\hline      
+	D5&  LED\_1&  1&    &     \\
+\hline     
+	U1& LM2940&  1&    &       \\
+\hline      
+	P3& MOTOR\_L&  1&    &      \\
+\hline     
+	P4& MOTOR\_R&  1&    &      \\
+\hline     
+	P2& PROG&  1&    &      \\
+\hline   
+   	SW1& RE-TRANS&  1&    &    \\   
+\hline   
+   	P5& RF\_EMIT&  1&    &        \\
+\hline 
+ 	P8& SENS PLACA&  1&    &       \\
+\hline 
+ 	P9&  SENS uC&  1&    &       \\
+\hline 
+ 	SW2&  SW\_PUSH&  1&    &       \\
+\hline 
+ 	P10&SWITCH\_GRAL&  1&    &       \\
+\hline   
+   	P6&   Tx/Rx&  1&    &     \\\hline
 \end{tabular}
 
 
@@ -392,12 +406,36 @@ se evita que las líneas blancas que dividen las celdas como la salida del laberi
 \begin{itemize}
 
 \item \href{http://www.scribd.com/doc/13138464/The-8051-Micro-Controller-Book-by-Scott-Mackenzie-Online}{I.Scott Mackenzie, "The 8051 Microcontroller",Prentice Hall, 1995}
-\item Datasheet del Microcontrolador ATMEGA16
+\item \href{datasheets/C8051F33x.pdf}{Datasheet del Microcontrolador 8051F330}
+\item \href{infoalgoritmo/InteligenciaArtificialyRedesNeuronales.pdf}{M. Daniela López De Luise,"Inteligencia Artificial y Redes Neuronales", EnterpriseWare SRL, Junio de 2001}
+%\item \href{infoalgoritmo/TheFloodfill.pdf}{The Flood-fill Algorithm ()}
+%\item \href{infoalgoritmo/backtracking}{El Esquema Algorítmico del Backtracking}
 \end{itemize}
 
 \section{Apéndice}
 
-\subsection{Esquemáticos  (*)}
+\subsection{Esquemáticos:}
+
+\begin{itemize}
+
+\item \href{robotesquematico.pdf}{Esquematico versión pdf}
+%\item \href{diseno/placa_robot.pro}{Esquematico y board en versión KiCAD}
+
+\end{itemize}
+
+\subsection{Links útiles:}
+
+\begin{itemize}
+\item \href{http://en.wikipedia.org/wiki/Maze_solving_algorithm}{Wikipedia - Resumen de los algoritmos más conocidos 
+para resolución de laberintos}
+\item \href{http://www.micromouseinfo.com/}{Página dedicada a competencias de \emph{Micromouse} (Resolvedores de laberintos)}
+\item \href{http://sensorwiki.org/doku.php}{Referencia a un gran número de sensores diferentes}
+\item \href{http://www.societyofrobots.com}{Página dedicada a la robótica en general}
+\end{itemize}
+
+\subsection{Diagrama en bloques (*)}
+
+\subsection{Diagrama de flujo (*)}
 
 \subsection{Código fuente (*)}
 
