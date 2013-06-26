@@ -1,7 +1,8 @@
 Proyecto: 	TCO
 Año:		2013
 Cuatrimestre:	1°
-Integrantes	Cerone, Sebastian	90259
-		Carballeda, Ignacio	91646 	
-		Farace, Gisela		xxxxx
+Integrantes	
+		Carballeda, Ignacio	91646 			
+		Cerone, Sebastian	90259
+		Farace, Gisela		92457
 
