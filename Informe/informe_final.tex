@@ -233,6 +233,9 @@ Para llevar a cabo este proyecto se fabricó un robot. El mismo esta compuesto de
 \subsection{PWM y Motores}
  
 \subsection{Funcionamiento de los encoders}
+
+Ambos motores tienen un sensor de efecto Hall en el extremo, estos sirven para medir las revoluciones, pudiendo de esta forma, medir con precisión cuanto gira cada rueda.
+Las salidas de los encoders, se conectaron a los pines de interrupción externa IN1 e IN2. De esta forma; cada vez que hay un flanco ascendente en alguna de las interrupciones, se incrementa una variable.
  
 \subsection{Medición de distancia}
  
@@ -312,9 +315,18 @@ Se configuró la \emph{UART} para enviar y recibir datos, y se configuró una inte
 \newpage
 \section{Conclusiones}
      
-     
-\newpage
+Los resultados obtenidos en el presente proyecto han sido satisfactorios. Se ha realizado un robot capaz de cumplir con el objetivo propuesto, salir de un laberinto por sus propios medios.
+
+También, el proyecto a sido galardonado con el segundo premio en la categoría \emph{Laberinto}, en la competencia de robótica \emph{Megaman 2013} organizada por el \emph{Club de Robótica} de la \emph{Facultad de ingeniería de la Universidad de Buenos Aires}.
+
+A futuro, se realizaran algunas mejoras, como por ejemplo:
+\begin{itemize}
  
+\item Mejorar el sistema de interrupciones. Como se utilizó una OR de diodos, para conectar varios sensores a la misma interrupción, a veces, el funcionamiento de un sensor, afecta el funcionamiento de otro sensor.
+\item Mejorar la estructura del robot.
+\end{itemize}
+
+\newpage
 \section{Listado de componentes}
  
 \subsection{Robot}
