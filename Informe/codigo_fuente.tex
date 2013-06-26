@@ -1,0 +1,843 @@
+\documentclass[a4paper,12pt]{article}   %Hoja A4, tamaño de letra 12 puntos
+\usepackage[latin1]{inputenc}        	%Encoding del archivo de texto plano (txt), así podés escribir letras con diacríticas 
+\usepackage[T1]{fontenc}        	%Encoding de la fuente
+\usepackage[spanish]{babel}         	%Estilos, hyphenation y nombres de entornos (abstract-->resumen) en español
+\usepackage{times}            		%Para agregar la fecha al documento         
+\usepackage{amsmath}            	%Simbolos matemáticos que sino no funcionan
+\usepackage{amssymb}                 	%Simbolos matemáticos que sino no funcionan
+\usepackage{amsfonts}                	%Fuentes extras para modo mátemático
+\usepackage{units}                   	%Para agregar unidades y fracciones con formato especial
+\usepackage{esint}                   	%Para integrales dobles cerradas
+%\usepackage{wasysym}                	%Para integrales dobles cerradas (no tan lindo como las de `esint')
+%\usepackage{pdfpages}            	%Para incluir otros pdfs, en un nuestro documento Latex
+%\usepackage{eso-pic}
+%\usepackage{everyshi}
+%\usepackage{ifthen}
+%\usepackage{calc}
+%\usepackage{watermark}              	%Permite incluir marcas de agua
+\usepackage{float}                   	%Permite fijar una figura a un lugar específico del archivo con el parámetro [H] 
+\usepackage{fancyhdr}            	%Manejo enriquecido de encabezados y pie de página
+\usepackage{fancybox}                	%Permite agregar marcos especiales en las páginas
+%\usepackage{anysize}            	%Habilita el comando \marginsize{left}{right}{top}{bottom}
+%\usepackage{mathptmx}            	%Tipografía Times
+\usepackage[hang,bf]{caption2}        	%Numerar subsection
+\usepackage{subfigure}
+\usepackage{graphicx}
+%\usepackage[pdflatex]{graphicx}    	%Permite incluir imágenes en el documento. Usando ``dvipdfm'' se pueden manejar archivos jpg, jpeg, png, y pdf. Pero hay que generar un archivo .bb que contiene el tamaño de la imagen entre otros datos. Para eso miktex-->bin-->ebb.exe 
+\usepackage{threeparttable}        	%Permite agregar notas al pie en tablas
+\usepackage{cancel}            		%Permite tachar cosas en modo matemático
+                    			%hyperref posibilita referencia internas y externas, a continuacion las opciones de config:
+\usepackage[a4paper,
+             dvipdfm,                 	%Usar sólo si después se va a pasar de dvi a pdf
+        %dvips,%        		%Usar si se va a trabajar en dvi, o si después se va a pasar de dvi a ps (y eventualmente de ps a pdf ---pero ojo que los enlaces quedan más lindos si se pasa directamente de dvi a pdf, usando dvipdfm)
+        pdfdisplaydoctitle=true,	%Muestra el título en el marco superior de la ventana del visor de pdf
+        colorlinks=true,         	%Al encender esta función, ya nohay recuadros feos alrededor de los links
+        pdfnewwindow=true,       	%Para que el link a nuevos pdf, no se abran en la misma ventana
+        linkcolor=black,         	%Color para links internos
+        citecolor=green,         	%Color para links a Bibliografia
+               filecolor=blue,          %Color para links a archivos
+        pdftitle={Proyecto (66.09) [Junio 2010] - Robótica Colaborativa},
+        pdfauthor={Manuel I. Fernandez, Marcela F. Luberto y Sebastián García Marra}]
+        {hyperref}
+ 
+\usepackage{color}                 
+\usepackage{listings}        		%Este paquete es para poder insertar codigo en el informe y su respectivo set
+\lstset{ 
+language=C++,                    	% choose the language of the code
+basicstyle=\footnotesize,       	% the size of the fonts that are used for the code
+numbers=left,                   	% where to put the line-numbers
+numberstyle=\footnotesize,      	% the size of the fonts that are used for the line-numbers
+stepnumber=1,                   	% the step between two line-numbers. If it is 1 each line will be numbered
+numbersep=5pt,                  	% how far the line-numbers are from the code
+backgroundcolor=\color{white},  	% choose the background color. You must add \usepackage{color}
+showspaces=false,               	% show spaces adding particular underscores
+showstringspaces=false,         	% underline spaces within strings
+showtabs=false,                 	% show tabs within strings adding particular underscores
+frame=single,                 		% adds a frame around the code
+tabsize=2,                 		% sets default tabsize to 2 spaces
+captionpos=b,               		% sets the caption-position to bottom
+breaklines=true,            		% sets automatic line breaking
+breakatwhitespace=false,        	% sets if automatic breaks should only happen at whitespace
+escapeinside={\%*}{*)}          	% if you want to add a comment within your code
+}
+                     
+ 
+ 
+\newcommand{\autor}[3]{\vspace{5mm}%
+                                            {\bf #1}\\%
+                                            {\bf Padrón:} #2\\%
+                                            \texttt{#3}\\}
+ 
+ 
+%Determinación del estilo de página (encabezado y pie)
+ 
+\lhead{\small Proyecto (66.09) [Junio 2013]}
+\chead{}
+\rhead{\small TCO}
+\rfoot{}
+\cfoot{{\thepage}}
+\lfoot{}
+ 
+%Manejo de márgenes
+ 
+%\marginsize{left}{right}{top}{bottom}
+\addtolength{\textwidth}{2cm}          %Agrega 2cm al ancho por defecto (usado junto con hoffset, no se pierde el centrado)
+\addtolength{\hoffset}{-1cm}           %Quita 1cm al margen, pero mantiene la relación repecto de cada margen
+\addtolength{\textheight}{2cm}
+\addtolength{\voffset}{-1cm}
+\setlength{\headheight}{14pt}
+ 
+ 
+%Manejo de contadores (counters)
+ 
+%\setcounter{tocdepth}{2}        	%Profundidad de la aparición de las secciones en el índice:
+                   	 		%-1 Part, 0 Chapter, 1 Section, 2 Subsection, 3 Subsubsection, 4 Titled
+ 
+\setcounter{secnumdepth}{1}          	%Profundidad en la enumeración de las secciones:
+					%-1 Part, 0 Chapter, 1 Section, 2 Subsection, 3 Subsubsection, 4 Titled paragraph, 5 Titled subparagraph %paragraph, 5 Titled subparagraph
+ 
+ 
+%==================================== Comienzo del documento ===================================
+ 
+\begin{document}     
+                     
+%========================================== Caratula ===========================================
+ 
+\pagestyle{fancy}
+ 
+     
+%===============================================================================================
+ 
+%=========================================== Presentación ======================================
+\newpage
+\section{Codigo fuente}
+\subsection{main.c}
+
+\begin{lstlisting}
+
+#include "main.h"
+
+//Delacaracion de variables globales
+volatile uint8_t    value, flag_piso_blanco;
+
+//Variables encoders
+volatile uint32_t   cuenta_encoder_izquierda, cuenta_encoder_derecha;
+
+//Variables sensores pared
+volatile uint8_t    sensor_active, status_flag;
+volatile uint32_t   interrupciones_timer_1, distancia;
+
+
+int main(void)
+{
+    usart_init();		//Inicializacion de UART para enviar/recibir datos por serie.
+    sei();			//Activacion de las interrupciones.
+
+
+    inicializar_puertos_sensores_pared();
+    inicializar_sensores_piso();
+    inicializar_encoders();     //Al inicializar los encoders lo que se hace es configurar el TIMER 0 y el TIMER 2
+    inicializar_puertos_motores();
+    inicializar_PWM();		//Al inicializar el PWM lo que se hace es configurar el TIMER 1
+
+    cuenta_encoder_derecha = 0;
+    cuenta_encoder_izquierda = 0;
+    _delay_ms(500);
+
+
+	for (;;){
+
+        //Se corrige el rumbo, midiendo la distancia a la pared derecha.
+        motores_corregir_rumbo();
+
+        //Se avanza una distancia muy pequena.
+        motores_avanzar(200,200, 40);
+
+        //Se mide a la derecha para saber si hay pared o no.
+        distancia = medicion_distancia_pared(SENSOR_PARED_DER);
+
+        //Si se entra aca es que no hay pared a la derecha, entonces, se giro a la derecha
+        if(distancia > DISTANCIA_GRANDE){
+
+            //Se revisa si el piso es de color blanco, para saber si llego al final del laberinto
+            //Para esto, primero se encienden los sensores del piso y se mide. Si hay suelo blanco,
+            //se avanza y se mide de nuevo. Si hay doble confirmacion, entonces estoy en la casilla final.
+            encender_sensores_piso();
+
+            _delay_us(100);
+
+            if((PINA & (1 << PA2)) == (1 << PA2)){
+
+                motores_avanzar(200,200,200);
+
+                motores_detener();
+
+                _delay_ms(10000);
+
+            }
+
+            //Si se llega a este punto, el suelo es color negro.
+            apagar_sensores_piso();
+
+            motores_avanzar(200,200, 200);
+
+            motores_rotar_der_90_grados();
+
+            motores_avanzar(200,200, 450);
+
+        }
+
+        //Si se entra aca, es que hay una pared a la derecha
+        else{
+
+            distancia = medicion_distancia_pared(SENSOR_PARED_CEN);
+
+            //Si se entra acá, es que hay pared a la derecha, y al frente
+            if(distancia < DISTANCIA_CHICA){
+
+                motores_rotar_izq_90_grados();
+
+                _delay_ms(10);
+
+                distancia = medicion_distancia_pared(SENSOR_PARED_CEN);
+
+                _delay_ms(10);
+
+                //Si se entra aca, es que hay pared a la derecha, al frente y a la izquierda.
+                //Entonces rota 180 grados.
+                //La distancia tiene que se mayor a distancia chica, porque a veces no queda centrado en la casilla
+                if(distancia < 0x00001800){
+
+                    motores_rotar_izq_90_grados();
+
+                }
+
+                motores_avanzar(200,200, 450);
+            }
+        }
+    }
+
+	return 0;
+}
+
+
+//Inicializacion puerto serie
+void usart_init()
+{
+	UCSRB |= (1<<RXCIE) | (1 << RXEN) | (1 << TXEN);	//Encender recepcion transmicion
+
+	UCSRC |= (1 << URSEL) | (1 << UCSZ0) | (1 << UCSZ1); 	//Configuro para usar 8 caracteres
+
+	UBRRL = BAUD_PRESCALE; 				        // Cargo la parte baja del registro
+
+	UBRRH = (BAUD_PRESCALE >> 8); 			        // Cargo la parte alta del registro
+}
+
+//Interrupcion puerto serie
+ISR (USART_RXC_vect){
+
+    //Echo: Esta funcion recibe un dato por el puerto serie y lo reenvia. Sirve para probar que la conexion esta OK
+	value = UDR;    // Tomo el valor recibido, y lo cargo en la variable value
+	UDR = value;	// Cargo el buffer con lo almacenado en la variable value
+}
+
+
+//Interrupcion Timer 1
+ISR (TIMER1_OVF_vect){
+
+    if (sensor_active)
+        interrupciones_timer_1++;
+
+	if(interrupciones_timer_1 > MAX_INTERRUPCIONES_SENSOR_DISTANCIA)
+        status_flag = 1;
+}
+
+//Interrupcion INT 0
+ISR (INT0_vect)
+{
+    cuenta_encoder_derecha++;
+
+}
+
+//Interrupcion INT 1
+ISR (INT1_vect)
+{
+    cuenta_encoder_izquierda++;
+
+}
+
+
+//interrupcion sensores de piso
+
+ISR (INT2_vect){
+
+    if((PINA & (1 << PA2)) == (1 << PA2))
+
+       flag_piso_blanco = TRUE;
+
+    //Finalmente hacemos un clear al registro GIFR de interrupcion como se pide en hoja de datos [1].
+    GIFR &= ~(1<<INTF2);
+
+}
+
+\end{lstlisting}
+ 
+\subsection{main.h}
+
+\begin{lstlisting}
+#ifndef _MAIN_H_
+#define _MAIN_H_
+
+#include <avr/io.h>
+#include <avr/interrupt.h>
+#include <util/delay.h>
+#include "pwm.h"
+#include "motores.h"
+#include "sensores_pared.h"
+#include "sensores_piso.h"
+#include "encoders.h"
+
+#define USART_BAUDRATE 	9600
+#define BAUD_PRESCALE 	(((F_CPU / (USART_BAUDRATE * 16UL))) - 1)
+
+#define MAX_STRING	25
+
+#define DISTANCIA_CHICA   0x00000E00
+#define DISTANCIA_GRANDE  0x00003000//0x8C
+
+#define MAX_TIME    100000
+
+#define MAX_INTERRUPCIONES_SENSOR_DISTANCIA 1000
+
+
+#endif /* _MAIN_H_ */
+
+//Definicion de prototipos
+void usart_init(void);
+\end{lstlisting}
+
+\subsection{motores.c}
+\begin{lstlisting}
+#include "motores.h"
+
+extern volatile uint32_t     cuenta_encoder_derecha, cuenta_encoder_izquierda;
+
+
+void inicializar_puertos_motores(void){
+
+	//Configuro pines como salida
+	DDRD |= MOTOR_DER_DIRECTION;
+	DDRB |= MOTOR_DER_BRAKE;
+
+	DDRB |= MOTOR_IZQ_BRAKE;
+    	DDRD |= MOTOR_IZQ_DIRECTION;
+
+    	//Detengo los motores una vez que inicializo los puertos.
+    	motores_detener();
+}
+
+
+
+void motores_detener(void){
+
+	//Freno: poner brake en alto
+	PORTB |= MOTOR_DER_BRAKE;	//Pongo en alto el pin BRAKE del motor 1
+	PORTB |= MOTOR_IZQ_BRAKE;	//Pongo en alto el pin BRAKE del motor 2
+}
+
+
+
+void motores_retroceder(uint8_t velocidad_izquierda, uint8_t velocidad_derecha){
+
+	//Avance sentido 1: PWM H - Direction H - Brake L
+
+	PORTD |= MOTOR_DER_DIRECTION; 	//Pongo en alto el pin DIRECTION del motor 1
+	PORTB &= ~MOTOR_DER_BRAKE;	    //Pongo en bajo el pin BRAKE del motor 1
+
+	PORTD &= ~MOTOR_IZQ_DIRECTION; 	//Pongo en bajo el pin DIRECTION del motor 2
+	PORTB &= ~MOTOR_IZQ_BRAKE;	    //Pongo en bajo el pin BRAKE del motor 2
+
+    variar_PWM(velocidad_izquierda, velocidad_derecha);
+
+}
+
+
+void motores_avanzar(uint8_t velocidad_izquierda, uint8_t velocidad_derecha, uint32_t cantidad_cuentas){
+
+	uint8_t  flag_fin_avance = FALSE;
+    uint32_t cuenta_encoder_derecha_anterior;
+
+    cuenta_encoder_derecha = 0;
+    cuenta_encoder_izquierda = 0;
+    cuenta_encoder_derecha_anterior = 0;
+
+    variar_PWM(velocidad_izquierda, velocidad_derecha);
+
+    PORTD &= ~MOTOR_DER_DIRECTION; 	//Pongo en bajo el pin DIRECTION del motor 1
+	PORTB &= ~MOTOR_DER_BRAKE;	    //Pongo en bajo el pin BRAKE del motor 1
+
+	PORTD |= MOTOR_IZQ_DIRECTION; 	//Pongo en alto el pin DIRECTION del motor 2
+	PORTB &= ~MOTOR_IZQ_BRAKE;	    //Pongo en bajo el pin BRAKE del motor 2
+
+
+    while(flag_fin_avance == FALSE){
+
+        if((cuenta_encoder_derecha_anterior + 35) >= cuenta_encoder_derecha){
+
+            cuenta_encoder_derecha_anterior = cuenta_encoder_derecha;
+
+            if(cuenta_encoder_derecha < cuenta_encoder_izquierda){
+
+                if(velocidad_derecha < 240)
+                    variar_PWM(velocidad_izquierda, velocidad_derecha += 5);
+
+                }
+
+            if(cuenta_encoder_derecha > cuenta_encoder_izquierda){
+
+                if(velocidad_derecha > 130)
+                    variar_PWM(velocidad_izquierda, velocidad_derecha -= 5);
+
+            }
+        }
+
+        if(cantidad_cuentas < cuenta_encoder_derecha){
+
+            PORTB |= MOTOR_DER_BRAKE;	//Pongo en alto el pin BRAKE del motor 1
+            PORTB |= MOTOR_IZQ_BRAKE;	//Pongo en alto el pin BRAKE del motor 2
+
+
+            flag_fin_avance = TRUE;
+
+        }
+    }
+}
+
+
+
+void motores_rotar_der_90_grados(void){
+
+    uint8_t  flag_fin_rotacion = FALSE;
+    uint32_t cuenta_inicial_encoder_derecho     =   cuenta_encoder_derecha;
+    uint32_t cuenta_inicial_encoder_izquierdo   =   cuenta_encoder_izquierda;
+
+    variar_PWM(210, 210);
+
+    PORTD &= ~MOTOR_DER_DIRECTION; 	//Pongo en bajo el pin DIRECTION del motor 1
+    PORTB &= ~MOTOR_DER_BRAKE;	    //Pongo en bajo el pin BRAKE del motor 1
+
+    PORTD &= ~MOTOR_IZQ_DIRECTION; 	//Pongo en bajo el pin DIRECTION del motor 2
+    PORTB &= ~MOTOR_IZQ_BRAKE;	    //Pongo en bajo el pin BRAKE del motor 2
+
+    while(flag_fin_rotacion == FALSE){
+
+        if(cuenta_encoder_derecha >= (cuenta_inicial_encoder_derecho + 360)){
+
+            if(cuenta_encoder_izquierda >= (cuenta_inicial_encoder_izquierdo + 360)){
+
+                PORTB |= MOTOR_DER_BRAKE;	//Pongo en alto el pin BRAKE del motor 1
+                PORTB |= MOTOR_IZQ_BRAKE;	//Pongo en alto el pin BRAKE del motor 2
+
+                flag_fin_rotacion = TRUE;
+
+            }
+        }
+    }
+}
+
+
+void motores_rotar_izq_90_grados(void){
+
+    uint8_t  flag_fin_rotacion = FALSE;
+    uint32_t cuenta_inicial_encoder_derecho     =   cuenta_encoder_derecha;
+    uint32_t cuenta_inicial_encoder_izquierdo   =   cuenta_encoder_izquierda;
+
+    variar_PWM(210, 210);
+
+    PORTD |= MOTOR_DER_DIRECTION; 	//Pongo en alto el pin DIRECTION del motor 1
+    PORTB &= ~MOTOR_DER_BRAKE;	    //Pongo en bajo el pin BRAKE del motor 1
+
+    PORTD |= MOTOR_IZQ_DIRECTION; 	//Pongo en alto el pin DIRECTION del motor 2
+    PORTB &= ~MOTOR_IZQ_BRAKE;	    //Pongo en bajo el pin BRAKE del motor 2
+
+    while(flag_fin_rotacion == FALSE){
+
+        if(cuenta_encoder_derecha >= (cuenta_inicial_encoder_derecho + 370)){
+
+            if(cuenta_encoder_izquierda >= (cuenta_inicial_encoder_izquierdo + 370)){
+
+                //Antes tenia 300
+
+                PORTB |= MOTOR_DER_BRAKE;	//Pongo en alto el pin BRAKE del motor 1
+                PORTB |= MOTOR_IZQ_BRAKE;	//Pongo en alto el pin BRAKE del motor 2
+
+                flag_fin_rotacion = TRUE;
+
+            }
+        }
+    }
+}
+
+
+void motores_corregir_rumbo (void){
+
+    uint32_t distancia;
+    uint8_t  flag_fin_rotacion = FALSE;
+
+    cuenta_encoder_derecha = 0;
+    cuenta_encoder_izquierda = 0;
+
+    _delay_ms(10);
+
+    distancia = medicion_distancia_pared(SENSOR_PARED_DER);
+
+    _delay_ms(10);
+
+    if(distancia < 0x00000650){
+
+        variar_PWM(200, 200);
+
+        PORTD |= MOTOR_DER_DIRECTION; 	//Pongo en alto el pin DIRECTION del motor 1
+        PORTB &= ~MOTOR_DER_BRAKE;	    //Pongo en bajo el pin BRAKE del motor 1
+
+        PORTD |= MOTOR_IZQ_DIRECTION; 	//Pongo en alto el pin DIRECTION del motor 2
+        PORTB &= ~MOTOR_IZQ_BRAKE;	    //Pongo en bajo el pin BRAKE del motor 2
+
+        while(flag_fin_rotacion == FALSE){
+
+            if(cuenta_encoder_derecha >= 15){
+
+                if(cuenta_encoder_izquierda >= 15){
+
+                    flag_fin_rotacion = TRUE;
+
+                }
+            }
+        }
+    }
+
+    if(distancia > 0x00000750){
+
+        variar_PWM(200, 200);
+
+        PORTD &= ~MOTOR_DER_DIRECTION; 	//Pongo en bajo el pin DIRECTION del motor 1
+        PORTB &= ~MOTOR_DER_BRAKE;	    //Pongo en bajo el pin BRAKE del motor 1
+
+        PORTD &= ~MOTOR_IZQ_DIRECTION; 	//Pongo en bajo el pin DIRECTION del motor 2
+        PORTB &= ~MOTOR_IZQ_BRAKE;	    //Pongo en bajo el pin BRAKE del motor 2
+
+        while(flag_fin_rotacion == FALSE){
+
+            if(cuenta_encoder_derecha >= 15){
+
+                if(cuenta_encoder_izquierda >= 15){
+
+                    flag_fin_rotacion = TRUE;
+
+                }
+            }
+        }
+    }
+}
+
+
+\end{lstlisting}
+
+\subsection{motores.h}
+\begin{lstlisting}
+#ifndef MOTORES_H_
+#define MOTORES_H_
+#include <util/delay.h>
+
+#include <avr/io.h>
+#include <avr/interrupt.h>
+
+#include "main.h"
+#include "pwm.h"
+#include "sensores_pared.h"
+
+#define MOTOR_DER_BRAKE		(1<<PB3)
+#define MOTOR_IZQ_BRAKE		(1<<PB4)
+#define MOTOR_DER_DIRECTION	(1<<PD7)
+#define MOTOR_IZQ_DIRECTION	(1<<PD6)
+
+#define TRUE    1
+#define FALSE   0
+
+#endif /* MOTORES_H_ */
+
+
+//Definicion de prototipos
+void inicializar_puertos_motores	(void);
+void motores_avanzar			(uint8_t, uint8_t, uint32_t);
+void motores_retroceder			(uint8_t, uint8_t);
+void motores_detener			(void);
+void motores_rotar_der_90_grados    	(void);
+void motores_rotar_izq_90_grados	(void);
+void motores_corregir_rumbo         	(void);
+extern void inicializar_PWM         	(void);
+extern void variar_PWM              	(uint8_t, uint8_t);
+\end{lstlisting}
+
+\subsection{encoders.c}
+\begin{lstlisting}
+
+#include "encoders.h"
+
+void inicializar_encoders(void){
+
+    //Configuro el encoder usando el pin como entrada
+    DDRD    &= ~(1<<PD3);   //Configuro como entrada
+    PORTD   &= ~(1<<PD3);   //Desactivo el pull up
+
+    //Configuro el encoder usando el pin como entrada
+    DDRD    &= ~(1<<PD2);   //Configuro como entrada
+    PORTD   &= ~(1<<PD2);   //Desactivo el pull up
+
+    GICR    |= (1<<INT0);   //Activo INT0
+    GICR    |= (1<<INT1);   //Activo INT1
+   // GICR &= ~(1<<INT2);   //Desactivo INT2
+
+    MCUCR   |= ((1<<ISC01) | (1<<ISC00));     //Configuro la INT0 por flanco ascendente
+    MCUCR   |= ((1<<ISC11) | (1<<ISC10));     //Configuro la INT1 por flanco ascendente
+
+}
+
+\end{lstlisting}
+
+\subsection{encoders.h}
+\begin{lstlisting}
+#ifndef _ENCODER_H_
+#define _ENCODER_H_
+
+
+#include <avr/io.h>
+#include <util/delay.h>
+#include <avr/interrupt.h>
+
+
+#endif /* _ENCODER_H_ */
+
+//Definicion de prototipos
+void inicializar_encoders(void);
+\end{lstlisting}
+
+\subsection{pwm.c}
+\begin{lstlisting}
+
+#include "pwm.h"
+
+void inicializar_PWM(void){
+
+	TCCR1A = ((1 << COM1A1)|(1 << COM1A0)|(1 << COM1B1)|(1 << COM1B0)|(0 << WGM11)|(1 << WGM10));
+	//COM1A1=1, COM1A0=1, COM1B1=1, COM1B0=1, WGM11=0, WGM10=1
+	//Configuracion del PWM como fast PWM de 8 bits
+
+	TCCR1B = ((0 << WGM13)|(1 << WGM12));
+	//Timer Apagado WGM13=0, WGM12=1, CS12=0, CS11=0, CS10=0
+
+	// Configuracion de direccion de puertos I/O
+	// DDRA=0x00; // Puerto A como entrada
+	//DDRC=0xFF; // Puerto C como salida
+	//DDRD=0xFF;// Pin 3 y 4 del puerto B como salida
+	DDRD |= (1<<4)|(1<<5);
+	//PORTA=0xFF; // Habilitacion de pull-ups del puerto A
+	//PORTC=0x00; // Inicializacion de salida del puerto C
+	//OCR1AH = 0;//velocidad_motor_izq;
+	//OCR1BH = 0;//velocidad_motor_der;
+
+    TIMSK |= (1<<TOIE1);
+	// Configuracion del Timer 1:
+	TCCR1B |= ((0<<CS12)|(0<<CS11)|(1<<CS10)); //Enciendo el Timer sin prescaler (001)
+}
+
+void variar_PWM(uint8_t valor_izq, uint8_t valor_der){
+
+	OCR1AL = valor_izq;
+	OCR1BL = valor_der;
+	//TCNT1 = 0;
+}
+\end{lstlisting}
+
+\subsection{pwm.h}
+\begin{lstlisting}
+
+#ifndef _PWM_H_
+#define _PWM_H_
+
+#include <avr/io.h>
+#include <util/delay.h>
+
+#endif
+
+
+//Definicion de prototipos
+void inicializar_PWM    (void);
+void variar_PWM         (uint8_t valor_izq, uint8_t valor_der);
+\end{lstlisting}
+
+\subsection{sensoresPared.c}
+\begin{lstlisting}
+
+#include "sensores_pared.h"
+
+extern volatile uint8_t     status_flag, sensor_active;
+extern volatile uint32_t    interrupciones_timer_1;
+
+void inicializar_puertos_sensores_pared(void){
+
+	//Configuro los puertos de TRIGGER como salida.
+	DDRA |= SENSOR_PARED_DER;
+	DDRA |= SENSOR_PARED_CEN;
+	DDRA |= SENSOR_PARED_IZQ;
+
+	//Configuro el puerto de ECHO como entrada.
+	DDRB &= ~SENSOR_PARED_ECHO;
+
+	//Configuro los puertos encendido como salida.
+	DDRA |= (1<<PA0);
+
+}
+
+
+uint32_t medicion_distancia_pared(uint8_t sensor){
+
+    uint32_t    cuentas = 0, cuentas_inicial, cuentas_final;
+
+    //Desactivo INT 2 al medir, para evitar problemas.
+    GICR &= ~(1<<INT2);
+
+    while(cuentas == 0){
+
+        //pongo en 1 el trigger
+        PORTA |= sensor;
+
+        //Espero 10 us
+        _delay_us(10);
+
+        //pongo en 0 el trigger
+        PORTA &= ~sensor;
+
+        //Espero a que el echo sea 1
+        while((PINB & SENSOR_PARED_ECHO) != SENSOR_PARED_ECHO);
+
+        interrupciones_timer_1 = 0;
+        cuentas_inicial = TCNT1;
+        status_flag = 0;
+        sensor_active = 1;
+
+        //Espero a que el echo sea 0
+        while( ((PINB & SENSOR_PARED_ECHO) == SENSOR_PARED_ECHO) && (status_flag == 0) );
+        sensor_active = 0;
+
+        cuentas_final = TCNT1;
+
+        cuentas = (256 - cuentas_inicial) + 256 * interrupciones_timer_1 + cuentas_final;
+
+    }
+
+    //Vuelvo a activar la interrupcion INT2
+    GICR |= (1<<INT2);
+
+
+    if (status_flag == 1)
+        return 0xFFFFFFFF;
+
+
+    else
+        return cuentas;
+}
+\end{lstlisting}
+
+\subsection{sensoresPared.h}
+\begin{lstlisting}
+
+#ifndef _SENSORES_PARED_H_
+#define _SENSORES_PARED_H_
+
+#include <avr/io.h>
+#include <util/delay.h>
+
+#define	SENSOR_PARED_IZQ	(1 << PA3)
+#define	SENSOR_PARED_DER	(1 << PA4)
+#define	SENSOR_PARED_CEN	(1 << PA5)
+#define SENSOR_PARED_ECHO	(1 << PB2)
+
+#define CANTIDAD    10
+
+#endif
+
+//Definicion de prototipos
+inline void apagar_timer(void);
+inline void	encender_timer(void);
+void        inicializar_timer(void);
+void        inicializar_puertos_sensores_pared(void);
+uint32_t    medicion_distancia_pared(uint8_t);
+
+\end{lstlisting}
+
+\subsection{sensoresPiso.c}
+\begin{lstlisting}
+
+#include "sensores_piso.h"
+
+
+/*los tres sensores del piso estan conectados a la misma interrupcion externa INT2
+y a su vez a PA0=izq PA1=der y PA2=centro
+La idea con este codigo es primero inicializar las interrupciones por flanco ascendente (usando algun tipo de debouncer  para evitar efecto rebote)
+y poder identificar que interrupcion fue activada para luego poder usarla en el codigo del robot.
+*/
+
+inline void encender_sensores_piso(void){
+
+    PORTC |= (1<<1);
+
+}
+
+
+inline void apagar_sensores_piso(void){
+
+    PORTC &= ~(1<<1);
+
+}
+
+
+void inicializar_sensores_piso(void)
+{
+
+    //Configuro el pin de los CNY70 como salida.
+    DDRC    |= (1<<1);
+
+    //configuro el pin de interrupcion como entrada (no se si es necesario)
+    DDRB    &= ~(1<<2);
+    PORTB   &= ~(1<<2);
+
+    // activamos la interrupcion INT2 por flanco ascendente ISC2=1
+    MCUCSR |= (1<<ISC2);
+
+    //configuramos General Interrupt Control Register
+    //activamos la interrupcion INT2=1
+    GICR |= (1<<INT2);
+
+}
+\end{lstlisting}
+
+\subsection{sensoresPiso.h}
+\begin{lstlisting}
+#ifndef _SENSORES_PISO_H
+#define _SENSORES_PISO_H
+
+
+#include <avr/io.h>
+#include <avr/interrupt.h>
+
+#endif
+
+
+//prototipos de funcion.
+inline void encender_sensores_piso(void);
+inline void apagar_sensores_piso(void);
+void        inicializar_sensores_piso(void);
+\end{lstlisting}
+
+\end{document}
