@@ -181,10 +181,11 @@ Por las razones planteadas anteriormente, el objetivo de este trabajo es el dise
  
 \begin{figure}[H]
   \centering
-    \includegraphics[width=0.7\textwidth]{img/diagrama.eps}
+    \includegraphics[width=0.7\textwidth]{img/Diagrama2.eps}
   \caption{Diagrama de bloques del robot.}
 \end{figure}
- 
+\newpage
+
 Para llevar a cabo este proyecto se fabricó un robot. El mismo esta compuesto de las siguientes partes:
  
 \begin{itemize}
@@ -204,7 +205,7 @@ Para llevar a cabo este proyecto se fabricó un robot. El mismo esta compuesto de
 \end{figure}
  
 \end{itemize}
- 
+
      
 \subsection{Laberinto}
     El laberinto se fabricó como un módulo modelizable como una matriz perteneciente a $\mathbb{R}^{3x3}$, donde sus paredes internas, definen \emph{celdas} que se pueden interpretar como posiciones dentro de la matriz.
@@ -232,11 +233,11 @@ Para llevar a cabo este proyecto se fabricó un robot. El mismo esta compuesto de
  
 \subsection{PWM y Motores}
 
-Para tener la libertad de poder cambiar la velocidad de los motores, se utilizó una señal PWM. Se configuró el \emph{timer/contador1} en modo \emph{Fast PWM}. De esta forma, el contador se incrementa de $0$ a $256$ cuentas. Cuando alcanza este último valor, se desborda y comienza otra vez desde cero. Luego, realizando dos comparaciones, se puede variar el ancho de pulso de dos señales que se usan para regular la potencia entregada a cada motor.
+Para tener la libertad de poder cambiar la velocidad de los motores, se utilizó una señal PWM. Se configuró el \emph{timer/contador1} en modo \emph{Fast PWM}. De esta forma, el contador se incrementa de $0$ a $256$ cuentas. Cuando alcanza este último valor, desborda y comienza otra vez desde cero. Luego, realizando dos comparaciones, se puede variar el ancho de pulso de dos señales que se usan para regular la potencia entregada a cada motor.
 
 También se utilizaron dos puentes H \emph{LMD18200} para poder frenar y cambiar el sentido de giro de cada motor por separado.\\
 
-Los motores del robot son de la marca \emph{Pololu}, los mismos vienen equipados con reducciones $29:1$ y encoders en tablatura con una resolución de 64 pasos por vuelta de motor.
+Los motores del robot son de la marca \emph{Pololu}, los mismos vienen equipados con reducciones $29:1$ y encoders en cuadratura con una resolución de 64 pasos por vuelta de motor.
 Gracias a la reducción incorporada en los motores se obtiene una buena relación velocidad/torque sin las complicaciones mecánicas que conlleva utilizar un sistema de engranajes por separado. 
 Por otra parte, los encoders dotan al robot de una resolución de $29\times 64 = 1856$ cuentas por revolución de rueda.\\
 
@@ -353,11 +354,14 @@ Los resultados obtenidos en el presente proyecto han sido satisfactorios. Se ha 
 
 También, el proyecto a sido galardonado con el segundo premio en la categoría \emph{Laberinto}, en la competencia de robótica \emph{Megaman 2013} organizada por el \emph{Club de Robótica} de la \emph{Facultad de ingeniería de la Universidad de Buenos Aires}.\\
 
-A futuro, se realizaran algunas mejoras, como por ejemplo:
+De todas formas, hay ciertos aspectos en los cuales, se realizaran algunas mejoras, como por ejemplo:
 \begin{itemize}
  
-\item Mejorar el sistema de interrupciones. Como se utilizó una OR de diodos, para conectar varios sensores a la misma interrupción, a veces, el funcionamiento de un sensor, afecta el funcionamiento de otro sensor.
-\item Mejorar la estructura del robot.
+\item Mejorar el sistema de interrupciones: Como se utilizó una OR de diodos, para conectar varios sensores a la misma interrupción, a veces, el funcionamiento de un sensor, afecta el funcionamiento de otro sensor.
+\item Mejorar la estructura del robot: Se fabricará un disco de acrílico o fibra para montar ahí los motores, y luego atornillas la placa de alimentación sensores. De esta forma, se dará mayor estabilidad y mejor tracción.
+\item Mejorar el control de las ruedas: Mejorar la forma en que se controla cuanto rota cada rueda. 
+\item Mejorar los sensores: Si bien los resultados obtenidos han sido satisfactorios, se propone mejorar los sensores del suelo y estudiar la posiblidad de utilizar otros sensores para medir distancia a las paredes. 
+\item Implementar algoritmos de autoaprendizaje. Optimizar la forma en que el robot recorre el laberinto.
 \end{itemize}
 
 \newpage
