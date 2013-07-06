@@ -1,140 +1,91 @@
-# EESchema Netlist Version 1.1 created  mar 11 jun 2013 19:51:54 ART
+# EESchema Netlist Version 1.1 created  sáb 25 may 2013 18:34:43 ART
 (
- ( /51B785DE $noname  R7 200 {Lib=R}
-  (    1 N-000030 )
-  (    2 /Encendido_Sens_Piso_Cen )
- )
- ( /51B785DD $noname  R6 200 {Lib=R}
-  (    1 N-000029 )
-  (    2 /Encendido_Sens_Piso_Izq )
- )
- ( /51B785D8 $noname  R5 200 {Lib=R}
-  (    1 N-000037 )
-  (    2 /Encendido_Sens_Piso_Der )
- )
- ( /51B774F4 $noname  R4 470 {Lib=R}
-  (    1 /Led_Test_Rojo )
-  (    2 N-000075 )
- )
- ( /51B774EF $noname  R3 470 {Lib=R}
-  (    1 /Led_Test_Verde )
-  (    2 N-000024 )
- )
- ( /51B774C9 $noname  D17 LED {Lib=LED}
-  (    1 N-000075 )
-  (    2 GND )
- )
- ( /51B774C5 $noname  D16 LED {Lib=LED}
-  (    1 N-000024 )
-  (    2 GND )
- )
- ( /51B7721E $noname  R2 10_k {Lib=R}
-  (    1 /Interrupcion_sensores )
-  (    2 GND )
- )
- ( /51B7714A $noname  D13 DIODE {Lib=DIODE}
-  (    1 /Sensor_Piso_Der )
-  (    2 /Interrupcion_sensores )
- )
- ( /51B77149 $noname  D14 DIODE {Lib=DIODE}
-  (    1 /Sensor_Piso_Izq )
-  (    2 /Interrupcion_sensores )
- )
- ( /51B77147 $noname  D15 DIODE {Lib=DIODE}
-  (    1 N-000067 )
-  (    2 /Interrupcion_sensores )
- )
- ( /51B77141 $noname  D11 DIODE {Lib=DIODE}
-  (    1 /Echo_Sensor_Pared_Izq )
-  (    2 /Interrupcion_sensores )
- )
- ( /51B77140 $noname  D12 DIODE {Lib=DIODE}
-  (    1 /Sensor_Piso_Cen )
-  (    2 /Interrupcion_sensores )
- )
- ( /51B77139 $noname  D10 DIODE {Lib=DIODE}
-  (    1 /Echo_Sensor_Pared_Der )
-  (    2 /Interrupcion_sensores )
- )
- ( /51B77132 $noname  D9 DIODE {Lib=DIODE}
-  (    1 /Echo_Sensor_Pared_Cen )
-  (    2 /Interrupcion_sensores )
- )
- ( /51B770A0 $noname  C22 100nF {Lib=C}
-  (    1 GND )
-  (    2 +5V )
- )
- ( /51B76B49 $noname  P21 CONN_5X2 {Lib=CONN_5X2}
-  (    1 /Encendido_Sens_Pared_Cen )
-  (    2 /Encendido_Sens_Pared_Der )
-  (    3 /Trigger_Sensor_Pared_Cen )
-  (    4 /Trigger_Sensor_Pared_Der )
-  (    5 /Echo_Sensor_Pared_Cen )
-  (    6 /Echo_Sensor_Pared_Der )
-  (    7 /Encendido_Sens_Pared_Izq )
-  (    8 /Echo_Sensor_Pared_Izq )
-  (    9 /Trigger_Sensor_Pared_Izq )
-  (   10 GND )
- )
- ( /51B769B9 $noname  P6 CONN_5X2 {Lib=CONN_5X2}
-  (    1 /Sensor_Piso_Der )
-  (    2 N-000037 )
-  (    3 /Sensor_Piso_Izq )
-  (    4 N-000029 )
-  (    5 /Sensor_Piso_Cen )
-  (    6 N-000030 )
-  (    7 ? )
-  (    8 GND )
-  (    9 +5V )
-  (   10 GND )
- )
- ( /51B75EAF $noname  P5 UNL2803A {Lib=DIL18}
-  (    1 /Micro_Encendido_Sens_Pared )
-  (    2 /Micro_Encendido_Sens_Pared )
-  (    3 /Micro_Encendido_Sens_Pared )
-  (    4 /Micro_Encendido_Sens_Piso )
-  (    5 /Micro_Encendido_Sens_Piso )
-  (    6 /Micro_Encendido_Sens_Piso )
-  (    7 /Micro_Led_Test_Verde )
-  (    8 /Micro_Led_Test_Rojo )
-  (    9 GND )
-  (   10 ? )
-  (   11 /Led_Test_Rojo )
-  (   12 /Led_Test_Verde )
-  (   13 /Encendido_Sens_Piso_Izq )
-  (   14 /Encendido_Sens_Piso_Der )
-  (   15 /Encendido_Sens_Piso_Cen )
-  (   16 /Encendido_Sens_Pared_Izq )
-  (   17 /Encendido_Sens_Pared_Der )
-  (   18 /Encendido_Sens_Pared_Cen )
- )
- ( /51B75D79 $noname  F1 FUSE {Lib=FUSE}
-  (    1 +5V )
-  (    2 N-000016 )
- )
  ( /517EC291 $noname  C5 100nF {Lib=C}
   (    1 GND )
   (    2 +5V )
  )
  ( /517EC041 $noname  C6 100nF {Lib=C}
-  (    1 N-000049 )
+  (    1 N-000069 )
   (    2 GND )
  )
  ( /517EC009 $noname  L1 10uH {Lib=INDUCTOR}
   (    1 +5V )
-  (    2 N-000049 )
+  (    2 N-000069 )
+ )
+ ( /517EBEA3 $noname  P6 CONN_8X2 {Lib=CONN_8X2}
+  (    1 /Sensor_Piso_Cen )
+  (    2 /Sensor_Pared_Cen )
+  (    3 /S1+ )
+  (    4 /S4+ )
+  (    5 /Sensor_Piso_Izq )
+  (    6 /Sensor_Pared_Der )
+  (    7 /S2+ )
+  (    8 /S5+ )
+  (    9 /Sensor_Piso_Der )
+  (   10 /Sensor_Pared_Izq )
+  (   11 /S3+ )
+  (   12 /S6+ )
+  (   13 ? )
+  (   14 /Señal_sens_pared )
+  (   15 /S- )
+  (   16 GND )
+ )
+ ( /517EBD67 $noname  R7 R {Lib=R}
+  (    1 +5V )
+  (    2 /S6+ )
+ )
+ ( /517EBD64 $noname  R6 R {Lib=R}
+  (    1 +5V )
+  (    2 /S5+ )
+ )
+ ( /517EBD61 $noname  R4 R {Lib=R}
+  (    1 +5V )
+  (    2 /S3+ )
+ )
+ ( /517EBD5E $noname  R5 R {Lib=R}
+  (    1 +5V )
+  (    2 /S4+ )
+ )
+ ( /517EBD54 $noname  R3 R {Lib=R}
+  (    1 +5V )
+  (    2 /S2+ )
+ )
+ ( /517BFEF9 $noname  P5 CONN_5X2 {Lib=CONN_5X2}
+  (    1 /TCK )
+  (    2 GND )
+  (    3 /TDO )
+  (    4 +5V )
+  (    5 /TMS )
+  (    6 /RESET )
+  (    7 ? )
+  (    8 ? )
+  (    9 /TDI )
+  (   10 GND )
  )
  ( /517C1CE8 $noname  P4 CONN_2 {Lib=CONN_2}
-  (    1 N-000016 )
+  (    1 +5V )
   (    2 GND )
  )
+ ( /517BF9D3 $noname  R2 R {Lib=R}
+  (    1 +5V )
+  (    2 /S1+ )
+ )
+ ( /517BF9BE $noname  1k1 R {Lib=R}
+  (    1 /Encendido_Sensores )
+  (    2 N-000012 )
+ )
+ ( /517BF9A9 $noname  Q1 NPN {Lib=NPN}
+  (    1 GND )
+  (    2 N-000012 )
+  (    3 /S- )
+ )
  ( /51742163 $noname  U1 MAX232 {Lib=MAX232}
-  (    1 N-000018 )
-  (    2 N-000072 )
-  (    3 N-000019 )
-  (    4 N-000020 )
-  (    5 N-000021 )
-  (    6 N-000071 )
+  (    1 N-000003 )
+  (    2 N-000068 )
+  (    3 N-000004 )
+  (    4 N-000005 )
+  (    5 N-000006 )
+  (    6 N-000067 )
   (    7 ? )
   (    8 ? )
   (    9 ? )
@@ -147,12 +98,12 @@
   (   16 +5V )
  )
  ( /51746DA2 $noname  C3 100nF {Lib=C}
-  (    1 N-000015 )
+  (    1 N-000016 )
   (    2 GND )
  )
  ( /51746B07 $noname  SW2 SW_PUSH {Lib=SW_PUSH}
-  (    1 +5V )
-  (    2 N-000067 )
+  (    1 GND )
+  (    2 /INT2 )
  )
  ( /517467EE $noname  P1 CONN_7X2 {Lib=CONN_7X2}
   (    1 /Motor_1_Direction )
@@ -183,11 +134,11 @@
   (   10 ? )
  )
  ( /51742251 $noname  C11 1uF {Lib=CAPAPOL}
-  (    1 N-000071 )
+  (    1 N-000067 )
   (    2 GND )
  )
  ( /5174224C $noname  C9 1uF {Lib=CAPAPOL}
-  (    1 N-000072 )
+  (    1 N-000068 )
   (    2 GND )
  )
  ( /51742246 $noname  C10 1uF {Lib=CAPAPOL}
@@ -195,12 +146,12 @@
   (    2 GND )
  )
  ( /51742178 $noname  C8 1uF {Lib=CAPAPOL}
-  (    1 N-000020 )
-  (    2 N-000021 )
+  (    1 N-000005 )
+  (    2 N-000006 )
  )
  ( /5174216E $noname  C7 1uF {Lib=CAPAPOL}
-  (    1 N-000018 )
-  (    2 N-000019 )
+  (    1 N-000003 )
+  (    2 N-000004 )
  )
  ( /51741714 $noname  P3 CONN_3X2 {Lib=CONN_3X2}
   (    1 /MISO )
@@ -210,9 +161,9 @@
   (    5 /RESET )
   (    6 GND )
  )
- ( /5174105F $noname  C4 10_uF {Lib=C}
+ ( /5174105F $noname  C4 100_nF {Lib=C}
   (    1 /RESET )
-  (    2 GND )
+  (    2 +5V )
  )
  ( /51741055 $noname  SW1 SW_PUSH {Lib=SW_PUSH}
   (    1 GND )
@@ -220,19 +171,19 @@
  )
  ( /51740FEC $noname  R1 10k {Lib=R}
   (    1 /RESET )
-  (    2 +5V )
+  (    2 GND )
  )
  ( /51740E54 $noname  C2 12_pF {Lib=C}
-  (    1 N-000038 )
+  (    1 N-000029 )
   (    2 GND )
  )
  ( /51740DB0 $noname  C1 12_pF {Lib=C}
-  (    1 N-000039 )
+  (    1 N-000030 )
   (    2 GND )
  )
- ( /51740D9C $noname  X1 16_MHz {Lib=CRYSTAL}
-  (    1 N-000038 )
-  (    2 N-000039 )
+ ( /51740D9C $noname  X1 8_MHz {Lib=CRYSTAL}
+  (    1 N-000029 )
+  (    2 N-000030 )
  )
  ( /51740609 TQFP44  IC1 ATMEGA16-A {Lib=ATMEGA16-A}
   (    1 /MOSI )
@@ -241,8 +192,8 @@
   (    4 /RESET )
   (    5 +5V )
   (    6 GND )
-  (    7 N-000039 )
-  (    8 N-000038 )
+  (    7 N-000030 )
+  (    8 N-000029 )
   (    9 /RXD )
   (   10 /TXD )
   (   11 /Motor_1_Encoder_B )
@@ -253,36 +204,46 @@
   (   16 /Motor_1_Direction )
   (   17 +5V )
   (   18 GND )
-  (   19 /Echo_Sensor_Pared_Cen )
-  (   20 /Echo_Sensor_Pared_Izq )
-  (   21 /Micro_Encendido_Sens_Pared )
-  (   22 /Micro_Encendido_Sens_Piso )
-  (   23 /Micro_Led_Test_Verde )
-  (   24 /Micro_Led_Test_Rojo )
+  (   19 /Señal_sens_pared )
+  (   20 /Encendido_Sensores )
+  (   21 /TCK )
+  (   22 /TMS )
+  (   23 /TDO )
+  (   24 /TDI )
   (   25 /Motor_2_Encoder_A )
   (   26 ? )
-  (   27 N-000049 )
+  (   27 N-000069 )
   (   28 GND )
-  (   29 N-000015 )
+  (   29 N-000016 )
   (   30 /Motor_2_Temperature )
   (   31 /Motor_1_Temperature )
-  (   32 /Trigger_Sensor_Pared_Cen )
-  (   33 /Trigger_Sensor_Pared_Der )
-  (   34 /Trigger_Sensor_Pared_Izq )
+  (   32 /Sensor_Pared_Cen )
+  (   33 /Sensor_Pared_Der )
+  (   34 /Sensor_Pared_Izq )
   (   35 /Sensor_Piso_Cen )
   (   36 /Sensor_Piso_Der )
   (   37 /Sensor_Piso_Izq )
   (   38 +5V )
   (   39 GND )
   (   40 /Motor_1_Encoder_A )
-  (   41 /Echo_Sensor_Pared_Der )
-  (   42 /Interrupcion_sensores )
+  (   41 ? )
+  (   42 /INT2 )
   (   43 /Motor_1_Brake )
   (   44 /Motor_2_Brake )
  )
 )
 *
 { Allowed footprints by component:
+$component C5
+ SM*
+ C?
+ C1-1
+$endlist
+$component C6
+ SM*
+ C?
+ C1-1
+$endlist
 $component R7
  R?
  SM0603
@@ -297,14 +258,14 @@ $component R6
  R?-*
  SM1206
 $endlist
-$component R5
+$component R4
  R?
  SM0603
  SM0805
  R?-*
  SM1206
 $endlist
-$component R4
+$component R5
  R?
  SM0603
  SM0805
@@ -318,24 +279,6 @@ $component R3
  R?-*
  SM1206
 $endlist
-$component D17
- LED-3MM
- LED-5MM
- LED-10MM
- LED-0603
- LED-0805
- LED-1206
- LEDV
-$endlist
-$component D16
- LED-3MM
- LED-5MM
- LED-10MM
- LED-0603
- LED-0805
- LED-1206
- LEDV
-$endlist
 $component R2
  R?
  SM0603
@@ -343,48 +286,12 @@ $component R2
  R?-*
  SM1206
 $endlist
-$component D13
- D?
- S*
-$endlist
-$component D14
- D?
- S*
-$endlist
-$component D15
- D?
- S*
-$endlist
-$component D11
- D?
- S*
-$endlist
-$component D12
- D?
- S*
-$endlist
-$component D10
- D?
- S*
-$endlist
-$component D9
- D?
- S*
-$endlist
-$component C22
- SM*
- C?
- C1-1
-$endlist
-$component C5
- SM*
- C?
- C1-1
-$endlist
-$component C6
- SM*
- C?
- C1-1
+$component 1k1
+ R?
+ SM0603
+ SM0805
+ R?-*
+ SM1206
 $endlist
 $component C3
  SM*
@@ -439,248 +346,209 @@ $endlist
 $endfootprintlist
 }
 { Pin List by Nets
-Net 1 "GND" "GND"
- C11 2
- C9 2
- P3 6
- P6 8
- P6 10
- R2 2
- D17 2
- D16 2
- C5 1
- P2 9
- SW1 1
- C2 2
- C1 2
- C10 2
- P21 10
- IC1 39
- P5 9
- IC1 6
- C4 2
- U1 15
- C6 2
- C22 1
- IC1 18
- IC1 28
- P1 14
- P4 2
- C3 2
-Net 2 "/Encendido_Sens_Piso_Izq" "Encendido_Sens_Piso_Izq"
- P5 13
- R6 2
-Net 3 "/Encendido_Sens_Piso_Der" "Encendido_Sens_Piso_Der"
- R5 2
- P5 14
-Net 4 "/Encendido_Sens_Piso_Cen" "Encendido_Sens_Piso_Cen"
- P5 15
- R7 2
-Net 5 "/Encendido_Sens_Pared_Izq" "Encendido_Sens_Pared_Izq"
- P5 16
- P21 7
-Net 6 "/Encendido_Sens_Pared_Der" "Encendido_Sens_Pared_Der"
- P5 17
- P21 2
-Net 7 "/Led_Test_Verde" "Led_Test_Verde"
- P5 12
- R3 1
-Net 8 "+5V" "+5V"
- P1 13
- C10 1
- IC1 17
- IC1 38
- IC1 5
- C5 2
- P3 2
- R1 2
- P6 9
- C22 2
- F1 1
- L1 1
- SW2 1
- U1 16
-Net 10 "/Led_Test_Rojo" "Led_Test_Rojo"
- P5 11
- R4 1
-Net 15 "" ""
- IC1 29
- C3 1
-Net 16 "" ""
- F1 2
- P4 1
-Net 18 "" ""
+Net 3 "" ""
  C7 1
  U1 1
-Net 19 "" ""
- C7 2
+Net 4 "" ""
  U1 3
-Net 20 "" ""
- C8 1
+ C7 2
+Net 5 "" ""
  U1 4
-Net 21 "" ""
+ C8 1
+Net 6 "" ""
  C8 2
  U1 5
-Net 22 "/Encendido_Sens_Pared_Cen" "Encendido_Sens_Pared_Cen"
- P5 18
- P21 1
-Net 23 "/Sensor_Piso_Cen" "Sensor_Piso_Cen"
- D12 1
- P6 5
- IC1 35
-Net 24 "" ""
- D16 1
- R3 2
-Net 25 "/Trigger_Sensor_Pared_Der" "Trigger_Sensor_Pared_Der"
- P21 4
- IC1 33
-Net 26 "/Sensor_Piso_Der" "Sensor_Piso_Der"
- P6 1
- IC1 36
- D13 1
-Net 27 "/Sensor_Piso_Izq" "Sensor_Piso_Izq"
- IC1 37
- D14 1
+Net 9 "/S1+" "S1+"
+ R2 2
  P6 3
-Net 28 "/Micro_Encendido_Sens_Pared" "Micro_Encendido_Sens_Pared"
- IC1 21
- P5 1
- P5 2
- P5 3
-Net 29 "" ""
- P6 4
- R6 1
-Net 30 "" ""
- P6 6
- R7 1
-Net 32 "/Micro_Encendido_Sens_Piso" "Micro_Encendido_Sens_Piso"
- P5 6
- IC1 22
- P5 5
+Net 10 "+5V" "+5V"
  P5 4
-Net 33 "/Echo_Sensor_Pared_Cen" "Echo_Sensor_Pared_Cen"
- D9 1
- P21 5
- IC1 19
-Net 34 "/Echo_Sensor_Pared_Der" "Echo_Sensor_Pared_Der"
- IC1 41
- D10 1
- P21 6
-Net 35 "/Echo_Sensor_Pared_Izq" "Echo_Sensor_Pared_Izq"
- D11 1
- IC1 20
- P21 8
-Net 36 "/Trigger_Sensor_Pared_Izq" "Trigger_Sensor_Pared_Izq"
- IC1 34
- P21 9
-Net 37 "" ""
- P6 2
+ C5 2
+ C10 1
+ L1 1
+ R4 1
+ R6 1
+ IC1 17
+ C4 2
+ IC1 5
+ P4 1
+ R3 1
  R5 1
-Net 38 "" ""
+ IC1 38
+ R2 1
+ R7 1
+ U1 16
+ P3 2
+ P1 13
+Net 11 "/Encendido_Sensores" "Encendido_Sensores"
+ IC1 20
+ 1k1 1
+Net 12 "" ""
+ Q1 2
+ 1k1 2
+Net 14 "/Motor_1_Direction" "Motor_1_Direction"
+ IC1 16
+ P1 1
+Net 15 "/Motor_2_Direction" "Motor_2_Direction"
+ P1 2
+ IC1 15
+Net 16 "" ""
+ C3 1
+ IC1 29
+Net 18 "/S-" "S-"
+ P6 15
+ Q1 3
+Net 19 "/S5+" "S5+"
+ R6 2
+ P6 8
+Net 20 "/S3+" "S3+"
+ P6 11
+ R4 2
+Net 21 "/S6+" "S6+"
+ P6 12
+ R7 2
+Net 22 "/Sensor_Piso_Izq" "Sensor_Piso_Izq"
+ IC1 37
+ P6 5
+Net 25 "/RESET" "RESET"
+ P5 6
+ P3 5
+ IC1 4
+ R1 1
+ C4 1
+ SW1 2
+Net 26 "/S4+" "S4+"
+ P6 4
+ R5 2
+Net 27 "/S2+" "S2+"
+ P6 7
+ R3 2
+Net 28 "/Motor_1_Brake" "Motor_1_Brake"
+ IC1 43
+ P1 3
+Net 29 "" ""
  C2 1
  X1 1
  IC1 8
-Net 39 "" ""
+Net 30 "" ""
+ C1 1
  IC1 7
  X1 2
- C1 1
-Net 40 "/MOSI" "MOSI"
- P3 4
- IC1 1
-Net 41 "/RESET" "RESET"
- C4 1
- SW1 2
- R1 1
- P3 5
- IC1 4
-Net 42 "/Motor_1_Brake" "Motor_1_Brake"
- IC1 43
- P1 3
-Net 43 "/Micro_Led_Test_Rojo" "Micro_Led_Test_Rojo"
- P5 8
- IC1 24
-Net 44 "/Motor_2_Brake" "Motor_2_Brake"
- P1 4
- IC1 44
-Net 45 "/Motor_2_Direction" "Motor_2_Direction"
- IC1 15
- P1 2
-Net 46 "/Motor_2_Encoder_A" "Motor_2_Encoder_A"
- IC1 25
- P1 10
-Net 47 "/Motor_1_Direction" "Motor_1_Direction"
- P1 1
- IC1 16
-Net 48 "/Micro_Led_Test_Verde" "Micro_Led_Test_Verde"
- P5 7
- IC1 23
-Net 49 "" ""
- L1 2
- C6 1
- IC1 27
-Net 50 "/MISO" "MISO"
+Net 31 "/MISO" "MISO"
  P3 1
  IC1 2
-Net 51 "/SCK" "SCK"
+Net 32 "/SCK" "SCK"
  IC1 3
  P3 3
-Net 52 "/RXD" "RXD"
+Net 33 "/Sensor_Piso_Der" "Sensor_Piso_Der"
+ IC1 36
+ P6 9
+Net 34 "/Motor_1_PWM" "Motor_1_PWM"
+ P1 5
+ IC1 14
+Net 35 "/TDI" "TDI"
+ IC1 24
+ P5 9
+Net 36 "/Sensor_Pared_Izq" "Sensor_Pared_Izq"
+ IC1 34
+ P6 10
+Net 37 "/Sensor_Piso_Cen" "Sensor_Piso_Cen"
+ P6 1
+ IC1 35
+Net 38 "/Señal_sens_pared" "Señal_sens_pared"
+ IC1 19
+ P6 14
+Net 39 "/TCK" "TCK"
+ IC1 21
+ P5 1
+Net 40 "/RXD" "RXD"
  U1 12
  IC1 9
-Net 53 "/TXD" "TXD"
- IC1 10
- U1 11
-Net 54 "/Motor_1_Encoder_A" "Motor_1_Encoder_A"
- IC1 40
- P1 9
-Net 55 "/Motor_2_Encoder_B" "Motor_2_Encoder_B"
- IC1 12
- P1 12
-Net 56 "/Interrupcion_sensores" "Interrupcion_sensores"
- D13 2
- D11 2
- R2 1
- IC1 42
- D14 2
- D15 2
- D9 2
- D12 2
- D10 2
-Net 57 "/Trigger_Sensor_Pared_Cen" "Trigger_Sensor_Pared_Cen"
- P21 3
- IC1 32
-Net 58 "/Motor_1_Encoder_B" "Motor_1_Encoder_B"
- P1 11
- IC1 11
-Net 66 "/Motor_2_Temperature" "Motor_2_Temperature"
- P1 8
+Net 41 "/Motor_2_Temperature" "Motor_2_Temperature"
  IC1 30
-Net 67 "" ""
- SW2 2
- D15 1
-Net 68 "/Motor_1_Temperature" "Motor_1_Temperature"
+ P1 8
+Net 42 "/MOSI" "MOSI"
+ IC1 1
+ P3 4
+Net 43 "/Motor_1_Temperature" "Motor_1_Temperature"
  P1 7
  IC1 31
-Net 69 "/Motor_1_PWM" "Motor_1_PWM"
- IC1 14
- P1 5
-Net 70 "/Motor_2_PWM" "Motor_2_PWM"
+Net 45 "/TMS" "TMS"
+ P5 5
+ IC1 22
+Net 46 "/INT2" "INT2"
+ IC1 42
+ SW2 2
+Net 47 "/Motor_2_PWM" "Motor_2_PWM"
  P1 6
  IC1 13
-Net 71 "" ""
- C11 1
- U1 6
-Net 72 "" ""
- C9 1
- U1 2
-Net 73 "/CONN_RX" "CONN_RX"
+Net 48 "/TDO" "TDO"
+ P5 3
+ IC1 23
+Net 49 "/CONN_RX" "CONN_RX"
  U1 14
  P2 3
-Net 74 "/CONN_TX" "CONN_TX"
+Net 57 "/CONN_TX" "CONN_TX"
  P2 5
  U1 13
-Net 75 "" ""
- D17 1
- R4 2
+Net 58 "/Motor_2_Brake" "Motor_2_Brake"
+ P1 4
+ IC1 44
+Net 59 "/Motor_1_Encoder_A" "Motor_1_Encoder_A"
+ P1 9
+ IC1 40
+Net 60 "/Motor_2_Encoder_A" "Motor_2_Encoder_A"
+ P1 10
+ IC1 25
+Net 61 "/Motor_1_Encoder_B" "Motor_1_Encoder_B"
+ IC1 11
+ P1 11
+Net 62 "/Motor_2_Encoder_B" "Motor_2_Encoder_B"
+ P1 12
+ IC1 12
+Net 63 "GND" "GND"
+ SW2 1
+ C6 2
+ P6 16
+ C3 2
+ P4 2
+ U1 15
+ P2 9
+ Q1 1
+ P3 6
+ P1 14
+ C9 2
+ C11 2
+ C10 2
+ R1 2
+ IC1 18
+ IC1 28
+ IC1 39
+ SW1 1
+ C1 2
+ C2 2
+ IC1 6
+ C5 1
+ P5 10
+ P5 2
+Net 64 "/Sensor_Pared_Der" "Sensor_Pared_Der"
+ P6 6
+ IC1 33
+Net 65 "/Sensor_Pared_Cen" "Sensor_Pared_Cen"
+ IC1 32
+ P6 2
+Net 66 "/TXD" "TXD"
+ U1 11
+ IC1 10
+Net 67 "" ""
+ C11 1
+ U1 6
+Net 68 "" ""
+ C9 1
+ U1 2
+Net 69 "" ""
+ C6 1
+ IC1 27
+ L1 2
 }
 #End
