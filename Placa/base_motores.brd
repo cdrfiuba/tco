@@ -1,0 +1,626 @@
+PCBNEW-BOARD Version 1 date sáb 06 jul 2013 11:16:33 ART
+
+# Created by Pcbnew(2012-apr-16-27)-stable
+
+$GENERAL
+encoding utf-8
+LayerCount 2
+Ly 1FFF8001
+EnabledLayers 1FFF8001
+Links 0
+NoConn 0
+Di 27483 7798 90627 75099
+Ndraw 7
+Ntrack 0
+Nzone 0
+BoardThickness 630
+Nmodule 24
+Nnets 1
+$EndGENERAL
+
+$SHEETDESCR
+Sheet A4 11700 8267
+Title ""
+Date "6 jul 2013"
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndSHEETDESCR
+
+$SETUP
+InternalUnit 0.000100 INCH
+Layers 2
+Layer[0] Back signal
+Layer[15] Front signal
+TrackWidth 130
+TrackWidthList 150
+TrackWidthList 250
+TrackClearence 120
+ZoneClearence 200
+TrackMinWidth 120
+DrawSegmWidth 150
+EdgeSegmWidth 150
+ViaSize 350
+ViaDrill 250
+ViaMinSize 50
+ViaMinDrill 50
+ViaSizeList 120 0
+ViaSizeList 780 0
+MicroViaSize 200
+MicroViaDrill 50
+MicroViasAllowed 0
+MicroViaMinSize 200
+MicroViaMinDrill 50
+TextPcbWidth 120
+TextPcbSize 600 800
+EdgeModWidth 150
+TextModSize 600 600
+TextModWidth 120
+PadSize 1600 1600
+PadDrill 1181
+Pad2MaskClearance 100
+AuxiliaryAxisOrg 0 0
+PcbPlotParams (pcbplotparams (layerselection 3178497) (usegerberextensions true) (excludeedgelayer true) (linewidth 60) (plotframeref false) (viasonmask false) (mode 1) (useauxorigin false) (hpglpennumber 1) (hpglpenspeed 20) (hpglpendiameter 15) (hpglpenoverlay 0) (pscolor true) (psnegative false) (psa4output false) (plotreference true) (plotvalue true) (plotothertext true) (plotinvisibletext false) (padsonsilk false) (subtractmaskfromsilk false) (outputformat 1) (mirror false) (drillshape 1) (scaleselection 1) (outputdirectory ""))
+$EndSETUP
+
+$EQUIPOT
+Na 0 ""
+St ~
+$EndEQUIPOT
+$NCLASS
+Name "Default"
+Desc "This is the default net class."
+Clearance 120
+TrackWidth 130
+ViaDia 350
+ViaDrill 250
+uViaDia 200
+uViaDrill 50
+AddNet ""
+$EndNCLASS
+$MODULE 1pin
+Po 54134 49409 0 15 00200000 51D824B9 ~~
+Li 1pin
+Cd module 1 pin (ou trou mecanique de percage)
+Kw DEV
+Sc 51D824B9
+AR 1pin
+Op 0 0 0
+T0 0 -1200 400 400 0 100 N V 21 N "1PIN"
+T1 0 1100 400 400 0 100 N I 21 N "P***"
+DC 0 0 0 -900 150 21
+$PAD
+Sh "1" C 1600 1600 0 0 0
+Dr 1181 0 0
+At STD N 00E0FFFF
+Ne 0 ""
+Po 0 0
+$EndPAD
+$EndMODULE  1pin
+$MODULE 1pin
+Po 63977 49409 0 15 00200000 51D824B7 ~~
+Li 1pin
+Cd module 1 pin (ou trou mecanique de percage)
+Kw DEV
+Sc 51D824B7
+AR 1pin
+Op 0 0 0
+T0 0 -1200 400 400 0 100 N V 21 N "1PIN"
+T1 0 1100 400 400 0 100 N I 21 N "P***"
+DC 0 0 0 -900 150 21
+$PAD
+Sh "1" C 1600 1600 0 0 0
+Dr 1181 0 0
+At STD N 00E0FFFF
+Ne 0 ""
+Po 0 0
+$EndPAD
+$EndMODULE  1pin
+$MODULE 1pin
+Po 63977 54330 0 15 00200000 51D824B5 ~~
+Li 1pin
+Cd module 1 pin (ou trou mecanique de percage)
+Kw DEV
+Sc 51D824B5
+AR 1pin
+Op 0 0 0
+T0 0 -1200 400 400 0 100 N V 21 N "1PIN"
+T1 0 1100 400 400 0 100 N I 21 N "P***"
+DC 0 0 0 -900 150 21
+$PAD
+Sh "1" C 1600 1600 0 0 0
+Dr 1181 0 0
+At STD N 00E0FFFF
+Ne 0 ""
+Po 0 0
+$EndPAD
+$EndMODULE  1pin
+$MODULE 1pin
+Po 54134 54330 0 15 00200000 51D824B3 ~~
+Li 1pin
+Cd module 1 pin (ou trou mecanique de percage)
+Kw DEV
+Sc 51D824B3
+AR 1pin
+Op 0 0 0
+T0 0 -1200 400 400 0 100 N V 21 N "1PIN"
+T1 0 1100 400 400 0 100 N I 21 N "P***"
+DC 0 0 0 -900 150 21
+$PAD
+Sh "1" C 1600 1600 0 0 0
+Dr 1181 0 0
+At STD N 00E0FFFF
+Ne 0 ""
+Po 0 0
+$EndPAD
+$EndMODULE  1pin
+$MODULE 1pin
+Po 54134 54330 0 15 00200000 51D824B1 ~~
+Li 1pin
+Cd module 1 pin (ou trou mecanique de percage)
+Kw DEV
+Sc 51D824B1
+AR 1pin
+Op 0 0 0
+T0 0 -1200 400 400 0 100 N V 21 N "1PIN"
+T1 0 1100 400 400 0 100 N I 21 N "P***"
+DC 0 0 0 -900 150 21
+$PAD
+Sh "1" C 1600 1600 0 0 0
+Dr 1181 0 0
+At STD N 00E0FFFF
+Ne 0 ""
+Po 0 0
+$EndPAD
+$EndMODULE  1pin
+$MODULE 1pin
+Po 63977 54330 0 15 00200000 51D824AF ~~
+Li 1pin
+Cd module 1 pin (ou trou mecanique de percage)
+Kw DEV
+Sc 51D824AF
+AR 1pin
+Op 0 0 0
+T0 0 -1200 400 400 0 100 N V 21 N "1PIN"
+T1 0 1100 400 400 0 100 N I 21 N "P***"
+DC 0 0 0 -900 150 21
+$PAD
+Sh "1" C 1600 1600 0 0 0
+Dr 1181 0 0
+At STD N 00E0FFFF
+Ne 0 ""
+Po 0 0
+$EndPAD
+$EndMODULE  1pin
+$MODULE 1pin
+Po 63977 59251 0 15 00200000 51D824AD ~~
+Li 1pin
+Cd module 1 pin (ou trou mecanique de percage)
+Kw DEV
+Sc 51D824AD
+AR 1pin
+Op 0 0 0
+T0 0 -1200 400 400 0 100 N V 21 N "1PIN"
+T1 0 1100 400 400 0 100 N I 21 N "P***"
+DC 0 0 0 -900 150 21
+$PAD
+Sh "1" C 1600 1600 0 0 0
+Dr 1181 0 0
+At STD N 00E0FFFF
+Ne 0 ""
+Po 0 0
+$EndPAD
+$EndMODULE  1pin
+$MODULE 1pin
+Po 54134 59251 0 15 00200000 51D824AB ~~
+Li 1pin
+Cd module 1 pin (ou trou mecanique de percage)
+Kw DEV
+Sc 51D824AB
+AR 1pin
+Op 0 0 0
+T0 0 -1200 400 400 0 100 N V 21 N "1PIN"
+T1 0 1100 400 400 0 100 N I 21 N "P***"
+DC 0 0 0 -900 150 21
+$PAD
+Sh "1" C 1600 1600 0 0 0
+Dr 1181 0 0
+At STD N 00E0FFFF
+Ne 0 ""
+Po 0 0
+$EndPAD
+$EndMODULE  1pin
+$MODULE 1pin
+Po 54134 64172 0 15 00200000 51D824A9 ~~
+Li 1pin
+Cd module 1 pin (ou trou mecanique de percage)
+Kw DEV
+Sc 51D824A9
+AR 1pin
+Op 0 0 0
+T0 0 -1200 400 400 0 100 N V 21 N "1PIN"
+T1 0 1100 400 400 0 100 N I 21 N "P***"
+DC 0 0 0 -900 150 21
+$PAD
+Sh "1" C 1600 1600 0 0 0
+Dr 1181 0 0
+At STD N 00E0FFFF
+Ne 0 ""
+Po 0 0
+$EndPAD
+$EndMODULE  1pin
+$MODULE 1pin
+Po 63977 64172 0 15 00200000 51D824A7 ~~
+Li 1pin
+Cd module 1 pin (ou trou mecanique de percage)
+Kw DEV
+Sc 51D824A7
+AR 1pin
+Op 0 0 0
+T0 0 -1200 400 400 0 100 N V 21 N "1PIN"
+T1 0 1100 400 400 0 100 N I 21 N "P***"
+DC 0 0 0 -900 150 21
+$PAD
+Sh "1" C 1600 1600 0 0 0
+Dr 1181 0 0
+At STD N 00E0FFFF
+Ne 0 ""
+Po 0 0
+$EndPAD
+$EndMODULE  1pin
+$MODULE 1pin
+Po 63977 29133 0 15 00200000 51D82479 ~~
+Li 1pin
+Cd module 1 pin (ou trou mecanique de percage)
+Kw DEV
+Sc 51D82479
+AR 1pin
+Op 0 0 0
+T0 0 -1200 400 400 0 100 N V 21 N "1PIN"
+T1 0 1100 400 400 0 100 N I 21 N "P***"
+DC 0 0 0 -900 150 21
+$PAD
+Sh "1" C 1600 1600 0 0 0
+Dr 1181 0 0
+At STD N 00E0FFFF
+Ne 0 ""
+Po 0 0
+$EndPAD
+$EndMODULE  1pin
+$MODULE 1pin
+Po 54134 29133 0 15 00200000 51D82477 ~~
+Li 1pin
+Cd module 1 pin (ou trou mecanique de percage)
+Kw DEV
+Sc 51D82477
+AR 1pin
+Op 0 0 0
+T0 0 -1200 400 400 0 100 N V 21 N "1PIN"
+T1 0 1100 400 400 0 100 N I 21 N "P***"
+DC 0 0 0 -900 150 21
+$PAD
+Sh "1" C 1600 1600 0 0 0
+Dr 1181 0 0
+At STD N 00E0FFFF
+Ne 0 ""
+Po 0 0
+$EndPAD
+$EndMODULE  1pin
+$MODULE 1pin
+Po 54134 24212 0 15 00200000 51D82467 ~~
+Li 1pin
+Cd module 1 pin (ou trou mecanique de percage)
+Kw DEV
+Sc 51D82467
+AR 1pin
+Op 0 0 0
+T0 0 -1200 400 400 0 100 N V 21 N "1PIN"
+T1 0 1100 400 400 0 100 N I 21 N "P***"
+DC 0 0 0 -900 150 21
+$PAD
+Sh "1" C 1600 1600 0 0 0
+Dr 1181 0 0
+At STD N 00E0FFFF
+Ne 0 ""
+Po 0 0
+$EndPAD
+$EndMODULE  1pin
+$MODULE 1pin
+Po 63977 24212 0 15 00200000 51D82465 ~~
+Li 1pin
+Cd module 1 pin (ou trou mecanique de percage)
+Kw DEV
+Sc 51D82465
+AR 1pin
+Op 0 0 0
+T0 0 -1200 400 400 0 100 N V 21 N "1PIN"
+T1 0 1100 400 400 0 100 N I 21 N "P***"
+DC 0 0 0 -900 150 21
+$PAD
+Sh "1" C 1600 1600 0 0 0
+Dr 1181 0 0
+At STD N 00E0FFFF
+Ne 0 ""
+Po 0 0
+$EndPAD
+$EndMODULE  1pin
+$MODULE 1pin
+Po 63977 19291 0 15 00200000 51D82435 ~~
+Li 1pin
+Cd module 1 pin (ou trou mecanique de percage)
+Kw DEV
+Sc 51D82435
+AR 1pin
+Op 0 0 0
+T0 0 -1200 400 400 0 100 N V 21 N "1PIN"
+T1 0 1100 400 400 0 100 N I 21 N "P***"
+DC 0 0 0 -900 150 21
+$PAD
+Sh "1" C 1600 1600 0 0 0
+Dr 1181 0 0
+At STD N 00E0FFFF
+Ne 0 ""
+Po 0 0
+$EndPAD
+$EndMODULE  1pin
+$MODULE 1pin
+Po 54134 19291 0 15 00200000 51D82433 ~~
+Li 1pin
+Cd module 1 pin (ou trou mecanique de percage)
+Kw DEV
+Sc 51D82433
+AR 1pin
+Op 0 0 0
+T0 0 -1200 400 400 0 100 N V 21 N "1PIN"
+T1 0 1100 400 400 0 100 N I 21 N "P***"
+DC 0 0 0 -900 150 21
+$PAD
+Sh "1" C 1600 1600 0 0 0
+Dr 1181 0 0
+At STD N 00E0FFFF
+Ne 0 ""
+Po 0 0
+$EndPAD
+$EndMODULE  1pin
+$MODULE 1pin
+Po 54134 19291 0 15 00200000 51D82427 ~~
+Li 1pin
+Cd module 1 pin (ou trou mecanique de percage)
+Kw DEV
+Sc 51D82427
+AR 1pin
+Op 0 0 0
+T0 0 -1200 400 400 0 100 N V 21 N "1PIN"
+T1 0 1100 400 400 0 100 N I 21 N "P***"
+DC 0 0 0 -900 150 21
+$PAD
+Sh "1" C 1600 1600 0 0 0
+Dr 1181 0 0
+At STD N 00E0FFFF
+Ne 0 ""
+Po 0 0
+$EndPAD
+$EndMODULE  1pin
+$MODULE 1pin
+Po 63977 19291 0 15 00200000 51D82425 ~~
+Li 1pin
+Cd module 1 pin (ou trou mecanique de percage)
+Kw DEV
+Sc 51D82425
+AR 1pin
+Op 0 0 0
+T0 0 -1200 400 400 0 100 N V 21 N "1PIN"
+T1 0 1100 400 400 0 100 N I 21 N "P***"
+DC 0 0 0 -900 150 21
+$PAD
+Sh "1" C 1600 1600 0 0 0
+Dr 1181 0 0
+At STD N 00E0FFFF
+Ne 0 ""
+Po 0 0
+$EndPAD
+$EndMODULE  1pin
+$MODULE 1pin
+Po 63977 14370 0 15 00200000 51D82412 ~~
+Li 1pin
+Cd module 1 pin (ou trou mecanique de percage)
+Kw DEV
+Sc 51D82412
+AR 1pin
+Op 0 0 0
+T0 0 -1200 400 400 0 100 N V 21 N "1PIN"
+T1 0 1100 400 400 0 100 N I 21 N "P***"
+DC 0 0 0 -900 150 21
+$PAD
+Sh "1" C 1600 1600 0 0 0
+Dr 1181 0 0
+At STD N 00E0FFFF
+Ne 0 ""
+Po 0 0
+$EndPAD
+$EndMODULE  1pin
+$MODULE 1pin
+Po 54134 14370 0 15 00200000 51D823F0 ~~
+Li 1pin
+Cd module 1 pin (ou trou mecanique de percage)
+Kw DEV
+Sc 51D823F0
+AR 1pin
+Op 0 0 0
+T0 0 -1200 400 400 0 100 N V 21 N "1PIN"
+T1 0 1100 400 400 0 100 N I 21 N "P***"
+DC 0 0 0 -900 150 21
+$PAD
+Sh "1" C 1600 1600 0 0 0
+Dr 1181 0 0
+At STD N 00E0FFFF
+Ne 0 ""
+Po 0 0
+$EndPAD
+$EndMODULE  1pin
+$MODULE 1pin
+Po 38976 59449 0 15 00200000 51D824E2 ~~
+Li 1pin
+Cd module 1 pin (ou trou mecanique de percage)
+Kw DEV
+Sc 51D824E2
+AR 1pin
+Op 0 0 0
+T0 0 -1200 400 400 0 100 N V 21 N "1PIN"
+T1 0 1100 400 400 0 100 N I 21 N "P***"
+DC 0 0 0 -900 150 21
+$PAD
+Sh "1" C 1600 1600 0 0 0
+Dr 1181 0 0
+At STD N 00E0FFFF
+Ne 0 ""
+Po 0 0
+$EndPAD
+$EndMODULE  1pin
+$MODULE 1pin
+Po 39370 19685 0 15 51D82676 51D824FA ~~
+Li 1pin
+Cd module 1 pin (ou trou mecanique de percage)
+Kw DEV
+Sc 51D824FA
+AR 1pin
+Op 0 0 0
+T0 0 -1200 400 400 0 100 N V 21 N "1PIN"
+T1 0 1100 400 400 0 100 N I 21 N "P***"
+DC 0 0 0 -900 150 21
+$PAD
+Sh "1" C 1600 1600 0 0 0
+Dr 1181 0 0
+At STD N 00E0FFFF
+Ne 0 ""
+Po 0 0
+$EndPAD
+$EndMODULE  1pin
+$MODULE 1pin
+Po 78740 19685 0 15 00200000 51D82527 ~~
+Li 1pin
+Cd module 1 pin (ou trou mecanique de percage)
+Kw DEV
+Sc 51D82527
+AR 1pin
+Op 0 0 0
+T0 0 -1200 400 400 0 100 N V 21 N "1PIN"
+T1 0 1100 400 400 0 100 N I 21 N "P***"
+DC 0 0 0 -900 150 21
+$PAD
+Sh "1" C 1600 1600 0 0 0
+Dr 1181 0 0
+At STD N 00E0FFFF
+Ne 0 ""
+Po 0 0
+$EndPAD
+$EndMODULE  1pin
+$MODULE 1pin
+Po 79134 59449 0 15 00200000 51D82536 ~~
+Li 1pin
+Cd module 1 pin (ou trou mecanique de percage)
+Kw DEV
+Sc 51D82536
+AR 1pin
+Op 0 0 0
+T0 0 -1200 400 400 0 100 N V 21 N "1PIN"
+T1 0 1100 400 400 0 100 N I 21 N "P***"
+DC 0 0 0 -900 150 21
+$PAD
+Sh "1" C 1600 1600 0 0 0
+Dr 1181 0 0
+At STD N 00E0FFFF
+Ne 0 ""
+Po 0 0
+$EndPAD
+$EndMODULE  1pin
+$COTATION
+Ge 0 25 0
+Va 6299
+Te "15,999 mm"
+Po 69144 67322 600 800 120 899 1
+Sb 0 68504 70472 68504 64173 120
+Sd 0 63976 64173 69784 64173 120
+Sg 0 63976 70472 69784 70472 120
+S1 0 68504 64173 68734 64616 120
+S2 0 68504 64173 68274 64616 120
+S3 0 68504 70472 68734 70029 120
+S4 0 68504 70472 68274 70029 120
+$endCOTATION
+$COTATION
+Ge 0 25 0
+Va 4922
+Te "12,502 mm"
+Po 69144 51870 600 800 120 899 1
+Sb 0 68504 54331 68504 49409 120
+Sd 0 63976 49409 69784 49409 120
+Sg 0 63976 54331 69784 54331 120
+S1 0 68504 49409 68734 49852 120
+S2 0 68504 49409 68274 49852 120
+S3 0 68504 54331 68734 53888 120
+S4 0 68504 54331 68274 53888 120
+$endCOTATION
+$COTATION
+Ge 0 25 0
+Va 4921
+Te "12,499 mm"
+Po 69144 56791 600 800 120 899 1
+Sb 0 68504 59252 68504 54331 120
+Sd 0 63976 54331 69784 54331 120
+Sg 0 63976 59252 69784 59252 120
+S1 0 68504 54331 68734 54774 120
+S2 0 68504 54331 68274 54774 120
+S3 0 68504 59252 68734 58809 120
+S4 0 68504 59252 68274 58809 120
+$endCOTATION
+$COTATION
+Ge 0 25 0
+Va 4921
+Te "12,499 mm"
+Po 69144 61712 600 800 120 899 1
+Sb 0 68504 64173 68504 59252 120
+Sd 0 63976 59252 69784 59252 120
+Sg 0 63976 64173 69784 64173 120
+S1 0 68504 59252 68734 59695 120
+S2 0 68504 59252 68274 59695 120
+S3 0 68504 64173 68734 63730 120
+S4 0 68504 64173 68274 63730 120
+$endCOTATION
+$COTATION
+Ge 0 25 0
+Va 9842
+Te "24,999 mm"
+Po 59055 72293 600 800 120 0 1
+Sb 0 54134 71653 63976 71653 120
+Sd 0 63976 64173 63976 72933 120
+Sg 0 54134 64173 54134 72933 120
+S1 0 63976 71653 63533 71883 120
+S2 0 63976 71653 63533 71423 120
+S3 0 54134 71653 54577 71883 120
+S4 0 54134 71653 54577 71423 120
+$endCOTATION
+$COTATION
+Ge 0 25 0
+Va 62992
+Te "160,000 mm"
+Po 59055 74458 600 800 120 0 1
+Sb 0 27559 73818 90551 73818 120
+Sd 0 90551 39370 90551 75098 120
+Sg 0 27559 39370 27559 75098 120
+S1 0 90551 73818 90108 74048 120
+S2 0 90551 73818 90108 73588 120
+S3 0 27559 73818 28002 74048 120
+S4 0 27559 73818 28002 73588 120
+$endCOTATION
+$DRAWSEGMENT
+Po 3 59055 39370 90551 39370 150
+De 28 0 900 0 0
+$EndDRAWSEGMENT
+$TRACK
+$EndTRACK
+$ZONE
+$EndZONE
+$EndBOARD
