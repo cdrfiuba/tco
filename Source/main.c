@@ -30,20 +30,19 @@ volatile uint32_t   interrupciones_timer_1, distancia;
 
 int main(void)
 {
-	usart_init();		                //Inicialización de UART para enviar/recibir datos por serie.
-	sei();			                    //Activación de las interrupciones.
+	usart_init();			//Inicialización de UART para enviar/recibir datos por serie.
+	sei();			        //Activación de las interrupciones.
 
 
-    inicializar_puertos_sensores_pared();
-    inicializar_sensores_piso();
-    inicializar_encoders();             //Al inicializar los encoders lo que se hace es configurar el TIMER 0 y el TIMER 2
-    inicializar_puertos_motores();
-    inicializar_PWM();                  //Al inicializar el PWM lo que se hace es configurar el TIMER 1
+	inicializar_puertos_sensores_pared();
+	//inicializar_sensores_piso();
+	inicializar_encoders();       	//Al inicializar los encoders lo que se hace es configurar el TIMER 0 y el TIMER 2
+	inicializar_puertos_motores();
+	inicializar_PWM();             	//Al inicializar el PWM lo que se hace es configurar el TIMER 1
 
-    cuenta_encoder_derecha = 0;
-    cuenta_encoder_izquierda = 0;
-    _delay_ms(500);
-
+	cuenta_encoder_derecha = 0;
+	cuenta_encoder_izquierda = 0;
+	_delay_ms(500);
 
 	for (;;){
 
@@ -51,33 +50,13 @@ int main(void)
         motores_corregir_rumbo();
 
         //Se avanza una distancia muy pequeña.
-        motores_avanzar(200,200, 40);
-
+        motores_avanzar(200,200, 10);
+/*
         //Se mide a la derecha para saber si hay pared o no.
         distancia = medicion_distancia_pared(SENSOR_PARED_DER);
 
         //Si se entra acá es que no hay pared a la derecha, entonces, se giro a la derecha
         if(distancia > DISTANCIA_GRANDE){
-
-            //Se revisa si el piso es de color blanco, para saber si llegó al final del laberinto
-            //Para esto, primero se encienden los sensores del piso y se mide. Si hay suelo blanco,
-            //se avanza y se mide de nuevo. Si hay doble confirmación, entonces estoy en la casilla final.
-            encender_sensores_piso();
-
-            _delay_us(100);
-
-            if((PINA & (1 << PA2)) == (1 << PA2)){
-
-                motores_avanzar(200,200,200);
-
-                motores_detener();
-
-                _delay_ms(10000);
-
-            }
-
-            //Si se llega a este punto, el suelo es color negro.
-            apagar_sensores_piso();
 
             motores_avanzar(200,200, 200);
 
@@ -115,6 +94,7 @@ int main(void)
                 motores_avanzar(200,200, 450);
             }
         }
+*/
     }
 
 	return 0;

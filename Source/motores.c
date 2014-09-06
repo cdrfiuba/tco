@@ -27,10 +27,10 @@ void inicializar_puertos_motores(void){
 	DDRB |= MOTOR_DER_BRAKE;
 
 	DDRB |= MOTOR_IZQ_BRAKE;
-    DDRD |= MOTOR_IZQ_DIRECTION;
+    	DDRD |= MOTOR_IZQ_DIRECTION;
 
-    //Detengo los motores una vez que inicializo los puertos.
-    motores_detener();
+    	//Detengo los motores una vez que inicializo los puertos.
+    	motores_detener();
 }
 
 
@@ -38,9 +38,16 @@ void inicializar_puertos_motores(void){
 
 void motores_detener(void){
 
+	TCCR1B = 0;
+	TCCR1B = ((0 << WGM13)|(1 << WGM12));
+
 	//Freno: poner brake en alto
 	PORTB |= MOTOR_DER_BRAKE;	//Pongo en alto el pin BRAKE del motor 1
 	PORTB |= MOTOR_IZQ_BRAKE;	//Pongo en alto el pin BRAKE del motor 2
+
+	//
+	PORTD &= ~(MOTOR_DER_PWM);
+	PORTD &= ~(MOTOR_IZQ_PWM);
 }
 
 
@@ -66,51 +73,53 @@ void motores_retroceder(uint8_t velocidad_izquierda, uint8_t velocidad_derecha){
 void motores_avanzar(uint8_t velocidad_izquierda, uint8_t velocidad_derecha, uint32_t cantidad_cuentas){
 
 	uint8_t  flag_fin_avance = FALSE;
-    uint32_t cuenta_encoder_derecha_anterior;
+    	uint32_t cuenta_encoder_derecha_anterior;
 
-    cuenta_encoder_derecha = 0;
-    cuenta_encoder_izquierda = 0;
-    cuenta_encoder_derecha_anterior = 0;
+	// Enciendo el timer por si lo apagué al frenar los motores.
+	TCCR1B |= ((0<<CS12)|(0<<CS11)|(1<<CS10));
 
-    variar_PWM(velocidad_izquierda, velocidad_derecha);
+	// Pongo a cero los valores del encoder
+	cuenta_encoder_derecha = 0;
+	cuenta_encoder_izquierda = 0;
+	cuenta_encoder_derecha_anterior = 0;
 
-    PORTD &= ~MOTOR_DER_DIRECTION; 	//Pongo en bajo el pin DIRECTION del motor 1
-	PORTB &= ~MOTOR_DER_BRAKE;	    //Pongo en bajo el pin BRAKE del motor 1
+    	variar_PWM(velocidad_izquierda, velocidad_derecha);
 
+	//Un motor avanza, el otro retrocede, entonces el robot avanza.
+    	PORTD &= ~MOTOR_DER_DIRECTION; 	//Pongo en bajo el pin DIRECTION del motor 1
+	PORTB &= ~MOTOR_DER_BRAKE;	//Pongo en bajo el pin BRAKE del motor 1
 	PORTD |= MOTOR_IZQ_DIRECTION; 	//Pongo en alto el pin DIRECTION del motor 2
-	PORTB &= ~MOTOR_IZQ_BRAKE;	    //Pongo en bajo el pin BRAKE del motor 2
+	PORTB &= ~MOTOR_IZQ_BRAKE;	//Pongo en bajo el pin BRAKE del motor 2
 
 
-    while(flag_fin_avance == FALSE){
+    	while(flag_fin_avance == FALSE){
 
-        if((cuenta_encoder_derecha_anterior + 35) >= cuenta_encoder_derecha){
+		//
+		if((cuenta_encoder_derecha_anterior + 5) >= cuenta_encoder_derecha){
 
-            cuenta_encoder_derecha_anterior = cuenta_encoder_derecha;
+		    cuenta_encoder_derecha_anterior = cuenta_encoder_derecha;
 
-            if(cuenta_encoder_derecha < cuenta_encoder_izquierda){
+		    if(cuenta_encoder_derecha < cuenta_encoder_izquierda){
 
-                if(velocidad_derecha < 240)
-                    variar_PWM(velocidad_izquierda, velocidad_derecha += 5);
+			//255 es la velocidad máxima
+			if(velocidad_derecha < 250)
+			    variar_PWM(velocidad_izquierda, velocidad_derecha += 10);
+			}
 
-                }
+		    if(cuenta_encoder_derecha > cuenta_encoder_izquierda){
 
-            if(cuenta_encoder_derecha > cuenta_encoder_izquierda){
+			//130 es el valor mínimo de PWM para mover al robot
+			if(velocidad_derecha > 130)
+			    variar_PWM(velocidad_izquierda, velocidad_derecha -= 10);
+		    }
+		}
 
-                if(velocidad_derecha > 130)
-                    variar_PWM(velocidad_izquierda, velocidad_derecha -= 5);
+		if(cantidad_cuentas < cuenta_encoder_derecha){    
 
-            }
-        }
+			motores_detener();
 
-        if(cantidad_cuentas < cuenta_encoder_derecha){
-
-            PORTB |= MOTOR_DER_BRAKE;	//Pongo en alto el pin BRAKE del motor 1
-            PORTB |= MOTOR_IZQ_BRAKE;	//Pongo en alto el pin BRAKE del motor 2
-
-
-            flag_fin_avance = TRUE;
-
-        }
+			flag_fin_avance = TRUE;
+		}
     }
 }
 
@@ -120,40 +129,60 @@ void motores_avanzar(uint8_t velocidad_izquierda, uint8_t velocidad_derecha, uin
 
 void motores_rotar_der_90_grados(void){
 
-    uint8_t  flag_fin_rotacion = FALSE;
-    uint32_t cuenta_inicial_encoder_derecho     =   cuenta_encoder_derecha;
-    uint32_t cuenta_inicial_encoder_izquierdo   =   cuenta_encoder_izquierda;
+	uint8_t  flag_fin_rotacion = FALSE;
+	uint32_t cuenta_inicial_encoder_derecha     =   cuenta_encoder_derecha;
+	uint32_t cuenta_inicial_encoder_izquierda   =   cuenta_encoder_izquierda;
 
-    variar_PWM(210, 210);
+	// Enciendo el timer por si lo apagué al frenar los motores.
+	TCCR1B |= ((0<<CS12)|(0<<CS11)|(1<<CS10));
 
-    PORTD &= ~MOTOR_DER_DIRECTION; 	//Pongo en bajo el pin DIRECTION del motor 1
-    PORTB &= ~MOTOR_DER_BRAKE;	    //Pongo en bajo el pin BRAKE del motor 1
+	variar_PWM(220, 220);
 
-    PORTD &= ~MOTOR_IZQ_DIRECTION; 	//Pongo en bajo el pin DIRECTION del motor 2
-    PORTB &= ~MOTOR_IZQ_BRAKE;	    //Pongo en bajo el pin BRAKE del motor 2
+	// Configuro al puente H para que los motores giren para el mismo lado, y entonces el robot gire a la derecha.
+	PORTD &= ~MOTOR_DER_DIRECTION; 	//Pongo en bajo el pin DIRECTION del motor 1
+	PORTB &= ~MOTOR_DER_BRAKE;	    //Pongo en bajo el pin BRAKE del motor 1
+	PORTD &= ~MOTOR_IZQ_DIRECTION; 	//Pongo en bajo el pin DIRECTION del motor 2
+	PORTB &= ~MOTOR_IZQ_BRAKE;	    //Pongo en bajo el pin BRAKE del motor 2
 
     while(flag_fin_rotacion == FALSE){
 
-        if(cuenta_encoder_derecha >= (cuenta_inicial_encoder_derecho + 360)){
+        if(cuenta_encoder_derecha >= (cuenta_inicial_encoder_derecha + 340)){
 
-            if(cuenta_encoder_izquierda >= (cuenta_inicial_encoder_izquierdo + 360)){
+			variar_PWM(255, 220);
 
-                PORTB |= MOTOR_DER_BRAKE;	//Pongo en alto el pin BRAKE del motor 1
-                PORTB |= MOTOR_IZQ_BRAKE;	//Pongo en alto el pin BRAKE del motor 2
+            if(cuenta_encoder_izquierda >= (cuenta_inicial_encoder_izquierda + 340)){
 
-                flag_fin_rotacion = TRUE;
+				break;
+
+            }
+        }
+
+		if(cuenta_encoder_izquierda >= (cuenta_inicial_encoder_izquierda + 340)){
+
+			variar_PWM(220, 255);
+
+            if(cuenta_encoder_derecha >= (cuenta_inicial_encoder_derecha + 340)){
+
+				break;
 
             }
         }
     }
+
+	motores_detener();
+
+    flag_fin_rotacion = TRUE;
 }
 
 
 void motores_rotar_izq_90_grados(void){
 
     uint8_t  flag_fin_rotacion = FALSE;
-    uint32_t cuenta_inicial_encoder_derecho     =   cuenta_encoder_derecha;
-    uint32_t cuenta_inicial_encoder_izquierdo   =   cuenta_encoder_izquierda;
+    uint32_t cuenta_inicial_encoder_derecha     =   cuenta_encoder_derecha;
+    uint32_t cuenta_inicial_encoder_izquierda   =   cuenta_encoder_izquierda;
+
+	// Enciendo el timer por si lo apagué al frenar los motores.
+	TCCR1B |= ((0<<CS12)|(0<<CS11)|(1<<CS10));
 
     variar_PWM(210, 210);
 
@@ -163,29 +192,45 @@ void motores_rotar_izq_90_grados(void){
     PORTD |= MOTOR_IZQ_DIRECTION; 	//Pongo en alto el pin DIRECTION del motor 2
     PORTB &= ~MOTOR_IZQ_BRAKE;	    //Pongo en bajo el pin BRAKE del motor 2
 
-    while(flag_fin_rotacion == FALSE){
+   while(flag_fin_rotacion == FALSE){
 
-        if(cuenta_encoder_derecha >= (cuenta_inicial_encoder_derecho + 370)){
+        if(cuenta_encoder_derecha >= (cuenta_inicial_encoder_derecha + 335)){
 
-            if(cuenta_encoder_izquierda >= (cuenta_inicial_encoder_izquierdo + 370)){
+			variar_PWM(255, 220);
 
-                //Antes tenia 300
+            if(cuenta_encoder_izquierda >= (cuenta_inicial_encoder_izquierda + 335)){
 
-                PORTB |= MOTOR_DER_BRAKE;	//Pongo en alto el pin BRAKE del motor 1
-                PORTB |= MOTOR_IZQ_BRAKE;	//Pongo en alto el pin BRAKE del motor 2
+				break;
 
-                flag_fin_rotacion = TRUE;
+            }
+        }
+
+		if(cuenta_encoder_izquierda >= (cuenta_inicial_encoder_izquierda + 335)){
+
+			variar_PWM(220, 255);
+
+            if(cuenta_encoder_derecha >= (cuenta_inicial_encoder_derecha + 335)){
+
+				break;
 
             }
         }
     }
+
+	motores_detener();
+
+    flag_fin_rotacion = TRUE;
 }
+
 
 
 void motores_corregir_rumbo (void){
 
     uint32_t distancia;
     uint8_t  flag_fin_rotacion = FALSE;
+
+	// Enciendo el timer por si lo apagué al frenar los motores.
+	TCCR1B |= ((0<<CS12)|(0<<CS11)|(1<<CS10));
 
     cuenta_encoder_derecha = 0;
     cuenta_encoder_izquierda = 0;
@@ -196,7 +241,7 @@ void motores_corregir_rumbo (void){
 
     _delay_ms(10);
 
-    if(distancia < 0x00000650){
+    if(distancia < 0x00000700){
 
         variar_PWM(200, 200);
 
@@ -208,16 +253,28 @@ void motores_corregir_rumbo (void){
 
         while(flag_fin_rotacion == FALSE){
 
-            if(cuenta_encoder_derecha >= 15){
+            if(cuenta_encoder_derecha >= 10){
 
-                if(cuenta_encoder_izquierda >= 15){
+				variar_PWM(255, 220);
 
-                    flag_fin_rotacion = TRUE;
+		        if(cuenta_encoder_izquierda >= 10){
 
-                }
-            }
-        }
-    }
+					break;
+		        }
+		    }
+
+			if(cuenta_encoder_izquierda >= 10){
+
+				variar_PWM(220, 255);
+
+		        if(cuenta_encoder_derecha >= 10){
+
+					break;
+
+		        }
+		    }
+    	}
+	}
 
     if(distancia > 0x00000750){
 
@@ -231,15 +288,28 @@ void motores_corregir_rumbo (void){
 
         while(flag_fin_rotacion == FALSE){
 
-            if(cuenta_encoder_derecha >= 15){
+		    if(cuenta_encoder_derecha >= 10){
 
-                if(cuenta_encoder_izquierda >= 15){
+				variar_PWM(255, 220);
 
-                    flag_fin_rotacion = TRUE;
+		        if(cuenta_encoder_izquierda >= 10){
 
-                }
-            }
-        }
+					break;
+
+		        }
+		    }
+
+			if(cuenta_encoder_izquierda >= 10){
+
+				variar_PWM(220, 255);
+
+		        if(cuenta_encoder_derecha >= 10){
+
+					break;
+
+		        }
+		    }
+		}
     }
 }
 

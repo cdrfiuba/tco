@@ -28,6 +28,9 @@
 #define MOTOR_IZQ_BRAKE		(1<<PB4)
 #define MOTOR_DER_DIRECTION	(1<<PD7)
 #define MOTOR_IZQ_DIRECTION	(1<<PD6)
+#define MOTOR_DER_PWM		(1<<PD4)
+#define MOTOR_IZQ_PWM		(1<<PD5)	
+
 
 #define TRUE    1
 #define FALSE   0
